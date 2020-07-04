@@ -1,0 +1,7 @@
+-creare form creazione torneo
+-form login e creazione profilo
+-home page
+-area privata utente registrato dove vedere i tornei creati
+-pagina per le richieste di supporto
+-creazione pagina per il tecnico utile alla risoluzione dei problemi
+-

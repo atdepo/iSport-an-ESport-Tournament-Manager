@@ -1,0 +1,10 @@
+@charset "ISO-8859-1";
+
+a:hover{
+	color: yellow;
+	background-color: blue;
+}
+
+h1 {
+	color: olive;
+}

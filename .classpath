@@ -7,7 +7,7 @@
 			<attribute name="owner.project.facets" value="java"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="C:/Users/Antonioù/Documents/GitHub/ESport_Tournament/mssql-jdbc-8.2.2.jre13.jar">
+	<classpathentry kind="lib" path="mssql-jdbc-8.2.2.jre13.jar">
 		<attributes>
 			<attribute name="module" value="true"/>
 		</attributes>

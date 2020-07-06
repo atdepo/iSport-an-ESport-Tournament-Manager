@@ -3,10 +3,10 @@ package it.unisa.model.torneo;
 import java.io.Serializable;
 
 public class TournamentBean implements Serializable{
-String nome,data,indirizzoStruttura;
-int codGioco,CAPStruttura;
+String nome,data,indirizzoStruttura,codGioco;
+int CAPStruttura;
 
-public TournamentBean(String nome,String data,String indirizzoStruttura, int codGioco,int CAPStruttura) {
+public TournamentBean(String nome,String data,String indirizzoStruttura, String codGioco,int CAPStruttura) {
 	
 	 nome=this.nome;
 	 data=this.data;
@@ -21,7 +21,7 @@ public TournamentBean() {
 	nome="";
 	data="";
 	indirizzoStruttura="";
-	codGioco=0;
+	codGioco="";
 	CAPStruttura=0;
 	
 }
@@ -50,12 +50,12 @@ public void setIndirizzoStruttura(String indirizzoStruttura) {
 	this.indirizzoStruttura = indirizzoStruttura;
 }
 
-public int getCodGioco() {
+public String getCodGioco() {
 	return codGioco;
 }
 
-public void setCodGioco(int codGioco) {
-	this.codGioco = codGioco;
+public void setCodGioco(String string) {
+	this.codGioco = string;
 }
 
 public int getCAPStruttura() {

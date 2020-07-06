@@ -1,4 +1,4 @@
-package it.unisa.model;
+package it.unisa.model.torneo;
 
 import java.io.Serializable;
 
@@ -13,6 +13,16 @@ public TournamentBean(String nome,String data,String indirizzoStruttura, int cod
 	 indirizzoStruttura=this.indirizzoStruttura;
 	 codGioco=this.codGioco;
 	 CAPStruttura=this.CAPStruttura;
+	
+}
+
+public TournamentBean() {
+	
+	nome="";
+	data="";
+	indirizzoStruttura="";
+	codGioco=0;
+	CAPStruttura=0;
 	
 }
 

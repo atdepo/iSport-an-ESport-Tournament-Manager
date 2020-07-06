@@ -1,4 +1,4 @@
-package it.unisa.model;
+package it.unisa.model.connessione;
 
 
 import java.sql.Connection;

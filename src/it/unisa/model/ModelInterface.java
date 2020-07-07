@@ -3,9 +3,9 @@ package it.unisa.model;
 import java.sql.SQLException;
 import java.util.Collection;
 
-public interface ModelInterface <T>{
+public interface ModelInterface <T,U>{
 
-	public T doRetriveByKey(String code) throws SQLException;
+	public T doRetriveByKey(U code) throws SQLException;
 	
 	public Collection<T> doRetriveAll(String order) throws SQLException;
 	

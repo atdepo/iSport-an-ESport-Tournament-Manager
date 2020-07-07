@@ -4,4 +4,4 @@
 -area privata utente registrato dove vedere i tornei creati
 -pagina per le richieste di supporto
 -creazione pagina per il tecnico utile alla risoluzione dei problemi
--
+-pagina di errore apposita per evitare che appaia lo stacktrace

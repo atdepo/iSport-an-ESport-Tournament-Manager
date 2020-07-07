@@ -4,16 +4,16 @@ import java.io.Serializable;
 
 public class TournamentBean implements Serializable{
 String nome,data,indirizzoStruttura,codGioco;
-int CAPStruttura;
+int CAPStruttura,codice;
 
-public TournamentBean(String nome,String data,String indirizzoStruttura, String codGioco,int CAPStruttura) {
+public TournamentBean(String nome,String data,String indirizzoStruttura, String codGioco,int CAPStruttura,int codice) {
 	
-	 nome=this.nome;
-	 data=this.data;
-	 indirizzoStruttura=this.indirizzoStruttura;
-	 codGioco=this.codGioco;
-	 CAPStruttura=this.CAPStruttura;
-	
+	 this.nome=nome;
+	 this.data=data;
+	 this.indirizzoStruttura=indirizzoStruttura;
+	 this.codGioco=codGioco;
+	 this.CAPStruttura=CAPStruttura;
+	 this.codice=codice;
 }
 
 public TournamentBean() {
@@ -23,7 +23,16 @@ public TournamentBean() {
 	indirizzoStruttura="";
 	codGioco="";
 	CAPStruttura=0;
+	codice=0;
 	
+}
+
+public int getCodice() {
+	return codice;
+}
+
+public void setCodice(int cod) {
+	codice=cod;
 }
 
 public String getNome() {

@@ -4,12 +4,13 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Collection;
 
 import it.unisa.model.connessione.DriverManagerConnectionPool;
 import it.unisa.model.ModelInterface;
 
-public class TournamentModel implements ModelInterface<TournamentBean>{
+public class TournamentModel implements ModelInterface<TournamentBean,String>{
 
 	@Override
 	public TournamentBean doRetriveByKey(String code) throws SQLException {
@@ -31,6 +32,7 @@ public class TournamentModel implements ModelInterface<TournamentBean>{
 				bean.setData(rs.getString("DataTorneo"));
 				bean.setIndirizzoStruttura(rs.getString("IndirizzoStruttura"));
 				bean.setNome(rs.getString("Nome"));
+				bean.setCodice(rs.getInt("Codice"));
 				
 			}
 		}
@@ -39,8 +41,32 @@ public class TournamentModel implements ModelInterface<TournamentBean>{
 
 	@Override
 	public Collection<TournamentBean> doRetriveAll(String order) throws SQLException {
-		// TODO Auto-generated method stub
-		return null;
+		
+		PreparedStatement statement= null;
+		Collection<TournamentBean> collection= new ArrayList<TournamentBean>();
+		
+		TournamentBean bean= new TournamentBean();
+		String sql="SELECT * FROM torneo";
+		
+		try (Connection con=DriverManagerConnectionPool.getConnection()){
+			statement = con.prepareStatement(sql);
+			
+			System.out.println("DoRetriveAll="+statement.toString());
+			ResultSet rs= statement.executeQuery();
+			
+			while(rs.next()) {
+				
+				bean.setCAPStruttura(rs.getInt("CAPStruttura"));
+				bean.setCodGioco(rs.getString("CodGioco"));
+				bean.setData(rs.getString("DataTorneo"));
+				bean.setIndirizzoStruttura(rs.getString("IndirizzoStruttura"));
+				bean.setNome(rs.getString("Nome"));
+				bean.setCodice(rs.getInt("Codice"));
+				
+				collection.add(bean);
+			}
+		}
+		return collection;
 	}
 
 	@Override

@@ -57,7 +57,7 @@ public class StrutturaModel implements ModelInterface<StrutturaBean,KeyStruttura
 		try (Connection con=DriverManagerConnectionPool.getConnection()){
 			statement = con.prepareStatement(sql);
 
-			System.out.println("DoRetriveByKey="+statement.toString());
+			System.out.println("DoRetriveALL="+statement.toString());
 			ResultSet rs= statement.executeQuery();
 			
 			while(rs.next()) {

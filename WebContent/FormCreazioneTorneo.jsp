@@ -1,3 +1,4 @@
+<%@page import="it.unisa.model.gioco.GiocoBean"%>
 <%@page import="it.unisa.model.struttura.StrutturaBean"%>
 <%@page import="java.util.Iterator"%>
 <%@page import="java.util.Collection"%>
@@ -8,6 +9,7 @@
 <%
 
 Collection<?> strutture= (Collection<?>)request.getAttribute("strutture");
+Collection<?> giochi= (Collection<?>)request.getAttribute("giochi");
 
 %>
 <!DOCTYPE html>
@@ -26,17 +28,26 @@ Collection<?> strutture= (Collection<?>)request.getAttribute("strutture");
 	<br><br><br>
 	<label>Data Torneo</label>  <input type="date">
 	<br><br><br>
-	<label>Gioco di riferimento</label>  <select></select>
+	<label>Gioco di riferimento</label>
+	<select>
+	<%Iterator<?> it1=giochi.iterator(); %>
+	
+			<%while(it1.hasNext()){
+				GiocoBean bean= (GiocoBean)it1.next(); 
+			%>
+			<option><%=bean.getNomeGioco()%></option>
+			
+			<%} %>
+	
+	</select>
 	<br><br><br>
 	
 	<fieldset>
 	<legend>Come si svolgerà il torneo</legend>
-		<label>On-line</label> <input type="radio" name="sel" value="on-line"> <br><br><br>
-		<label>Fisico</label> <input type="radio" name="sel" value="fisico"> <br><br><br>
+		<label>On-line</label> <input type="radio" name="sel" value="on-line"> <br><br>
+		<label>Fisico</label> <input type="radio" name="sel" value="fisico">
 	</fieldset>
-	
-</fieldset>
-
+	 <br><br><br>
 	<label>Struttura</label>
 	<%Iterator<?> it=strutture.iterator(); %>
 		<select>
@@ -50,6 +61,9 @@ Collection<?> strutture= (Collection<?>)request.getAttribute("strutture");
 		</select> 
 	
 	<br><br><br>
+	
+</fieldset>
+
 
 
 

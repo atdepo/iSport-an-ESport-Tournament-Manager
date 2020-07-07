@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import it.unisa.model.gioco.GiocoBean;
+import it.unisa.model.gioco.GiocoModel;
 import it.unisa.model.struttura.StrutturaBean;
 import it.unisa.model.struttura.StrutturaModel;
 import it.unisa.model.torneo.TournamentBean;
@@ -22,7 +24,7 @@ public class TournamentControl extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	TournamentModel tModel= new TournamentModel();
 	StrutturaModel sModel= new StrutturaModel();
-	
+	GiocoModel gModel= new GiocoModel();
 	
     
     public TournamentControl() {
@@ -35,17 +37,19 @@ public class TournamentControl extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-			
+		String action= request.getParameter("action");
 		
+		if(action.equals("create")) {
 			try {
 				ArrayList<StrutturaBean> strutture= (ArrayList<StrutturaBean>) sModel.doRetriveAll(null);
-				
+				ArrayList<GiocoBean> giochi= (ArrayList<GiocoBean>) gModel.doRetriveAll(null);
 				request.setAttribute("strutture", strutture);
+				request.setAttribute("giochi", giochi);
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
 			
-		
+		}
 			RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher("/FormCreazioneTorneo.jsp");
 			dispatcher.forward(request, response);
 		

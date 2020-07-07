@@ -45,7 +45,6 @@ public class TournamentModel implements ModelInterface<TournamentBean,String>{
 		PreparedStatement statement= null;
 		Collection<TournamentBean> collection= new ArrayList<TournamentBean>();
 		
-		TournamentBean bean= new TournamentBean();
 		String sql="SELECT * FROM torneo";
 		
 		try (Connection con=DriverManagerConnectionPool.getConnection()){
@@ -55,7 +54,8 @@ public class TournamentModel implements ModelInterface<TournamentBean,String>{
 			ResultSet rs= statement.executeQuery();
 			
 			while(rs.next()) {
-				
+				TournamentBean bean= new TournamentBean();
+
 				bean.setCAPStruttura(rs.getInt("CAPStruttura"));
 				bean.setCodGioco(rs.getString("CodGioco"));
 				bean.setData(rs.getString("DataTorneo"));

@@ -72,8 +72,7 @@ public class StrutturaModel implements ModelInterface<StrutturaBean,KeyStruttura
 			}
 		}
 		
-		for(StrutturaBean s: collection)
-			System.out.println(s.nome);
+		
 		return collection;
 		
 	}

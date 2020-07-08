@@ -15,6 +15,7 @@ import it.unisa.model.gioco.GiocoBean;
 import it.unisa.model.gioco.GiocoModel;
 import it.unisa.model.struttura.StrutturaBean;
 import it.unisa.model.struttura.StrutturaModel;
+import it.unisa.model.tecnico.TecnicoModel;
 import it.unisa.model.torneo.TournamentBean;
 import it.unisa.model.torneo.TournamentModel;
 
@@ -25,7 +26,7 @@ public class TournamentControl extends HttpServlet {
 	TournamentModel tModel= new TournamentModel();
 	StrutturaModel sModel= new StrutturaModel();
 	GiocoModel gModel= new GiocoModel();
-	
+	TecnicoModel tecModel= new TecnicoModel();
     
     public TournamentControl() {
         super();
@@ -41,14 +42,20 @@ public class TournamentControl extends HttpServlet {
 		
 		if(action.equals("create")) {
 			try {
+				System.out.println("Inizializzo il necessario per la creazione del torneo");
 				ArrayList<StrutturaBean> strutture= (ArrayList<StrutturaBean>) sModel.doRetriveAll(null);
 				ArrayList<GiocoBean> giochi= (ArrayList<GiocoBean>) gModel.doRetriveAll(null);
+				Integer numeroTecnici= tecModel.doRetriveAll(null).size();
+				request.setAttribute("numtecnici", numeroTecnici);
 				request.setAttribute("strutture", strutture);
 				request.setAttribute("giochi", giochi);
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
 			
+		} else if(action.equals("validate")) {
+			System.out.println("Sto validando il torneo");
+			System.out.println(request.getParameter("nometorneo"));
 		}
 			RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher("/FormCreazioneTorneo.jsp");
 			dispatcher.forward(request, response);

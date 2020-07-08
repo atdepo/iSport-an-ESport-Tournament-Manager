@@ -1,7 +1,11 @@
 package it.unisa.model.struttura;
 
-public class StrutturaBean {
+import java.io.Serializable;
 
+public class StrutturaBean implements Serializable{
+
+
+	private static final long serialVersionUID = -1655205620750244421L;
 	String nome,indirizzo,CAP;
 	int capienza;
 	

@@ -1,7 +1,10 @@
 package it.unisa.model.gioco;
 
-public class GiocoBean {
+import java.io.Serializable;
 
+public class GiocoBean implements Serializable{
+
+	private static final long serialVersionUID = 7463727716757079663L;
 	private String nomeGioco;
 	
 	public GiocoBean() {

@@ -1,7 +1,13 @@
 package it.unisa.model.modalita;
 
-public class ModalitaBean {
+import java.io.Serializable;
 
+public class ModalitaBean implements Serializable{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 544928221774913146L;
 	String tipo,nomeGioco;
 	int numPartecipanti;
 	

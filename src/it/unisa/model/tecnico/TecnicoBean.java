@@ -1,7 +1,11 @@
 package it.unisa.model.tecnico;
 
-public class TecnicoBean {
+import java.io.Serializable;
 
+public class TecnicoBean implements Serializable{
+
+
+	private static final long serialVersionUID = 1960861329438531433L;
 	String codStaff,specializzazione;
 	
 	public TecnicoBean() {

@@ -7,13 +7,15 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <%
-Collection<?> strutture = (Collection<?>) request.getAttribute("strutture");
-Collection<?> giochi = (Collection<?>) request.getAttribute("giochi");
-Integer numTecnici = (Integer) request.getAttribute("numtecnici");
+Collection<?> strutture = (Collection<?>) session.getAttribute("strutture");
+Collection<?> giochi = (Collection<?>) session.getAttribute("giochi");
+Integer numTecnici = (Integer) session.getAttribute("numtecnici");
+String error = (String) request.getAttribute("error"); 
 
 if (strutture == null && giochi == null) {
 	response.sendRedirect(response.encodeRedirectURL("./TournamentControl?action=create"));
 	return;
+	
 }
 %>
 <!DOCTYPE html>
@@ -24,7 +26,7 @@ if (strutture == null && giochi == null) {
 </head>
 <body>
 	<h2>CREA ORA IL TUO TORNEO</h2>
-	<form name="FormCreazioneTorneo" action="<%=response.encodeURL("TournamentControl?action=validate")%>" method="post">
+	<form name="FormCreazioneTorneo" action="<%=response.encodeURL("TournamentControl?action=validate")%>" method=post>
 		<fieldset>
 			<legend>Informazioni generali</legend>
 
@@ -51,7 +53,7 @@ if (strutture == null && giochi == null) {
 
 			<fieldset>
 				<legend>Come si svolgerà il torneo</legend>
-				<label>On-line<input type="radio" name="sel" value="on-line"></label> <br> <br> 
+				<label>On-line<input type="radio" name="sel" value="on-line" checked></label> <br> <br> 
 				<label>Fisico <input type="radio" name="sel" value="fisico"></label>
 			</fieldset>
 			<br> <br> <br> <label>Struttura
@@ -64,7 +66,7 @@ if (strutture == null && giochi == null) {
 					StrutturaBean bean = (StrutturaBean) it.next();
 				%>
 
-				<option><%=bean.getNome()%></option>
+				<option><%=bean.getNome()+", "+bean.getIndirizzo()+" - "+bean.getCAP()%></option>
 
 				<%
 					}
@@ -76,13 +78,10 @@ if (strutture == null && giochi == null) {
 			<label>Di cui presenti fisicamente <input type="number" min="0" max="4" name="tecnici_fisici" required></label> <br><br><br>
 			<!--Da scegliere dinamicamente -->
 		</fieldset>
-
-
-
-
-
-		<input type="submit" value="press me">
-
+		<% if(error!=null) { %>
+		<h3>ERRORE: <%=error%></h3>
+		<%} %>
+		<input type="submit" value="Next ->">
 
 	</form>
 </body>

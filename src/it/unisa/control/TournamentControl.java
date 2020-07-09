@@ -112,6 +112,8 @@ public class TournamentControl extends HttpServlet {
 				e.printStackTrace();
 			}
 		}
+		
+		
 
 		RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher("/FormInserimentoGiocatori.jsp");
 		dispatcher.forward(request, response);

@@ -23,6 +23,9 @@ if (strutture == null && giochi == null) {
 <head>
 <meta charset="ISO-8859-1">
 <title>Crea il tuo torneo</title>
+
+      <script src = "https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	  <script src = "Script/mode.js"></script>
 </head>
 <body>
 	<h2>CREA ORA IL TUO TORNEO</h2>
@@ -31,9 +34,9 @@ if (strutture == null && giochi == null) {
 			<legend>Informazioni generali</legend>
 
 			<label>Nome del Torneo <input type="text" name="nometorneo" required></label> <br> <br> <br>
-			<label>Data Torneo</label> <input type="date" name="datatorneo" required> <br> <br> <br>
+			<label>Data Torneo <input type="date" name="datatorneo" required></label> <br> <br> <br>
 			<label>Gioco di riferimento
-				<select name="gioco">
+				<select name="gioco" id="gioco" onchange="getMode()">
 					<%
 						Iterator<?> it1 = giochi.iterator();
 					%>
@@ -49,7 +52,15 @@ if (strutture == null && giochi == null) {
 					%>
 
 				</select>
-			</label> <br> <br> <br>
+			</label> <br> <br>
+			<label>Modalita di gioco <select id="mode" name="modalita">
+			
+			<option></option>
+			
+			</select></label>
+			<div id="myDIV" style="display:none">
+				Prova
+			</div>
 
 			<fieldset>
 				<legend>Come si svolgerà il torneo</legend>
@@ -72,17 +83,56 @@ if (strutture == null && giochi == null) {
 					}
 				%>
 			</select> </label> <br> <br> <br> 
-			<label>Budget stimato per il torneo(in euro iva esclusa) <input type="number" min="0" max=100000 name="budget" required>
+			<label>Budget stimato per il torneo(in euro iva esclusa) <input type="number" min="0" max=10000000 name="budget" required>
 			</label><br><br><br>
 			<label>Numero di tecnici desiderati <input type="number" min="0" max=<%=numTecnici.intValue()%> name="tot_tecnici" required></label> <br><br><br>
 			<label>Di cui presenti fisicamente <input type="number" min="0" max="4" name="tecnici_fisici" required></label> <br><br><br>
 			<!--Da scegliere dinamicamente -->
 		</fieldset>
 		<% if(error!=null) { %>
-		<h3>ERRORE: <%=error%></h3>
+		<h3 style="color: red;">ERRORE: <%=error%></h3>
 		<%} %>
 		<input type="submit" value="Next ->">
 
 	</form>
+	<script type="text/javascript">
+	  function doAjax(){
+		     url = "test.json";
+		     if(window.XMLHttpRequest){
+		        // most browsers have a builtin XMLHttpRequest object
+		        httpRequest = new XMLHttpRequest();
+		     } else if(window.ActiveXObject){
+		    	 httpRequest = new ActiveXObject("Microsoft.XMLHTTP");
+		     } else {
+		    	 alert("AJAX not supported");
+		        return;
+		     }
+
+		     // Set the name of the function that will process the response from the request.
+		     httpRequest.onreadystatechange = AjaxCallback;
+
+		     // This triggers the request for a document.
+		     // The third parameter 'true' causes the routine to run asynchronously.
+		     // Execution continues here and the onreadystatechange routine will be called'
+		     // when the operation completes.
+		     httpRequest.open ('GET', url, true);
+		     httpRequest.send (null);
+		  }
+
+		  function AjaxCallback() {
+		     // 4 means the full response has been received.
+		     if(httpRequest.readyState == 4){
+		        alert(httpRequest.responseText);
+	  		    var x = document.getElementById('myDIV');
+	  		    x.innerHTML = httpRequest.responseText;
+	  		    if (x.style.display === 'none') {
+	  		      x.style.display = 'block';
+	  		    } else {
+	  		      x.style.display = 'none';
+	  		    }
+		     }
+		  }
+
+	</script>
 </body>
 </html>

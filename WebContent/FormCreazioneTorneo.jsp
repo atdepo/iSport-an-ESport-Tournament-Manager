@@ -21,77 +21,8 @@ if (strutture == null && giochi == null) {
 <!DOCTYPE html>
 <html>
 <head>
-
-
-<style type="text/css">
-	body{background-color :#1F2833}
-	
-	label,h2,legend{color:#45A29E}
-	
-	form{margin:10%}
-	
-	div.title{text-align:center;}
-   
-   .container{align-items:center; display:flex; }
-	
-
-
-.radioLabel {
-  border: 3px solid #1a1a1a;
-  display: inline-block;
-  padding: 10px;
-  position: relative;
-  text-align: center;
- 
-  transition: background 600ms ease, color 600ms ease;
-}
-
-input[type="radio"].sel {
-  display: none;
-}
-input[type="radio"].sel + label {
-  cursor: pointer;
-  min-width: 60px;
-}
-input[type="radio"].sel + label:hover {
-  background: none;
-  color: #1a1a1a;
-}
-input[type="radio"].sel + label:after {
-  background: #1a1a1a;
-  content: "";
-  height: 100%;
-  position: absolute;
-  top: 0;
-  -webkit-transition: left 200ms cubic-bezier(0.77, 0, 0.175, 1);
-  transition: left 200ms cubic-bezier(0.77, 0, 0.175, 1);
-  width: 100%;
-  z-index: -1;
-}
-input[type="radio"].sel.bt1 + label {
-  border-right: 0;
-}
-input[type="radio"].sel.bt1 + label:after {
-  left: 100%;
-}
-input[type="radio"].sel.bt2 + label {
-  margin-left: -5px;
-}
-input[type="radio"].sel.bt2 + label:after {
-  left: -100%;
-}
-input[type="radio"].sel:checked + label {
-  cursor: default;
-  color: #fff;
-  -webkit-transition: color 200ms;
-  transition: color 200ms;
-}
-input[type="radio"].sel:checked + label:after {
-  left: 0;
-}
-
-</style>
-
+<link rel="stylesheet" href="CSS/CreazioneTorneo.css" type="text/css">
+<link rel="stylesheet" href="CSS/2RadioButton.css" type="text/css">
 <meta charset="ISO-8859-1">
 
 <title >Crea il tuo torneo</title>
@@ -136,7 +67,7 @@ input[type="radio"].sel:checked + label:after {
 			
 
 			<fieldset>
-						<legend >Come si svolgerà il torneo</legend>
+						<legend >Come si svolgerà	 il torneo</legend>
 				<div class="container" >
 				
 				<input id="on-line" type="radio" name="sel" value="on-line" checked class="sel bt1">

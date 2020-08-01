@@ -24,15 +24,16 @@ if (strutture == null && giochi == null) {
 
 
 <style type="text/css">
-	body{background-color:#070909}
+	body{background-color:#1F2833}
 	
-	label,h2,legend{color:lime}
+	label,h2,legend{color:#45A29E}
 	
 	form{margin:10%}
 	
-
+	div.title{text-align:center;}
 
 </style>
+
 <meta charset="ISO-8859-1">
 
 <title >Crea il tuo torneo</title>
@@ -43,7 +44,9 @@ if (strutture == null && giochi == null) {
 
 <body>
 <%@ include file="header.jsp"%>
+	<div class="title">
 	<h2 >CREA ORA IL TUO TORNEO</h2>
+	</div>
 	<form name="FormCreazioneTorneo" action="<%=response.encodeURL("TournamentControl?action=validate")%>" method=post>
 		<fieldset>
 			<legend>Informazioni generali</legend>
@@ -76,7 +79,7 @@ if (strutture == null && giochi == null) {
 			
 
 			<fieldset>
-				<legend>Come si svolgerà il torneo</legend>
+				<legend>Come si svolgerÃ  il torneo</legend>
 				<label>On-line<input type="radio" name="sel" value="on-line" checked></label> <br> <br> 
 				<label>Fisico <input type="radio" name="sel" value="fisico"></label>
 			</fieldset>

@@ -32,7 +32,7 @@ public class TournamentControl extends HttpServlet {
 	StrutturaModel sModel = new StrutturaModel();
 	GiocoModel gModel = new GiocoModel();
 	TecnicoModel tecModel = new TecnicoModel();
-	Gson gson;
+
 	public TournamentControl() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -49,15 +49,22 @@ public class TournamentControl extends HttpServlet {
 		HttpSession session = request.getSession();
 
 		if (action.equals("create")) {
+
+			Gson gson = new Gson();
+			String theJson=" ";
 			try {
 				System.out.println("Inizializzo il necessario per la creazione del torneo");
+				System.out.println(session.getAttribute("strutture"));
 				if (session.getAttribute("strutture") == null) {
 					ArrayList<StrutturaBean> strutture = (ArrayList<StrutturaBean>) sModel.doRetriveAll(null);
+					theJson+= gson.toJson(strutture);
 					session.setAttribute("strutture", strutture);
 				}
 
 				if (session.getAttribute("giochi") == null) {
 					ArrayList<GiocoBean> giochi = (ArrayList<GiocoBean>) gModel.doRetriveAll(null);
+					theJson+= gson.toJson(giochi);
+
 					session.setAttribute("giochi", giochi);
 				}
 
@@ -65,6 +72,7 @@ public class TournamentControl extends HttpServlet {
 					Integer numeroTecnici = tecModel.doRetriveAll(null).size();
 					session.setAttribute("numtecnici", numeroTecnici);
 				}
+				System.out.println("Il json "+theJson);
 
 				RequestDispatcher dispatcher = this.getServletContext()
 						.getRequestDispatcher("/FormCreazioneTorneo.jsp");
@@ -76,37 +84,40 @@ public class TournamentControl extends HttpServlet {
 
 		} else if (action.equals("validate")) {
 			System.out.println("Sto validando il torneo");
-			
-			String dataTorneoDaCreare=(String) request.getParameter("datatorneo");
+
+			String dataTorneoDaCreare = (String) request.getParameter("datatorneo");
 			Date d1 = new Date();
 			SimpleDateFormat df = new SimpleDateFormat("YYYY-MM-dd");
 			String data = df.format(d1);
-			
-			if(controlloData(data, request.getParameter("datatorneo"))) {
-				request.setAttribute("error", "Non possediamo una DeLorean, pertanto ci è impossibile organizzare tornei nel passato!");
-				RequestDispatcher dispatcher= request.getServletContext().getRequestDispatcher("/FormCreazioneTorneo.jsp");
+
+			if (controlloData(data, request.getParameter("datatorneo"))) {
+				request.setAttribute("error",
+						"Non possediamo una DeLorean, pertanto ci è impossibile organizzare tornei nel passato!");
+				RequestDispatcher dispatcher = request.getServletContext()
+						.getRequestDispatcher("/FormCreazioneTorneo.jsp");
 				dispatcher.forward(request, response);
 				return;
 			}
-			
+
 			try {
-				ArrayList<TournamentBean> tornei= (ArrayList<TournamentBean>) tModel.doRetriveAll(null);
-				for(TournamentBean t: tornei) {
-					if(t.getData().equals(dataTorneoDaCreare)) {
-						String s= request.getParameter("struttura");
-						String tmp=s.substring(s.indexOf(',')+2);
+				ArrayList<TournamentBean> tornei = (ArrayList<TournamentBean>) tModel.doRetriveAll(null);
+				for (TournamentBean t : tornei) {
+					if (t.getData().equals(dataTorneoDaCreare)) {
+						String s = request.getParameter("struttura");
+						String tmp = s.substring(s.indexOf(',') + 2);
 						int value = Integer.parseInt(tmp.replaceAll("[^0-9]", ""));
-						String address = tmp.substring(0,tmp.indexOf('-')-1);
-						
-						if(t.getCAPStruttura()==value&&t.getIndirizzoStruttura().equals(address)) {
+						String address = tmp.substring(0, tmp.indexOf('-') - 1);
+
+						if (t.getCAPStruttura() == value && t.getIndirizzoStruttura().equals(address)) {
 							System.out.println("PROBLEMAAAAA");
-							String errore="In questa data la struttura selezionata è già occupata, selezionarne una diversa";
+							String errore = "In questa data la struttura selezionata è già occupata, selezionarne una diversa";
 							request.setAttribute("error", errore);
-							RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher("/FormCreazioneTorneo.jsp");
+							RequestDispatcher dispatcher = this.getServletContext()
+									.getRequestDispatcher("/FormCreazioneTorneo.jsp");
 							dispatcher.forward(request, response);
 							return;
 						}
-						
+
 					}
 				}
 			} catch (SQLException e) {
@@ -114,12 +125,10 @@ public class TournamentControl extends HttpServlet {
 				e.printStackTrace();
 			}
 		}
-		
-		
 
 		RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher("/FormInserimentoGiocatori.jsp");
 		dispatcher.forward(request, response);
-		
+
 		// response.getWriter().append("Served at: ").append(request.getContextPath());
 		// System.out.println("Oh vedi che sono stata attivata");
 	}
@@ -130,18 +139,15 @@ public class TournamentControl extends HttpServlet {
 		doGet(request, response);
 	}
 
-	private boolean controlloData(String a,String b) {
-		if(a!=null&&b!=null) {
-		int dataA=Integer.valueOf(a.replaceAll("[-]", ""));
-		int dataB=Integer.valueOf(b.replaceAll("[-]", ""));
+	private boolean controlloData(String a, String b) {
+		if (a != null && b != null) {
+			int dataA = Integer.valueOf(a.replaceAll("[-]", ""));
+			int dataB = Integer.valueOf(b.replaceAll("[-]", ""));
 
-		return dataA>dataB;
-		}
-		else
+			return dataA > dataB;
+		} else
 			return true;
-		
+
 	}
-	
+
 }
-
-

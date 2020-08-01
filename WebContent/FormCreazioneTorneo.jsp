@@ -31,7 +31,59 @@ if (strutture == null && giochi == null) {
 	form{margin:10%}
 	
 	div.title{text-align:center;}
-
+   
+   .container{align-items:center; display:flex; }
+	
+	.radioLabel{
+    border: 3px solid #1a1a1a;
+    display: inline-block;
+    padding: 10px;
+    position: relative;
+    text-align: center;
+    transition: background 600ms ease, color 600ms ease;}
+    
+    input[type="radio"].sel{
+    	display: none;
+    	& + label{
+    		cursor:pointer;
+    		min-width:60px;
+    		&:hover{
+    			background:none;
+    			color:#1a1a1a;
+    			}
+    			&:after{
+    					background: #1a1a1a;
+       		   			content: "";
+          		 		height: 100%;
+           				position: absolute;
+        			    top: 0;
+         			    transition: left 200ms cubic-bezier(0.77, 0, 0.175, 1);
+   		 		        width: 100%;
+          			    z-index: -1;
+ 						}
+    			}
+    			&.bt1 + label{
+    				border-right: 0;
+    				&:after{
+    					left:100%
+    				}
+    			}
+    			&.bt2 + label{
+    				margin-left:-5px;
+    				&:after{
+    					left:-100%;
+    				}
+    			}
+    			 &:checked + label {
+     		   cursor: default;
+      		  color: #fff;
+   			     transition: color 200ms;
+  		      &:after{
+  		          left: 0;
+  	  		    }
+  			  } 
+ 		   }
+	
 </style>
 
 <meta charset="ISO-8859-1">
@@ -78,9 +130,12 @@ if (strutture == null && giochi == null) {
 			
 
 			<fieldset>
-				<legend>Come si svolgerà il torneo</legend>
-				<label>On-line<input type="radio" name="sel" value="on-line" checked></label> <br> <br> 
-				<label>Fisico <input type="radio" name="sel" value="fisico"></label>
+						<legend >Come si svolgerà il torneo</legend>
+				<div class="container" >
+				
+				<label class="radioLabel">On-line<input type="radio" name="sel" value="on-line" checked class="bt1"></label> <br> <br> 
+				<label class="radioLabel">Fisico <input type="radio" name="sel" value="fisico" class="bt2"></label>
+				</div>
 			</fieldset>
 			<br> <br> <br> <label>Struttura
 			<%

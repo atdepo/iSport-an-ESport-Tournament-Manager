@@ -24,7 +24,7 @@ if (strutture == null && giochi == null) {
 
 
 <style type="text/css">
-	body{background-color:#1F2833}
+	body{background-color :#1F2833}
 	
 	label,h2,legend{color:#45A29E}
 	
@@ -34,56 +34,62 @@ if (strutture == null && giochi == null) {
    
    .container{align-items:center; display:flex; }
 	
-	.radioLabel{
-    border: 3px solid #1a1a1a;
-    display: inline-block;
-    padding: 10px;
-    position: relative;
-    text-align: center;
-    transition: background 600ms ease, color 600ms ease;}
-    
-    input[type="radio"].sel{
-    	display: none;
-    	& + label{
-    		cursor:pointer;
-    		min-width:60px;
-    		&:hover{
-    			background:none;
-    			color:#1a1a1a;
-    			}
-    			&:after{
-    					background: #1a1a1a;
-       		   			content: "";
-          		 		height: 100%;
-           				position: absolute;
-        			    top: 0;
-         			    transition: left 200ms cubic-bezier(0.77, 0, 0.175, 1);
-   		 		        width: 100%;
-          			    z-index: -1;
- 						}
-    			}
-    			&.bt1 + label{
-    				border-right: 0;
-    				&:after{
-    					left:100%
-    				}
-    			}
-    			&.bt2 + label{
-    				margin-left:-5px;
-    				&:after{
-    					left:-100%;
-    				}
-    			}
-    			 &:checked + label {
-     		   cursor: default;
-      		  color: #fff;
-   			     transition: color 200ms;
-  		      &:after{
-  		          left: 0;
-  	  		    }
-  			  } 
- 		   }
-	
+
+
+.radioLabel {
+  border: 3px solid #1a1a1a;
+  display: inline-block;
+  padding: 10px;
+  position: relative;
+  text-align: center;
+ 
+  transition: background 600ms ease, color 600ms ease;
+}
+
+input[type="radio"].sel {
+  display: none;
+}
+input[type="radio"].sel + label {
+  cursor: pointer;
+  min-width: 60px;
+}
+input[type="radio"].sel + label:hover {
+  background: none;
+  color: #1a1a1a;
+}
+input[type="radio"].sel + label:after {
+  background: #1a1a1a;
+  content: "";
+  height: 100%;
+  position: absolute;
+  top: 0;
+  -webkit-transition: left 200ms cubic-bezier(0.77, 0, 0.175, 1);
+  transition: left 200ms cubic-bezier(0.77, 0, 0.175, 1);
+  width: 100%;
+  z-index: -1;
+}
+input[type="radio"].sel.bt1 + label {
+  border-right: 0;
+}
+input[type="radio"].sel.bt1 + label:after {
+  left: 100%;
+}
+input[type="radio"].sel.bt2 + label {
+  margin-left: -5px;
+}
+input[type="radio"].sel.bt2 + label:after {
+  left: -100%;
+}
+input[type="radio"].sel:checked + label {
+  cursor: default;
+  color: #fff;
+  -webkit-transition: color 200ms;
+  transition: color 200ms;
+}
+input[type="radio"].sel:checked + label:after {
+  left: 0;
+}
+
 </style>
 
 <meta charset="ISO-8859-1">
@@ -133,8 +139,11 @@ if (strutture == null && giochi == null) {
 						<legend >Come si svolgerà il torneo</legend>
 				<div class="container" >
 				
-				<label class="radioLabel">On-line<input type="radio" name="sel" value="on-line" checked class="bt1"></label> <br> <br> 
-				<label class="radioLabel">Fisico <input type="radio" name="sel" value="fisico" class="bt2"></label>
+				<input id="on-line" type="radio" name="sel" value="on-line" checked class="sel bt1">
+				<label class="radioLabel" for="on-line">On-line</label>	
+				
+				<input id="fisico" type="radio" name="sel" value="fisico" class="sel bt2">
+				<label class="radioLabel" for="fisico">Fisico </label>
 				</div>
 			</fieldset>
 			<br> <br> <br> <label>Struttura

@@ -14,6 +14,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.google.gson.Gson;
+
 import it.unisa.model.gioco.GiocoBean;
 import it.unisa.model.gioco.GiocoModel;
 import it.unisa.model.struttura.KeyStruttura;
@@ -30,7 +32,7 @@ public class TournamentControl extends HttpServlet {
 	StrutturaModel sModel = new StrutturaModel();
 	GiocoModel gModel = new GiocoModel();
 	TecnicoModel tecModel = new TecnicoModel();
-
+	Gson gson;
 	public TournamentControl() {
 		super();
 		// TODO Auto-generated constructor stub

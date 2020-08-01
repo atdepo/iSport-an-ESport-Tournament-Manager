@@ -28,7 +28,8 @@ if (strutture == null && giochi == null) {
 	
 	label,h2,legend{color:lime}
 	
-	form{margin:10% }
+	form{margin:10%}
+	
 
 
 </style>
@@ -75,7 +76,7 @@ if (strutture == null && giochi == null) {
 			
 
 			<fieldset>
-				<legend>Come si svolgerà il torneo</legend>
+				<legend>Come si svolgerï¿½ il torneo</legend>
 				<label>On-line<input type="radio" name="sel" value="on-line" checked></label> <br> <br> 
 				<label>Fisico <input type="radio" name="sel" value="fisico"></label>
 			</fieldset>

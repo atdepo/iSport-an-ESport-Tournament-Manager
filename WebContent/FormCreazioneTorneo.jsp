@@ -76,7 +76,7 @@ if (strutture == null && giochi == null) {
 			
 
 			<fieldset>
-				<legend>Come si svolgerï¿½ il torneo</legend>
+				<legend>Come si svolgerà il torneo</legend>
 				<label>On-line<input type="radio" name="sel" value="on-line" checked></label> <br> <br> 
 				<label>Fisico <input type="radio" name="sel" value="fisico"></label>
 			</fieldset>

@@ -4,8 +4,8 @@
 <%@page import="java.util.Collection"%>
 <%@page import="it.unisa.model.struttura.StrutturaModel"%>
 <%@page import="it.unisa.model.torneo.TournamentModel"%>
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%
 Collection<?> strutture = (Collection<?>) session.getAttribute("strutture");
 Collection<?> giochi = (Collection<?>) session.getAttribute("giochi");
@@ -23,7 +23,7 @@ if (strutture == null && giochi == null) {
 <head>
 <link rel="stylesheet" href="CSS/CreazioneTorneo.css" type="text/css">
 <link rel="stylesheet" href="CSS/2RadioButton.css" type="text/css">
-<meta charset="ISO-8859-1">
+<meta charset="UTF-8">
 
 <title >Crea il tuo torneo</title>
 

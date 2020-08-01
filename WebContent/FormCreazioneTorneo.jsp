@@ -28,7 +28,7 @@ if (strutture == null && giochi == null) {
 	
 	label,h2,legend{color:lime}
 	
-	
+	form{margin:10% }
 
 
 </style>

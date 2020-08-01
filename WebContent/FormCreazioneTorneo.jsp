@@ -21,14 +21,28 @@ if (strutture == null && giochi == null) {
 <!DOCTYPE html>
 <html>
 <head>
+
+
+<style type="text/css">
+	body{background-color:#070909}
+	
+	label,h2,legend{color:lime}
+	
+	
+
+
+</style>
 <meta charset="ISO-8859-1">
-<title>Crea il tuo torneo</title>
+
+<title >Crea il tuo torneo</title>
 
       <script src = "https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 	  <script src = "Script/mode.js"></script>
 </head>
+
 <body>
-	<h2>CREA ORA IL TUO TORNEO</h2>
+<%@ include file="header.jsp"%>
+	<h2 >CREA ORA IL TUO TORNEO</h2>
 	<form name="FormCreazioneTorneo" action="<%=response.encodeURL("TournamentControl?action=validate")%>" method=post>
 		<fieldset>
 			<legend>Informazioni generali</legend>
@@ -58,9 +72,7 @@ if (strutture == null && giochi == null) {
 			<option></option>
 			
 			</select></label>
-			<div id="myDIV" style="display:none">
-				Prova
-			</div>
+			
 
 			<fieldset>
 				<legend>Come si svolgerà il torneo</legend>

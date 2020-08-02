@@ -12,13 +12,13 @@
 
 <body>
 
-	<div>
-		<nav  id="header" >
+	<div id="header">
+		<nav  class="header" >
 			<ul>
-				<li><a href="#">Prova 1</a></li>
-				<li><a href="#">Prova 2</a></li>
-				<li><a href="#">Prova 3</a></li>
-				<li><a href="#">Prova 4</a></li>
+				<li><a href="<%=response.encodeURL("TournamentControl?action=create")%>">CreaTorneo</a></li>
+				<li><a href="#">Lista Tornei</a></li>
+				<li><a href="#">Elenco Squadre</a></li>
+				<li><a href="#">Elenco giocatori</a></li>
 			</ul>	
 		</nav>
 			

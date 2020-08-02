@@ -16,12 +16,23 @@ h6{
 body{
 	background-color: #357EC7;
 }
-div#robe{
-	left:0;
+
+.split{
+	height: 100%;
+	width: 33%;
 }
-div#altriTornei{
-	left:50%
+
+.robe {
+	left: 0;
 }
-div#news{
+
+.altriTornei{
+	left:50%;
+}
+
+.news{
 	right:0;
 }
+
+
+

@@ -1,4 +1,4 @@
-@charset "ISO-8859-1";
+@charset "UTF-8";
 
 a:hover{
 	color: yellow;
@@ -15,4 +15,13 @@ h6{
 
 body{
 	background-color: #357EC7;
+}
+div#robe{
+	left:0;
+}
+div#altriTornei{
+	left:50%
+}
+div#news{
+	right:0;
 }

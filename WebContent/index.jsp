@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,7 +9,7 @@
 </head>
 
 <style>
-	.altriTornei{
+	div#altriTornei{
 		border:5px black;
 		background-color:blue;
 	 	text-align:center;
@@ -18,25 +18,25 @@
 <body>
 	<%@ include file="header.jsp"%>
 	
-	<div class="robe">
-	<h3>Robe sulle squadre</h3>
-	</div>
-	<div class="altriTornei">
-		
-		<h3>Dai un occhiata a questi tornei</h3>
+	<div id="home">
+	
+		<div id="robe">
+			<h3>Robe sulle squadre</h3>
+		</div>
+	
+		<div id="altriTornei">
+			<h3>Dai un occhiata a questi tornei</h3>
+		</div>
+	
+		<div id="news">
+			<h2> NEWS</h2>
 
+			<ul>
+				<li>Adesso fino a 4 tecnici live</li>
+				<li> ciao</li>
+		
+			</ul>
+		</div>
 	</div>
-	
-	<div class="notizie">
-		
-		<h2> NEWS</h2>
-		
-		<ul class="news">
-			<li>Adesso fino a 4 tecnici live</li>
-			<li> ciao</li>
-		
-		</ul>
-	</div>
-	
 </body>
 </html>

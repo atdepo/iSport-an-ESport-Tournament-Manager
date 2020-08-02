@@ -19,6 +19,7 @@
 				<li><a href="#">Lista Tornei</a></li>
 				<li><a href="#">Elenco Squadre</a></li>
 				<li><a href="#">Elenco giocatori</a></li>
+				<li><a href="#">About</a></li>			
 			</ul>	
 		</nav>
 			

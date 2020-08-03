@@ -13,7 +13,6 @@
 	<h1>Montefusco merda</h1>
 	<br>
 	<br>
-	<a href="<%=response.encodeURL("FormCreazioneTorneo.jsp")%>">Crea il tuo torneo ora!</a>
 	
 	<div class="home">
 	

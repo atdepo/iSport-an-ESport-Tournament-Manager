@@ -15,7 +15,7 @@
 	<br>
 	<a href="<%=response.encodeURL("FormCreazioneTorneo.jsp")%>">Crea il tuo torneo ora!</a>
 	
-	<div id="home">
+	<div class="home">
 	
 		<div class="split robe">
 			<h3>Robe sulle squadre</h3>
@@ -23,6 +23,7 @@
 	
 		<div class="split altriTornei">
 			<h3>Dai un occhiata a questi tornei</h3>
+			<h3>Cose a caso</h3>
 		</div>
 	
 		<div class="split news">
@@ -30,7 +31,7 @@
 
 			<ul>
 				<li>Adesso fino a 4 tecnici live</li>
-				<li> ciao</li>
+				<li> Montefusco merda</li>
 		
 			</ul>
 		</div>

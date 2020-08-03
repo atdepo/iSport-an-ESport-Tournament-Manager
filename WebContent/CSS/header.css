@@ -8,7 +8,9 @@
 		list-style: none;
 		display: inline-block;
 		float:left;
-		line-height: 100px;
+		width:7%;
+		text-align:center;
+		padding-top:2%;
 	}
 	
 	nav.header ul li a{

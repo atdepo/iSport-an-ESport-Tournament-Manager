@@ -12,6 +12,12 @@
   transition: background 600ms ease, color 600ms ease;
 }
 
+/*
+Per i bottoni belli, dare classe container al div contenitore, dare classe sel ai due bottoni e
+bt1 a quello a sinistra e bt2 a quello di destra
+*/
+
+
 input[type="radio"].sel {
   display: none;
 }

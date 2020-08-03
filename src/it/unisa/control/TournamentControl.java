@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
 
 import javax.servlet.RequestDispatcher;
@@ -18,6 +19,9 @@ import com.google.gson.Gson;
 
 import it.unisa.model.gioco.GiocoBean;
 import it.unisa.model.gioco.GiocoModel;
+import it.unisa.model.modalita.ModalitaBean;
+import it.unisa.model.modalita.ModalitaKey;
+import it.unisa.model.modalita.ModalitaModel;
 import it.unisa.model.struttura.KeyStruttura;
 import it.unisa.model.struttura.StrutturaBean;
 import it.unisa.model.struttura.StrutturaModel;
@@ -32,6 +36,7 @@ public class TournamentControl extends HttpServlet {
 	StrutturaModel sModel = new StrutturaModel();
 	GiocoModel gModel = new GiocoModel();
 	TecnicoModel tecModel = new TecnicoModel();
+	ModalitaModel modModel = new ModalitaModel();
 
 	public TournamentControl() {
 		super();
@@ -44,44 +49,135 @@ public class TournamentControl extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		String action = request.getParameter("action");
 
-		HttpSession session = request.getSession();
+		String action = request.getParameter("action"); // azione da far compiere alla servlet
+		Gson gson = new Gson();
+		
+		switch (action) {
 
-		if (action.equals("create")) {
-
-			Gson gson = new Gson();
-			String theJson=" ";
+		case "initTorneo":
+			
+			String theJson = "";
+			response.setContentType("application/json");
+			response.setCharacterEncoding("UTF-8");
 			try {
-				System.out.println("Inizializzo il necessario per la creazione del torneo");
-				System.out.println(session.getAttribute("strutture"));
-				if (session.getAttribute("strutture") == null) {
-					ArrayList<StrutturaBean> strutture = (ArrayList<StrutturaBean>) sModel.doRetriveAll(null);
-					theJson+= gson.toJson(strutture);
-					session.setAttribute("strutture", strutture);
-				}
+				ArrayList<StrutturaBean> strutture = (ArrayList<StrutturaBean>) sModel.doRetriveAll(null);
+				ArrayList<GiocoBean> giochi = (ArrayList<GiocoBean>) gModel.doRetriveAll(null);
+				ArrayList<String> numeroTecnici = new ArrayList<String>();
+				numeroTecnici.add(String.valueOf(tecModel.doRetriveAll(null).size()));
+				ArrayList<ArrayList> col= new ArrayList<ArrayList>();
+				col.add(strutture);
+				col.add(giochi);
+				col.add(numeroTecnici);
+				theJson += gson.toJson(col);
+				response.getWriter().print(theJson);
+				response.getWriter().flush();
+				System.out.println("il json di inizializzazione del form è stato creato con successo");
+				response.setStatus(200);
 
-				if (session.getAttribute("giochi") == null) {
-					ArrayList<GiocoBean> giochi = (ArrayList<GiocoBean>) gModel.doRetriveAll(null);
-					theJson+= gson.toJson(giochi);
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
 
-					session.setAttribute("giochi", giochi);
-				}
+		break;
+		
+		case "getMode":
+			
+			try {
+				String mode="";
+				String gioco= request.getParameter("gioco");
+				System.out.println("Cerco le modalità di "+gioco);
+				ArrayList<ModalitaBean> modalita;
+				modalita = (ArrayList<ModalitaBean>) modModel.doRetriveByGame(gioco);
+				mode=gson.toJson(modalita);
+				response.getWriter().print(mode);
+				response.getWriter().flush();
+				System.out.println("il json delle modalità è stato creato con successo");
+				response.setStatus(200);
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			
+		break;
+		
+		case "validate":
+		
+			System.out.println("Sto validando il torneo");
 
-				if (session.getAttribute("numtecnici") == null) {
-					Integer numeroTecnici = tecModel.doRetriveAll(null).size();
-					session.setAttribute("numtecnici", numeroTecnici);
-				}
-				System.out.println("Il json "+theJson);
+			String dataTorneoDaCreare = (String) request.getParameter("datatorneo");
+			Date d1 = new Date();
+			SimpleDateFormat df = new SimpleDateFormat("YYYY-MM-dd");
+			String data = df.format(d1);
 
-				RequestDispatcher dispatcher = this.getServletContext()
+			if (controlloData(data, request.getParameter("datatorneo"))) {
+				request.setAttribute("error",
+						"Non possediamo una DeLorean, pertanto ci è impossibile organizzare tornei nel passato!");
+				RequestDispatcher dispatcher = request.getServletContext()
 						.getRequestDispatcher("/FormCreazioneTorneo.jsp");
 				dispatcher.forward(request, response);
 				return;
-			} catch (SQLException e) {
-				e.printStackTrace();
 			}
 
+			try {
+				ArrayList<TournamentBean> tornei = (ArrayList<TournamentBean>) tModel.doRetriveAll(null);
+				for (TournamentBean t : tornei) {
+					if (t.getData().equals(dataTorneoDaCreare)) {
+						String s = request.getParameter("struttura");
+						String tmp = s.substring(s.indexOf(',') + 2);
+						int value = Integer.parseInt(tmp.replaceAll("[^0-9]", ""));
+						String address = tmp.substring(0, tmp.indexOf('-') - 1);
+
+						if (t.getCAPStruttura() == value && t.getIndirizzoStruttura().equals(address)) {
+							System.out.println("PROBLEMAAAAA");
+							String errore = "In questa data la struttura selezionata è già occupata, selezionarne una diversa";
+							request.setAttribute("error", errore);
+							RequestDispatcher dispatcher = this.getServletContext()
+									.getRequestDispatcher("/FormCreazioneTorneo.jsp");
+							dispatcher.forward(request, response);
+							return;
+						}
+
+					}
+				}
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+		
+		break;
+		
+
+		}
+/*
+		if (action.equals("create")) {
+
+			Gson gson = new Gson();
+			String theJson = "";
+
+			try {
+				response.setContentType("application/json");
+				response.setCharacterEncoding("UTF-8");
+				ArrayList<StrutturaBean> strutture = (ArrayList<StrutturaBean>) sModel.doRetriveAll(null);
+				ArrayList<GiocoBean> giochi = (ArrayList<GiocoBean>) gModel.doRetriveAll(null);
+				String numeroTecnici = String.valueOf(tecModel.doRetriveAll(null).size());
+				ArrayList<ModalitaBean> modalita = (ArrayList<ModalitaBean>) modModel.doRetriveAll(null);
+
+				theJson += gson.toJson(strutture) + gson.toJson(giochi) + gson.toJson(numeroTecnici)
+						+ gson.toJson(modalita);
+				response.getWriter().write(theJson);
+
+				System.out.println(theJson);
+				// RequestDispatcher dispatcher =
+				// this.getServletContext().getRequestDispatcher("/FormCreazioneTorneo.jsp");
+				// dispatcher.forward(request, response);
+				// return;
+				response.setStatus(200);
+
+			} catch (SQLException e) {
+				// TODO: handle exception
+			}
 		} else if (action.equals("validate")) {
 			System.out.println("Sto validando il torneo");
 
@@ -126,11 +222,40 @@ public class TournamentControl extends HttpServlet {
 			}
 		}
 
-		RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher("/FormInserimentoGiocatori.jsp");
-		dispatcher.forward(request, response);
+		// RequestDispatcher dispatcher =
+		// this.getServletContext().getRequestDispatcher("/FormInserimentoGiocatori.jsp");
+		// dispatcher.forward(request, response);
+
+		/*
+		 * try {
+		 * System.out.println("Inizializzo il necessario per la creazione del torneo");
+		 * if (session.getAttribute("strutture") == null) { ArrayList<StrutturaBean>
+		 * strutture = (ArrayList<StrutturaBean>) sModel.doRetriveAll(null); theJson+=
+		 * gson.toJson(strutture); session.setAttribute("strutture", strutture); }
+		 * 
+		 * if (session.getAttribute("giochi") == null) { ArrayList<GiocoBean> giochi =
+		 * (ArrayList<GiocoBean>) gModel.doRetriveAll(null); theJson+=
+		 * gson.toJson(giochi);
+		 * 
+		 * session.setAttribute("giochi", giochi); }
+		 * 
+		 * if (session.getAttribute("numtecnici") == null) { Integer numeroTecnici =
+		 * tecModel.doRetriveAll(null).size(); session.setAttribute("numtecnici",
+		 * numeroTecnici); } System.out.println("Il json "+theJson);
+		 * 
+		 * RequestDispatcher dispatcher = this.getServletContext()
+		 * .getRequestDispatcher("/FormCreazioneTorneo.jsp");
+		 * dispatcher.forward(request, response); return; } catch (SQLException e) {
+		 * e.printStackTrace();
+		 * 
+		 * 
+		 * }
+		 */
 
 		// response.getWriter().append("Served at: ").append(request.getContextPath());
 		// System.out.println("Oh vedi che sono stata attivata");
+		
+		
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)

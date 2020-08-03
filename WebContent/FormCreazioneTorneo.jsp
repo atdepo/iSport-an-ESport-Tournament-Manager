@@ -7,6 +7,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%
+//response.sendRedirect(response.encodeRedirectURL("./TournamentControl?action=create"));
+/*
 Collection<?> strutture = (Collection<?>) session.getAttribute("strutture");
 Collection<?> giochi = (Collection<?>) session.getAttribute("giochi");
 Integer numTecnici = (Integer) session.getAttribute("numtecnici");
@@ -16,11 +18,23 @@ if (strutture == null && giochi == null) {
 	response.sendRedirect(response.encodeRedirectURL("./TournamentControl?action=create"));
 	return;
 	
-}
+}*/
 %>
 <!DOCTYPE html>
 <html>
 <head>
+
+
+<style type="text/css">
+	body{background-color:#070909}
+	
+	label,h2,legend{color:lime}
+	
+	form{margin:10%}
+	
+
+
+</style>
 <link rel="stylesheet" href="CSS/CreazioneTorneo.css" type="text/css">
 <link rel="stylesheet" href="CSS/2RadioButton.css" type="text/css">
 <meta charset="UTF-8">
@@ -43,20 +57,7 @@ if (strutture == null && giochi == null) {
 			<label>Data Torneo <input type="date" name="datatorneo" required></label> <br> <br> <br>
 			<label>Gioco di riferimento
 				<select name="gioco" id="gioco" onchange="getMode()">
-					<%
-						Iterator<?> it1 = giochi.iterator();
-					%>
-	
-					<%
-						while (it1.hasNext()) {
-						GiocoBean bean = (GiocoBean) it1.next();
-					%>
-					<option><%=bean.getNomeGioco()%></option>
-	
-					<%
-						}
-					%>
-
+				
 				</select>
 			</label> <br> <br>
 			<label>Modalita di gioco <select id="mode" name="modalita">
@@ -78,30 +79,19 @@ if (strutture == null && giochi == null) {
 				</div>
 			</fieldset>
 			<br> <br> <br> <label>Struttura
-			<%
-				Iterator<?> it = strutture.iterator();
-			%>
-			<select name="struttura">
-				<%
-					while (it.hasNext()) {
-					StrutturaBean bean = (StrutturaBean) it.next();
-				%>
-
-				<option><%=bean.getNome()+", "+bean.getIndirizzo()+" - "+bean.getCAP()%></option>
-
-				<%
-					}
-				%>
+			
+			<select name="strutture" id="strutture">
+				
 			</select> </label> <br> <br> <br> 
 			<label>Budget stimato per il torneo(in euro iva esclusa) <input type="number" min="0" max=10000000 name="budget" required>
 			</label><br><br><br>
-			<label>Numero di tecnici desiderati <input type="number" min="0" max=<%=numTecnici.intValue()%> name="tot_tecnici" required></label> <br><br><br>
+			<label>Numero di tecnici desiderati <input type="number" min="0" name="tot_tecnici" id="tot_tecnici" required></label> <br><br><br>
 			<label>Di cui presenti fisicamente <input type="number" min="0" max="4" name="tecnici_fisici" required></label> <br><br><br>
 			<!--Da scegliere dinamicamente -->
 		</fieldset>
-		<% if(error!=null) { %>
-		<h3 style="color: red;">ERRORE: <%=error%></h3>
-		<%} %>
+		
+		<h3 style="color: red;">ERRORE: </h3>
+		
 		<input type="submit" value="Next ->">
 
 	</form>

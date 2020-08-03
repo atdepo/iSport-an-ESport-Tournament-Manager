@@ -67,6 +67,37 @@ public class ModalitaModel implements ModelInterface<ModalitaBean, ModalitaKey> 
 		
 	}
 
+	public ArrayList<ModalitaBean> doRetriveByGame(String game) throws SQLException {
+
+		PreparedStatement statement = null;
+
+		String sql = "SELECT * FROM modalita WHERE nomegioco=?";
+		if (!game.isEmpty()) {
+			try (Connection con = DriverManagerConnectionPool.getConnection()) {
+				ArrayList<ModalitaBean> modalita= new ArrayList<ModalitaBean>();
+				statement = con.prepareStatement(sql);
+				statement.setString(1, game);
+
+				System.out.println("DoRetriveByGame=" + statement.toString());
+				ResultSet rs = statement.executeQuery();
+
+				while (rs.next()) {
+					ModalitaBean bean = new ModalitaBean();
+
+					bean.setTipo(rs.getString("tipo"));
+					bean.setNomeGioco(rs.getString("nomegioco"));
+					
+					modalita.add(bean);
+				}
+				return modalita;
+
+			}
+		} else {
+			// TODO ERRORE
+			return null;
+		}
+	}
+	
 	@Override
 	public void doSave(ModalitaBean product) throws SQLException {
 		// TODO Auto-generated method stub

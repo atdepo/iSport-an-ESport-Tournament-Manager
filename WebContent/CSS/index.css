@@ -5,34 +5,36 @@ a:hover{
 	background-color: blue;
 }
 
-h1 {
-	color: olive;
-}
-
-h6{
-	font-family: cursive;
-}
-
 body{
-	background-color: #357EC7;
+	background-color:#1F2833;;
 }
 
-.split{
+div.home{
+	margin-top:3%;
+	display:flex;
+	flex-direction:row;
+	justify-content:space-around;
+}
+div.split{
 	height: 100%;
-	width: 33%;
+	width: 25%;
+	text-align:center;
+	border: 1px solid #008080 ;
+	color:#45A29E;
 }
 
-.robe {
-	left: 0;
+div.robe {
+	
 }
 
-.altriTornei{
-	left:50%;
+div.altriTornei{
+  
 }
 
-.news{
-	right:0;
+div.news{
+  
 }
-
-
+div.news ul{
+	list-style-type:none;
+}
 

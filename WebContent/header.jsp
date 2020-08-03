@@ -15,11 +15,12 @@
 	<div id="header">
 		<nav  class="header" >
 			<ul>
+				<li><a href="index.jsp">Home</a></li>	
 				<li><a href="<%=response.encodeURL("TournamentControl?action=create")%>">CreaTorneo</a></li>
 				<li><a href="#">Lista Tornei</a></li>
 				<li><a href="#">Elenco Squadre</a></li>
 				<li><a href="#">Elenco giocatori</a></li>
-				<li><a href="#">About</a></li>			
+				<li><a href="#">About</a></li>				
 			</ul>	
 		</nav>
 			

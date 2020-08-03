@@ -1,4 +1,4 @@
-@charset "ISO-8859-1";
+@charset "UTF-8";
 
 a:hover{
 	color: yellow;
@@ -16,3 +16,23 @@ h6{
 body{
 	background-color: #357EC7;
 }
+
+.split{
+	height: 100%;
+	width: 33%;
+}
+
+.robe {
+	left: 0;
+}
+
+.altriTornei{
+	left:50%;
+}
+
+.news{
+	right:0;
+}
+
+
+

@@ -4,8 +4,8 @@
 <%@page import="java.util.Collection"%>
 <%@page import="it.unisa.model.struttura.StrutturaModel"%>
 <%@page import="it.unisa.model.torneo.TournamentModel"%>
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%
 //response.sendRedirect(response.encodeRedirectURL("./TournamentControl?action=create"));
 /*
@@ -35,6 +35,8 @@ if (strutture == null && giochi == null) {
 
 
 </style>
+<link rel="stylesheet" href="CSS/CreazioneTorneo.css" type="text/css">
+<link rel="stylesheet" href="CSS/2RadioButton.css" type="text/css">
 <meta charset="UTF-8">
 
 <title >Crea il tuo torneo</title>
@@ -45,11 +47,12 @@ if (strutture == null && giochi == null) {
 
 <body>
 <%@ include file="header.jsp"%>
+	<div class="title">
 	<h2 >CREA ORA IL TUO TORNEO</h2>
+	</div>
 	<form name="FormCreazioneTorneo" action="<%=response.encodeURL("TournamentControl?action=validate")%>" method=post>
 		<fieldset>
 			<legend>Informazioni generali</legend>
-
 			<label>Nome del Torneo <input type="text" name="nometorneo" required></label> <br> <br> <br>
 			<label>Data Torneo <input type="date" name="datatorneo" required></label> <br> <br> <br>
 			<label>Gioco di riferimento
@@ -65,9 +68,15 @@ if (strutture == null && giochi == null) {
 			
 
 			<fieldset>
-				<legend>Come si svolger‡ il torneo</legend>
-				<label>On-line<input type="radio" name="sel" value="on-line" checked></label> <br> <br> 
-				<label>Fisico <input type="radio" name="sel" value="fisico"></label>
+						<legend >Come si svolger√†	 il torneo</legend>
+				<div class="container" >
+				
+				<input id="on-line" type="radio" name="sel" value="on-line" checked class="sel bt1">
+				<label class="radioLabel" for="on-line">On-line</label>	
+				
+				<input id="fisico" type="radio" name="sel" value="fisico" class="sel bt2">
+				<label class="radioLabel" for="fisico">Fisico </label>
+				</div>
 			</fieldset>
 			<br> <br> <br> <label>Struttura
 			

@@ -1,0 +1,61 @@
+
+
+.container{align-items:center; display:flex; }
+
+.radioLabel {
+  border: 3px solid #1a1a1a;
+  display: inline-block;
+  padding: 10px;
+  position: relative;
+  text-align: center;
+ 
+  transition: background 600ms ease, color 600ms ease;
+}
+
+/*
+Per i bottoni belli, dare classe container al div contenitore, dare classe sel ai due bottoni e
+bt1 a quello a sinistra e bt2 a quello di destra
+*/
+
+
+input[type="radio"].sel {
+  display: none;
+}
+input[type="radio"].sel + label {
+  cursor: pointer;
+  min-width: 60px;
+}
+input[type="radio"].sel + label:hover {
+  background: none;
+  color: #1a1a1a;
+}
+input[type="radio"].sel + label:after {
+  background: #1a1a1a;
+  content: "";
+  height: 100%;
+  position: absolute;
+  top: 0;
+  transition: left 200ms cubic-bezier(0.77, 0, 0.175, 1);
+  width: 100%;
+  z-index: -1;
+}
+input[type="radio"].sel.bt1 + label {
+  border-right: 0;
+}
+input[type="radio"].sel.bt1 + label:after {
+  left: 100%;
+}
+input[type="radio"].sel.bt2 + label {
+  margin-left: -5px;
+}
+input[type="radio"].sel.bt2 + label:after {
+  left: -100%;
+}
+input[type="radio"].sel:checked + label {
+  cursor: default;
+  color: #fff;
+  transition: color 200ms;
+}
+input[type="radio"].sel:checked + label:after {
+  left: 0;
+}

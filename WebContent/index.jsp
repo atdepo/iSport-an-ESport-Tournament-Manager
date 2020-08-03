@@ -10,7 +10,6 @@
 
 <body>
 	<%@ include file="header.jsp"%>
-	<h1>Montefusco merda</h1>
 	<br>
 	<br>
 	

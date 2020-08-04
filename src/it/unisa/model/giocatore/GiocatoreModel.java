@@ -71,8 +71,24 @@ public class GiocatoreModel implements ModelInterface<GiocatoreBean, String> {
 	}
 
 	@Override
-	public void doSave(GiocatoreBean product) throws SQLException {
-		// TODO Auto-generated method stub
+	public void doSave(GiocatoreBean giocatore) throws SQLException {
+		PreparedStatement statement = null;
+		String sql = "INSERT INTO giocatore values (?,?,?,?,?,?,?)";
+		GiocatoreBean bean= new GiocatoreBean();
+		try(Connection con = DriverManagerConnectionPool.getConnection()){
+		
+			statement=con.prepareStatement(sql);
+			statement.setString(1,giocatore.getNickname());
+			statement.setString(2,giocatore.getNome());
+			statement.setString(3,giocatore.getCognome());
+			statement.setString(4,giocatore.getRuolo());
+			statement.setString(5,giocatore.getDatanascita());
+			statement.setString(6,giocatore.getNomesquadra());
+			statement.setString(7,giocatore.getCodtecnico());
+			System.out.println("doSave="+statement);
+			statement.executeUpdate();
+		}
+		
 		
 	}
 
@@ -83,8 +99,19 @@ public class GiocatoreModel implements ModelInterface<GiocatoreBean, String> {
 	}
 
 	@Override
-	public void doDelete(GiocatoreBean product) throws SQLException {
-		// TODO Auto-generated method stub
+	public void doDelete(GiocatoreBean giocatore) throws SQLException {
+		PreparedStatement statement	 = null;
+		String sql = "DELETE FROM giocatore WHERE (nickname=?)";
+		GiocatoreBean bean= new GiocatoreBean();
+		try(Connection con = DriverManagerConnectionPool.getConnection()){
+		
+			statement=con.prepareStatement(sql);
+			statement.setString(1,giocatore.getNickname());
+			
+			System.out.println("doSave="+statement);
+			statement.executeUpdate();
+		}
+		
 		
 	}
 

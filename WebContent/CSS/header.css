@@ -3,39 +3,53 @@
 		margin:0;
 		padding:0;
 		}
-			
-	nav.header ul li{
-		list-style: none;
-		display: inline-block;
-		float:left;
-		width:7%;
-		text-align:center;
-		padding-top:2%;
+	.nav {
+ 	 overflow: hidden;
+ 	 background-color: #008080;
 	}
-	
-	nav.header ul li a{
-		display:block;
-		text-decoration:none;
-		font-size: 14px;
-		font-family: arial;
-		color:#1e1e1e;
-		padding:0 20px;
-		
+
+	.nav a {
+  		float: left;
+  		display: block;
+  		color: #f2f2f2;
+  		text-align: center;
+  		padding: 14px 16px;
+  		text-decoration: none;
+  		font-size: 17px;
+  		color:#1e1e1e
 	}
-		nav.header ul li a:hover{
-		color:lime;		
+
+	.nav a:hover {
+ 		color:lime;		
 		background-color:#1F2833;
 	}
-	
-	nav.header ul{
-		margin-left: 60px;
-	}	
-	nav{
-		width: 100%;
-		height: 100px;
-		background-color:#008080 ;
-	
+
+	.nav a.active {
+ 
 	}
-	
-	
-	
+
+	.nav .icon {
+ 	 display: none;
+	}
+
+	@media screen and (max-width: 700px) {
+  		.nav a:not(:first-child) {display: none;}
+  		.nav a.icon {
+    	float: right;
+    	display: block;
+  	}
+	}
+
+	@media screen and (max-width: 700px) {
+  		.nav.responsive {position: relative;}
+  		.nav.responsive .icon {
+   		position: absolute;
+    	right: 0;
+    	top: 0;
+  }
+  .nav.responsive a {
+    float: none;
+    display: block;
+    text-align: left;
+  }
+}

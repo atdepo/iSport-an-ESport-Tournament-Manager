@@ -7,18 +7,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%
-//response.sendRedirect(response.encodeRedirectURL("./TournamentControl?action=create"));
-/*
-Collection<?> strutture = (Collection<?>) session.getAttribute("strutture");
-Collection<?> giochi = (Collection<?>) session.getAttribute("giochi");
-Integer numTecnici = (Integer) session.getAttribute("numtecnici");
-String error = (String) request.getAttribute("error"); 
-
-if (strutture == null && giochi == null) {
-	response.sendRedirect(response.encodeRedirectURL("./TournamentControl?action=create"));
-	return;
-	
-}*/
+String error=(String)request.getAttribute("error");
 %>
 <!DOCTYPE html>
 <html>
@@ -50,7 +39,7 @@ if (strutture == null && giochi == null) {
 	<div class="title">
 	<h2 >CREA ORA IL TUO TORNEO</h2>
 	</div>
-	<form name="FormCreazioneTorneo" onsubmit="validateTournament()" method="post">
+	<form name="FormCreazioneTorneo" action="<%=response.encodeURL("TournamentControl?action=validate")%>" method="post">
 		<fieldset>
 			<legend>Informazioni generali</legend>
 			<label>Nome del Torneo <input type="text" name="nometorneo" required></label> <br> <br> <br>
@@ -89,8 +78,9 @@ if (strutture == null && giochi == null) {
 			<!-- Il max utilizzato nei tecnici fisici è solo un placeholder per evitare che la barra diventi troppo grande -->
 			
 		</fieldset>
-		
-		<h3 style="color: red;" class="error">ERRORE: </h3>
+		<%if(error!=null) {%>
+		<h3 style="color: red;" class="error">ERRORE: <%=error%></h3>
+		<%} %>
 		<input type="submit" class="formsub" value="Next">
 
 	</form>

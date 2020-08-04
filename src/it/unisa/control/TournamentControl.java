@@ -102,9 +102,9 @@ public class TournamentControl extends HttpServlet {
 		break;
 		
 		case "validate":
-		
+			response.setCharacterEncoding("UTF-8");
 			System.out.println("Sto validando il torneo");
-
+			request.setAttribute("error", null);
 			String dataTorneoDaCreare = (String) request.getParameter("datatorneo");
 			Date d1 = new Date();
 			SimpleDateFormat df = new SimpleDateFormat("YYYY-MM-dd");
@@ -113,9 +113,10 @@ public class TournamentControl extends HttpServlet {
 			if (controlloData(data, request.getParameter("datatorneo"))) {
 				request.setAttribute("error",
 						"Non possediamo una DeLorean, pertanto ci è impossibile organizzare tornei nel passato!");
-				RequestDispatcher dispatcher = request.getServletContext()
-						.getRequestDispatcher("/FormCreazioneTorneo.jsp");
+				RequestDispatcher dispatcher = request.getServletContext().getRequestDispatcher("/FormCreazioneTorneo.jsp");
 				dispatcher.forward(request, response);
+				
+
 				return;
 			}
 
@@ -132,14 +133,19 @@ public class TournamentControl extends HttpServlet {
 							System.out.println("PROBLEMAAAAA");
 							String errore = "In questa data la struttura selezionata è già occupata, selezionarne una diversa";
 							request.setAttribute("error", errore);
-							RequestDispatcher dispatcher = this.getServletContext()
-									.getRequestDispatcher("/FormCreazioneTorneo.jsp");
+							RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher("/FormCreazioneTorneo.jsp");
 							dispatcher.forward(request, response);
 							return;
+							
 						}
 
 					}
 				}
+				
+				//RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher("/FormInserimentoGiocatori.jsp");
+				//dispatcher.forward(request, response);
+				response.encodeRedirectURL("FormInserimentoGiocatori.jsp");
+				return;
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}

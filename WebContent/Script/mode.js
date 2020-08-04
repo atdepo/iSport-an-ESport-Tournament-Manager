@@ -1,6 +1,5 @@
 
 $(document).ready(function() {
-$(".error").hide();
 	var xhr = new XMLHttpRequest();
 	xhr.onreadystatechange = function() {
 
@@ -38,7 +37,6 @@ $(".error").hide();
 function getMode() {
 	
 	var gioco = $('select#gioco option:checked').val();
-	//alert(gioco);
 	var xhr = new XMLHttpRequest();
 	xhr.onreadystatechange = function() {
 		if (xhr.status == 200 && xhr.readyState == 4) {
@@ -68,17 +66,16 @@ function numTecnici(){
 
 function validateTournament(){
 	
-	
-	window.location.href='https://www.google.com';
+	var xhr = new XMLHttpRequest();
+	xhr.onreadystatechange = function() {
+		if (xhr.status == 200 && xhr.readyState == 4) {
+			
+			
+		}
+	}
 
-	/*var	sub=document.getElementByClassName('formsub');
-	sub.addEventListener("click", function (evt) {
-		alert('va');
-		evt.preventDefault(); 
-		window.location.href("https://www.google.com");
-		
-		return false; });
-	//window.location.href='https://www.google.com';
-	*/
+	xhr.open('GET', 'TournamentControl?action=validate', true);
+	xhr.send();
+	
 }
 

@@ -9,6 +9,7 @@ import java.util.Collection;
 
 import it.unisa.model.ModelInterface;
 import it.unisa.model.connessione.DriverManagerConnectionPool;
+import it.unisa.model.giocatore.GiocatoreBean;
 import it.unisa.model.gioco.GiocoBean;
 
 public class SquadraModel implements ModelInterface<SquadraBean, String>{
@@ -58,9 +59,19 @@ public class SquadraModel implements ModelInterface<SquadraBean, String>{
 	}
 
 	@Override
-	public void doSave(SquadraBean product) throws SQLException {
-		// TODO Auto-generated method stub
+	public void doSave(SquadraBean squadra) throws SQLException {
+		PreparedStatement statement = null;
+		String sql = "INSERT INTO squadra values (?,?)";
+		GiocatoreBean bean= new GiocatoreBean();
+		try(Connection con = DriverManagerConnectionPool.getConnection()){
 		
+			statement=con.prepareStatement(sql);
+			statement.setString(1,squadra.getNome());
+			statement.setString(2,squadra.getNazionalita());
+			
+			System.out.println("doSave="+statement);
+			statement.executeUpdate();
+		}
 	}
 
 	@Override
@@ -70,9 +81,18 @@ public class SquadraModel implements ModelInterface<SquadraBean, String>{
 	}
 
 	@Override
-	public void doDelete(SquadraBean product) throws SQLException {
-		// TODO Auto-generated method stub
+	public void doDelete(SquadraBean squadra) throws SQLException {
+		PreparedStatement statement	 = null;
+		String sql = "DELETE FROM giocatore WHERE (nickname=?)";
+		GiocatoreBean bean= new GiocatoreBean();
+		try(Connection con = DriverManagerConnectionPool.getConnection()){
 		
+			statement=con.prepareStatement(sql);
+			statement.setString(1,squadra.getNome());
+			
+			System.out.println("doSave="+statement);
+			statement.executeUpdate();		
+			}
 	}
 
 	

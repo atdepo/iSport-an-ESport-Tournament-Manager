@@ -50,89 +50,50 @@ if (strutture == null && giochi == null) {
 	<div class="title">
 	<h2 >CREA ORA IL TUO TORNEO</h2>
 	</div>
-	<form name="FormCreazioneTorneo" action="<%=response.encodeURL("TournamentControl?action=validate")%>" method=post>
+	<form name="FormCreazioneTorneo" onsubmit="validateTournament()" method="post">
 		<fieldset>
 			<legend>Informazioni generali</legend>
 			<label>Nome del Torneo <input type="text" name="nometorneo" required></label> <br> <br> <br>
 			<label>Data Torneo <input type="date" name="datatorneo" required></label> <br> <br> <br>
 			<label>Gioco di riferimento
-				<select name="gioco" id="gioco" onchange="getMode()">
+				<select name="gioco" id="gioco" onchange="getMode()"></select>
 				
-				</select>
 			</label> <br> <br>
-			<label>Modalita di gioco <select id="mode" name="modalita">
+			<label>Modalita di gioco <select id="mode" name="modalita"></select>
+			</label> <br> <br>
 			
-			<option></option>
-			
-			</select></label>
-			
-
 			<fieldset>
-						<legend >Come si svolgerà	 il torneo</legend>
+				<legend >Come si svolgerà il torneo</legend>
 				<div class="container" >
-				
+				<br>
 				<input id="on-line" type="radio" name="sel" value="on-line" checked class="sel bt1">
 				<label class="radioLabel" for="on-line">On-line</label>	
 				
 				<input id="fisico" type="radio" name="sel" value="fisico" class="sel bt2">
 				<label class="radioLabel" for="fisico">Fisico </label>
+				<br><br>
+				
 				</div>
 			</fieldset>
 			<br> <br> <br> <label>Struttura
 			
-			<select name="strutture" id="strutture">
-				
-			</select> </label> <br> <br> <br> 
+			<select name="strutture" id="strutture"></select>
+			</label> <br> <br> <br> 
+			
 			<label>Budget stimato per il torneo(in euro iva esclusa) <input type="number" min="0" max=10000000 name="budget" required>
 			</label><br><br><br>
-			<label>Numero di tecnici desiderati <input type="number" min="0" name="tot_tecnici" id="tot_tecnici" required></label> <br><br><br>
-			<label>Di cui presenti fisicamente <input type="number" min="0" max="4" name="tecnici_fisici" required></label> <br><br><br>
-			<!--Da scegliere dinamicamente -->
+			
+			<label>Numero di tecnici desiderati <input type="number" min="0" name="tot_tecnici" id="tot_tecnici" onchange="numTecnici()" required></label> <br><br><br>
+			
+			<label>Di cui presenti fisicamente <input type="number" min="0"  max="10" name="tecnici_fisici" id="tecnici_fisici" required></label> <br><br><br>
+			<!-- Il max utilizzato nei tecnici fisici è solo un placeholder per evitare che la barra diventi troppo grande -->
+			
 		</fieldset>
 		
-		<h3 style="color: red;">ERRORE: </h3>
-		
-		<input type="submit" value="Next ->">
+		<h3 style="color: red;" class="error">ERRORE: </h3>
+		<input type="submit" class="formsub" value="Next">
 
 	</form>
-	<script type="text/javascript">
-	  function doAjax(){
-		     url = "test.json";
-		     if(window.XMLHttpRequest){
-		        // most browsers have a builtin XMLHttpRequest object
-		        httpRequest = new XMLHttpRequest();
-		     } else if(window.ActiveXObject){
-		    	 httpRequest = new ActiveXObject("Microsoft.XMLHTTP");
-		     } else {
-		    	 alert("AJAX not supported");
-		        return;
-		     }
-
-		     // Set the name of the function that will process the response from the request.
-		     httpRequest.onreadystatechange = AjaxCallback;
-
-		     // This triggers the request for a document.
-		     // The third parameter 'true' causes the routine to run asynchronously.
-		     // Execution continues here and the onreadystatechange routine will be called'
-		     // when the operation completes.
-		     httpRequest.open ('GET', url, true);
-		     httpRequest.send (null);
-		  }
-
-		  function AjaxCallback() {
-		     // 4 means the full response has been received.
-		     if(httpRequest.readyState == 4){
-		        alert(httpRequest.responseText);
-	  		    var x = document.getElementById('myDIV');
-	  		    x.innerHTML = httpRequest.responseText;
-	  		    if (x.style.display === 'none') {
-	  		      x.style.display = 'block';
-	  		    } else {
-	  		      x.style.display = 'none';
-	  		    }
-		     }
-		  }
-
-	</script>
+	 
 </body>
 </html>

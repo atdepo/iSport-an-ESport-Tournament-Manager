@@ -142,9 +142,23 @@ public class TournamentControl extends HttpServlet {
 					}
 				}
 				
+				
+				//System.out.println("mannagg geppett");
+				
+				HttpSession sessione= request.getSession();
+				sessione.setAttribute("nomeTorneo", request.getParameter("nometorneo"));
+				sessione.setAttribute("dataTorneo", request.getParameter("datatorneo"));
+				sessione.setAttribute("nomeGioco", request.getParameter("gioco"));
+				sessione.setAttribute("tipoTorneo", request.getParameter("sel"));
+				sessione.setAttribute("modalita", request.getParameter("modalita"));
+				sessione.setAttribute("struttura", request.getParameter("strutture"));
+				sessione.setAttribute("budget", request.getParameter("budget"));
+				sessione.setAttribute("totaleTecnici", request.getParameter("tot_tecnici"));
+				sessione.setAttribute("tecniciFisici", request.getParameter("tecnici_fisici"));
+				response.sendRedirect(request.getContextPath()+"/FormInserimentoGiocatori.jsp");
+
 				//RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher("/FormInserimentoGiocatori.jsp");
 				//dispatcher.forward(request, response);
-				response.encodeRedirectURL("FormInserimentoGiocatori.jsp");
 				return;
 			} catch (SQLException e) {
 				e.printStackTrace();

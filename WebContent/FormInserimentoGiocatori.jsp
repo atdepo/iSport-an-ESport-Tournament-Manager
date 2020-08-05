@@ -28,6 +28,9 @@
 			<input type="text" name="nomeSquadra1" placeholder="Merda">
 
 		</div>
+		
+		<input type="button" value="aggiungi" onclick="add()">
+		 
 	</div>
 
 </body>

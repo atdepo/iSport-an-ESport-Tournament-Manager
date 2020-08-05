@@ -13,6 +13,8 @@
 </head>
 
 
+</head>
+
 <body>
 	<%@ include file="header.jsp"%>
 

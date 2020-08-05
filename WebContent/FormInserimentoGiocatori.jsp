@@ -17,11 +17,21 @@
 
 	
 	<div class="container">
-	
+		<div class="squadra1" align="left">
+			<h2>Squadra 1</h2>
+			<br><br>
+			<input type="text" name="nomeSquadra1" placeholder="Montefusco">
+		</div>
+
+		<div class="squadra2" align="right">
+			<h2>Squadra 2</h2>
+			<br><br>
+			<input type="text" name="nomeSquadra1" placeholder="Merda">
+
+		</div>
 		
-		<button id="aggiungi" value="mammt">Ngul</button>
-	
-		
+		<input type="button" value="aggiungi" onclick="add()">
+		 
 	</div>
 
 </body>

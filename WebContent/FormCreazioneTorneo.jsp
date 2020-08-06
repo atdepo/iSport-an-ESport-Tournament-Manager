@@ -66,9 +66,13 @@ String error=(String)request.getAttribute("error");
 			</fieldset>
 			<br> <br> <br> <label>Struttura
 			
-			<select name="strutture" id="strutture"></select>
+		<!--  	<select name="strutture" id="strutture"></select> -->
+		
 			</label> <br> <br> <br> 
-			
+			<div class="seleziona">
+				
+		
+			</div>
 			<label>Budget stimato per il torneo(in euro iva esclusa) <input type="number" min="0" max=10000000 name="budget" required>
 			</label><br><br><br>
 			

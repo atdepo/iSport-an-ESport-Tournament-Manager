@@ -14,14 +14,11 @@ $(document).ready(function() {
 			var numTecnici= data['2'];
 			document.getElementById("tot_tecnici").setAttribute("max" , numTecnici);
 
-			/* for (var i = 0; i < dataStrutture.length; i++) {
+			for (var i = 0; i < dataStrutture.length; i++) {
 				strutture.append('<option>' + dataStrutture[i].nome+', '+dataStrutture[i].indirizzo+' - '+dataStrutture[i].CAP+ '</option>');	
 
-			} */
-				for (var i = 0; i < dataStrutture.length; i++) {
-					strutture.append('<div class="option"><input name="struttura" type="radio" class="radio" id="'+dataStrutture[i].nome+'"/> <label for="'+dataStrutture[i].nome+'">'+dataStrutture[i].nome+', '+dataStrutture[i].indirizzo+' - '+dataStrutture[i].CAP+' </label></div>');	
-			
 			}
+
 			for (var i = 0; i < dataGiochi.length; i++) {
 				game.append('<option>' + dataGiochi[i].nomeGioco + '</option>');	
 

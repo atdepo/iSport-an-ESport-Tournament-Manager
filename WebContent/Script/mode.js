@@ -18,10 +18,39 @@ $(document).ready(function() {
 				strutture.append('<option>' + dataStrutture[i].nome+', '+dataStrutture[i].indirizzo+' - '+dataStrutture[i].CAP+ '</option>');	
 
 			} */
+			
+			/*const selected = document.querySelector(".selected");
+			const optionsContainer = $(".options-container");
+
+			selected.addEventListener("click", () => {
+				alert('mammt');
+			  optionsContainer.addClass("active");
+			});
+*/
+			
 				for (var i = 0; i < dataStrutture.length; i++) {
-					strutture.append('<div class="option"><input name="struttura" type="radio" class="radio" id="'+dataStrutture[i].nome+'"/> <label for="'+dataStrutture[i].nome+'">'+dataStrutture[i].nome+', '+dataStrutture[i].indirizzo+' - '+dataStrutture[i].CAP+' </label></div>');	
+					strutture.append('<div class="option"><input name="struttura" onclick="tendina()" type="radio" class="radio" id="'+dataStrutture[i].nome+'"> <label for="'+dataStrutture[i].nome+'">'+dataStrutture[i].nome+', '+dataStrutture[i].indirizzo+' - '+dataStrutture[i].CAP+' </label></div>');	
 			
 			}
+				
+
+
+				
+				//const optionsList = document.querySelectorAll(".option");
+				
+				/*optionsList.forEach(o => {
+				  o.addEventListener("click", () => {
+						alert('mammt');
+
+				    selected.innerHTML = o.querySelector("label").innerHTML;
+				    optionsContainer.classList.remove("active");
+				  });
+				});*/	
+				
+				
+				
+				
+				
 			for (var i = 0; i < dataGiochi.length; i++) {
 				game.append('<option>' + dataGiochi[i].nomeGioco + '</option>');	
 
@@ -35,6 +64,23 @@ $(document).ready(function() {
 	xhr.send();
 
 });
+
+function menu(){
+	
+$(".options-container").toggleClass("active");
+	
+}
+function tendina(){
+	var selected=$('.selected');
+	var optionsContainer = $(".options-container");
+	//alert($("input[name='struttura']:checked").attr("id"));
+    //selected.replaceWith('<div class="selected" onclick="menu()">'+'Ciccio'+'</div>');
+	//selected.text($("input[name='struttura']:checked").attr("id"));
+	selected.text($("input[name='struttura']:checked").attr("id"));
+
+	//alert($(this).html());
+    optionsContainer.toggleClass("active");;
+}
 
 
 function getMode() {

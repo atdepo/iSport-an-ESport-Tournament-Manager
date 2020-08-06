@@ -12,8 +12,6 @@ String error=(String)request.getAttribute("error");
 <!DOCTYPE html>
 <html>
 <head>
-
-
 <style type="text/css">
 	body{background-color:#070909}
 	
@@ -73,15 +71,14 @@ String error=(String)request.getAttribute("error");
 	<div class="container">
 		<div class="select-box">
         	<div class="options-container" id="strutture">
-		
 			</div>
-    		<div class="selected">
+    		<div class="selected" onclick="menu()">
               Seleziona una Struttura
     		</div>
     	</div>
     </div>
     
-    <script src="Script/main.js"></script>
+    <!-- <script src="Script/main.js"></script> -->
 			
 			
 			<label>Budget stimato per il torneo(in euro iva esclusa) <input type="number" min="0" max=10000000 name="budget" required>

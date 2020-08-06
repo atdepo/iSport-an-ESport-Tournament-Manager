@@ -26,6 +26,7 @@ String error=(String)request.getAttribute("error");
 </style>
 <link rel="stylesheet" href="CSS/CreazioneTorneo.css" type="text/css">
 <link rel="stylesheet" href="CSS/2RadioButton.css" type="text/css">
+<link rel="stylesheet" href="CSS/Tendina.css" type="text/css">
 <meta charset="UTF-8">
 
 <title >Crea il tuo torneo</title>
@@ -64,15 +65,25 @@ String error=(String)request.getAttribute("error");
 				
 				</div>
 			</fieldset>
-			<br> <br> <br> <label>Struttura
+			<br><label>Struttura
 			
 		<!--  	<select name="strutture" id="strutture"></select> -->
 		
-			</label> <br> <br> <br> 
-			<div class="seleziona">
-				
+			</label> <br>
+	<div class="container">
+		<div class="select-box">
+        	<div class="options-container" id="strutture">
 		
 			</div>
+    		<div class="selected">
+              Seleziona una Struttura
+    		</div>
+    	</div>
+    </div>
+    
+    <script src="Script/main.js"></script>
+			
+			
 			<label>Budget stimato per il torneo(in euro iva esclusa) <input type="number" min="0" max=10000000 name="budget" required>
 			</label><br><br><br>
 			

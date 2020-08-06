@@ -53,7 +53,7 @@ String error=(String)request.getAttribute("error");
 			
 			<fieldset>
 				<legend >Come si svolgerà il torneo</legend>
-				<div class="container" >
+				<div class="contieniBottoni" >
 				<br>
 				<input id="on-line" type="radio" name="sel" value="on-line" checked class="sel bt1">
 				<label class="radioLabel" for="on-line">On-line</label>	

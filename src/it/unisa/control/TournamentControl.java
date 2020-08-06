@@ -22,6 +22,8 @@ import it.unisa.model.gioco.GiocoModel;
 import it.unisa.model.modalita.ModalitaBean;
 import it.unisa.model.modalita.ModalitaKey;
 import it.unisa.model.modalita.ModalitaModel;
+import it.unisa.model.squadra.SquadraBean;
+import it.unisa.model.squadra.SquadraModel;
 import it.unisa.model.struttura.KeyStruttura;
 import it.unisa.model.struttura.StrutturaBean;
 import it.unisa.model.struttura.StrutturaModel;
@@ -37,6 +39,7 @@ public class TournamentControl extends HttpServlet {
 	GiocoModel gModel = new GiocoModel();
 	TecnicoModel tecModel = new TecnicoModel();
 	ModalitaModel modModel = new ModalitaModel();
+	SquadraModel sqModel= new SquadraModel();
 
 	public TournamentControl() {
 		super();
@@ -142,15 +145,47 @@ public class TournamentControl extends HttpServlet {
 					}
 				}
 				
+				
+				//System.out.println("mannagg geppett");
+				
+				HttpSession sessione= request.getSession();
+				sessione.setAttribute("nomeTorneo", request.getParameter("nometorneo"));
+				sessione.setAttribute("dataTorneo", request.getParameter("datatorneo"));
+				sessione.setAttribute("nomeGioco", request.getParameter("gioco"));
+				sessione.setAttribute("tipoTorneo", request.getParameter("sel"));
+				sessione.setAttribute("modalita", request.getParameter("modalita"));
+				sessione.setAttribute("struttura", request.getParameter("strutture"));
+				sessione.setAttribute("budget", request.getParameter("budget"));
+				sessione.setAttribute("totaleTecnici", request.getParameter("tot_tecnici"));
+				sessione.setAttribute("tecniciFisici", request.getParameter("tecnici_fisici"));
+				response.sendRedirect(request.getContextPath()+"/FormInserimentoGiocatori.jsp");
+
 				//RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher("/FormInserimentoGiocatori.jsp");
 				//dispatcher.forward(request, response);
-				response.encodeRedirectURL("FormInserimentoGiocatori.jsp");
 				return;
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
 			
 		break;
+		
+		case "getSquadre":
+			response.setCharacterEncoding("UTF-8");
+			
+			try {
+				ArrayList<SquadraBean> squadre= (ArrayList<SquadraBean>) sqModel.doRetriveAll(null);
+				String mode=gson.toJson(squadre);
+				response.getWriter().print(mode);
+				response.getWriter().flush();
+				System.out.println("il json delle squadre è stato creato con successo");
+				response.setStatus(200);
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			
+			break;
 		
 		}
 		

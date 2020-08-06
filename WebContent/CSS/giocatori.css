@@ -1,0 +1,11 @@
+@charset "UTF-8";
+
+.container{
+	
+		 width: 100px;
+        display: inline-block;
+        padding: 15px;
+        text-align: center;
+        color: #000000;
+        font-family: arial, sans-serif;
+}

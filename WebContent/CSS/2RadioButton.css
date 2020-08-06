@@ -1,6 +1,6 @@
 
 
-.container{align-items:center; display:flex; }
+.contieniBottoni{align-items:center; display:flex; }
 
 .radioLabel {
   border: 3px solid #1a1a1a;
@@ -13,7 +13,7 @@
 }
 
 /*
-Per i bottoni belli, dare classe container al div contenitore, dare classe sel ai due bottoni e
+Per i bottoni belli, dare classe contieniBottoni al div contenitore, dare classe sel ai due bottoni e
 bt1 a quello a sinistra e bt2 a quello di destra
 */
 

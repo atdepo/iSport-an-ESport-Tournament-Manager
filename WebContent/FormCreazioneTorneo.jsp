@@ -12,22 +12,13 @@ String error=(String)request.getAttribute("error");
 <!DOCTYPE html>
 <html>
 <head>
-<style type="text/css">
-	body{background-color:#070909}
-	
-	label,h2,legend{color:lime}
-	
-	form{margin:10%}
-	
 
-
-</style>
 <link rel="stylesheet" href="CSS/CreazioneTorneo.css" type="text/css">
 <link rel="stylesheet" href="CSS/2RadioButton.css" type="text/css">
 <link rel="stylesheet" href="CSS/Tendina.css" type="text/css">
 <meta charset="UTF-8">
 
-<title >Crea il tuo torneo</title>
+<title>Crea il tuo Torneo</title>
 
       <script src = "https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 	  <script src = "Script/mode.js"></script>
@@ -36,21 +27,42 @@ String error=(String)request.getAttribute("error");
 <body>
 <%@ include file="header.jsp"%>
 	<div class="title">
-	<h2 >CREA ORA IL TUO TORNEO</h2>
+	<h2>CREA ORA IL TUO TORNEO</h2>
 	</div>
 	<form name="FormCreazioneTorneo" action="<%=response.encodeURL("TournamentControl?action=validate")%>" method="post">
-		<fieldset>
-			<legend>Informazioni generali</legend>
+			<fieldset>
 			<label>Nome del Torneo <input type="text" name="nometorneo" required></label> <br> <br> <br>
 			<label>Data Torneo <input type="date" name="datatorneo" required></label> <br> <br> <br>
-			<label>Gioco di riferimento
+			<!-- <label>Gioco di riferimento
 				<select name="gioco" id="gioco" onchange="getMode()"></select>
-				
-			</label> <br> <br>
-			<label>Modalita di gioco <select id="mode" name="modalita"></select>
-			</label> <br> <br>
+			</label> <br> <br> -->
+			<label>Gioco di riferimento</label>
+			<div class="container">
+					<div class="select-box">
+			        	<div class="options-container" id="gioco">
+						</div>
+			    		<div class="selected gioco" onclick="menu('gioco')" >
+			              Gioco di riferimento
+			    		</div>
+			    	</div>
+			</div>
+
+
+			<label>Modalita di gioco</label> 
 			
+			<div class="container">
+					<div class="select-box">
+			        	<div class="options-container" id="mode">
+						</div>
+			    		<div class="selected mode" onclick="menu('mode')" >
+			              Modalità di gioco
+			    		</div>
+			    	</div>
+			</div>
+			
+			</fieldset>
 			<fieldset>
+			<br>
 				<legend >Come si svolgerà il torneo</legend>
 				<div class="contieniBottoni" >
 				<br>
@@ -62,17 +74,17 @@ String error=(String)request.getAttribute("error");
 				<br><br>
 				
 				</div>
-			</fieldset>
 			<br><label>Struttura
 			
 		<!--  	<select name="strutture" id="strutture"></select> -->
 		
-			</label> <br>
+			</label>
+			
 	<div class="container">
 		<div class="select-box">
         	<div class="options-container" id="strutture">
 			</div>
-    		<div class="selected" onclick="menu()">
+    		<div class="selected strutture" onclick="menu('strutture')">
               Seleziona una Struttura
     		</div>
     	</div>

@@ -1,0 +1,17 @@
+NELLA PAGINA HTML/JSP
+
+<div class="container">
+		<div class="select-box">
+        	<div class="options-container" id="$ID">
+			</div>
+    		<div class="selected $ID" onclick="menu('$ID')">
+              Seleziona il cazzo che ti pare
+    		</div>
+    	</div>
+    </div>
+    
+QUANDO LO RIEMPITE DINAMICAMENTE IN JAVASCRIPT
+
+for(...)
+var nome = $IL_NOME_CHE_METTETE_NELLA_LABEL.replace(/\s/g, '');
+<div class="option"><input name="gioco" onclick="tendina(\''+$IL_NOME_CHE_METTETE_NELLA_LABEL+'\')" type="radio" class="radio" id="'+$IL_NOME_CHE_METTETE_NELLA_LABEL+'"> <label for="'+$IL_NOME_CHE_METTETE_NELLA_LABEL+'">'+..le cose che servono da visualizzare..+'</label></div>

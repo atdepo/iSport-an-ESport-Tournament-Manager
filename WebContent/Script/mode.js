@@ -13,49 +13,18 @@ $(document).ready(function() {
 			var dataGiochi= data['1'];
 			var numTecnici= data['2'];
 			document.getElementById("tot_tecnici").setAttribute("max" , numTecnici);
-
-			/* for (var i = 0; i < dataStrutture.length; i++) {
-				strutture.append('<option>' + dataStrutture[i].nome+', '+dataStrutture[i].indirizzo+' - '+dataStrutture[i].CAP+ '</option>');	
-
-			} */
 			
-			/*const selected = document.querySelector(".selected");
-			const optionsContainer = $(".options-container");
-
-			selected.addEventListener("click", () => {
-				alert('mammt');
-			  optionsContainer.addClass("active");
-			});
-*/
-			
-				for (var i = 0; i < dataStrutture.length; i++) {
-					strutture.append('<div class="option"><input name="struttura" onclick="tendina()" type="radio" class="radio" id="'+dataStrutture[i].nome+'"> <label for="'+dataStrutture[i].nome+'">'+dataStrutture[i].nome+', '+dataStrutture[i].indirizzo+' - '+dataStrutture[i].CAP+' </label></div>');	
-			
+			for (var i = 0; i < dataStrutture.length; i++) {
+					var nome = dataStrutture[i].nome.replace(/\s/g, '');
+					strutture.append('<div class="option"><input required name="strutture" onclick="tendina(\''+nome+'\')" type="radio" class="radio" id="'+nome+'" value="'+dataStrutture[i].nome+'"> <label for="'+nome+'">'+dataStrutture[i].nome+', '+dataStrutture[i].indirizzo+' - '+dataStrutture[i].CAP+' </label></div>');	
 			}
 				
-
-
-				
-				//const optionsList = document.querySelectorAll(".option");
-				
-				/*optionsList.forEach(o => {
-				  o.addEventListener("click", () => {
-						alert('mammt');
-
-				    selected.innerHTML = o.querySelector("label").innerHTML;
-				    optionsContainer.classList.remove("active");
-				  });
-				});*/	
-				
-				
-				
-				
-				
 			for (var i = 0; i < dataGiochi.length; i++) {
-				game.append('<option>' + dataGiochi[i].nomeGioco + '</option>');	
+					var nome = dataGiochi[i].nomeGioco.replace(/\s/g, '');
+					game.append('<div class="option"><input name="gioco" onclick="tendina(\''+nome+'\')" type="radio" class="radio" id="'+nome+'"> <label for="'+nome+'">'+dataGiochi[i].nomeGioco+'</label></div>');
 
 			}			
-			getMode();
+			//getMode();
 		}
 		
 	}
@@ -65,26 +34,28 @@ $(document).ready(function() {
 
 });
 
-function menu(){
+function menu(k){
 	
-$(".options-container").toggleClass("active");
+$("#"+k).toggleClass("active");
 	
 }
-function tendina(){
-	var selected=$('.selected');
-	var optionsContainer = $(".options-container");
-	//alert($("input[name='struttura']:checked").attr("id"));
-    //selected.replaceWith('<div class="selected" onclick="menu()">'+'Ciccio'+'</div>');
-	//selected.text($("input[name='struttura']:checked").attr("id"));
-	selected.text($("input[name='struttura']:checked").attr("id"));
-
-	//alert($(this).html());
-    optionsContainer.toggleClass("active");;
+function tendina(k){
+	var selected=$('.selected.'+event.target.name);
+	var optionsContainer = $("#"+event.target.name);
+	selected.text($("label[for='"+k+"']").html());
+    optionsContainer.toggleClass("active");
+    if(event.target.name==="gioco"){
+    	
+    	$('.selected.mode').text("Modalità di gioco");
+    getMode($("label[for='"+k+"']").html());
+    }
 }
 
 
-function getMode() {
-	var gioco = $('select#gioco option:checked').val();
+function getMode(k) {
+	//var gioco = $('select#gioco option:checked').val();
+	//alert($("#"+event.target.for).html());
+	//var gioco = $("#"+event.target.for).html();
 	var xhr = new XMLHttpRequest();
 	xhr.onreadystatechange = function() {
 		if (xhr.status == 200 && xhr.readyState == 4) {
@@ -94,12 +65,14 @@ function getMode() {
 			let data = JSON.parse(xhr.responseText);
 
 			for (var i = 0; i < data.length; i++) {
-				select.append('<option>' + data[i].tipo + '</option>');
+				//select.append('<option>' + data[i].tipo + '</option>');
+				select.append('<div class="option"><input name="mode" onclick="tendina(\''+data[i].tipo+'\')" type="radio" class="radio" id="'+data[i].tipo+'"> <label for="'+data[i].tipo+'">'+data[i].tipo+'</label></div>');
+
 			}
 		}
 	}
 
-	xhr.open('GET', 'TournamentControl?action=getMode&gioco=' + gioco, true);
+	xhr.open('GET', 'TournamentControl?action=getMode&gioco=' + k, true);
 	xhr.send();
 
 }

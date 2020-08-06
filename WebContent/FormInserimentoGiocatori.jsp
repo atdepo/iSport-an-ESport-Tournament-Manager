@@ -17,7 +17,7 @@
 
 <body>
 	<%@ include file="header.jsp"%>
-
+	<%=session.getAttribute("struttura") %>
 	<div class="container">
 		<div class="squadra">
 		<h3>Inserisci una nuova squadra</h3><br>

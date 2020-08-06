@@ -28,7 +28,7 @@
 			<input type="radio" id="nuova" class="sel bt2" value="Aggiungi una nuova squadra" name="sel">
 			<label class="radioLabel" for="nuova">Nuova</label>
 			</div>
-			
+			<div></div>
 			<input type="button" value="Aggiungi Squadra" onclick="add()">
 		</div>
 	</div>

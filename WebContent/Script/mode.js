@@ -35,7 +35,6 @@ $(document).ready(function() {
 
 
 function getMode() {
-	
 	var gioco = $('select#gioco option:checked').val();
 	var xhr = new XMLHttpRequest();
 	xhr.onreadystatechange = function() {
@@ -66,16 +65,7 @@ function numTecnici(){
 
 function validateTournament(){
 	
-	var xhr = new XMLHttpRequest();
-	xhr.onreadystatechange = function() {
-		if (xhr.status == 200 && xhr.readyState == 4) {
-			
-			
-		}
-	}
-
-	xhr.open('GET', 'TournamentControl?action=validate', true);
-	xhr.send();
+	
 	
 }
 

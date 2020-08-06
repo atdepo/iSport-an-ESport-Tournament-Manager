@@ -46,7 +46,8 @@ function cambiaTipo(){
 
 			let data = JSON.parse(xhr.responseText);
 			console.log(data);
-			
+			var cont=$('.container');
+			cont
 			
 			
 		}

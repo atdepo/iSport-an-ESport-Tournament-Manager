@@ -12,7 +12,6 @@ String error=(String)request.getAttribute("error");
 <!DOCTYPE html>
 <html>
 <head>
-
 <link rel="stylesheet" href="CSS/CreazioneTorneo.css" type="text/css">
 <link rel="stylesheet" href="CSS/2RadioButton.css" type="text/css">
 <link rel="stylesheet" href="CSS/Tendina.css" type="text/css">
@@ -31,12 +30,11 @@ String error=(String)request.getAttribute("error");
 	</div>
 	<form name="FormCreazioneTorneo" action="<%=response.encodeURL("TournamentControl?action=validate")%>" method="post">
 			<fieldset>
-			<label>Nome del Torneo <input type="text" name="nometorneo" required></label> <br> <br> <br>
-			<label>Data Torneo <input type="date" name="datatorneo" required></label> <br> <br> <br>
-			<!-- <label>Gioco di riferimento
-				<select name="gioco" id="gioco" onchange="getMode()"></select>
-			</label> <br> <br> -->
-			<label>Gioco di riferimento</label>
+			
+			<label>Nome del Torneo <input type="text" name="nometorneo" required></label> 
+			<label>Data Torneo <input type="date" name="datatorneo" required></label> 
+			
+			<label for="gioco">Gioco di riferimento</label>
 			<div class="container">
 					<div class="select-box">
 			        	<div class="options-container" id="gioco">
@@ -62,43 +60,33 @@ String error=(String)request.getAttribute("error");
 			
 			</fieldset>
 			<fieldset>
-			<br>
+			
 				<legend >Come si svolgerà il torneo</legend>
 				<div class="contieniBottoni" >
 				<br>
-				<input id="on-line" type="radio" name="sel" value="on-line" checked class="sel bt1">
+				<input id="on-line" type="radio" name="sel" value="on-line" onclick="hide()" checked class="sel bt1">
 				<label class="radioLabel" for="on-line">On-line</label>	
 				
-				<input id="fisico" type="radio" name="sel" value="fisico" class="sel bt2">
+				<input id="fisico" type="radio" name="sel" value="fisico" onclick="show()"class="sel bt2">
 				<label class="radioLabel" for="fisico">Fisico </label>
 				<br><br>
 				
 				</div>
-			<br><label>Struttura
+				
 			
-		<!--  	<select name="strutture" id="strutture"></select> -->
-		
+			<div class="strutture"></div>     <!-- Da generare dinamicamente se il torneo è fisico -->
+			
+			
+			<label for="budget">Budget stimato per il torneo(in euro iva esclusa) <input type="number" min="0" max=10000000 name="budget" required>
 			</label>
 			
-	<div class="container">
-		<div class="select-box">
-        	<div class="options-container" id="strutture">
-			</div>
-    		<div class="selected strutture" onclick="menu('strutture')">
-              Seleziona una Struttura
-    		</div>
-    	</div>
-    </div>
-    
-    <!-- <script src="Script/main.js"></script> -->
+			<label for="tot_tecnici">Numero di tecnici desiderati</label> 
+			<input type="number" min="0" name="tot_tecnici" id="tot_tecnici" onchange="numTecnici()" required>
 			
 			
-			<label>Budget stimato per il torneo(in euro iva esclusa) <input type="number" min="0" max=10000000 name="budget" required>
-			</label><br><br><br>
+			<div class="tecniciFisici"></div>     <!-- Da generare dinamicamente se il torneo è fisico -->
 			
-			<label>Numero di tecnici desiderati <input type="number" min="0" name="tot_tecnici" id="tot_tecnici" onchange="numTecnici()" required></label> <br><br><br>
 			
-			<label>Di cui presenti fisicamente <input type="number" min="0"  max="10" name="tecnici_fisici" id="tecnici_fisici" required></label> <br><br><br>
 			<!-- Il max utilizzato nei tecnici fisici è solo un placeholder per evitare che la barra diventi troppo grande -->
 			
 		</fieldset>

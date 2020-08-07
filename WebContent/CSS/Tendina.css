@@ -1,11 +1,6 @@
 @charset "UTF-8";
 
-* {
-  margin: 0;
-  box-sizing: border-box;
- 	 	
-  display: block;
-}
+
 
 title{
 	display:none;
@@ -13,10 +8,17 @@ title{
 	.container {
  		margin-top: 0px;
  	 	padding: 32px;
- 	 	  display: block;
+ 	 	 
  	 	
 	}
 
+	.container *{
+	display: block;
+	margin: 0;
+  	box-sizing: border-box;
+  	
+	}
+	
 	.select-box {
  		display: flex;
 	 	width: 400px;
@@ -41,6 +43,7 @@ title{
 
 .selected {
   background: #2f3640;
+  border:outset 2px;
   border-radius: 8px;
   margin-bottom: 8px;
   color: #f5f6fa;
@@ -64,7 +67,7 @@ title{
   width: 32px;
   right: 10px;
   top: 5px;
-
+border-color:#45A29E;
   transition: all 0.4s;
     display: block;
   
@@ -75,6 +78,7 @@ title{
   opacity: 1;
   overflow-y: scroll;
     display: block;
+    border-color:#45A29E;
   
 }
 
@@ -82,7 +86,7 @@ title{
   transform: rotateX(180deg);
   top: -6px;
     display: block;
-  
+    border-color:#45A29E;
 }
 
 .select-box .options-container::-webkit-scrollbar {
@@ -90,6 +94,8 @@ title{
   background: #0d141f;
   border-radius: 0 8px 8px 0;
     display: block;
+        border-color:#45A29E;
+    
   
 }
 

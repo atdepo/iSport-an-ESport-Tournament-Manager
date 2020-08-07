@@ -64,12 +64,11 @@ public class TournamentControl extends HttpServlet {
 			response.setContentType("application/json");
 			response.setCharacterEncoding("UTF-8");
 			try {
-				ArrayList<StrutturaBean> strutture = (ArrayList<StrutturaBean>) sModel.doRetriveAll(null);
+				
 				ArrayList<GiocoBean> giochi = (ArrayList<GiocoBean>) gModel.doRetriveAll(null);
 				ArrayList<String> numeroTecnici = new ArrayList<String>();
 				numeroTecnici.add(String.valueOf(tecModel.doRetriveAll(null).size()));
 				ArrayList<ArrayList> col= new ArrayList<ArrayList>();
-				col.add(strutture);
 				col.add(giochi);
 				col.add(numeroTecnici);
 				theJson += gson.toJson(col);
@@ -84,9 +83,32 @@ public class TournamentControl extends HttpServlet {
 
 		break;
 		
+		case "getStrutture":
+		
+			try {
+				String str="";
+				response.setContentType("application/json");
+				response.setCharacterEncoding("UTF-8");
+				System.out.println("Prendo le strutture");
+				ArrayList<StrutturaBean> st=(ArrayList<StrutturaBean>) sModel.doRetriveAll(null);
+				str=gson.toJson(st);
+				response.getWriter().print(str);
+				response.getWriter().flush();
+				System.out.println("il json delle strutture è stato creato con successo");
+				response.setStatus(200);
+			} catch (SQLException e2) {
+				// TODO Auto-generated catch block
+				e2.printStackTrace();
+			}
+						
+			
+		break;
+		
 		case "getMode":
 			
 			try {
+				response.setContentType("application/json");
+				response.setCharacterEncoding("UTF-8");
 				String mode="";
 				String gioco= request.getParameter("gioco");
 				System.out.println("Cerco le modalità di "+gioco);

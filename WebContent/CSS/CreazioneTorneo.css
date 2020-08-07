@@ -6,3 +6,30 @@
 	
 	div.title{text-align:center;}
    
+   input{
+   	border-color:#45A29E;
+   	border:outset 1px;
+   	border-radius: 7px;
+    margin-top: 20px;
+    margin-left:30px;
+    margin-bottom:30px;
+ 	padding : 7px;
+ 	box-sizing: border-box;
+ 	display: flex;
+ 	background-color:#2f3640;
+ 	outline:none;
+   }
+   
+  input[type=text]:focus {
+  border-color:#45A29E ;
+  
+}
+
+input[type=number]:focus {
+  border-color:#45A29E ;
+  
+}
+input[type=date]:focus {
+  border-color:#45A29E ;
+  
+}

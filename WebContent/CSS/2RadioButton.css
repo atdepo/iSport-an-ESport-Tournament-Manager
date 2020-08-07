@@ -1,6 +1,10 @@
 
 
-.contieniBottoni{align-items:center; display:flex; }
+.contieniBottoni{
+	align-items:center;
+	 display:flex; 
+	 margin:30px;
+	 }
 
 .radioLabel {
   border: 3px solid #1a1a1a;

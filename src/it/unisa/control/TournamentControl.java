@@ -180,7 +180,7 @@ public class TournamentControl extends HttpServlet {
 				sessione.setAttribute("budget", request.getParameter("budget"));
 				sessione.setAttribute("totaleTecnici", request.getParameter("tot_tecnici"));
 				sessione.setAttribute("tecniciFisici", request.getParameter("tecnici_fisici"));
-				response.sendRedirect(request.getContextPath()+"/FormInserimentoGiocatori.jsp");
+				response.sendRedirect(request.getContextPath()+"/FormInserimentoSquadre.jsp?jsessionid="+sessione.getId());
 
 				//RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher("/FormInserimentoGiocatori.jsp");
 				//dispatcher.forward(request, response);

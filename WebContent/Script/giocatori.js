@@ -1,31 +1,41 @@
-
-var i=1;
-
 $(document).ready(function() {
 
-	var input=$("input[type='radio']");
-		input.on( "change", function() {
-		   if($("input:checked").attr("id")==="esistente"){
-			   cambiaTipo();
-		}
-		   else{
+	$("input[type=radio][name=sel]").change(function() {	
+		
+			  cambiaTipo();   
 			  
-		   }
-		   
 		});
 		
-		//$("#esistente").attr("checked", true);
+		$("#nuova").attr("checked", true);
+
+
 })
+
+function menu(k){
+	
+$("#"+k).toggleClass("active");
+	
+}
+
+
+function tendina(k){
+	var selected=$('.selected.'+event.target.name);
+	var optionsContainer = $("#"+event.target.name);
+	selected.text($("label[for='"+k+"']").html());
+    optionsContainer.toggleClass("active");
+}
+
 
 function add(){
 
-
+/*
 	var cont=$('.container');
 
 	cont.append('<div id="squadra'+i+'" class="squadra" align="right"><input type="text"'+
 			'placeholder="Inserisci nome Squadra">'+
 			'<input type="button" value="Delete Squadra" onclick="elimina('+i+')"><br><br></div>');
 	i++;
+	*/
 	
 }
 
@@ -39,6 +49,8 @@ function elimina(i){
 }
 
 function cambiaTipo(){
+	
+	if(event.target.id==="esistente"){
 	var xhr = new XMLHttpRequest();
 	xhr.onreadystatechange = function() {
 
@@ -46,16 +58,33 @@ function cambiaTipo(){
 
 			let data = JSON.parse(xhr.responseText);
 			console.log(data);
-			var cont=$('.container');
-			cont
+			var write=$('.squadreEsistenti');
+			write.append('<label for="squadreEsistenti">Squadre già presenti nel database</label> <div class="container"> <div class="select-box">'+
+					'<div class="options-container" id="squadreEsistenti">'+
+					'</div><div class="selected squadreEsistenti" onclick="menu(\'squadreEsistenti\')">'+
+		             ' Seleziona una squadra</div></div></div>');
 			
+			
+			for (var i = 0; i < data.length; i++) {
+				//var nome = data[i].nome.replace(/\s/g, '');
+				$('#squadreEsistenti').append('<div class="option"><label for="'+data[i].nome+'">'+data[i].nome+'</label><input required name="squadreEsistenti" onclick="tendina(\'squadreEsistenti\')" type="radio" class="radio" id="'+data[i].nome+'" value="'+data[i].nome+'"> </div>');	
+			}
+			
+			$('#aggiungi').attr("value","Aggiungi una squadra esistente");
 			
 		}
-		
-	}
-	
+			
+	  }	
 	xhr.open('GET', 'TournamentControl?action=getSquadre', true);
 	xhr.send();
+	
+	} else{
+		
+		$('.squadreEsistenti').empty();
+		$('#aggiungi').attr("value","Aggiungi una squadra esistente");
+	}
+	
+	
 }
 
 

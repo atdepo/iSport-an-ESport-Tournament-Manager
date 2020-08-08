@@ -34,6 +34,7 @@ function menu(k){
 $("#"+k).toggleClass("active");
 	
 }
+
 function tendina(k){
 	var selected=$('.selected.'+event.target.name);
 	var optionsContainer = $("#"+event.target.name);
@@ -74,9 +75,7 @@ function getStrutture(){
 
 
 function getMode(k) {
-	//var gioco = $('select#gioco option:checked').val();
-	//alert($("#"+event.target.for).html());
-	//var gioco = $("#"+event.target.for).html();
+	
 	var xhr = new XMLHttpRequest();
 	xhr.onreadystatechange = function() {
 		if (xhr.status == 200 && xhr.readyState == 4) {
@@ -86,7 +85,6 @@ function getMode(k) {
 			let data = JSON.parse(xhr.responseText);
 
 			for (var i = 0; i < data.length; i++) {
-				//select.append('<option>' + data[i].tipo + '</option>');
 				select.append('<div class="option"><input name="mode" onclick="tendina(\''+data[i].tipo+'\')" type="radio" class="radio" id="'+data[i].tipo+'"> <label for="'+data[i].tipo+'">'+data[i].tipo+'</label></div>');
 
 			}
@@ -99,16 +97,13 @@ function getMode(k) {
 }
 
 function numTecnici(){
-	//document.getElementByClass('tecniciFisici').setAttribute("max",document.getElementById('tot_tecnici').value);
+
 	$('.tecniciFisici').attr("max",$("#tot_tecnici").val());
 }
 
 
 function hide(){
-	/*var tec= $("#tecnici_fisici");
-	$("label[for='tecnici_fisici']").hide();
-	tec.attr("required",false);
-	tec.hide();*/
+
 	
 	$(".tecniciFisici").empty();
 	$("label[for='tecnici_fisici']").hide();
@@ -117,11 +112,6 @@ function hide(){
 }
 
 function show(){
-	/*var tec= $("#tecnici_fisici");
-	$("label[for='tecnici_fisici']").show();
-	tec.attr("required",true);
-	tec.show();
-*/
 	$("label[for='tecnici_fisici']").show();
 	$(".tecniciFisici").append('<label for="tecnici_fisici">Di cui presenti fisicamente </label>'+ 
 							   '<input type="number" min="0"  max="10" name="tecnici_fisici" id="tecnici_fisici" required>');

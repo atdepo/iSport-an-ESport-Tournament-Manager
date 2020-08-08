@@ -18,9 +18,14 @@
  	display: flex;
  	background-color:#2f3640;
  	outline:none;
+ 	
+   }
+    
+   input[type=submit]{
+   cursor: pointer
    }
    
-  input[type=text]:focus {
+   input[type=text]:focus {
   border-color:#45A29E ;
   
 }

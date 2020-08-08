@@ -16,7 +16,7 @@ $(document).ready(function() {
 				
 			for (var i = 0; i < dataGiochi.length; i++) {
 					var nome = dataGiochi[i].nomeGioco.replace(/\s/g, '');
-					game.append('<div class="option"><input name="gioco" onclick="tendina(\''+nome+'\')" type="radio" class="radio" id="'+nome+'"> <label for="'+nome+'">'+dataGiochi[i].nomeGioco+'</label></div>');
+					game.append('<div class="option"><input name="gioco" value="'+dataGiochi[i].nomeGioco+'" onclick="tendina(\''+nome+'\')" type="radio" class="radio" id="'+nome+'"> <label for="'+nome+'">'+dataGiochi[i].nomeGioco+'</label></div>');
 
 			}			
 
@@ -83,9 +83,9 @@ function getMode(k) {
 			select.empty();
 
 			let data = JSON.parse(xhr.responseText);
-
+			
 			for (var i = 0; i < data.length; i++) {
-				select.append('<div class="option"><input name="mode" onclick="tendina(\''+data[i].tipo+'\')" type="radio" class="radio" id="'+data[i].tipo+'"> <label for="'+data[i].tipo+'">'+data[i].tipo+'</label></div>');
+				select.append('<div class="option"><input  value="'+data[i].tipo+'" name="mode"  onclick="tendina(\''+data[i].tipo+'\')" type="radio" class="radio" id="'+data[i].tipo+'"> <label for="'+data[i].tipo+'">'+data[i].tipo+'</label></div>');
 
 			}
 		}

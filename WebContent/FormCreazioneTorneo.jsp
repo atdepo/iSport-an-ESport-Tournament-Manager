@@ -54,6 +54,7 @@ String error=(String)request.getAttribute("error");
 						</div>
 			    		<div class="selected mode" onclick="menu('mode')" >
 			              Modalità di gioco
+			              
 			    		</div>
 			    	</div>
 			</div>

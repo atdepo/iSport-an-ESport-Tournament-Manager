@@ -175,7 +175,7 @@ public class TournamentControl extends HttpServlet {
 				sessione.setAttribute("dataTorneo", request.getParameter("datatorneo"));
 				sessione.setAttribute("nomeGioco", request.getParameter("gioco"));
 				sessione.setAttribute("tipoTorneo", request.getParameter("sel"));
-				sessione.setAttribute("modalita", request.getParameter("modalita"));
+				sessione.setAttribute("modalita", request.getParameter("mode"));
 				sessione.setAttribute("struttura", request.getParameter("strutture"));
 				sessione.setAttribute("budget", request.getParameter("budget"));
 				sessione.setAttribute("totaleTecnici", request.getParameter("tot_tecnici"));

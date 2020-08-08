@@ -9,7 +9,6 @@
 <body>
 	<%@ include file="header.jsp"%>
 	
-	<%=session.getAttribute("gioco") %>
 
 
 </body>

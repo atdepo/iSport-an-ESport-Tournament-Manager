@@ -25,6 +25,8 @@
 	<%@ include file="header.jsp"%>
 	<div class="squadra">
 		<h3>Montefusco merda</h3><br>
+		<%=session.getAttribute("totaleFisici") %>
+		
 		<div class="papino">
 		<div class="contieniBottoni">
 			

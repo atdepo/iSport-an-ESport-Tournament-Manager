@@ -98,6 +98,34 @@ public class ModalitaModel implements ModelInterface<ModalitaBean, ModalitaKey> 
 		}
 	}
 	
+	public static int NumeroGiocatori(String tipo) throws SQLException {
+
+		PreparedStatement statement = null;
+
+		ModalitaBean bean = new ModalitaBean();
+		String sql = "SELECT numeroGiocatori/2 as giocatori FROM modalita WHERE tipo=? ";
+		if (tipo != null) {
+			try (Connection con = DriverManagerConnectionPool.getConnection()) {
+				statement = con.prepareStatement(sql);
+				statement.setString(1, tipo);
+				
+
+				System.out.println("DoRetriveByKey=" + statement.toString());
+				ResultSet rs = statement.executeQuery();
+				 rs.next();
+				 return rs.getInt("giocatori");
+			}
+			
+			}
+			
+		 else {
+			// TODO ERRORE
+			return -1;
+		}
+	}
+	
+	
+	
 	@Override
 	public void doSave(ModalitaBean product) throws SQLException {
 		// TODO Auto-generated method stub

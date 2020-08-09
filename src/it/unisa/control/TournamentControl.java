@@ -125,7 +125,39 @@ public class TournamentControl extends HttpServlet {
 			}
 			
 		break;
-		
+	
+		case "giocatori":
+			
+			request.setAttribute("error", null);
+			
+			
+			
+					
+			HttpSession sessioneg= request.getSession();
+			try {
+				sessioneg.setAttribute("numeroGiocatori", ModalitaModel.NumeroGiocatori(request.getParameter("mode")));
+			 
+			sessioneg.setAttribute("nomeTorneo", request.getParameter("nometorneo"));
+			sessioneg.setAttribute("dataTorneo", request.getParameter("datatorneo"));
+			sessioneg.setAttribute("nomeGioco", request.getParameter("gioco"));
+			sessioneg.setAttribute("tipoTorneo", request.getParameter("sel"));
+			sessioneg.setAttribute("modalita", request.getParameter("mode"));
+			sessioneg.setAttribute("struttura", request.getParameter("strutture"));
+			sessioneg.setAttribute("budget", request.getParameter("budget"));
+			sessioneg.setAttribute("totaleTecnici", request.getParameter("tot_tecnici"));
+			sessioneg.setAttribute("tecniciFisici", request.getParameter("tecnici_fisici"));
+			System.out.println("Mammt");
+			response.sendRedirect(request.getContextPath()+"/FormInserimentoGiocatori.jsp?jsessionid="+sessioneg.getId());
+			System.out.println("Patt");
+			return;
+			}
+			catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}	
+			break;
+			
+			
 		case "validate":
 			response.setCharacterEncoding("UTF-8");
 			System.out.println("Sto validando il torneo");
@@ -208,6 +240,7 @@ public class TournamentControl extends HttpServlet {
 			
 			
 			break;
+		
 		
 		}
 		

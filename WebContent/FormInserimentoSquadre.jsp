@@ -1,7 +1,11 @@
+<%@page import="it.unisa.model.modalita.ModalitaModel"%>
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	
 <!DOCTYPE html>
 <html>
+
 <head>
 <meta charset="UTF-8">
 <title>Montefusco pupù</title>
@@ -25,7 +29,7 @@
 	<%@ include file="header.jsp"%>
 	<div class="squadra">
 		<h3>Montefusco merda</h3><br>
-		<%=session.getAttribute("totaleFisici") %>
+		<%=session.getAttribute("modalita") %>
 		
 		<div class="papino">
 		<div class="contieniBottoni">

@@ -1,4 +1,5 @@
 $(document).ready(function(){
+	
 	var div=$ (".inseriamo");
 	  var numeroGiocatori= $("#giocatori").val();
 	  
@@ -8,6 +9,9 @@ $(document).ready(function(){
 		  		"<input type='text' placeholder='nome' id='nome'>" +
 		  		"<input type='text' placeholder='cognome' id='cognome'>" +
 		  		"<input type='date' id='data'" +
-		  		"<h3>il nome della squadra lo prendiamo dalla sessione</h3></div");
+		  		"<h3>"+$('#nSquadra').val()+"</h3></div>");
 	  }
+	  
+	  
+
 })

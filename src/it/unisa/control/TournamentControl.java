@@ -126,35 +126,23 @@ public class TournamentControl extends HttpServlet {
 			
 		break;
 	
-		case "giocatori":
-			
-			request.setAttribute("error", null);
+		case "getGiocatori":
 			
 			
-			
-					
-			HttpSession sessioneg= request.getSession();
 			try {
-				sessioneg.setAttribute("numeroGiocatori", ModalitaModel.NumeroGiocatori(request.getParameter("mode")));
-			 
-			sessioneg.setAttribute("nomeTorneo", request.getParameter("nometorneo"));
-			sessioneg.setAttribute("dataTorneo", request.getParameter("datatorneo"));
-			sessioneg.setAttribute("nomeGioco", request.getParameter("gioco"));
-			sessioneg.setAttribute("tipoTorneo", request.getParameter("sel"));
-			sessioneg.setAttribute("modalita", request.getParameter("mode"));
-			sessioneg.setAttribute("struttura", request.getParameter("strutture"));
-			sessioneg.setAttribute("budget", request.getParameter("budget"));
-			sessioneg.setAttribute("totaleTecnici", request.getParameter("tot_tecnici"));
-			sessioneg.setAttribute("tecniciFisici", request.getParameter("tecnici_fisici"));
-			System.out.println("Mammt");
-			response.sendRedirect(request.getContextPath()+"/FormInserimentoGiocatori.jsp?jsessionid="+sessioneg.getId());
-			System.out.println("Patt");
-			return;
-			}
-			catch (SQLException e1) {
+				request.setAttribute("error", null);
+				HttpSession sess=request.getSession();
+				ModalitaBean bean=modModel.doRetriveByKey(new ModalitaKey((String)sess.getAttribute("nomeGioco"),(String)sess.getAttribute("modalita")));
+				System.out.println((String)sess.getAttribute("nomeGioco")+ " "+(String)sess.getAttribute("modalita") );
+				sess.setAttribute("numPartecipanti",bean.getNumPartecipanti()/2);
+				response.setStatus(200);
+				response.sendRedirect("FormInserimentoGiocatori.jsp");
+				
+			} catch (SQLException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
-			}	
+			}
+			
 			break;
 			
 			
@@ -212,7 +200,7 @@ public class TournamentControl extends HttpServlet {
 				sessione.setAttribute("budget", request.getParameter("budget"));
 				sessione.setAttribute("totaleTecnici", request.getParameter("tot_tecnici"));
 				sessione.setAttribute("tecniciFisici", request.getParameter("tecnici_fisici"));
-				response.sendRedirect(request.getContextPath()+"/FormInserimentoSquadre.jsp?jsessionid="+sessione.getId());
+				response.sendRedirect(request.getContextPath()+"/FormInserimentoSquadre.jsp");
 
 				//RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher("/FormInserimentoGiocatori.jsp");
 				//dispatcher.forward(request, response);

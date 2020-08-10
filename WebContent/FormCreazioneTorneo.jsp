@@ -28,7 +28,7 @@ String error=(String)request.getAttribute("error");
 	<div class="title">
 	<h2>CREA ORA IL TUO TORNEO</h2>
 	</div>
-	<form name="FormCreazioneTorneo" action="<%=response.encodeURL("TournamentControl?action=giocatori")%>" method="post">
+	<form name="FormCreazioneTorneo" action="<%=response.encodeURL("TournamentControl?action=validate")%>" method="post">
 			<fieldset>
 			
 			<label>Nome del Torneo <input type="text" name="nometorneo" required></label> 

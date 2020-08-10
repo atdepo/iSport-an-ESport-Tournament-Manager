@@ -13,9 +13,10 @@
 </head>
 <body>
 	<%@ include file="header.jsp"%>
-
-	<input type="hidden" id="giocatori" value=<%=(int)session.getAttribute("numeroGiocatori")%>>
-	<h3><%=(int)session.getAttribute("numeroGiocatori")%></h3>
+	
+	<input type="hidden" id="nSquadra" value=<%=(String)session.getAttribute("nomeSquadra")%>>
+	<input type="hidden" id="nPartecipanti" value=<%=(Integer)session.getAttribute("numPartecipanti")%>>
+	<h3><%=(int)session.getAttribute("numPartecipanti")%></h3>
 	<div class="inseriamo"></div>
 	
 

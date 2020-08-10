@@ -21,7 +21,7 @@
 	
 		<div class="split altriTornei">
 			<h3>Dai un occhiata a questi tornei</h3>
-			<h3>Cose a caso</h3>
+				<%@ include file="ListaTornei.jsp"%>
 		</div>
 	
 		<div class="split news">

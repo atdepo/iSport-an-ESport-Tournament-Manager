@@ -228,14 +228,17 @@ public class TournamentControl extends HttpServlet {
 			
 			
 			break;
-		case"getTornei":
+			
+			
+		case "getTornei":
+			
 		try {
 			response.setContentType("application/json");
 			response.setCharacterEncoding("UTF-8");
 			String torneo="";
-			ArrayList<TournamentBean> tornei;
-			tornei = (ArrayList<TournamentBean>) tModel.doRetriveAll(null);
+			ArrayList<TournamentBean> tornei = (ArrayList<TournamentBean>) tModel.doRetriveAll(null);
 			torneo=gson.toJson(tornei);
+			System.out.println("ciao mamma");
 			response.getWriter().print(torneo);
 			response.getWriter().flush();
 			response.setStatus(200);
@@ -244,6 +247,8 @@ public class TournamentControl extends HttpServlet {
 			e2.printStackTrace();
 		}
 		break;
+		
+		
 		}
 		
 	}

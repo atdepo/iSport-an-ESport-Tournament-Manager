@@ -20,10 +20,11 @@
 			lista.append('</ul>');
 			
 		}
-		alert('ciao');
-		xhr.open('GET', 'TournamentControl?action=getTornei', true);
-		xhr.send();
-	}})
+	}
+	
+	xhr.open('GET', 'TournamentControl?action=getTornei', true);
+	xhr.send();
+	});
 	</script>
 </head>
 	

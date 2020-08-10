@@ -33,15 +33,6 @@ function add(){
 	}
 	
 	
-/*
-	var cont=$('.container');
-
-	cont.append('<div id="squadra'+i+'" class="squadra" align="right"><input type="text"'+
-			'placeholder="Inserisci nome Squadra">'+
-			'<input type="button" value="Delete Squadra" onclick="elimina('+i+')"><br><br></div>');
-	i++;
-	*/
-	
 }
 
 function elimina(i){

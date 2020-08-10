@@ -5,6 +5,7 @@
 <head>
 	<meta charset="UTF-8">
 	<script src = "https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<link rel="stylesheet" href="CSS/ListaTornei.css" type="text/css">
 	<script>
 	$(document).ready(function(){var xhr = new XMLHttpRequest();
 	xhr.onreadystatechange = function() {
@@ -15,7 +16,7 @@
 			var lista=$('.lista');
 			lista.append('<ul>');
 			for (var i = 0; i < data.length; i++) {
-				lista.append('<li>'+data[i].nome+data[i].data+data[i].indirizzoStruttura+data[i].codGioco+data[i].CAPStruttura+data[i].codice+'</li>');
+				lista.append('<li>'+data[i].nome+" "+data[i].data+" "+data[i].indirizzoStruttura+" "+data[i].CAPStruttura+" "+data[i].codGioco+'</li>');
 			}
 			lista.append('</ul>');
 			
@@ -29,11 +30,7 @@
 </head>
 	
 <body>
-	
-<div class="lista">
-	
-	
-</div>
-
+	<div class="lista">
+	</div>
 </body>
 </html>

@@ -136,7 +136,7 @@ public class TournamentControl extends HttpServlet {
 				System.out.println((String)sess.getAttribute("nomeGioco")+ " "+(String)sess.getAttribute("modalita") );
 				sess.setAttribute("numPartecipanti",bean.getNumPartecipanti()/2);
 				response.setStatus(200);
-				response.sendRedirect("FormInserimentoGiocatori.jsp");
+				response.sendRedirect("FormInserimentoGiocatori.jsp?nomesquadra="+request.getParameter("nomesquadra"));
 				
 			} catch (SQLException e1) {
 				// TODO Auto-generated catch block
@@ -202,8 +202,6 @@ public class TournamentControl extends HttpServlet {
 				sessione.setAttribute("tecniciFisici", request.getParameter("tecnici_fisici"));
 				response.sendRedirect(request.getContextPath()+"/FormInserimentoSquadre.jsp");
 
-				//RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher("/FormInserimentoGiocatori.jsp");
-				//dispatcher.forward(request, response);
 				return;
 			} catch (SQLException e) {
 				e.printStackTrace();

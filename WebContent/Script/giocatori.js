@@ -28,10 +28,10 @@ function tendina(k){
 
 function add(){
 
-	if($("input[type=radio][name=sel]:checked").attr("id")==="nuova"){
-		window.location.replace('TournamentControl?action=getGiocatori');
-	}
+	if($("input[type=radio][name=sel]:checked").attr("id")==="nuova")
+		window.location.replace('TournamentControl?action=getGiocatori&nomesquadra='+$('.nomeSquadra').val());
 	
+
 	
 }
 

@@ -240,8 +240,22 @@ public class TournamentControl extends HttpServlet {
 			
 			
 			break;
-		
-		
+		case"getTornei":
+		try {
+			response.setContentType("application/json");
+			response.setCharacterEncoding("UTF-8");
+			String torneo="";
+			ArrayList<TournamentBean> tornei;
+			tornei = (ArrayList<TournamentBean>) tModel.doRetriveAll(null);
+			torneo=gson.toJson(tornei);
+			response.getWriter().print(torneo);
+			response.getWriter().flush();
+			response.setStatus(200);
+		}
+		catch(SQLException e2) {
+			e2.printStackTrace();
+		}
+		break;
 		}
 		
 	}

@@ -1,15 +1,14 @@
 @charset "UTF-8";
 
-.container{
-	
-		color: #000000;
-      /*  display: inline-block;
-        padding: 15px;
-        text-align: center;
-        color: #000000;
-        font-family: arial, sans-serif;
-*/}
 
+div.inseriamo{
+	margin-top: 2%;
+	color:#45A29E;
+}
+
+.giocatore{
+	padding:3px;
+}
 
 label{
 	color: white;

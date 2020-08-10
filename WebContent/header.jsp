@@ -23,6 +23,17 @@
     		<i class="fa fa-bars" aria-hidden="true"></i>
   		</a>
 	</div>
+	
+	<script>
+	function funzione() {
+  	var x = document.getElementById("navigationBar");
+  	if (x.className === "nav") {
+    	x.className += " responsive";
+  	} else {
+    	x.className = "nav";
+  	}
+	}
+	</script>
 
 </body>
 </html>

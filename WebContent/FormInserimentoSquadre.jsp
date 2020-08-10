@@ -29,7 +29,6 @@
 	<%@ include file="header.jsp"%>
 	<div class="squadra">
 		<h3>Montefusco merda</h3><br>
-		<%=session.getAttribute("modalita") %>
 		
 		<div class="papino">
 		<div class="contieniBottoni">
@@ -38,6 +37,9 @@
 			<label class="radioLabel" for="esistente">Esistente</label>
 			<input type="radio" id="nuova" class="sel bt2" value="Aggiungi una nuova squadra" name="sel">
 			<label class="radioLabel" for="nuova">Nuova</label>
+			</div>
+			<div class="nomeSquadra">
+			<input type="text" placeholder="Inserisci il nome squadra">
 			</div>
 			<div class="squadreEsistenti"></div>
 			<input type="button" value="Aggiungi una nuova squadra" id="aggiungi" onclick="add()">

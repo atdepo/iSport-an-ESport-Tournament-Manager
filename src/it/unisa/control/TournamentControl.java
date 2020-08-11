@@ -75,7 +75,7 @@ public class TournamentControl extends HttpServlet {
 				theJson += gson.toJson(col);
 				response.getWriter().print(theJson);
 				response.getWriter().flush();
-				System.out.println("il json di inizializzazione del form è stato creato con successo");
+				System.out.println("il json di inizializzazione del form ï¿½ stato creato con successo");
 				response.setStatus(200);
 
 			} catch (SQLException e1) {
@@ -95,7 +95,7 @@ public class TournamentControl extends HttpServlet {
 				str=gson.toJson(st);
 				response.getWriter().print(str);
 				response.getWriter().flush();
-				System.out.println("il json delle strutture è stato creato con successo");
+				System.out.println("il json delle strutture ï¿½ stato creato con successo");
 				response.setStatus(200);
 			} catch (SQLException e2) {
 				// TODO Auto-generated catch block
@@ -112,13 +112,13 @@ public class TournamentControl extends HttpServlet {
 				response.setCharacterEncoding("UTF-8");
 				String mode="";
 				String gioco= request.getParameter("gioco");
-				System.out.println("Cerco le modalità di "+gioco);
+				System.out.println("Cerco le modalitï¿½ di "+gioco);
 				ArrayList<ModalitaBean> modalita;
 				modalita = (ArrayList<ModalitaBean>) modModel.doRetriveByGame(gioco);
 				mode=gson.toJson(modalita);
 				response.getWriter().print(mode);
 				response.getWriter().flush();
-				System.out.println("il json delle modalità è stato creato con successo");
+				System.out.println("il json delle modalitï¿½ ï¿½ stato creato con successo");
 				response.setStatus(200);
 			} catch (SQLException e1) {
 				// TODO Auto-generated catch block
@@ -159,7 +159,7 @@ public class TournamentControl extends HttpServlet {
 
 			if (controlloData(data, request.getParameter("datatorneo"))) {
 				request.setAttribute("error",
-						"Non possediamo una DeLorean, pertanto ci è impossibile organizzare tornei nel passato!");
+						"Non possediamo una DeLorean, pertanto ci ï¿½ impossibile organizzare tornei nel passato!");
 				RequestDispatcher dispatcher = request.getServletContext().getRequestDispatcher("/FormCreazioneTorneo.jsp");
 				dispatcher.forward(request, response);
 				
@@ -178,7 +178,7 @@ public class TournamentControl extends HttpServlet {
 
 						if (t.getCAPStruttura() == value && t.getIndirizzoStruttura().equals(address)) {
 							System.out.println("PROBLEMAAAAA");
-							String errore = "In questa data la struttura selezionata è già occupata, selezionarne una diversa";
+							String errore = "In questa data la struttura selezionata ï¿½ giï¿½ occupata, selezionarne una diversa";
 							request.setAttribute("error", errore);
 							RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher("/FormCreazioneTorneo.jsp");
 							dispatcher.forward(request, response);
@@ -219,7 +219,7 @@ public class TournamentControl extends HttpServlet {
 				String mode=gson.toJson(squadre);
 				response.getWriter().print(mode);
 				response.getWriter().flush();
-				System.out.println("il json delle squadre è stato creato con successo");
+				System.out.println("il json delle squadre ï¿½ stato creato con successo");
 				response.setStatus(200);
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
@@ -250,8 +250,9 @@ public class TournamentControl extends HttpServlet {
 		
 		
 		}
-		
+	
 	}
+
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {

@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+
 import com.google.gson.Gson;
 
 import it.unisa.model.gioco.GiocoBean;
@@ -130,6 +131,7 @@ public class TournamentControl extends HttpServlet {
 			
 			
 			try {
+				
 				request.setAttribute("error", null);
 				HttpSession sess=request.getSession();
 				ModalitaBean bean=modModel.doRetriveByKey(new ModalitaKey((String)sess.getAttribute("nomeGioco"),(String)sess.getAttribute("modalita")));

@@ -13,10 +13,6 @@ if(urlParams.get('nomesquadra')===""||!urlParams.has('nomesquadra')){
 	alert('Per aggiungere una nuova squadra bisogna inserire il nome della squadra');
 	window.location.replace('FormInserimentoSquadre.jsp');
 }
-else{
-	alert('sono bravo');
-	
-}
 </script>
 
 
@@ -29,11 +25,14 @@ else{
 <body>
 	<%@ include file="header.jsp"%>
 	
-	<input type="hidden" id="nSquadra" value=<%=(String)session.getAttribute("nomeSquadra")%>>
 	<input type="hidden" id="nPartecipanti" value=<%=(Integer)session.getAttribute("numPartecipanti")%>>
-	<h3><%=(int)session.getAttribute("numPartecipanti")%></h3>
-	<div class="inseriamo"></div>
 	
+	
+	<form method="post" action="fileupload" name="echo" enctype="multipart/form-data">
+		<div class="inseriamo"></div>
+		<label for="file">Inserisci una immagine per il giocatore</label>
+		<input type="file" name="file" accept="image/jpeg"><br> 
+	</form>
 
 
 </body>

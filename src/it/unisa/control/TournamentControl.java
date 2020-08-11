@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+
 import com.google.gson.Gson;
 
 import it.unisa.model.gioco.GiocoBean;
@@ -74,7 +75,7 @@ public class TournamentControl extends HttpServlet {
 				theJson += gson.toJson(col);
 				response.getWriter().print(theJson);
 				response.getWriter().flush();
-				System.out.println("il json di inizializzazione del form è stato creato con successo");
+				System.out.println("il json di inizializzazione del form ï¿½ stato creato con successo");
 				response.setStatus(200);
 
 			} catch (SQLException e1) {
@@ -94,7 +95,7 @@ public class TournamentControl extends HttpServlet {
 				str=gson.toJson(st);
 				response.getWriter().print(str);
 				response.getWriter().flush();
-				System.out.println("il json delle strutture è stato creato con successo");
+				System.out.println("il json delle strutture ï¿½ stato creato con successo");
 				response.setStatus(200);
 			} catch (SQLException e2) {
 				// TODO Auto-generated catch block
@@ -111,13 +112,13 @@ public class TournamentControl extends HttpServlet {
 				response.setCharacterEncoding("UTF-8");
 				String mode="";
 				String gioco= request.getParameter("gioco");
-				System.out.println("Cerco le modalità di "+gioco);
+				System.out.println("Cerco le modalitï¿½ di "+gioco);
 				ArrayList<ModalitaBean> modalita;
 				modalita = (ArrayList<ModalitaBean>) modModel.doRetriveByGame(gioco);
 				mode=gson.toJson(modalita);
 				response.getWriter().print(mode);
 				response.getWriter().flush();
-				System.out.println("il json delle modalità è stato creato con successo");
+				System.out.println("il json delle modalitï¿½ ï¿½ stato creato con successo");
 				response.setStatus(200);
 			} catch (SQLException e1) {
 				// TODO Auto-generated catch block
@@ -126,35 +127,24 @@ public class TournamentControl extends HttpServlet {
 			
 		break;
 	
-		case "giocatori":
-			
-			request.setAttribute("error", null);
+		case "getGiocatori":
 			
 			
-			
-					
-			HttpSession sessioneg= request.getSession();
 			try {
-				sessioneg.setAttribute("numeroGiocatori", ModalitaModel.NumeroGiocatori(request.getParameter("mode")));
-			 
-			sessioneg.setAttribute("nomeTorneo", request.getParameter("nometorneo"));
-			sessioneg.setAttribute("dataTorneo", request.getParameter("datatorneo"));
-			sessioneg.setAttribute("nomeGioco", request.getParameter("gioco"));
-			sessioneg.setAttribute("tipoTorneo", request.getParameter("sel"));
-			sessioneg.setAttribute("modalita", request.getParameter("mode"));
-			sessioneg.setAttribute("struttura", request.getParameter("strutture"));
-			sessioneg.setAttribute("budget", request.getParameter("budget"));
-			sessioneg.setAttribute("totaleTecnici", request.getParameter("tot_tecnici"));
-			sessioneg.setAttribute("tecniciFisici", request.getParameter("tecnici_fisici"));
-			
-			response.sendRedirect(request.getContextPath()+"/FormInserimentoGiocatori.jsp?jsessionid="+sessioneg.getId());
-	
-			return;
-			}
-			catch (SQLException e1) {
+				
+				request.setAttribute("error", null);
+				HttpSession sess=request.getSession();
+				ModalitaBean bean=modModel.doRetriveByKey(new ModalitaKey((String)sess.getAttribute("nomeGioco"),(String)sess.getAttribute("modalita")));
+				System.out.println((String)sess.getAttribute("nomeGioco")+ " "+(String)sess.getAttribute("modalita") );
+				sess.setAttribute("numPartecipanti",bean.getNumPartecipanti()/2);
+				response.setStatus(200);
+				response.sendRedirect("FormInserimentoGiocatori.jsp?nomesquadra="+request.getParameter("nomesquadra"));
+				
+			} catch (SQLException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
-			}	
+			}
+			
 			break;
 			
 			
@@ -169,7 +159,7 @@ public class TournamentControl extends HttpServlet {
 
 			if (controlloData(data, request.getParameter("datatorneo"))) {
 				request.setAttribute("error",
-						"Non possediamo una DeLorean, pertanto ci è impossibile organizzare tornei nel passato!");
+						"Non possediamo una DeLorean, pertanto ci ï¿½ impossibile organizzare tornei nel passato!");
 				RequestDispatcher dispatcher = request.getServletContext().getRequestDispatcher("/FormCreazioneTorneo.jsp");
 				dispatcher.forward(request, response);
 				
@@ -188,7 +178,7 @@ public class TournamentControl extends HttpServlet {
 
 						if (t.getCAPStruttura() == value && t.getIndirizzoStruttura().equals(address)) {
 							System.out.println("PROBLEMAAAAA");
-							String errore = "In questa data la struttura selezionata è già occupata, selezionarne una diversa";
+							String errore = "In questa data la struttura selezionata ï¿½ giï¿½ occupata, selezionarne una diversa";
 							request.setAttribute("error", errore);
 							RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher("/FormCreazioneTorneo.jsp");
 							dispatcher.forward(request, response);
@@ -212,10 +202,8 @@ public class TournamentControl extends HttpServlet {
 				sessione.setAttribute("budget", request.getParameter("budget"));
 				sessione.setAttribute("totaleTecnici", request.getParameter("tot_tecnici"));
 				sessione.setAttribute("tecniciFisici", request.getParameter("tecnici_fisici"));
-				response.sendRedirect(request.getContextPath()+"/FormInserimentoSquadre.jsp?jsessionid="+sessione.getId());
+				response.sendRedirect(request.getContextPath()+"/FormInserimentoSquadre.jsp");
 
-				//RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher("/FormInserimentoGiocatori.jsp");
-				//dispatcher.forward(request, response);
 				return;
 			} catch (SQLException e) {
 				e.printStackTrace();
@@ -231,7 +219,7 @@ public class TournamentControl extends HttpServlet {
 				String mode=gson.toJson(squadre);
 				response.getWriter().print(mode);
 				response.getWriter().flush();
-				System.out.println("il json delle squadre è stato creato con successo");
+				System.out.println("il json delle squadre ï¿½ stato creato con successo");
 				response.setStatus(200);
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
@@ -240,6 +228,25 @@ public class TournamentControl extends HttpServlet {
 			
 			
 			break;
+			
+			
+		case "getTornei":
+			
+		try {
+			response.setContentType("application/json");
+			response.setCharacterEncoding("UTF-8");
+			String torneo="";
+			ArrayList<TournamentBean> tornei = (ArrayList<TournamentBean>) tModel.doRetriveAll(null);
+			torneo=gson.toJson(tornei);
+			System.out.println("ciao mamma");
+			response.getWriter().print(torneo);
+			response.getWriter().flush();
+			response.setStatus(200);
+		}
+		catch(SQLException e2) {
+			e2.printStackTrace();
+		}
+		break;
 		
 		
 		}

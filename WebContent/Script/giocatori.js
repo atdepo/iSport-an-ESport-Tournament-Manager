@@ -28,14 +28,10 @@ function tendina(k){
 
 function add(){
 
-/*
-	var cont=$('.container');
+	if($("input[type=radio][name=sel]:checked").attr("id")==="nuova")
+		window.location.replace('TournamentControl?action=getGiocatori&nomesquadra='+$('.nomeSquadra').val());
+	
 
-	cont.append('<div id="squadra'+i+'" class="squadra" align="right"><input type="text"'+
-			'placeholder="Inserisci nome Squadra">'+
-			'<input type="button" value="Delete Squadra" onclick="elimina('+i+')"><br><br></div>');
-	i++;
-	*/
 	
 }
 
@@ -66,8 +62,8 @@ function cambiaTipo(){
 			
 			
 			for (var i = 0; i < data.length; i++) {
-				//var nome = data[i].nome.replace(/\s/g, '');
-				$('#squadreEsistenti').append('<div class="option"><label for="'+data[i].nome+'">'+data[i].nome+'</label><input required name="squadreEsistenti" onclick="tendina(\'squadreEsistenti\')" type="radio" class="radio" id="'+data[i].nome+'" value="'+data[i].nome+'"> </div>');	
+				var nome = data[i].nome.replace(/\s/g, '');
+				$('#squadreEsistenti').append('<div class="option"><label for="'+nome+'">'+data[i].nome+'</label><input required name="squadreEsistenti" onclick="tendina(\''+nome+'\')" type="radio" class="radio" id="'+nome+'" value="'+data[i].nome+'"> </div>');	
 			}
 			
 			$('#aggiungi').attr("value","Aggiungi una squadra esistente");

@@ -32,6 +32,7 @@ public class ModalitaModel implements ModelInterface<ModalitaBean, ModalitaKey> 
 				while (rs.next()) {
 					bean.setTipo(rs.getString("tipo"));
 					bean.setNomeGioco(rs.getString("nomegioco"));
+					bean.setNumPartecipanti(rs.getInt("numerogiocatori"));
 
 				}
 			}
@@ -59,7 +60,7 @@ public class ModalitaModel implements ModelInterface<ModalitaBean, ModalitaKey> 
 					
 					bean.setTipo(rs.getString("tipo"));
 					bean.setNomeGioco(rs.getString("nomegioco"));
-					
+					bean.setNumPartecipanti(rs.getInt("numeroGiocatori"));
 					collection.add(bean);
 				}
 			}
@@ -97,33 +98,6 @@ public class ModalitaModel implements ModelInterface<ModalitaBean, ModalitaKey> 
 			return null;
 		}
 	}
-	
-	public static int NumeroGiocatori(String tipo) throws SQLException {
-
-		PreparedStatement statement = null;
-
-		ModalitaBean bean = new ModalitaBean();
-		String sql = "SELECT numeroGiocatori/2 as giocatori FROM modalita WHERE tipo=? ";
-		if (tipo != null) {
-			try (Connection con = DriverManagerConnectionPool.getConnection()) {
-				statement = con.prepareStatement(sql);
-				statement.setString(1, tipo);
-				
-
-				System.out.println("DoRetriveByKey=" + statement.toString());
-				ResultSet rs = statement.executeQuery();
-				 rs.next();
-				 return rs.getInt("giocatori");
-			}
-			
-			}
-			
-		 else {
-			// TODO ERRORE
-			return -1;
-		}
-	}
-	
 	
 	
 	@Override

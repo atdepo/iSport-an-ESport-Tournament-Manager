@@ -15,7 +15,6 @@
 	<div class="nav" id="navigationBar">
   		<a href="index.jsp" class="active">Home</a>
   		<a href="<%=response.encodeURL("FormCreazioneTorneo.jsp")%>">Crea Torneo</a>
-  		<a href="#">Lista Tornei</a>
   		<a href="#">Elenco Squadre</a>
   		<a href="#">Elenco giocatori</a>
   		<a href="#">About</a>
@@ -23,6 +22,17 @@
     		<i class="fa fa-bars" aria-hidden="true"></i>
   		</a>
 	</div>
+	
+	<script>
+	function funzione() {
+  	var x = document.getElementById("navigationBar");
+  	if (x.className === "nav") {
+    	x.className += " responsive";
+  	} else {
+    	x.className = "nav";
+  	}
+	}
+	</script>
 
 </body>
 </html>

@@ -1,5 +1,5 @@
 <%@page import="java.util.Enumeration"%>
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 
 <!DOCTYPE html>
@@ -31,7 +31,8 @@ if(urlParams.get('nomesquadra')===""||!urlParams.has('nomesquadra')){
 	<form method="post" action="fileupload" name="echo" enctype="multipart/form-data">
 		<div class="inseriamo"></div>
 		<label for="file">Inserisci una immagine per il giocatore</label>
-		<input type="file" name="file" accept="image/jpeg"><br> 
+		<input type="file" id="upload" name="file" accept="image/jpeg"><br> 
+		<img id="img" src="img/default-image.png" alt="your image"/>
 	</form>
 
 

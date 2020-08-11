@@ -146,9 +146,9 @@ public class TournamentControl extends HttpServlet {
 			sessioneg.setAttribute("budget", request.getParameter("budget"));
 			sessioneg.setAttribute("totaleTecnici", request.getParameter("tot_tecnici"));
 			sessioneg.setAttribute("tecniciFisici", request.getParameter("tecnici_fisici"));
-			System.out.println("Mammt");
+			
 			response.sendRedirect(request.getContextPath()+"/FormInserimentoGiocatori.jsp?jsessionid="+sessioneg.getId());
-			System.out.println("Patt");
+	
 			return;
 			}
 			catch (SQLException e1) {

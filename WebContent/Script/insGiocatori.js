@@ -24,10 +24,10 @@ function inserisciGiocatore(){
 	var nome= urlParams.get('nomesquadra');
 	var div=$ (".inseriamo");
 	div.append("<div class='giocatore'>" +
-	  		"<input type='text' placeholder='nickname' id='nickname'>" +
-	  		"<input type='text' placeholder='nome' id='nome'>" +
-	  		"<input type='text' placeholder='cognome' id='cognome'>" +
-	  		"<input type='date' id='data'" +
+	  		"<input type='text' required placeholder='nickname' id='nickname'>" +
+	  		"<input type='text' required placeholder='nome' id='nome'>" +
+	  		"<input type='text' required placeholder='cognome' id='cognome'>" +
+	  		"<input type='date' required id='data'" +
 	  		"<h3> Squadra: "+nome+"</h3></div>");
 }
 
@@ -65,7 +65,7 @@ $(function(){
 	       }
 	    else
 	    {
-	      $('#img').attr('src', 'img/default-image.png');  //quando non ci sono 
+	      $('#img').attr('src', 'img/default-image.png');  //quando non ci sono immagini
 	    }
 	  });
 

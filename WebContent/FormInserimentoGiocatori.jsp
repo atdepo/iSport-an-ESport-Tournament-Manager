@@ -23,7 +23,7 @@ if(urlParams.get('nomesquadra')===""||!urlParams.has('nomesquadra')){
 <meta charset="UTF-8">
 <title>MIMMO</title>
 <link rel="stylesheet" href="CSS/giocatori.css" type="text/css">
-<link rel="stylesheet" href="CSS/Tendina.css" type="text/css">
+
 </head>
 <body>
 	<%@ include file="header.jsp"%>
@@ -31,7 +31,7 @@ if(urlParams.get('nomesquadra')===""||!urlParams.has('nomesquadra')){
 	<input type="hidden" id="nPartecipanti" value=<%=(Integer)session.getAttribute("numPartecipanti")%>>
 	
 	
-	<form method="post" action="fileupload" name="echo" enctype="multipart/form-data">
+	
 		 <div class="form-group file-area">
       	  <label for="images">Immagine <span>La tua immagine deve essere al massimo 150x150px </span></label>
    			 <input type="file" name="image" id="image" required="required" />
@@ -44,7 +44,7 @@ if(urlParams.get('nomesquadra')===""||!urlParams.has('nomesquadra')){
 		  <div class="form-group">
 		    <button type="submit">Chiavt a paccr</button>
 		  </div>
-	</form>
+	
 
 
 </body>

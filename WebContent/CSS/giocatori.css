@@ -3,7 +3,8 @@
 .file-area {
   width: 100%;
   position: relative;
-  
+}
+
   input[type=file] {
     position: absolute;
     width: 100%;
@@ -23,13 +24,13 @@
     border: 2px dashed rgba(255,255,255,0.2);
     text-align: center;
     transition: background 0.3s ease-in-out;
-    
+  }
     .success {
       display: none;
     }
-  }
   
-  &:hover .file-dummy {
+  
+  .file-dummy:hover {
     background: rgba(255,255,255,0.1);
   }
   
@@ -41,12 +42,12 @@
   input[type=file]:valid + .file-dummy {
     border-color: rgba(0,255,0,0.4);
     background-color: rgba(0,255,0,0.3);
-
+  }
     .success {
       display: inline-block;
     }
     .default {
       display: none;
     }
-  }
+  
 }

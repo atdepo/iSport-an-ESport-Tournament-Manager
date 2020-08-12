@@ -23,7 +23,10 @@ if(urlParams.get('nomesquadra')===""||!urlParams.has('nomesquadra')){
 <meta charset="UTF-8">
 <title>MIMMO</title>
 <link rel="stylesheet" href="CSS/giocatori.css" type="text/css">
+<link rel="stylesheet" href="CSS/Tendina.css" type="text/css">
+<link href='https://fonts.googleapis.com/css?family=Lato:100,200,300,400,500,600,700' rel='stylesheet' type='text/css'>
 
+<a href="http://scribblerockerz.com/drag-n-drop-file-input-without-javascript/" class="back-to-article" target="_blank">back to Article</a>
 </head>
 <body>
 	<%@ include file="header.jsp"%>
@@ -31,20 +34,31 @@ if(urlParams.get('nomesquadra')===""||!urlParams.has('nomesquadra')){
 	<input type="hidden" id="nPartecipanti" value=<%=(Integer)session.getAttribute("numPartecipanti")%>>
 	
 	
-	
-		 <div class="form-group file-area">
-      	  <label for="images">Immagine <span>La tua immagine deve essere al massimo 150x150px </span></label>
-   			 <input type="file" name="image" id="image" required="required" />
-   			 <div class="file-dummy">
-    			  <div class="success">Il tuo file è stato caricato GGWP</div>
-    			  <div class="default">Seleziona un immagine per il giocatore</div>
-   			 </div>
-  		</div>
+	<form method="post" action="fileupload" name="echo" enctype="multipart/form-data">
+		<h1><strong>File upload</strong> with style and pure CSS</h1>
   
-		  <div class="form-group">
-		    <button type="submit">Chiavt a paccr</button>
-		  </div>
-	
+  <div class="form-group">
+    <label for="title">Title <span>Use title case to get a better result</span></label>
+    <input type="text" name="title" id="title" class="form-controll"/>
+  </div>
+  <div class="form-group">
+    <label for="caption">Caption <span>This caption should be descriptiv</span></label>
+    <input type="text" name="caption" id="caption" class="form-controll"/>
+  </div>
+  
+  <div class="form-group file-area">
+        <label for="images">Images <span>Your images should be at least 400x300 wide</span></label>
+    <input type="file" name="images" id="images" required="required" multiple="multiple"/>
+    <div class="file-dummy">
+      <div class="success">Great, your files are selected. Keep on.</div>
+      <div class="default">Please select some files</div>
+    </div>
+  </div>
+  
+  <div class="form-group">
+    <button type="submit">Upload images</button>
+  </div>
+	</form>
 
 
 </body>

@@ -18,14 +18,16 @@
   }
   
   .file-dummy {
-    width: 100%;
+    width: 40%;
     padding: 30px;
+    margin-left:25%;
+    margin-top:4%;
     background: rgba(255,255,255,0.2);
     border: 2px dashed rgba(255,255,255,0.2);
     text-align: center;
     transition: background 0.3s ease-in-out;
   }
-    .success {
+   .file-dummy .success {
       display: none;
     }
   
@@ -43,11 +45,11 @@
     border-color: rgba(0,255,0,0.4);
     background-color: rgba(0,255,0,0.3);
   }
-    .success {
+   input[type=file]:valid + .file-dummy .success {
       display: inline-block;
     }
-    .default {
+    
+    input[type=file]:valid + .file-dummy .default {
       display: none;
     }
   
-}

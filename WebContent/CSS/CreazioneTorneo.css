@@ -1,8 +1,11 @@
-	body{background-color :#1F2833}
+	/*body{background-color :#1F2833}
 	
 	label,h2,legend{color:#45A29E}
 	
-	form{margin:10%}
+	form{
+	margin:10%;
+	text-align:center;
+	}
 	
 	div.title{text-align:center;}
    
@@ -10,23 +13,47 @@
    	border-color:#45A29E;
    	border:outset 1px;
    	border-radius: 7px;
-    margin-top: 20px;
-    margin-left:30px;
-    margin-bottom:30px;
- 	padding : 7px;
+    margin-top: 2%;
+    margin-left:40%;
+    margin-bottom: 3%;
+ 	padding-left : 60px;
+ 	padding-bottom: 20px;
  	box-sizing: border-box;
  	display: flex;
  	background-color:#2f3640;
  	outline:none;
+ 	font-size: medium;
+ 	color:white;
+ 	padding-top:10px;
+  padding-bottom:10px;
  	
    }
+   
+   .container{
+   
+   margin-left:30%;
+   }
     
+    .contieniBottoni{
+    
+    margin-left:auto;
+    }
    input[type=submit]{
    cursor: pointer
    }
    
+   input[type=text] {
+   	margin-left:41%;
+   	width:19%;
+   
+   }
+   
    input[type=text]:focus {
+   text-align:left;
   border-color:#45A29E ;
+  padding-top:10px;
+  padding-bottom:10px;
+  
   
 }
 
@@ -34,7 +61,180 @@ input[type=number]:focus {
   border-color:#45A29E ;
   
 }
+
+input[type=date]{
+	margin-left:44%;
+}
+
 input[type=date]:focus {
   border-color:#45A29E ;
-  
+  margin-left:44%;
+}*/
+
+
+
+@import url(https://fonts.googleapis.com/css?family=Montserrat:400,700);
+
+html{  
+  background:url(../img/background.jpg) repeat;
+  background-size: cover;
+  height:100%;
 }
+
+#feedback-page{
+	text-align:center;
+}
+
+#form-main{
+	width:100%;
+	float:left;
+	padding-top:0px;
+}
+
+#form-div {
+	background-color:rgba(99,83,105,0.6);
+	padding-left:35px;
+	padding-right:35px;
+	padding-top:35px;
+	padding-bottom:50px;
+	width: 450px;
+	float: left;
+	left: 50%;
+	position: absolute;
+  	margin-top:30px;
+	margin-left: -260px;
+  	-moz-border-radius: 7px;
+  	-webkit-border-radius: 7px;
+  	border-radius:7px;
+}
+
+label{
+	font-family: Helvetica, Arial, sans-serif;
+	font-weight:500;
+	font-size: 18px;
+	color:navy;
+	text-align: auto;
+	
+}
+
+fieldset{
+	font-family: Helvetica, Arial, sans-serif;
+	font-weight:500;
+	font-size: 18px;
+	color:navy;
+}
+
+.feedback-input {
+	color:#3c3c3c;
+	font-family: Helvetica, Arial, sans-serif;
+  font-weight:500;
+	font-size: 18px;
+	border-radius: 11px;
+	line-height: 22px;
+	background-color: #fbfbfb;
+	padding: 13px 13px 13px 54px;
+	margin-bottom: 10px;
+	margin-left:26px;
+	width:89%;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	-ms-box-sizing: border-box;
+	box-sizing: border-box;
+  border: 3px solid rgba(0,0,0,0);
+}
+
+.feedback-input:focus{
+	background: #fff;
+	box-shadow: 0;
+	border: 3px solid #3498db;
+	color: #3498db;
+	outline: none;
+  padding: 13px 13px 13px 54px;
+}
+
+.focused{
+	color:#30aed6;
+	border:#30aed6 solid 3px;
+}
+
+/* Icons ---------------------------------- */
+.nome{
+	/*background-image: url(../img/arrow-down.svg);*/
+	background-size: 30px 30px;
+	background-position: 11px 8px;
+	background-repeat: no-repeat;
+}
+
+.nome:focus{
+	/*background-image: url(img/arrow-down.svg);*/
+	background-size: 30px 30px;
+	background-position: 8px 5px;
+ 	background-position: 11px 8px;
+	background-repeat: no-repeat;
+}
+
+input:hover, input:focus{
+	background-color:white;
+}
+
+#button-blue{
+	font-family: 'Montserrat', Arial, Helvetica, sans-serif;
+	float:left;
+	width: 100%;
+	border: #fbfbfb solid 4px;
+	cursor:pointer;
+	background-color: #3498db;
+	color:white;
+	font-size:24px;
+	padding-top:22px;
+	padding-bottom:22px;
+	-webkit-transition: all 0.3s;
+	-moz-transition: all 0.3s;
+	transition: all 0.3s;
+  margin-top:-4px;
+  font-weight:700;
+}
+
+#button-blue:hover{
+	background-color: rgba(0,0,0,0);
+	color: #0493bd;
+}
+	
+.submit:hover {
+	color: #3498db;
+}
+	
+.ease {
+	width: 0px;
+	height: 74px;
+	background-color: #fbfbfb;
+	-webkit-transition: .3s ease;
+	-moz-transition: .3s ease;
+	-o-transition: .3s ease;
+	-ms-transition: .3s ease;
+	transition: .3s ease;
+}
+
+.submit:hover .ease{
+  width:100%;
+  background-color:white;
+}
+
+.select-box {
+	 	width:100%;
+	}
+
+
+@media only screen and (max-width: 580px) {
+	#form-div{
+		left: 3%;
+		margin-right: 3%;
+		width: 88%;
+		margin-left: 0;
+		padding-left: 3%;
+		padding-right: 3%;
+	}
+}
+
+
+

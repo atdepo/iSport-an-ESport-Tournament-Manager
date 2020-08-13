@@ -12,6 +12,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="CSS/2RadioButton.css" type="text/css">
 <link rel="stylesheet" href="CSS/Tendina.css" type="text/css">
 <link rel="stylesheet" href="CSS/CreazioneTorneo.css" type="text/css">
@@ -28,17 +29,128 @@
 
 <body>
 	<%@ include file="header.jsp"%>
-	<div class="title">
+	
+	<div class="total-container">
+		<header>Iniziamo con la creazione del tuo torneo!</header>
+		<div class="form-div">
+		
+		<form action="#" method="post">
+		<div class=page>
+			<div class="title">Informazioni di base:</div>
+
+			<div class="field">
+				<label for="nometorneo">Qual'è il nome del torneo da creare?</label>
+				<input type="text" class="feedback-input" name="nometorneo" required>
+			</div>	
+
+			<div class="field">
+				<label for="datatorneo">Che giorno vuoi svolgere il torneo?</label>
+				<input type="date" class="feedback-input" name="datatorneo" required>
+			</div>
+
+			<div class="field">
+				<label for="budget">Qual'è il budget stimato per il torneo(in euro iva esclusa)</label>
+				<input type="number" class="feedback-input" min="0" max=10000000 name="budget" required>
+			</div>
+
+			<div class="field btn">
+				<input type="button" class="button-blue" value="Next">
+			</div>
+
+
+		</div>
+		
+		<div class="page">
+			<div class="title">Informazioni sul gioco:</div>
+
+			<div class="field">
+				<label for="gioco">Gioco di riferimento</label>	
+					<div class="container gioco">
+						<div class="select-box">
+							<div class="options-container" id="gioco"></div>
+							<div class="selected gioco" onclick="menu('gioco')">Gioco di riferimento</div>
+						</div>
+					</div>
+			</div>
+
+			<div class="field">
+				<label for="mod">Modalita di gioco</label>
+					<div class="container mod">
+						<div class="select-box">
+							<div class="options-container" id="mode"></div>
+							<div class="selected mode" onclick="menu('mode')">Modalità di gioco</div>
+						</div>
+					</div>
+			</div>
+
+			<div class="field btn">
+				<input type="button" class="" value="Previous">
+				<input type="button" class="" value="Next">
+			</div>
+
+		</div>
+		
+		<div class="page">
+			<div class="title">Organizzazione:</div>
+
+			<div class="field">
+				<label for="radio">Come vuoi che sia organizzato il tuo torneo?</label>
+					<div class="contieniBottoni radio">
+						<label class="radioLabel" for="on-line">On-line</label>
+						<input id="on-line" type="radio" name="sel"
+						value="on-line" onclick="hide()" checked class="sel bt1">
+								
+						<label class="radioLabel" for="fisico">Fisico </label>
+						<input id="fisico" type="radio" name="sel"
+						value="fisico" onclick="show()" class="sel bt2"> 
+					</div>
+			</div>
+
+			<div class="field">
+				<div class="strutture"></div>
+				<!-- Da generare dinamicamente se il torneo è fisico -->
+			</div>
+			<div class="field">
+				<label for="tot_tecnici">Quanti tecnici desideri avere per il tuo torneo?</label>
+				<input type="number" min="0" name="tot_tecnici" id="tot_tecnici"
+				class="" onchange="numTecnici()" required>
+			</div>
+
+			<div class="field">
+				<div class="tecniciFisici"></div>
+				<!-- Da generare dinamicamente se il torneo è fisico -->
+			</div>
+
+			<div class="field btn">
+				<input type="button" class="" value="Previous">
+				<input type="submit" class="" value="Finish">
+				
+			</div>
+		</div>
+		</form>
+		
+		
+	</div>
+</div>
+	
+	
+	
+	
+	<!--<div class="title">
 		
 	</div>
 	<div id="form-main">
 		<div id="form-div">
 			<form name="FormCreazioneTorneo"
-				action="<%=response.encodeURL("TournamentControl?action=validate")%>"
+				action="
 				class="form" id="form1" method="post">
+					
+					
+					
 					<div class="front">
                     <p>Iniziamo con la creazione del tuo torneo!</p> 
                     </div>
+                    
 					<label for="nometorneo"  >Nome del Torneo <input type="text" class="feedback-input"
 						name="nometorneo"required></label>
 				
@@ -84,7 +196,7 @@
 					<!-- Da generare dinamicamente se il torneo è fisico -->
 
 
-					<label for="budget">Qual'è il budget stimato per il torneo(in euro iva esclusa)
+					<!--  <label for="budget">Qual'è il budget stimato per il torneo(in euro iva esclusa)
 					<input type="number" class="feedback-input" min="0" max=10000000 name="budget" required>
 					</label> 
 					
@@ -101,7 +213,7 @@
 
 				
 				
-				<div class="submit">
+				<!-- <div class="submit">
 					<input type="submit" id="button-blue" value="Next">
 					<div class="ease"></div>
 				</div>
@@ -109,6 +221,6 @@
 			</form>
 		</div>
 	</div>
-
+ -->
 </body>
 </html>

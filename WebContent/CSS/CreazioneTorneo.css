@@ -2,39 +2,88 @@
 @import url(https://fonts.googleapis.com/css2?family=Rowdies&display=swap);
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@700&display=swap');
 
-html{  
-  background:url(../img/background.jpg) repeat;
-  background-size: cover;
-  height:100%;
-}
 
-#feedback-page{
+/*#feedback-page{
 	text-align:center;
+}*/
+
+*{
+	margin: 0;
+	padding: 0;
+	outline: none;
+
 }
 
-#form-main{
-	width:100%;
+
+body{
+	background:url(../img/background.jpg) repeat;
+  	background-size: cover;
+	display: block;
+	/*align-items: center;
+	justify-content: center;*/
+	min-height: 100vh;
+}
+
+.total-container{
+	position: absolute;
+    left: 50%; /* position the left edge of the element at the middle of the parent */
+
+    /*transform: translate(-50%, -50%);
 	float:left;
-	padding-top:0px;
-}
-
-#form-div {
+	left: 50%;
+	position: absolute;*/
+	width:400px;
+	margin:auto;
+	padding: 50px 35px 10px 35px;
+	text-align: center;	
 	background-color:rgba(99,83,105,0.8);
 	padding-left:35px;
 	padding-right:35px;
 	padding-top:35px;
 	padding-bottom:50px;
-	width: 560px;
-	float: left;
-	left: 50%;
-	position: absolute;
   	margin-top:30px;
 	margin-left: -260px;
+	
   	-moz-border-radius: 7px;
   	-webkit-border-radius: 7px;
   	border-radius:7px;
+  	
+  	
 }
 
+.total-container header{
+	font-size: 35px;
+	font-weight: 600px;
+	margin: 0 0 30px 0;
+
+}
+
+.total-container .form-div{
+	width: 100%;
+	overflow: hidden;
+	
+	}
+
+.form-div form{
+	display: flex;
+	width: 400%;
+}
+
+.form-div form .page{
+	width: 25%;
+}
+
+.form-div form .page .title{
+text-align: left;
+font-size: 24px;
+font-weight: 500;
+}
+
+.form-div form .page .title .field{
+width: 30%;
+margin:10px;
+
+}/*
 label{
 	font-family:'Montserrat', Arial, Helvetica, sans-serif;
 	font-weight:500;
@@ -55,14 +104,13 @@ p{
 }
 
 
-
+*/
 .feedback-input {
 	color:#3c3c3c;
 	font-family: 'Montserrat', Arial, Helvetica, sans-serif;
   	font-weight:500;
 	font-size: 15px;
 	border-radius: 11px;
-	line-height: 22px;
 	background-color: #fbfbfb;
 	padding: 13px 13px 13px 54px;
 	margin-top:10px;
@@ -82,7 +130,7 @@ p{
 	border: 3px solid #3498db;
 	color: #3498db;
 	outline: none;
-  padding: 13px 13px 13px 54px;
+  /*padding: 13px 13px 13px 54px;*/
 }
 
 .focused{
@@ -110,21 +158,20 @@ input:hover, input:focus{
 	background-color:white;
 }
 
-.submit{
+.field.btn{
 	margin-top:30px;
 }
 
-#button-blue{
+.button-blue{
 	font-family: 'Montserrat', Arial, Helvetica, sans-serif;
 	float:left;
-	width: 100%;
+	width: 30%;
 	border: #fbfbfb solid 4px;
 	border-radius: 11px;
 	cursor:pointer;
 	background-color: #5DEFB9;;
 	color:white;
-	font-size:24px;
-	padding-top:22px;
+	font-size:14px;
 	padding-bottom:22px;
 	-webkit-transition: all 0.3s;
 	-moz-transition: all 0.3s;
@@ -133,7 +180,7 @@ input:hover, input:focus{
   	font-weight:700;
 }
 
-#button-blue:hover{
+.button-blue:hover{
 	background-color: rgba(0,0,0,0);
 	color: #0493bd;
 }
@@ -163,14 +210,19 @@ input:hover, input:focus{
 	}
 
 
-@media only screen and (max-width: 580px) {
-	#form-div{
+@media only screen and (max-width: 800px) {
+	.total-container{
 		left: 3%;
-		margin-right: 3%;
-		width: 88%;
-		margin-left: 0;
-		padding-left: 3%;
-		padding-right: 3%;
+		margin-right: 10%;
+		width: 50%;
+		margin-left: 10%;
+		padding-left: 5%;
+		padding-right: 5%;
+	}
+	
+	.field{
+	
+	width:89%
 	}
 }
 

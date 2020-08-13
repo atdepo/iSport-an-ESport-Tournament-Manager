@@ -10,6 +10,7 @@
 
 <body>
 	<%@ include file="header.jsp"%>
+	
 	<br>
 	<br>
 	
@@ -34,5 +35,6 @@
 			</ul>
 		</div>
 	</div>
+<%@ include file="Footer.jsp"%>
 </body>
 </html>

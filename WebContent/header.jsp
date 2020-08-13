@@ -17,7 +17,6 @@
   		<a href="<%=response.encodeURL("FormCreazioneTorneo.jsp")%>">Crea Torneo</a>
   		<a href="#">Elenco Squadre</a>
   		<a href="#">Elenco giocatori</a>
-  		<a href="#">About</a>
   		<a href="javascript:void(0);" class="icon" onclick="funzione()">
     		<i class="fa fa-bars" aria-hidden="true"></i>
   		</a>

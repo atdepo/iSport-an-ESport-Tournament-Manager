@@ -24,7 +24,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="Script/mode.js"></script>
 <script src="Script/radio.js"></script>
-
+<script src="https://kit.fontawesome.com/a076d05399.js"></script>
 </head>
 
 <body>
@@ -33,9 +33,39 @@
 	<div class="total-container">
 		<header>Iniziamo con la creazione del tuo torneo!</header>
 		<div class="form-div">
+			<div class="progress-bar">
+			
+				<div class="step">
+
+					<p>Generali</p>
+					<div class="bullet">
+						<span>1</span>
+					</div>
+					<div class="check fas fa-check"></div>
+				</div>
+
+				<div class="step">
+
+					<p>Name</p>
+					<div class="bullet">
+						<span>2</span>
+					</div>
+					<div class="check fas fa-check"></div>
+				</div>
+
+				<div class="step">
+
+					<p>Name</p>
+					<div class="bullet">
+						<span>3</span>
+					</div>
+					<div class="check fas fa-check"></div>
+				</div>
+
+			</div>
 		
-		<form action="#" method="post">
-		<div class=page>
+			<form action="#" method="post">
+		<div class="page slidepage">
 			<div class="title">Informazioni di base:</div>
 
 			<div class="field">
@@ -54,7 +84,7 @@
 			</div>
 
 			<div class="field btn">
-				<input type="button" class="button-blue" value="Next">
+				<input type="button" class="button-blue nextBtn1" onclick="slide()" value="Next">
 			</div>
 
 
@@ -84,8 +114,8 @@
 			</div>
 
 			<div class="field btn">
-				<input type="button" class="" value="Previous">
-				<input type="button" class="" value="Next">
+				<input type="button" class="button-blue prevBtn2" onclick="slide()" value="Previous">
+				<input type="button" class="button-blue nextBtn2" onclick="slide()" value="Next">
 			</div>
 
 		</div>
@@ -122,8 +152,8 @@
 			</div>
 
 			<div class="field btn">
-				<input type="button" class="" value="Previous">
-				<input type="submit" class="" value="Finish">
+				<input type="button" class="button-blue prevBtn3" onclick="slide()" value="Previous">
+				<input type="submit" class="button-blue subBtn" value="Finish">
 				
 			</div>
 		</div>

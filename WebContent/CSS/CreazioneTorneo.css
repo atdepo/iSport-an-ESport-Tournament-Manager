@@ -50,6 +50,107 @@ body{
   	
   	
 }
+.total-container .progress-bar{
+
+	display: flex;
+	margin: 40px 0;
+
+}
+
+.total-container .progress-bar .step{
+position: relative;
+text-align: center;
+width: 100%;
+}
+
+.progress-bar .step p{
+
+	font-size: 18px;
+	font-weight: 500px;
+	color: #000000;
+
+}
+
+.progress-bar .step p.active{
+	color: #d43f8d;
+
+}
+.progress-bar .step .bullet::before,
+.progress-bar .step .bullet::after{
+
+position: absolute;
+content: '';
+bottom: 11px;
+right: -103px;
+height: 3px;
+width: 97px;
+background: #262626;
+}
+
+.progress-bar .step:last-child .bullet::before,
+.progress-bar .step:last-child .bullet::after{
+
+	display: none;
+}
+
+.progress-bar .step .bullet.active{
+	border-color: #d43f8d;
+	background: #d43f8d;
+}
+
+.progress-bar .step .bullet.active span{
+	display:none;
+}
+
+.progress-bar .step .check.active{
+	display:block;
+	color:fff;
+
+}
+
+.progress-bar .step .bullet.active::after{
+
+background: #d43f8d;
+transform: scaleX(0);
+transform-origin:left;
+animation: animate 0.3s linear forwards;
+}
+
+@keyframes animate{
+	
+100%{
+	transform: scaleX(1);
+}
+}
+
+.progress-bar .step .bullet{
+position: relative;
+ height: 25px;
+ width: 25px;
+ border: 2px solid #000;
+ display: inline-block;
+ border-radius: 50%;
+ transition: 0.2s;
+}
+
+.progress-bar .step .bullet span{
+font-weight: 500;
+font-size: 17px;
+line-height: 25px;
+position: absolute;
+left: 50%;
+transform: translateX(-50%);
+}
+
+.progress-bar .step .check{
+position: absolute;
+top: 50%;
+left: 70%;
+font-size:15px;
+transform: translate(-229%,-2%);
+display: none;
+
+}
 
 .total-container header{
 	font-size: 35px;
@@ -71,6 +172,7 @@ body{
 
 .form-div form .page{
 	width: 25%;
+	transition: margin-left 0.3s ease-in-out;
 }
 
 .form-div form .page .title{
@@ -83,7 +185,9 @@ font-weight: 500;
 width: 30%;
 margin:10px;
 
-}/*
+}
+
+/*
 label{
 	font-family:'Montserrat', Arial, Helvetica, sans-serif;
 	font-weight:500;
@@ -164,19 +268,20 @@ input:hover, input:focus{
 
 .button-blue{
 	font-family: 'Montserrat', Arial, Helvetica, sans-serif;
-	float:left;
-	width: 30%;
+	float:right;
+	width: 50%;
 	border: #fbfbfb solid 4px;
 	border-radius: 11px;
 	cursor:pointer;
 	background-color: #5DEFB9;;
 	color:white;
 	font-size:14px;
-	padding-bottom:22px;
+	padding-bottom:13px;
+	padding-top:10px;
 	-webkit-transition: all 0.3s;
 	-moz-transition: all 0.3s;
 	transition: all 0.3s;
-  	margin-top:-4px;
+  	margin-right:9px;
   	font-weight:700;
 }
 
@@ -213,7 +318,7 @@ input:hover, input:focus{
 @media only screen and (max-width: 800px) {
 	.total-container{
 		left: 3%;
-		margin-right: 10%;
+		
 		width: 50%;
 		margin-left: 10%;
 		padding-left: 5%;

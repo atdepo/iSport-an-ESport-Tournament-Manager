@@ -23,7 +23,6 @@ $(document).ready(function() {
 		}
 		
 	}
-
 	xhr.open('GET', 'TournamentControl?action=initTorneo', true);
 	xhr.send();
 
@@ -130,6 +129,60 @@ function show(){
 		
 		getStrutture();
 		}
+}
+var max=4;
+var current=1;
+function slide(){
+		const slidePage= $('.slidepage');
+		const firtsNextButton=$('.nextBtn');
+		const progressText=$('.step p');
+		const progressCheck=$('.step .check');
+		const bullet=$('.step .bullet');
+		
+
+
+		var margin=slidePage.css("marginLeft").replace(/px/g, '');
+				
+		if($(event.target).hasClass("nextBtn1")){ //JQuery >> tutto
+			slidePage.css("marginLeft","-25%"); //JQuery >> tutto 
+			$(bullet[current-1]).addClass("active");
+			$(progressText[current-1]).addClass("active");
+			$(progressCheck[current-1]).addClass("active");
+			current+=1;
+		}
+		else if($(event.target).hasClass("nextBtn2")){
+			slidePage.css("marginLeft","-50%"); //JQuery >> tutto
+			$(bullet[current-1]).addClass("active");
+			$(progressText[current-1]).addClass("active");
+			$(progressCheck[current-1]).addClass("active");
+			current+=1;
+		} 
+		else if($(event.target).hasClass("subBtn")){
+			 //JQuery >> tutto
+			$(bullet[current-1]).addClass("active");
+			$(progressText[current-1]).addClass("active");
+			$(progressCheck[current-1]).addClass("active");
+			current+=1;
+		}
+		else if($(event.target).hasClass("prevBtn2")){
+			slidePage.css("marginLeft","0%"); //JQuery >> tutto
+			$(bullet[current-2]).removeClass("active");
+			$(progressText[current-2]).removeClass("active");
+			$(progressCheck[current-2]).removeClass("active");
+			current-=1;
+		}
+		else if($(event.target).hasClass("prevBtn3")){
+			slidePage.css("marginLeft","-25%"); //JQuery >> tutto
+			$(bullet[current-2]).removeClass("active");
+			$(progressText[current-2]).removeClass("active");
+			$(progressCheck[current-2]).removeClass("active");
+			current-=1;
+		}
+
+		
+	
+		
+
 }
 
 

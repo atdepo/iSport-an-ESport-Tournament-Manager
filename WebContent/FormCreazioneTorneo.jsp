@@ -20,9 +20,10 @@
 
 <title>Crea il tuo Torneo</title>
 
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="Script/mode.js"></script>
+<script src="Script/radio.js"></script>
+
 </head>
 
 <body>
@@ -35,17 +36,18 @@
 			<form name="FormCreazioneTorneo"
 				action="<%=response.encodeURL("TournamentControl?action=validate")%>"
 				class="form" id="form1" method="post">
-				<fieldset>
-
-					<label>Nome del Torneo <input type="text" class="bella feedback-input"
-						name="nometorneo" required></label>
+					<div class="front">
+                    <p>Iniziamo con la creazione del tuo torneo!</p> 
+                    </div>
+					<label for="nometorneo"  >Nome del Torneo <input type="text" class="feedback-input"
+						name="nometorneo"required></label>
 				
-				 <label>Data Torneo <input type="date" class="bella feedback-input"
+				 <label>Data Torneo <input type="date" class="feedback-input"
 				 		name="datatorneo" required></label>
 				 
 				 
 				 <label for="gioco">Gioco di riferimento</label>	
-					<div class="container">
+					<div class="container gioco">
 						<div class="select-box">
 							<div class="options-container" id="gioco"></div>
 							<div class="selected gioco" onclick="menu('gioco')">
@@ -54,9 +56,9 @@
 					</div>
 
 
-				<label>Modalita di gioco</label>
+				<label for="mod">Modalita di gioco</label>
 
-					<div class="container">
+					<div class="container mod">
 						<div class="select-box">
 							<div class="options-container" id="mode"></div>
 							<div class="selected mode" onclick="menu('mode')">
@@ -64,36 +66,31 @@
 						</div>
 					</div>
 
-				</fieldset>
-				<fieldset>
+			
 
-					<legend>Come si svolgerà il torneo</legend>
-					<div class="contieniBottoni">
+					<label for="radio">Come vuoi che sia organizzato il tuo torneo?</label>
+					<div class="contieniBottoni radio">
 					
-						<br> <input id="on-line" type="radio" name="sel"
+						 <input id="on-line" type="radio" name="sel"
 							value="on-line" onclick="hide()" checked class="sel bt1">
 							
 						<label class="radioLabel" for="on-line">On-line</label>
 						 <input id="fisico" type="radio" name="sel" value="fisico"
 								onclick="show()" class="sel bt2"> <label
 								class="radioLabel" for="fisico">Fisico </label>
-							 <br>
-						<br>
-
 					</div>
-
-
+						
 					<div class="strutture"></div>
 					<!-- Da generare dinamicamente se il torneo è fisico -->
 
 
-					<label for="budget">Budget stimato per il torneo(in euro iva esclusa)
-					<input type="number" class="bella feedback-input" min="0" max=10000000 name="budget" required>
+					<label for="budget">Qual'è il budget stimato per il torneo(in euro iva esclusa)
+					<input type="number" class="feedback-input" min="0" max=10000000 name="budget" required>
 					</label> 
 					
-					<label for="tot_tecnici">Numero di tecnici desiderati</label>
+					<label for="tot_tecnici">Quanti tecnici desideri avere per il tuo torneo?</label>
 					<input type="number" min="0" name="tot_tecnici" id="tot_tecnici"
-						   class="bella feedback-input" onchange="numTecnici()" required>
+						   class="feedback-input" onchange="numTecnici()" required>
 
 
 					<div class="tecniciFisici"></div>
@@ -102,7 +99,7 @@
 
 					<!-- Il max utilizzato nei tecnici fisici è solo un placeholder per evitare che la barra diventi troppo grande -->
 
-				</fieldset>
+				
 				
 				<div class="submit">
 					<input type="submit" id="button-blue" value="Next">

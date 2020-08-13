@@ -1,79 +1,6 @@
-	/*body{background-color :#1F2833}
-	
-	label,h2,legend{color:#45A29E}
-	
-	form{
-	margin:10%;
-	text-align:center;
-	}
-	
-	div.title{text-align:center;}
-   
-   input{
-   	border-color:#45A29E;
-   	border:outset 1px;
-   	border-radius: 7px;
-    margin-top: 2%;
-    margin-left:40%;
-    margin-bottom: 3%;
- 	padding-left : 60px;
- 	padding-bottom: 20px;
- 	box-sizing: border-box;
- 	display: flex;
- 	background-color:#2f3640;
- 	outline:none;
- 	font-size: medium;
- 	color:white;
- 	padding-top:10px;
-  padding-bottom:10px;
- 	
-   }
-   
-   .container{
-   
-   margin-left:30%;
-   }
-    
-    .contieniBottoni{
-    
-    margin-left:auto;
-    }
-   input[type=submit]{
-   cursor: pointer
-   }
-   
-   input[type=text] {
-   	margin-left:41%;
-   	width:19%;
-   
-   }
-   
-   input[type=text]:focus {
-   text-align:left;
-  border-color:#45A29E ;
-  padding-top:10px;
-  padding-bottom:10px;
-  
-  
-}
-
-input[type=number]:focus {
-  border-color:#45A29E ;
-  
-}
-
-input[type=date]{
-	margin-left:44%;
-}
-
-input[type=date]:focus {
-  border-color:#45A29E ;
-  margin-left:44%;
-}*/
-
-
-
 @import url(https://fonts.googleapis.com/css?family=Montserrat:400,700);
+@import url(https://fonts.googleapis.com/css2?family=Rowdies&display=swap);
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@700&display=swap');
 
 html{  
   background:url(../img/background.jpg) repeat;
@@ -92,12 +19,12 @@ html{
 }
 
 #form-div {
-	background-color:rgba(99,83,105,0.6);
+	background-color:rgba(99,83,105,0.8);
 	padding-left:35px;
 	padding-right:35px;
 	padding-top:35px;
 	padding-bottom:50px;
-	width: 450px;
+	width: 560px;
 	float: left;
 	left: 50%;
 	position: absolute;
@@ -109,30 +36,36 @@ html{
 }
 
 label{
-	font-family: Helvetica, Arial, sans-serif;
+	font-family:'Montserrat', Arial, Helvetica, sans-serif;
 	font-weight:500;
-	font-size: 18px;
-	color:navy;
-	text-align: auto;
+	font-size: 15px;
+	color:#66fcf1;
+	display:block;
+	text-align: center;
 	
 }
 
-fieldset{
-	font-family: Helvetica, Arial, sans-serif;
+p{
+	font-family:'Roboto Slab', sans-serif;
 	font-weight:500;
-	font-size: 18px;
-	color:navy;
+	font-size: 21px;
+	color:#5DEFB9;
+	text-align: center;
+	margin-bottom:20px;
 }
+
+
 
 .feedback-input {
 	color:#3c3c3c;
-	font-family: Helvetica, Arial, sans-serif;
-  font-weight:500;
-	font-size: 18px;
+	font-family: 'Montserrat', Arial, Helvetica, sans-serif;
+  	font-weight:500;
+	font-size: 15px;
 	border-radius: 11px;
 	line-height: 22px;
 	background-color: #fbfbfb;
 	padding: 13px 13px 13px 54px;
+	margin-top:10px;
 	margin-bottom: 10px;
 	margin-left:26px;
 	width:89%;
@@ -177,13 +110,18 @@ input:hover, input:focus{
 	background-color:white;
 }
 
+.submit{
+	margin-top:30px;
+}
+
 #button-blue{
 	font-family: 'Montserrat', Arial, Helvetica, sans-serif;
 	float:left;
 	width: 100%;
 	border: #fbfbfb solid 4px;
+	border-radius: 11px;
 	cursor:pointer;
-	background-color: #3498db;
+	background-color: #5DEFB9;;
 	color:white;
 	font-size:24px;
 	padding-top:22px;
@@ -191,8 +129,8 @@ input:hover, input:focus{
 	-webkit-transition: all 0.3s;
 	-moz-transition: all 0.3s;
 	transition: all 0.3s;
-  margin-top:-4px;
-  font-weight:700;
+  	margin-top:-4px;
+  	font-weight:700;
 }
 
 #button-blue:hover{

@@ -112,21 +112,24 @@ function hide(){
 }
 
 function show(){
-	$("label[for='tecnici_fisici']").show();
-	$(".tecniciFisici").append('<label for="tecnici_fisici">Di cui presenti fisicamente </label>'+ 
-							   '<input type="number" min="0"  max="10" name="tecnici_fisici" id="tecnici_fisici" required>');
+	if($(".tecniciFisici").empty()&&$(".strutture").empty()){
+		
+		$("label[for='tecnici_fisici']").show();
+		$(".tecniciFisici").append('<label for="tecnici_fisici">Di cui presenti fisicamente </label>'+ 
+								   '<input type="number" min="0"  max="10" name="tecnici_fisici" class=" feedback-input" id="tecnici_fisici" required>');
+		
+		numTecnici();
+		
+		
+		$(".strutture").append('<label for="strutture">In che struttura vuoi che sia organizzato il tuo torneo?</label> <div class="container"> <div class="select-box">'+
+				'<div class="options-container" id="strutture">'+
+				'</div><div class="selected strutture" onclick="menu(\'strutture\')">'+
+	             ' Seleziona una Struttura</div></div></div>');
+		$("label[for='strutture']").show();
 	
-	numTecnici();
-	
-	
-	$(".strutture").append('<label for="strutture">Struttura</label> <div class="container"> <div class="select-box">'+
-			'<div class="options-container" id="strutture">'+
-			'</div><div class="selected strutture" onclick="menu(\'strutture\')">'+
-             ' Seleziona una Struttura</div></div></div>');
-	$("label[for='strutture']").show();
-
-	
-	getStrutture();
+		
+		getStrutture();
+		}
 }
 
 

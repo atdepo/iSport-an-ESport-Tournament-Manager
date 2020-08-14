@@ -33,9 +33,9 @@
 	<div class="total-container">
 		<header>Iniziamo con la creazione del tuo torneo!</header>
 		<div class="form-div">
-			<div class="progress-bar">
+			<div class="progress-bar-wrapper">
 			
-				<div class="step">
+				<!-- <div class="step">
 
 					<p>Generali</p>
 					<div class="bullet">
@@ -61,9 +61,9 @@
 					</div>
 					<div class="check fas fa-check"></div>
 				</div> 	
-			</div>
+			</div> -->
 			
-			<!--  <div class="container-fluid">
+			<div class="container-fluid">
 			  <br /><br />
 			  <ul class="list-unstyled multi-steps">
 			    <li id="first-step" class="is-active fas fa-check">Start</li>
@@ -72,7 +72,7 @@
 			    
 			  </ul>
 			</div>
-			</div>-->
+			</div>
 			
 		<!--<div class="progress-bar-wrapper"></div>-->
 			<form action="#" method="post">

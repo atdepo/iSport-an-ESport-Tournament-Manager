@@ -131,51 +131,34 @@ function show(){
 		}
 }
 
-var max=4;
-var current=1;
-
 function slide(){
-	
-	
-	
 		const slidePage= $('.slidepage');
-		const progressText=$('.step p');
-		const progressCheck=$('.step .check');
-		const bullet=$('.step .bullet');			
-		
+					
 		if($(event.target).hasClass("nextBtn1")){ //JQuery >> tutto
 			slidePage.css("marginLeft","-25%"); //JQuery >> tutto 
-			$(bullet[current-1]).addClass("active");
-			$(progressText[current-1]).addClass("active");
-			$(progressCheck[current-1]).addClass("active");
-			current+=1;
+			$('#first-step').removeClass("is-active");
+			$('#second-step').addClass("is-active");
+
 		}
 		else if($(event.target).hasClass("nextBtn2")){
 			slidePage.css("marginLeft","-50%"); //JQuery >> tutto
-			$(bullet[current-1]).addClass("active");
-			$(progressText[current-1]).addClass("active");
-			$(progressCheck[current-1]).addClass("active");
-			current+=1;
+			$('#second-step').removeClass("is-active");
+			$('#third-step').addClass("is-active");
+
 		} 
 		else if($(event.target).hasClass("subBtn")){
-			 //JQuery >> tutto
-			$(bullet[current-1]).addClass("active");
-			$(progressText[current-1]).addClass("active");
-			$(progressCheck[current-1]).addClass("active");
-			current+=1;
+			
 		}
 		else if($(event.target).hasClass("prevBtn2")){
 			slidePage.css("marginLeft","0%"); //JQuery >> tutto
-			$(bullet[current-2]).removeClass("active");
-			$(progressText[current-2]).removeClass("active");
-			$(progressCheck[current-2]).removeClass("active");
+			$('#second-step').removeClass("is-active");
+			$('#first-step').addClass("is-active");
 			current-=1;
 		}
 		else if($(event.target).hasClass("prevBtn3")){
 			slidePage.css("marginLeft","-25%"); //JQuery >> tutto
-			$(bullet[current-2]).removeClass("active");
-			$(progressText[current-2]).removeClass("active");
-			$(progressCheck[current-2]).removeClass("active");
+			$('#third-step').removeClass("is-active");
+			$('#second-step').addClass("is-active");
 			current-=1;
 		}
 

@@ -83,7 +83,7 @@
 				<input type="number" class="feedback-input" min="0" max=10000000 name="budget" required>
 			</div>
 
-			<div class="field btn">
+			<div class="field-btn">
 				<input type="button" class="button-blue nextBtn1" onclick="slide()" value="Next">
 			</div>
 
@@ -113,7 +113,7 @@
 					</div>
 			</div>
 
-			<div class="field btn">
+			<div class="field-btn">
 				<input type="button" class="button-blue prevBtn2" onclick="slide()" value="Previous">
 				<input type="button" class="button-blue nextBtn2" onclick="slide()" value="Next">
 			</div>
@@ -123,35 +123,38 @@
 		<div class="page">
 			<div class="title">Organizzazione:</div>
 
-			<div class="field">
+			
 				<label for="radio">Come vuoi che sia organizzato il tuo torneo?</label>
 					<div class="contieniBottoni radio">
+					
+						 <input id="on-line" type="radio" name="sel"
+							value="on-line" onclick="hide()" checked class="sel bt1">
+							
 						<label class="radioLabel" for="on-line">On-line</label>
-						<input id="on-line" type="radio" name="sel"
-						value="on-line" onclick="hide()" checked class="sel bt1">
-								
-						<label class="radioLabel" for="fisico">Fisico </label>
-						<input id="fisico" type="radio" name="sel"
-						value="fisico" onclick="show()" class="sel bt2"> 
+						 <input id="fisico" type="radio" name="sel" value="fisico"
+								onclick="show()" class="sel bt2"> <label
+								class="radioLabel" for="fisico">Fisico </label>
 					</div>
-			</div>
-
+			
 			<div class="field">
 				<div class="strutture"></div>
 				<!-- Da generare dinamicamente se il torneo è fisico -->
 			</div>
-			<div class="field">
-				<label for="tot_tecnici">Quanti tecnici desideri avere per il tuo torneo?</label>
-				<input type="number" min="0" name="tot_tecnici" id="tot_tecnici"
-				class="" onchange="numTecnici()" required>
+			
+			<div class="tecnici">
+				<div class="field">
+					<label for="tot_tecnici">Quanti tecnici desideri avere per il tuo torneo?</label>
+					<input type="number" min="0" name="tot_tecnici" id="tot_tecnici"
+					class="feedback-input" onchange="numTecnici()" required>
+				</div>
+	
+				<div class="field">
+					<div class="tecniciFisici"></div>
+					<!-- Da generare dinamicamente se il torneo è fisico -->
+				</div>
+				
 			</div>
-
-			<div class="field">
-				<div class="tecniciFisici"></div>
-				<!-- Da generare dinamicamente se il torneo è fisico -->
-			</div>
-
-			<div class="field btn">
+			<div class="field-btn">
 				<input type="button" class="button-blue prevBtn3" onclick="slide()" value="Previous">
 				<input type="submit" class="button-blue subBtn" value="Finish">
 				

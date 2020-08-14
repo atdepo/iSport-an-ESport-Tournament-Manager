@@ -72,7 +72,7 @@ width: 100%;
 }
 
 .progress-bar .step p.active{
-	color: #d43f8d;
+	color: #5DEFB9;
 
 }
 .progress-bar .step .bullet::before,
@@ -94,8 +94,8 @@ background: #262626;
 }
 
 .progress-bar .step .bullet.active{
-	border-color: #d43f8d;
-	background: #d43f8d;
+	border-color: #5DEFB9;
+	background: #5DEFB9;
 }
 
 .progress-bar .step .bullet.active span{
@@ -110,7 +110,7 @@ background: #262626;
 
 .progress-bar .step .bullet.active::after{
 
-background: #d43f8d;
+background: #5DEFB9;
 transform: scaleX(0);
 transform-origin:left;
 animation: animate 0.3s linear forwards;
@@ -155,7 +155,7 @@ display: none;
 .total-container header{
 	font-size: 35px;
 	font-weight: 600px;
-	margin: 0 0 30px 0;
+	margin: 0 0 0 0;
 
 }
 
@@ -187,28 +187,15 @@ margin:10px;
 
 }
 
-/*
-label{
-	font-family:'Montserrat', Arial, Helvetica, sans-serif;
-	font-weight:500;
-	font-size: 15px;
-	color:#66fcf1;
-	display:block;
-	text-align: center;
-	
+.field-btn{
+	margin-top:30px;
+	display:flex;
 }
 
-p{
-	font-family:'Roboto Slab', sans-serif;
-	font-weight:500;
-	font-size: 21px;
-	color:#5DEFB9;
-	text-align: center;
-	margin-bottom:20px;
+.page .tecnici{
+	display:flex;
 }
 
-
-*/
 .feedback-input {
 	color:#3c3c3c;
 	font-family: 'Montserrat', Arial, Helvetica, sans-serif;
@@ -219,13 +206,13 @@ p{
 	padding: 13px 13px 13px 54px;
 	margin-top:10px;
 	margin-bottom: 10px;
-	margin-left:26px;
 	width:89%;
 	-webkit-box-sizing: border-box;
 	-moz-box-sizing: border-box;
 	-ms-box-sizing: border-box;
 	box-sizing: border-box;
   border: 3px solid rgba(0,0,0,0);
+  flex-grow:1;
 }
 
 .feedback-input:focus{
@@ -234,7 +221,6 @@ p{
 	border: 3px solid #3498db;
 	color: #3498db;
 	outline: none;
-  /*padding: 13px 13px 13px 54px;*/
 }
 
 .focused{
@@ -242,35 +228,20 @@ p{
 	border:#30aed6 solid 3px;
 }
 
-/* Icons ---------------------------------- */
-.nome{
-	/*background-image: url(../img/arrow-down.svg);*/
-	background-size: 30px 30px;
-	background-position: 11px 8px;
-	background-repeat: no-repeat;
-}
-
-.nome:focus{
-	/*background-image: url(img/arrow-down.svg);*/
-	background-size: 30px 30px;
-	background-position: 8px 5px;
- 	background-position: 11px 8px;
-	background-repeat: no-repeat;
-}
-
 input:hover, input:focus{
 	background-color:white;
 }
 
-.field.btn{
-	margin-top:30px;
+.nextBtn1{
+	padding:49%;
+	text-align:center;
 }
 
 .button-blue{
 	font-family: 'Montserrat', Arial, Helvetica, sans-serif;
 	float:right;
 	width: 50%;
-	border: #fbfbfb solid 4px;
+	border: #0088FF solid 4px;
 	border-radius: 11px;
 	cursor:pointer;
 	background-color: #5DEFB9;;

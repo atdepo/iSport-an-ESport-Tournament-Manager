@@ -49,7 +49,7 @@ body{
   	border-radius:7px;
   	
 }
-
+/*
 .multi-steps > li.is-active:before, .multi-steps > li.is-active ~ li:before {
 	 content: counter(stepNum);
 	 font-family: inherit;
@@ -75,7 +75,7 @@ body{
 	 content: '\2713';
 	 content: '\10003';
 	 content: '\10004';
-	 content: '\2713';*/
+	 content: '\2713';
 	 display: block;
 	 margin: 0 auto 4px;
 	 background-color: #fff;
@@ -113,29 +113,17 @@ body{
 	 background-color: #ededed;
 	 border-color: #ededed;
 }
- 
-/*
-.total-container .progress-bar-wrapper{
+ */.total-container .progress-bar{
 
-	width: 100%;
-    margin: 0;
-    padding: 0;
-    font-size: 0;
-    list-style: none;
+	display: flex;
+	margin: 40px 0;
+
 }
 
-.total-container .progress-bar-wrapper .progress-bar li.section {
-	display: inline-block;
-    padding-top: 45px;
-    font-size: 13px;
-    font-weight: bold;
-    line-height: 16px;
-    color: gray;
-    vertical-align: top;
-    position: relative;
-    text-align: center;
-    overflow: hidden;
-    text-overflow: ellipsis;
+.total-container .progress-bar .step{
+position: relative;
+text-align: center;
+width: 100%;
 }
 
 .progress-bar .step p{
@@ -147,7 +135,7 @@ body{
 }
 
 .progress-bar .step p.active{
-	color: #5DEFB9;
+	color: #d43f8d;
 
 }
 .progress-bar .step .bullet::before,
@@ -159,6 +147,7 @@ bottom: 11px;
 right: -103px;
 height: 3px;
 width: 97px;
+z-index:-1;
 background: #262626;
 }
 
@@ -169,8 +158,8 @@ background: #262626;
 }
 
 .progress-bar .step .bullet.active{
-	border-color: #5DEFB9;
-	background: #5DEFB9;
+	border-color: #d43f8d;
+	background: #d43f8d;
 }
 
 .progress-bar .step .bullet.active span{
@@ -185,7 +174,7 @@ background: #262626;
 
 .progress-bar .step .bullet.active::after{
 
-background: #5DEFB9;
+background: #d43f8d;
 transform: scaleX(0);
 transform-origin:left;
 animation: animate 0.3s linear forwards;
@@ -228,73 +217,6 @@ display: none;
 }
 
 
-
-ul.progress-bar {
-    width: 100%;
-    margin: 0;
-    padding: 0;
-    font-size: 0;
-    list-style: none;
-}
-
-li.section {
-    display: inline-block;
-    padding-top: 45px;
-    font-size: 13px;
-    font-weight: bold;
-    line-height: 16px;
-    color: gray;
-    vertical-align: top;
-    position: relative;
-    text-align: center;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
-
-li.section:before {
-    content: 'x';
-    position: absolute;
-    top: 2px;
-    left: calc(50% - 15px);
-    z-index: 1;
-    width: 30px;
-    height: 30px;
-    color: white;
-    border: 2px solid white;
-    border-radius: 17px;
-    line-height: 30px;
-    background: gray;
-}
-.status-bar {
-    height: 2px;
-    background: gray;
-    position: relative;
-    top: 20px;
-    margin: 0 auto;
-}
-.current-status {
-    height: 2px;
-    width: 0;
-    border-radius: 1px;
-    background: mediumseagreen;
-}
-
-@keyframes changeBackground {
-    from {background: gray}
-    to {background: mediumseagreen}
-}
-
-li.section.visited:before {
-    content: '\2714';
-    animation: changeBackground .5s linear;
-    animation-fill-mode: forwards;
-}
-
-li.section.visited.current:before {
-    box-shadow: 0 0 0 2px mediumseagreen;
-}
-
-*/
 .total-container header{
 	font-size: 35px;
 	font-weight: 600px;

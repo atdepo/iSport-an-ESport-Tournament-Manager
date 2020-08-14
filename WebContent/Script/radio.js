@@ -1,23 +1,12 @@
-// Select and cache elements to work with
-var el = {
-  sorter: $('.js-sort-container')
-};
-
-// classnames to apply for visual changes
-var classes = {
-  sorter: {
-    hot: 'sorter--hot',
-    new: 'sorter--new'
-  }
-};
-
-// Defaults / Initial values
-var isHot = true;
-
-// Listeners
-el.sorter.click(function() {
-  isHot = !isHot;
-  // Update classnames accordingly
-  el.sorter.addClass(isHot ? classes.sorter.hot : classes.sorter.new);
-  el.sorter.removeClass(isHot ? classes.sorter.new : classes.sorter.hot);
-});
+//we can set animation delay as following in ms (default 1000)
+ProgressBar.singleStepAnimation = 1500;
+ProgressBar.init(
+  [ 'Request Submitted',
+    'Received Responses',
+    'Negotiation Done',
+    'Hired Professional',
+    'Service Completed'
+  ],
+  'Hired Professional',
+  'progress-bar-wrapper' // created this optional parameter for container name (otherwise default container created)
+);

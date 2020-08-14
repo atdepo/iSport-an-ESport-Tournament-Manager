@@ -23,7 +23,7 @@
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="Script/mode.js"></script>
-<script src="Script/radio.js"></script>
+
 <script src="https://kit.fontawesome.com/a076d05399.js"></script>
 </head>
 
@@ -33,9 +33,9 @@
 	<div class="total-container">
 		<header>Iniziamo con la creazione del tuo torneo!</header>
 		<div class="form-div">
-			<div class="progress-bar">
+			<div class="progress-bar-wrapper">
 			
-				<div class="step">
+				<!-- <div class="step">
 
 					<p>Generali</p>
 					<div class="bullet">
@@ -60,10 +60,21 @@
 						<span>3</span>
 					</div>
 					<div class="check fas fa-check"></div>
-				</div>
-
+				</div> 	
+			</div> -->
+			
+			<div class="container-fluid">
+			  <br /><br />
+			  <ul class="list-unstyled multi-steps">
+			    <li id="first-step" class="is-active fas fa-check">Start</li>
+			    <li id="second-step" class="fas fa-check">Middle-Step</li>
+			    <li id="third-step" class="fas fa-check">Finish</li>
+			    
+			  </ul>
 			</div>
-		
+			</div>
+			
+		<!--<div class="progress-bar-wrapper"></div>-->
 			<form action="#" method="post">
 		<div class="page slidepage">
 			<div class="title">Informazioni di base:</div>
@@ -165,9 +176,6 @@
 		
 	</div>
 </div>
-	
-	
-	
 	
 	<!--<div class="title">
 		

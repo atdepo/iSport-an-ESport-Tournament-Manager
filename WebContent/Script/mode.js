@@ -131,6 +131,9 @@ function show(){
 		}
 }
 
+var current=1;
+
+
 function slide(){
 		const slidePage= $('.slidepage');
 					

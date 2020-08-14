@@ -31,10 +31,10 @@ input[type="radio"].sel + label {
 }
 input[type="radio"].sel + label:hover {
   background: none;
-  color: #fbfbfb;
+  color: #5DEFB9;
 }
 input[type="radio"].sel + label:after {
-  background: #fbfbfb;
+  background:#5DEFB9;
   content: "";
   height: 100%;
   position: absolute;

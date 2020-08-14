@@ -33,45 +33,17 @@
 	<div class="total-container">
 		<header>Iniziamo con la creazione del tuo torneo!</header>
 		<div class="form-div">
+		
 			<div class="progress-bar-wrapper">
-			
-				<!-- <div class="step">
-
-					<p>Generali</p>
-					<div class="bullet">
-						<span>1</span>
-					</div>
-					<div class="check fas fa-check"></div>
+				<div class="container-fluid">
+				  
+				  <ul class="list-unstyled multi-steps">
+				    <li id="first-step" class="is-active fas fa-check">Start</li>
+				    <li id="second-step" class="fas fa-check">Middle-Step</li>
+				    <li id="third-step" class="fas fa-check">Finish</li>
+				    
+				  </ul>
 				</div>
-
-				<div class="step">
-
-					<p>Name</p>
-					<div class="bullet">
-						<span>2</span>
-					</div>
-					<div class="check fas fa-check"></div>
-				</div>
-
-				<div class="step">
-
-					<p>Name</p>
-					<div class="bullet">
-						<span>3</span>
-					</div>
-					<div class="check fas fa-check"></div>
-				</div> 	
-			</div> -->
-			
-			<div class="container-fluid">
-			  <br /><br />
-			  <ul class="list-unstyled multi-steps">
-			    <li id="first-step" class="is-active fas fa-check">Start</li>
-			    <li id="second-step" class="fas fa-check">Middle-Step</li>
-			    <li id="third-step" class="fas fa-check">Finish</li>
-			    
-			  </ul>
-			</div>
 			</div>
 			
 		<!--<div class="progress-bar-wrapper"></div>-->

@@ -70,7 +70,19 @@ public class TecnicoModel implements ModelInterface<TecnicoBean, String> {
 
 	@Override
 	public void doSave(TecnicoBean product) throws SQLException {
-		// TODO Auto-generated method stub
+		PreparedStatement statement = null;
+		String sql = "INSERT INTO tecnico values (?,?)";
+		
+		try(Connection con = DriverManagerConnectionPool.getConnection()){
+		
+			statement=con.prepareStatement(sql);
+			statement.setString(1,product.getCodStaff());
+			statement.setString(2,product.getSpecializzazione());
+			
+			System.out.println("doSave="+statement);
+			statement.executeUpdate();
+		}
+
 
 	}
 

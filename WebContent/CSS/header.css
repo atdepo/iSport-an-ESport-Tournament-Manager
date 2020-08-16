@@ -9,6 +9,9 @@ body{
 	.nav {
  	 overflow: hidden;
  	 background-color: #008080;
+ 	 position:sticky;
+ 	 top:0;
+ 	 z-index:1;
 	}
 
 	.nav a {
@@ -35,7 +38,7 @@ body{
  	 display: none;
 	}
 
-	@media screen and (max-width: 700px) {
+	@media screen and (max-width: 580px) {
   		.nav a:not(:first-child) {display: none;}
   		.nav a.icon {
     	float: right;
@@ -43,7 +46,7 @@ body{
   	}
 	}
 
-	@media screen and (max-width: 700px) {
+	@media screen and (max-width: 580px) {
   		.nav.responsive {position: relative;}
   		.nav.responsive .icon {
    		position: absolute;

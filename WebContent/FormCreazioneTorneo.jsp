@@ -16,6 +16,7 @@
 <link rel="stylesheet" href="CSS/2RadioButton.css" type="text/css">
 <link rel="stylesheet" href="CSS/Tendina.css" type="text/css">
 <link rel="stylesheet" href="CSS/CreazioneTorneo.css" type="text/css">
+<link rel="stylesheet" href="CSS/button-input.css" type="text/css">
 
 <meta charset="UTF-8">
 
@@ -23,7 +24,7 @@
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="Script/mode.js"></script>
-
+<script src="Script/button-input.js"></script>
 <script src="https://kit.fontawesome.com/a076d05399.js"></script>
 </head>
 
@@ -62,8 +63,18 @@
 			</div>
 
 			<div class="field">
-				<label for="budget">Qual'è il budget stimato per il torneo(in euro iva esclusa)</label>
-				<input type="number" class="feedback-input" min="0" max=10000000 name="budget" required>
+				 <label for="number-container">Qual'è il budget stimato per il torneo?</label>
+				<!--<input type="number" class="feedback-input" min="0" max=10000000 name="budget" required> -->
+				
+				<div class="number-container" title="Premi shift cliccando i selettori per avanzare di +/- 100 e premi CTRL sx per avanzare di +/- 1000">
+					<span class="next"></span>
+					<span class="prev"></span>
+					<div class="box-span">
+						<span id="number-box">0 €</span>
+						
+					</div>
+				
+				</div>
 			</div>
 
 			<div class="field-btn">

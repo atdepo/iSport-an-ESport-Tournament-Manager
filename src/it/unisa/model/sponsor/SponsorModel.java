@@ -1,11 +1,20 @@
 package it.unisa.model.sponsor;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.sql.Blob;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Base64;
+import java.util.Base64.Encoder;
 import java.util.Collection;
+
+import org.apache.tomcat.util.http.fileupload.FileUtils;
 
 import it.unisa.model.ModelInterface;
 import it.unisa.model.connessione.DriverManagerConnectionPool;
@@ -47,6 +56,26 @@ public class SponsorModel implements ModelInterface<SponsorBean, SponsorKey>{
 
 		ArrayList<SponsorBean> collection= new ArrayList<SponsorBean>();
 		String sql = "SELECT DISTINCT nome FROM sponsor";
+		
+		Encoder enc=Base64.getEncoder();
+		File file= new File("");
+		try {
+			FileInputStream fstream= new FileInputStream(file);
+			 byte fileData[] = new byte[(int) file.length()];
+	         fstream.read(fileData);
+	         String base64File = Base64.getEncoder().encodeToString(fileData);
+	         System.out.println(base64File);
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		    
+		    
+		    
 		
 			try (Connection con = DriverManagerConnectionPool.getConnection()) {
 				statement = con.prepareStatement(sql);

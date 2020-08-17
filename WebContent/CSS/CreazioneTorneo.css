@@ -340,7 +340,7 @@ ul.ks-cboxtags li input[type="checkbox"]:focus + label {
   border: 2px solid #e9a1ff;
 }
 
-@media only screen and (max-width: 550px) {
+@media only screen and (max-width: 650px) {
 	.total-container{	
 		width: 80%;
 		margin-left: -48%;

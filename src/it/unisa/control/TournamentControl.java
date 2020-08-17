@@ -87,6 +87,8 @@ public class TournamentControl extends HttpServlet {
 				System.out.println("il json di inizializzazione del form è stato creato con successo");
 				response.setStatus(200);
 
+				
+				
 			} catch (SQLException e1) {
 				e1.printStackTrace();
 			}

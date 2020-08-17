@@ -52,8 +52,8 @@
     input[type=file]:valid + .file-dummy .default {
       display: none;
     }
-  }
-}
+  
+
 
 
 

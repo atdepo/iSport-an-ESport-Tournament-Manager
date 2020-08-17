@@ -1,5 +1,7 @@
 package it.unisa.model.utente;
 
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -86,10 +88,13 @@ public class UtenteModel implements ModelInterface<UtenteBean, String>{
 				"\"VALUES (?, ?, ?, ?, ?, ?, ?)";
 		
 		try (Connection con = DriverManagerConnectionPool.getConnection()) {
+			MessageDigest k=MessageDigest.getInstance("SHA-256");
+			byte pass[]=k.digest(utente.getPassword());
+			
 			statement = con.prepareStatement(sql);
 			statement.setString(1,utente.getUsername());
 			statement.setString(2,utente.getEmail());
-			statement.setBytes(3,utente.getPassword());
+			statement.setBytes(3,pass);
 			statement.setString(4,utente.getpIVA());
 			statement.setString(5,utente.getDataIscrizione());
 			statement.setString(6,utente.getTipo());
@@ -99,6 +104,9 @@ public class UtenteModel implements ModelInterface<UtenteBean, String>{
 			 statement.executeUpdate(sql);
 
 			
+			} catch (NoSuchAlgorithmException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
 		}
 		
@@ -111,9 +119,21 @@ public class UtenteModel implements ModelInterface<UtenteBean, String>{
 	}
 
 	@Override
-	public void doDelete(UtenteBean product) throws SQLException {
-		// TODO Auto-generated method stub
+	public void doDelete(UtenteBean utente) throws SQLException {
+		PreparedStatement statement=null;
+		
+		String sql="Delete from utenti \" +\r\n" + 
+				"\"where username=? \" +\r\n";
+		
+		try (Connection con = DriverManagerConnectionPool.getConnection()) {
+			statement = con.prepareStatement(sql);
+			statement.setString(1,utente.getUsername());
+			
+			
+			System.out.println("DoDelete=" + statement.toString());
+			 statement.executeUpdate(sql);
 		
 	}
+		}
 
 }

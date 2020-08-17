@@ -12,8 +12,8 @@
 	<%@ include file="header.jsp"%>
 	<div class="intro-section" style="background-image: url('img/homeBackground.jpg');">
 		<h1>Il Posto Perfetto per Competere</h1>
-        <p>Registrati ora per creare il tuo torneo!</p>
-        <a href="#" class="Login-register">Login/Register</a>
+    
+        
 	</div>
 	
 	<div class="arene">

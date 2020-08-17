@@ -3,6 +3,8 @@ body{
 	background-color:#1F2833;
 	
 }
+
+#login-register{float:right;}
 	*{
 		margin:0;
 		padding:0;

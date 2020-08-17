@@ -23,6 +23,8 @@ import it.unisa.model.gioco.GiocoModel;
 import it.unisa.model.modalita.ModalitaBean;
 import it.unisa.model.modalita.ModalitaKey;
 import it.unisa.model.modalita.ModalitaModel;
+import it.unisa.model.sponsor.SponsorBean;
+import it.unisa.model.sponsor.SponsorModel;
 import it.unisa.model.squadra.SquadraBean;
 import it.unisa.model.squadra.SquadraModel;
 import it.unisa.model.struttura.KeyStruttura;
@@ -41,6 +43,7 @@ public class TournamentControl extends HttpServlet {
 	TecnicoModel tecModel = new TecnicoModel();
 	ModalitaModel modModel = new ModalitaModel();
 	SquadraModel sqModel= new SquadraModel();
+	SponsorModel spModel= new SponsorModel();
 
 	public TournamentControl() {
 		super();
@@ -60,7 +63,7 @@ public class TournamentControl extends HttpServlet {
 		switch (action) {
 
 		case "initTorneo":
-			
+			System.out.println("MI HANNO CHIAMATO");
 			String theJson = "";
 			response.setContentType("application/json");
 			response.setCharacterEncoding("UTF-8");
@@ -68,16 +71,24 @@ public class TournamentControl extends HttpServlet {
 				
 				ArrayList<GiocoBean> giochi = (ArrayList<GiocoBean>) gModel.doRetriveAll(null);
 				ArrayList<String> numeroTecnici = new ArrayList<String>();
+				ArrayList<SponsorBean> sponsor= (ArrayList<SponsorBean>) spModel.doRetriveAll(null);
 				numeroTecnici.add(String.valueOf(tecModel.doRetriveAll(null).size()));
 				ArrayList<ArrayList> col= new ArrayList<ArrayList>();
 				col.add(giochi);
+				col.add(sponsor);
 				col.add(numeroTecnici);
 				theJson += gson.toJson(col);
 				response.getWriter().print(theJson);
 				response.getWriter().flush();
-				System.out.println("il json di inizializzazione del form ï¿½ stato creato con successo");
+				
+				//TODO delete
+				System.out.println(theJson);
+				
+				System.out.println("il json di inizializzazione del form è stato creato con successo");
 				response.setStatus(200);
 
+				
+				
 			} catch (SQLException e1) {
 				e1.printStackTrace();
 			}

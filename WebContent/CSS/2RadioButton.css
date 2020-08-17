@@ -2,7 +2,7 @@
 
 .contieniBottoni{
 	align-items:center;
-	 /*display:flex;*/ 
+	 display:block; 
 	 margin:30px;
 	 }
 
@@ -31,10 +31,10 @@ input[type="radio"].sel + label {
 }
 input[type="radio"].sel + label:hover {
   background: none;
-  color: #1a1a1a;
+  color: #5DEFB9;
 }
 input[type="radio"].sel + label:after {
-  background: #1a1a1a;
+  background:#5DEFB9;
   content: "";
   height: 100%;
   position: absolute;

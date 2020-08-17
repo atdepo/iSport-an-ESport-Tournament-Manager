@@ -8,22 +8,28 @@ $(document).ready(function() {
 			let data = JSON.parse(xhr.responseText);
 			console.log(data);
 			var game = $('#gioco');
+			var sponsor=$('.ks-cboxtags');
 			
 			var dataGiochi= data['0'];
-			var numTecnici= data['1'];
+			var dataSponsor= data['1'];
+			var numTecnici= data['2'];
 			document.getElementById("tot_tecnici").setAttribute("max" , numTecnici);
 			
 				
 			for (var i = 0; i < dataGiochi.length; i++) {
 					var nome = dataGiochi[i].nomeGioco.replace(/\s/g, '');
 					game.append('<div class="option"><input name="gioco" value="'+dataGiochi[i].nomeGioco+'" onclick="tendina(\''+nome+'\')" type="radio" class="radio" id="'+nome+'"> <label for="'+nome+'">'+dataGiochi[i].nomeGioco+'</label></div>');
-
 			}			
+			
+			for (var i = 0; i < dataSponsor.length; i++) {
+
+				sponsor.append('<li><input type="checkbox" id="'+dataSponsor[i].nome+'" value="'+dataSponsor[i].nome+'"><label for="'+dataSponsor[i].nome+'">'+dataSponsor[i].nome+'</label></li>')		
+			
+			}
 
 		}
 		
 	}
-
 	xhr.open('GET', 'TournamentControl?action=initTorneo', true);
 	xhr.send();
 
@@ -112,21 +118,66 @@ function hide(){
 }
 
 function show(){
-	$("label[for='tecnici_fisici']").show();
-	$(".tecniciFisici").append('<label for="tecnici_fisici">Di cui presenti fisicamente </label>'+ 
-							   '<input type="number" min="0"  max="10" name="tecnici_fisici" id="tecnici_fisici" required>');
+	if($(".tecniciFisici").empty()&&$(".strutture").empty()){
+		
+		$("label[for='tecnici_fisici']").show();
+		$(".tecniciFisici").append('<label for="tecnici_fisici">Di cui presenti fisicamente </label>'+ 
+								   '<input type="number" min="0"  max="10" name="tecnici_fisici" class=" feedback-input" id="tecnici_fisici" required>');
+		
+		numTecnici();
+		
+		
+		$(".strutture").append('<label for="strutture">In che struttura vuoi che sia organizzato il tuo torneo?</label> <div class="container"> <div class="select-box">'+
+				'<div class="options-container" id="strutture">'+
+				'</div><div class="selected strutture" onclick="menu(\'strutture\')">'+
+	             ' Seleziona una Struttura</div></div></div>');
+		$("label[for='strutture']").show();
 	
-	numTecnici();
-	
-	
-	$(".strutture").append('<label for="strutture">Struttura</label> <div class="container"> <div class="select-box">'+
-			'<div class="options-container" id="strutture">'+
-			'</div><div class="selected strutture" onclick="menu(\'strutture\')">'+
-             ' Seleziona una Struttura</div></div></div>');
-	$("label[for='strutture']").show();
+		
+		getStrutture();
+		}
+}
 
+
+
+var current=1;
+function slide(){
+		const slidePage= $('.slidepage');
+					
+		if($(event.target).hasClass("nextBtn1")){ //JQuery >> tutto
+			if($('.nome-torneo').val()!==""&& $('.data-torneo').val()!==""){
+				slidePage.css("marginLeft","-25%"); //JQuery >> tutto 
+				$('#first-step').removeClass("is-active");
+				$('#second-step').addClass("is-active");
+			}
+
+		}
+		else if($(event.target).hasClass("nextBtn2")){
+			slidePage.css("marginLeft","-50%"); //JQuery >> tutto
+			$('#second-step').removeClass("is-active");
+			$('#third-step').addClass("is-active");
+
+		} 
+		else if($(event.target).hasClass("subBtn")){
+			
+		}
+		else if($(event.target).hasClass("prevBtn2")){
+			slidePage.css("marginLeft","0%"); //JQuery >> tutto
+			$('#second-step').removeClass("is-active");
+			$('#first-step').addClass("is-active");
+			current-=1;
+		}
+		else if($(event.target).hasClass("prevBtn3")){
+			slidePage.css("marginLeft","-25%"); //JQuery >> tutto
+			$('#third-step').removeClass("is-active");
+			$('#second-step').addClass("is-active");
+			current-=1;
+		}
+
+		
 	
-	getStrutture();
+		
+
 }
 
 

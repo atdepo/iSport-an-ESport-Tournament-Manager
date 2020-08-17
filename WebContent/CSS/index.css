@@ -1,37 +1,179 @@
 @charset "UTF-8";
 
-a:hover{
-	color: yellow;
-	background-color: blue;
-}
 
 
-div.home{
-	margin-top:3%;
-	display:flex;
-	flex-direction:row;
-	justify-content:space-around;
-}
-div.split{
-	height: 100%;
-	width: 25%;
-	text-align:center;
-	border: 1px solid #008080 ;
-	color:#45A29E;
-}
 
-div.robe {
-	
-}
-
-div.altriTornei{
+.intro-section {
+  background-size: cover;
+  position: relative; 
+  min-height: 500px; 
+  color:#45A29E;
+  text-align:center;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;	}
   
-}
-
-div.news{
+  .intro-section h1, .intro-section p {
+   top:50%;
+   left:50%;
+   position:absolute;
+   transform:translateX(-50%) translateY(-200%);
+   background: rgba(0, 0, 0, 0.6);
+  }
+  .intro-section a{
+    top:50%;
+   left:50%;
+   position:absolute;
+   transform:translateX(-50%) translateY(-50%);
+   color:#45A29E;
+  }
+  .intro-section a:hover{
+ 		color:lime;		
+		background-color:#1F2833;
   
-}
-div.news ul{
-	list-style-type:none;
+  }
+  .intro-section:before {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.2);
+    border-bottom-right-radius: 0px;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat; }
+    @media (max-width: 991.98px) {
+      .intro-section:before {
+        width: 100%; } }
+    @media (max-width: 991.98px) {
+      .intro-section h1 {
+        font-size: 34px; } }
+
+/* Arene */
+ .items {
+ 	display: flex;
+ }
+ .arene p{
+ 	font-size:30px;
+ 	color:#45A29E;
+ 	text-align:center;
+ 	
+ }
+ .arene {
+ 	width:100%;
+ }
+ 
+ 
+ /* Slider */
+ .slides {
+  padding: 0;
+  width: 609px;
+  height: 420px;
+  display: block;
+  margin: 0 auto;
+  position: relative;
 }
 
+.slides * {
+  user-select: none;
+  -ms-user-select: none;
+  -moz-user-select: none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+  -webkit-touch-callout: none;
+}
+
+.slides input {
+  display: none;
+}
+
+.slide-container {
+  display: block;
+}
+
+.slide {
+  top: 0;
+  opacity: 0;
+  width: 609px;
+  height: 420px;
+  display: block;
+  position: absolute;
+  transform: scale(0);
+  transition: all 0.7s ease-in-out;
+}
+
+.slide img {
+  width: 100%;
+  height: 100%;
+}
+
+.nav label {
+  width: 10%;
+  height: 100%;
+  display: none;
+  position: absolute;
+  opacity: 0;
+  z-index: 9;
+  cursor: pointer;
+  transition: opacity 0.2s;
+  color: #FFF;
+  font-size: 156pt;
+  text-align: center;
+  line-height: 380px;
+  font-family: "Varela Round", sans-serif;
+  background-color: rgba(255, 255, 255, 0.3);
+  text-shadow: 0px 0px 15px #777777;
+}
+
+.slide:hover + .nav label {
+  opacity: 0.5;
+}
+
+.nav label:hover {
+  opacity: 1;
+}
+
+.nav .next {
+  right: 0;
+}
+
+input:checked + .slide-container .slide {
+  opacity: 1;
+  transform: scale(1);
+  transition: opacity 1s ease-in-out;
+}
+
+input:checked + .slide-container .nav label {
+  display: block;
+}
+
+.nav-dots {
+  width: 100%;
+  bottom: 9px;
+  height: 11px;
+  display: block;
+  position: absolute;
+  text-align: center;
+}
+
+.nav-dots .nav-dot {
+  top: -5px;
+  width: 11px;
+  height: 11px;
+  margin: 0 4px;
+  position: relative;
+  border-radius: 100%;
+  display: inline-block;
+  background-color: rgba(0, 0, 0, 0.6);
+}
+
+.nav-dots .nav-dot:hover {
+  cursor: pointer;
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
+input#img-1:checked ~ .nav-dots label#img-dot-1,
+input#img-2:checked ~ .nav-dots label#img-dot-2,
+{
+  background: rgba(0, 0, 0, 0.8);
+}
+ 

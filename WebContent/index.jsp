@@ -10,31 +10,45 @@
 
 <body>
 	<%@ include file="header.jsp"%>
-	
-	<br>
-	<br>
-	
-	<div class="home">
-	
-		<div class="split robe">
-			<h3>Robe sulle squadre</h3>
-		</div>
-	
-		<div class="split altriTornei">
-			<h3>Dai un occhiata a questi tornei</h3>
-				<%@ include file="ListaTornei.jsp"%>
-		</div>
-	
-		<div class="split news">
-			<h2> NEWS</h2>
-
-			<ul>
-				<li>Adesso fino a 4 tecnici live</li>
-				<li> Montefusco merda</li>
-		
-			</ul>
-		</div>
+	<div class="intro-section" style="background-image: url('img/homeBackground.jpg');">
+		<h1>Il Posto Perfetto per Competere</h1>
+    
+        
 	</div>
+	
+	<div class="arene">
+		<p class="caption">Arene</p>
+		<div class="items">
+		
+		
+	<ul class="slides">
+   	<input type="radio" name="radio-btn" id="img-1" checked />
+    <li class="slide-container">
+		<div class="slide">
+			<img src="img/arena1.jpg" />
+        </div>
+		<div class="nav">
+			<label for="img-2" class="prev">&#x2039;</label>
+			<label for="img-2" class="next">&#x203a;</label>
+		</div>
+    </li>
+
+    <input type="radio" name="radio-btn" id="img-2" />
+    <li class="slide-container">
+        <div class="slide">
+          <img src="img/arena2.jpg" />
+        </div>
+		<div class="nav">
+			<label for="img-1" class="prev">&#x2039;</label>
+			<label for="img-1" class="next">&#x203a;</label>
+		</div>
+    </li>
+
+</ul>
+		</div>
+	
+	</div>
+        
 <%@ include file="Footer.jsp"%>
 </body>
 </html>

@@ -26,15 +26,7 @@
           <div class="Copyright">
             <p class="copyright-text">Copyright &copy; 2017 All Rights Reserved by AntonioMerda SRL
             </p>
-          </div>
-
-          <!--  <div class="Social">
-            <ul class="social-icons">
-              <li><a class="facebook" href="https://www.facebook.com"><i class="fa fa-facebook"></i></a></li>
-              <li><a class="twitter" href="https://twitter.com"><i class="fa fa-twitter"></i></a></li>
-            </ul>
-          </div>
-			-->        
+          </div>     
         </div>
         
       </div>

@@ -15,18 +15,9 @@ $('.next').click(function (e) {
     }
     else if(curr_val+1<=max_value)
         $('#number-box').html(curr_val+1+' €');
+   
+     });
 
-    
-        if(curr_val>=1000){
-            $('.number-container').css("width", "100px");
-            $('.next').hover(function () {   
-
-
-            } 
-            );
-        }
-    
-});
 
 $('.prev').click(function (e) { 
     var min_value=0;

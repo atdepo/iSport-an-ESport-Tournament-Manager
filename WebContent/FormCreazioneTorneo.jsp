@@ -13,10 +13,10 @@
 <html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="CSS/button-input.css" type="text/css">
 <link rel="stylesheet" href="CSS/2RadioButton.css" type="text/css">
 <link rel="stylesheet" href="CSS/Tendina.css" type="text/css">
 <link rel="stylesheet" href="CSS/CreazioneTorneo.css" type="text/css">
-<link rel="stylesheet" href="CSS/button-input.css" type="text/css">
 
 <meta charset="UTF-8">
 
@@ -54,26 +54,33 @@
 
 			<div class="field">
 				<label for="nometorneo">Qual'è il nome del torneo da creare?</label>
-				<input type="text" class="feedback-input" name="nometorneo" required>
+				<input type="text" class="feedback-input nome-torneo" name="nometorneo" required>
 			</div>	
 
 			<div class="field">
 				<label for="datatorneo">Che giorno vuoi svolgere il torneo?</label>
-				<input type="date" class="feedback-input" name="datatorneo" required>
+				<input type="date" class="feedback-input data-torneo" name="datatorneo" required>
 			</div>
 
 			<div class="field">
 				 <label for="number-container">Qual'è il budget stimato per il torneo?</label>
 				<!--<input type="number" class="feedback-input" min="0" max=10000000 name="budget" required> -->
 				
-				<div class="number-container" title="Premi shift cliccando i selettori per avanzare di +/- 100 e premi CTRL sx per avanzare di +/- 1000">
+				<div class="number-container budget" title="Premi shift cliccando i selettori per avanzare di +/- 100 e premi CTRL sx per avanzare di +/- 1000">
 					<span class="next"></span>
 					<span class="prev"></span>
 					<div class="box-span">
 						<span id="number-box">0 €</span>
-						
 					</div>
 				
+				</div>
+			</div>
+
+			<div class="field">
+			<label for="contieniSponsor">Scegli degli sponsor</label>
+				<div class="contieniSponsor">
+					<ul class="ks-cboxtags">
+					</ul>
 				</div>
 			</div>
 

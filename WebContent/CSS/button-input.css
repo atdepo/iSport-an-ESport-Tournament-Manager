@@ -8,17 +8,17 @@
     min-height: 50px;
     background: #000d0f;
     position: relative;
-    width: 80px;
+    width: 100px;
     height: 50px;
     border-radius: 40px;
     border:2px solid rgba(255, 255, 255, 0.2);
     transition: 0.5s;
-    left:30%;
+    left:35%;
 
 }
 
 .number-container:hover{
-    width:120px;
+    width:170px;
     border:2px solid rgba(255, 255, 255, 1);
 }
 

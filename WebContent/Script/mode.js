@@ -8,17 +8,24 @@ $(document).ready(function() {
 			let data = JSON.parse(xhr.responseText);
 			console.log(data);
 			var game = $('#gioco');
+			var sponsor=$('.ks-cboxtags');
 			
 			var dataGiochi= data['0'];
-			var numTecnici= data['1'];
+			var dataSponsor= data['1'];
+			var numTecnici= data['2'];
 			document.getElementById("tot_tecnici").setAttribute("max" , numTecnici);
 			
 				
 			for (var i = 0; i < dataGiochi.length; i++) {
 					var nome = dataGiochi[i].nomeGioco.replace(/\s/g, '');
 					game.append('<div class="option"><input name="gioco" value="'+dataGiochi[i].nomeGioco+'" onclick="tendina(\''+nome+'\')" type="radio" class="radio" id="'+nome+'"> <label for="'+nome+'">'+dataGiochi[i].nomeGioco+'</label></div>');
-
 			}			
+			
+			for (var i = 0; i < dataSponsor.length; i++) {
+
+				sponsor.append('<li><input type="checkbox" id="'+dataSponsor[i].nome+'" value="'+dataSponsor[i].nome+'"><label for="'+dataSponsor[i].nome+'">'+dataSponsor[i].nome+'</label></li>')		
+			
+			}
 
 		}
 		
@@ -131,16 +138,18 @@ function show(){
 		}
 }
 
+
+
 var current=1;
-
-
 function slide(){
 		const slidePage= $('.slidepage');
 					
 		if($(event.target).hasClass("nextBtn1")){ //JQuery >> tutto
-			slidePage.css("marginLeft","-25%"); //JQuery >> tutto 
-			$('#first-step').removeClass("is-active");
-			$('#second-step').addClass("is-active");
+			if($('.nome-torneo').val()!==""&& $('.data-torneo').val()!==""){
+				slidePage.css("marginLeft","-25%"); //JQuery >> tutto 
+				$('#first-step').removeClass("is-active");
+				$('#second-step').addClass("is-active");
+			}
 
 		}
 		else if($(event.target).hasClass("nextBtn2")){

@@ -102,7 +102,18 @@ public class ModalitaModel implements ModelInterface<ModalitaBean, ModalitaKey> 
 	
 	@Override
 	public void doSave(ModalitaBean product) throws SQLException {
-		// TODO Auto-generated method stub
+		PreparedStatement statement = null;
+		String sql = "INSERT INTO modalita values (?,?,?)";
+		
+		try(Connection con = DriverManagerConnectionPool.getConnection()){
+		
+			statement=con.prepareStatement(sql);
+			statement.setString(1,product.getTipo());
+			statement.setInt(2,product.getNumPartecipanti());
+			statement.setString(3,product.getNomeGioco());
+			System.out.println("doSave="+statement);
+			statement.executeUpdate();
+		}
 
 	}
 

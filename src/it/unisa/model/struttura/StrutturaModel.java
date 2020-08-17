@@ -79,7 +79,20 @@ public class StrutturaModel implements ModelInterface<StrutturaBean,KeyStruttura
 
 	@Override
 	public void doSave(StrutturaBean product) throws SQLException {
-		// TODO Auto-generated method stub
+		PreparedStatement statement = null;
+		String sql = "INSERT INTO struttura values (?,?,?,?)";
+		
+		try(Connection con = DriverManagerConnectionPool.getConnection()){
+		
+			statement=con.prepareStatement(sql);
+			statement.setString(1,product.getNome());
+			statement.setString(2,product.getIndirizzo());
+			statement.setString(3,product.getCAP());
+			statement.setInt(4, product.getCapienza());
+			System.out.println("doSave="+statement);
+			statement.executeUpdate();
+		}
+
 		
 	}
 

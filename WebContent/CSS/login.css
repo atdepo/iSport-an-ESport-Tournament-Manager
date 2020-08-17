@@ -12,6 +12,11 @@ body{background-image: url(../img/loginBackground.jpg);
   height:100%;}
 
 
+input[type=file]{
+	position:relative;
+}
+
+
 .form-modal{
     position:relative;
     width:450px;

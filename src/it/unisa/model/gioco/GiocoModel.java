@@ -9,6 +9,7 @@ import java.util.Collection;
 
 import it.unisa.model.ModelInterface;
 import it.unisa.model.connessione.DriverManagerConnectionPool;
+import it.unisa.model.giocatore.GiocatoreBean;
 import it.unisa.model.torneo.TournamentBean;
 
 public class GiocoModel implements ModelInterface<GiocoBean, String> {
@@ -58,8 +59,17 @@ public class GiocoModel implements ModelInterface<GiocoBean, String> {
 
 	@Override
 	public void doSave(GiocoBean product) throws SQLException {
-		// TODO Auto-generated method stub
-
+		PreparedStatement statement = null;
+		String sql = "INSERT INTO gioco values (?)";
+		
+		try(Connection con = DriverManagerConnectionPool.getConnection()){
+		
+			statement=con.prepareStatement(sql);
+			statement.setString(1,product.getNomeGioco());
+			
+			System.out.println("doSave="+statement);
+			statement.executeUpdate();
+		}
 	}
 
 	@Override

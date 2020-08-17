@@ -74,7 +74,7 @@ public class GiocatoreModel implements ModelInterface<GiocatoreBean, String> {
 	public void doSave(GiocatoreBean giocatore) throws SQLException {
 		PreparedStatement statement = null;
 		String sql = "INSERT INTO giocatore values (?,?,?,?,?,?,?)";
-		GiocatoreBean bean= new GiocatoreBean();
+		
 		try(Connection con = DriverManagerConnectionPool.getConnection()){
 		
 			statement=con.prepareStatement(sql);

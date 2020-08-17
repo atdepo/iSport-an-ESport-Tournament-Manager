@@ -24,7 +24,7 @@
       <div class="container">
         <div class="row">
           <div class="Copyright">
-            <p class="copyright-text">Copyright &copy; 2017 All Rights Reserved by AntonioMerda SRL
+            <p class="copyright-text">Copyright &copy; 2020 All Rights Reserved by MontefuscoMerda SRL
             </p>
           </div>     
         </div>

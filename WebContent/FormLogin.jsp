@@ -21,28 +21,24 @@
     </div>
 
     <div id="login-form">
-        <form action="LoginAndRegisterServlet" method="post">
-            <input type="email" placeholder="Inserisci l'email"/>
-            <input type="password" placeholder="Inserisci la password"/>
-            <input type="hidden" id="action"  value="login" name="action">
+        <form action="LoginAndRegisterServlet?action=validateLogin" method="post">
+            <input type="email" name ="email" placeholder="Inserisci l'email"/>
+            <input type="password" name="password" placeholder="Inserisci la password"/>
             <button type="submit" class="btn login">Accedi</button>
             <p><a href="javascript:void(0)">Password dimenticata</a> </p>
-          <p><a href="javascript:void(0)" onclick="toggleSignup()">Registra Account</a> </p>
-          
+		          
         </form>
     </div>
 
     <div id="signup-form" >
-        <form action="LoginAndRegisterServlet" method="post" enctype="multipart/form-data">
-            <input type="email" name="email" placeholder="E-mail" />
-            <input type="text" name="username" placeholder="Username"/>
+        <form action="LoginAndRegisterServlet?action=register" method="post" enctype="multipart/form-data">
+            <input type="email" name="email" placeholder="E-mail" required/>
+            <input type="text" name="username" placeholder="Username" required/>
             <input type="text" name="pIva" placeholder="Partita IVA">
             <input type="hidden" id="data" name="dataIscrizione">
-            <input type="hidden" id="action"  value="register" name="action">
-            <input type="password" name="password" placeholder="Password"/>
-			<input type="file" name="dick"  >         
-    <button type="submit" class="btn signup"><i class="fa fa-spinner fa-pulse"></i> Crea account
-          </button> 
+            <input type="password" name="password" placeholder="Password" required/>
+			<input type="file" name="immagine" accept="image/*">         
+    		<button type="submit" class="btn signup">Crea account</button> 
             
         </form>
     </div>

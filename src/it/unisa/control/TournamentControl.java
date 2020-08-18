@@ -63,7 +63,6 @@ public class TournamentControl extends HttpServlet {
 		switch (action) {
 
 		case "initTorneo":
-			System.out.println("MI HANNO CHIAMATO");
 			String theJson = "";
 			response.setContentType("application/json");
 			response.setCharacterEncoding("UTF-8");
@@ -79,11 +78,7 @@ public class TournamentControl extends HttpServlet {
 				col.add(numeroTecnici);
 				theJson += gson.toJson(col);
 				response.getWriter().print(theJson);
-				response.getWriter().flush();
-				
-				//TODO delete
-				System.out.println(theJson);
-				
+				response.getWriter().flush();	
 				System.out.println("il json di inizializzazione del form è stato creato con successo");
 				response.setStatus(200);
 

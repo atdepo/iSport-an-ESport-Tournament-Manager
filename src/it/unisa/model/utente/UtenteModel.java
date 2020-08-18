@@ -1,7 +1,6 @@
 package it.unisa.model.utente;
 
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -11,7 +10,7 @@ import java.util.Collection;
 
 import it.unisa.model.ModelInterface;
 import it.unisa.model.connessione.DriverManagerConnectionPool;
-import it.unisa.model.tecnico.TecnicoBean;
+import it.unisa.model.utente.UtenteBean.Tipo;
 
 public class UtenteModel implements ModelInterface<UtenteBean, String>{
 
@@ -32,7 +31,7 @@ public class UtenteModel implements ModelInterface<UtenteBean, String>{
 					bean.setDataIscrizione(rs.getString("dataiscrizione"));
 					bean.setEmail(rs.getString("email"));
 					bean.setImg(rs.getString("imgProfilo"));
-					bean.setPassword(rs.getBytes("passw"));
+					bean.setPassword(rs.getString("passw"));
 					bean.setUsername(rs.getString("username"));
 					bean.setpIVA(rs.getString("pIVA"));
 				}
@@ -47,15 +46,21 @@ public class UtenteModel implements ModelInterface<UtenteBean, String>{
 	
 
 	@Override
-	public Collection<UtenteBean> doRetriveAll(String filter) throws SQLException {
+	/**
+	 * Questo metodo deve essere utilizzato specificando il tipo di utente da prelevare =utente|tecnico|admin
+	 * @param tipo il tipo di utente da scegliere
+	 */
+	public Collection<UtenteBean> doRetriveAll(String tipo) throws SQLException {
 		PreparedStatement statement = null;
 		
-		String sql="Select * from utente where tipoDiUtente=?";
+		if(tipo!=null) {
+		
+		String sql="SELECT * FROM UTENTI WHERE tipoDiUtente=?";
 		ArrayList<UtenteBean> collection= new ArrayList<UtenteBean>();
 		
 		try (Connection con = DriverManagerConnectionPool.getConnection()) {
 			statement = con.prepareStatement(sql);
-			statement.setString(1, filter);
+			statement.setString(1, tipo);
 
 			System.out.println("DoRetriveAll=" + statement.toString());
 			ResultSet rs = statement.executeQuery();
@@ -66,16 +71,16 @@ public class UtenteModel implements ModelInterface<UtenteBean, String>{
 				bean.setDataIscrizione(rs.getString("dataiscrizione"));
 				bean.setEmail(rs.getString("email"));
 				bean.setImg(rs.getString("imgProfilo"));
-				bean.setPassword(rs.getBytes("passw"));
+				bean.setPassword(rs.getString("passw"));
 				bean.setUsername(rs.getString("username"));
 				bean.setpIVA(rs.getString("pIVA"));
-
-				
 				collection.add(bean);
 			}
 		}
 		return collection;
-
+		}
+		else
+			return null;
 	}
 	
 
@@ -83,28 +88,25 @@ public class UtenteModel implements ModelInterface<UtenteBean, String>{
 	public void doSave(UtenteBean utente) throws SQLException {
 		PreparedStatement statement=null;
 		
-		String sql="INSERT INTO utenti \" +\r\n" + 
-				"\"(username,email,passw, pIVA, DataIscrizione,TipoDiUtente,imgProfilo) \" +\r\n" + 
-				"\"VALUES (?, ?, ?, ?, ?, ?, ?)";
+		String sql="INSERT INTO utenti VALUES (?, ?, ?, ?, ?, ?, ?)";
 		
 		try (Connection con = DriverManagerConnectionPool.getConnection()) {
-			MessageDigest k=MessageDigest.getInstance("SHA-256");
-			byte pass[]=k.digest(utente.getPassword());
 			
 			statement = con.prepareStatement(sql);
 			statement.setString(1,utente.getUsername());
 			statement.setString(2,utente.getEmail());
-			statement.setBytes(3,pass);
+			statement.setBytes(3,utente.getPassword());
 			statement.setString(4,utente.getpIVA());
 			statement.setString(5,utente.getDataIscrizione());
 			statement.setString(6,utente.getTipo());
 			statement.setString(7,utente.getImg());
 			
 			System.out.println("DoSave=" + statement.toString());
-			 statement.executeUpdate(sql);
-
+			 statement.executeUpdate();
+			 con.commit();//<----- a volte vorrei non essere così tanto forte
+			 System.out.println("dovrebbe essere andato tutto bene");
 			
-			} catch (NoSuchAlgorithmException e) {
+			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
@@ -135,5 +137,29 @@ public class UtenteModel implements ModelInterface<UtenteBean, String>{
 		
 	}
 		}
+	
+	public byte[] getUserPassword(String email) throws SQLException {
+		PreparedStatement stat= null;
+		String sql="SELECT * FROM utenti WHERE email= ? ";
+		
+		try (Connection con = DriverManagerConnectionPool.getConnection()) {
+			stat = con.prepareStatement(sql);
+			stat.setString(1,email);
+			
+			System.out.println("getUserPassword=" + stat.toString());
+			ResultSet rs = stat.executeQuery();
+			
+			while(rs.next()) {
+				return rs.getBytes("passw");
+			}
+			
+			return null;
+			
+		
+	}
+		
+	}
+	
+	
 
 }

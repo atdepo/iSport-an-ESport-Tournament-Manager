@@ -92,14 +92,9 @@ public class UtenteBean implements Serializable {
 		try {
 			MessageDigest md;
 			md = MessageDigest.getInstance("SHA-256");
-			String str="Una password molto bella e sicura";
-			byte arr[]=md.digest(str.getBytes());
+			byte arr[]=md.digest(passwordToEncode.getBytes());
 			this.password=arr;
 			
-			System.out.println("----------------registrazione----------------");
-			for(Byte b:arr) {
-				System.out.print(b+" ");
-			}
 		} catch (NoSuchAlgorithmException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

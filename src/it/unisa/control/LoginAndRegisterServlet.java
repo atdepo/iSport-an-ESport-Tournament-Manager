@@ -106,20 +106,7 @@ public class LoginAndRegisterServlet extends HttpServlet {
 				String str=request.getParameter("password");
 				System.out.println(str);
 				byte curr[]=md.digest(str.getBytes());
-				byte user[]=userModel.getUserPassword(request.getParameter("email"));
-				
-				
-				System.out.println("----------curr--------------");
-				for(Byte b:curr) {
-					System.out.print(b+" ");
-				}
-
-				System.out.println("\n----------user--------------");
-				
-				for(Byte b:user) {
-					System.out.print(b+" ");
-				}
-				
+				byte user[]=userModel.getUserPassword(request.getParameter("email"));		
 				System.out.println("Risutato"+Arrays.compare(curr,user));
 				if(Arrays.compare(curr,user)==0) {
 					response.sendRedirect("index.jsp");

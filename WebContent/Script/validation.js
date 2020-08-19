@@ -16,15 +16,18 @@
     var emailReg=/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
    
     if(!email.val())	//Email non inserita
+    	
     	error.show().text("Inserisci un'e-mail, non ti posso inviare spam altrimenti");
+   
     else
-      if(!emailReg.test(email.val()))	//Email non corretta
+    
+    	if(!emailReg.test(email.val()))	//Email non corretta
       { 
-         
-    	  error.show().text("Inserisci un'e-mail credibile dai");
+    	  email.next().show().text("Inserisci un'e-mail credibile dai");
           $(this).addClass("er");
       }
-      else	//Tutt a post
+     
+    	else	//Tutt a post
     	  {
     	  	error.hide();
     	  	console.log("ok");

@@ -1,14 +1,55 @@
 /**
  * 
  */
+
+
+
+
+	error=$(".error");
+	error.hide();
+   
+  //CONTROLL EMAIL
+  
+    var email=$("#email")
+    email.focusout(function() {
+        
+    var emailReg=/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+   
+    if(!email.val())	//Email non inserita
+    	error.show().text("Inserisci un'e-mail, non ti posso inviare spam altrimenti");
+    else
+      if(!emailReg.test(email.val()))	//Email non corretta
+      { 
+         
+    	  error.show().text("Inserisci un'e-mail credibile dai");
+          $(this).addClass("er");
+      }
+      else	//Tutt a post
+    	  {
+    	  	error.hide();
+    	  	console.log("ok");
+    	  }
+    })
+
+
+
+
+
+
+
+
+
+
+/*
+
  function emailCheck(campo) {
     let regex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    console.log(regex.test(campo.value))
-    return regex.test(campo.value);
+    console.log(regex.test(campo.val()))
+    return regex.test(campo.val());
 }
 
 function usernameCheck(campo) {
-    let regex =  ^[a-zA-Z0-9]+([._]?[a-zA-Z0-9]+)*$
+    let regex =  /^[a-zA-Z0-9]+([._]?[a-zA-Z0-9]+)*$/
     return regex.test(campo.value);
 }
 
@@ -49,12 +90,15 @@ function checkCampiRegistrazione() {
     const email = form.email;
     const password = form.password;
     const data=form.data;
-
+   
     let ch1 = emailCheck(email);
+    
+    /*
+   
     let ch2 = passwdCheck(password);
     let ch3 = usernameCheck(username);
     let ch4 = ivaCheck(pIva);
 	let ch5 = dataCheck(data);
 
-    return (ch1 && ch2 && ch4 && ch3 && ch5)
-}
+
+}*/

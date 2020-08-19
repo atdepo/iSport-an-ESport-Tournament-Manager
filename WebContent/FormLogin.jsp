@@ -4,11 +4,16 @@
 <html>
 <head>
 <meta charset="UTF-8">
+
     <title>Login Form</title>
     <link rel="stylesheet" type="text/css" href="CSS/login.css">
     <script src = "https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script type="text/javascript" src="Script/login-register.js"></script>
+  
     <script src="Script/validation.js"></script>
+    
+  <style type="text/css"> .er{color: darkred;}
+  							span{background-color: #008080; } </style>
     
 </head>
 <body>
@@ -23,7 +28,7 @@
 
     <div id="login-form">
         <form action="LoginAndRegisterServlet?action=validateLogin" method="post">
-            <input type="email" name ="email" placeholder="Inserisci l'email"/>
+            <input type="email" name ="email" class="email" placeholder="Inserisci l'email"/>
             <input type="password" name="password" placeholder="Inserisci la password"/>
             <button type="submit" class="btn login">Accedi</button>
             <p><a href="javascript:void(0)">Password dimenticata</a> </p>
@@ -33,12 +38,13 @@
 
     <div id="signup-form" >
         <form action="LoginAndRegisterServlet?action=register" method="post" enctype="multipart/form-data">
-            <input type="email" name="email" placeholder="E-mail" required/>
-            <input type="text" name="username" placeholder="Username" required/>
-            <input type="text" name="pIva" placeholder="Partita IVA">
-            <input type="hidden" id="data" name="dataIscrizione">
-            <input type="password" name="password" placeholder="Password" required/>
-			<input type="file" name="immagine" accept="image/*">         
+            <input type="email" name="email" id="email" placeholder="E-mail" required/>
+          	<span class="error">dasasd </span>
+            <input type="text" name="username" class="username" placeholder="Username" required/>
+            <input type="text" name="pIva" class="pIva" placeholder="Partita IVA">
+            <input type="hidden" id="data"  name="dataIscrizione">
+            <input type="password" name="password" class="password" placeholder="Password" required/>
+			<input type="file" name="immagine" class="immagine" accept="image/*">         
     		<button type="submit" class="btn signup">Crea account</button> 
             
         </form>
@@ -62,4 +68,5 @@
   
 
 </body>
+  <script type="text/javascript" src="Script/validation.js"></script>
 </html>

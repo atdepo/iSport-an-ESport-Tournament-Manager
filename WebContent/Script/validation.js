@@ -8,7 +8,7 @@
   //CONTROLL EMAIL
   
     var email=$("#email")
-    email.focusout(function() {
+    mailCheck(function() {
         
     var emailReg=/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
    
@@ -31,7 +31,7 @@
     	  }
     })
 var username=$("#username")
-    username.focusout(function() {
+    userCheck(function() {
         
     var usernameReg=/^[a-zA-Z0-9]+([._]?[a-zA-Z0-9]+)*$/;
    
@@ -52,7 +52,7 @@ var username=$("#username")
     })
     
 var password=$("#password")
-    password.focusout(function() {
+    passCheck(function() {
         
     var passwordReg=/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
    
@@ -73,7 +73,7 @@ var password=$("#password")
     })
 
 var iva=$("#iva")
-    iva.focusout(function() {
+    ivaCheck(function() {
         
     var ivaReg=/^[0-9]{11}$/;
    
@@ -92,3 +92,15 @@ var iva=$("#iva")
     	  	console.log("ok");
     	  }
     })
+    fullCheck(function(){
+    	mailCheck();
+    	userCheck();
+    	passCheck();
+    	ivaCheck();
+    })
+    
+    
+    var form=signup-$("signup-form");
+    	form.submit(fullCheck);
+    
+    

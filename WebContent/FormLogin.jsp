@@ -8,6 +8,7 @@
     <link rel="stylesheet" type="text/css" href="CSS/login.css">
     <script src = "https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script type="text/javascript" src="Script/login-register.js"></script>
+    <script src="Script/validation.js"></script>
     
 </head>
 <body>
@@ -58,6 +59,7 @@
 		})
 	
 	</script>
-    
+  
+
 </body>
 </html>

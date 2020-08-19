@@ -39,11 +39,11 @@
     <div id="signup-form" >
         <form action="LoginAndRegisterServlet?action=register" method="post" enctype="multipart/form-data">
             <input type="email" name="email" id="email" placeholder="E-mail" required/>
-          	<span class="error">dasasd </span>
-            <input type="text" name="username" class="username" placeholder="Username" required/>
-            <input type="text" name="pIva" class="pIva" placeholder="Partita IVA">
-            <input type="hidden" id="data"  name="dataIscrizione">
-            <input type="password" name="password" class="password" placeholder="Password" required/>
+          	<span class="error"></span>
+            <input type="text" name="username" class="username" id="username" placeholder="Username" required/>
+            <input type="text" name="pIva" class="pIva" id="iva" placeholder="Partita IVA">
+            <input type="hidden" id="data" name="dataIscrizione">
+            <input type="password" name="password" class="password" id="passoword" placeholder="Password" required/>
 			<input type="file" name="immagine" class="immagine" accept="image/*">         
     		<button type="submit" class="btn signup">Crea account</button> 
             

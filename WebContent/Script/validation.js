@@ -30,7 +30,26 @@
     	  	console.log("ok");
     	  }
     })
-
+var username=$("#username")
+    username.focusout(function() {
+        
+    var usernameReg=/^[a-zA-Z0-9]+([._]?[a-zA-Z0-9]+)*$/;
+   
+    if(!username.val())	//Username non inserita
+    	error.show().text("Devi mettere uno username prova xxSpinerKillerxx");
+    else
+      if(!usernameReg.test(username.val()))	//Username non corretta
+      { 
+         
+    	  error.show().text("Magari qualcosa di decente");
+          $(this).addClass("er");
+      }
+      else	//Tutt a post
+    	  {
+    	  	error.hide();
+    	  	console.log("ok");
+    	  }
+    })
 
 
 

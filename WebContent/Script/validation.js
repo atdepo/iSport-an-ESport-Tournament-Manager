@@ -3,12 +3,12 @@
  */
  function emailCheck(campo) {
     let regex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    console.log(regex.test(campo.value))
+    console.log(regex.test(campo.value));
     return regex.test(campo.value);
 }
 
 function usernameCheck(campo) {
-    let regex =  ^[a-zA-Z0-9]+([._]?[a-zA-Z0-9]+)*$
+    let regex =  /^[a-zA-Z0-9]+([._]?[a-zA-Z0-9]+)*$ /;
     return regex.test(campo.value);
 }
 
@@ -31,19 +31,19 @@ function dataCheck(campo) {
 }
 
 function checkCampiFormLogin() {
-    const form = document.getElementById("login-form")
+    const form = document.getElementById("login-form");
     const email = form.email;
     const password = form.password;
 
     let ch1 = emailCheck(email);
     let ch2 = passwdCheck(password);
 
-    console.log(ch1 && ch2)
+    console.log(ch1 && ch2);
     return (ch1 && ch2);
 }
 
 function checkCampiRegistrazione() {
-    const form = document.getElementById("signup-form")
+    const form = document.getElementById("signup-form");
     const username = form.username;
     const pIva= form.pIva;
     const email = form.email;
@@ -56,5 +56,5 @@ function checkCampiRegistrazione() {
     let ch4 = ivaCheck(pIva);
 	let ch5 = dataCheck(data);
 
-    return (ch1 && ch2 && ch4 && ch3 && ch5)
+    return (ch1 && ch2 && ch4 && ch3 && ch5);
 }

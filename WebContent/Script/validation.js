@@ -2,9 +2,6 @@
  * 
  */
 
-
-
-
 	error=$(".error");
 	error.hide();
    
@@ -17,7 +14,7 @@
    
     if(!email.val())	//Email non inserita
     	
-    	error.show().text("Inserisci un'e-mail, non ti posso inviare spam altrimenti");
+    	email.next().show().text("Inserisci un'e-mail, non ti posso inviare spam altrimenti");
    
     else
     
@@ -39,12 +36,33 @@ var username=$("#username")
     var usernameReg=/^[a-zA-Z0-9]+([._]?[a-zA-Z0-9]+)*$/;
    
     if(!username.val())	//Username non inserita
-    	error.show().text("Devi mettere uno username prova xxSpinerKillerxx");
+    	username.next().show().text("Devi mettere uno username prova xxSpinnerKillerxx");
     else
       if(!usernameReg.test(username.val()))	//Username non corretta
       { 
          
-    	  error.show().text("Magari qualcosa di decente");
+    	  username.next().show().text("Magari qualcosa di decente");
+          $(this).addClass("er");
+      }
+      else	//Tutt a post
+    	  {
+    	  	error.hide();
+    	  	console.log("ok");
+    	  }
+    })
+    
+var password=$("#password")
+    password.focusout(function() {
+        
+    var passwordReg=/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+   
+    if(!password.val())	//Password non inserita
+    	password.next().show().text("Devi mettere una password prova Kekko2000!");
+    else
+      if(!passwordReg.test(username.val()))	//Password non corretta
+      { 
+         
+    	  password.next().show().text("Deve essere almeno 8 caratteri con almeno:un carattere speciale,un lowercase,un UPPERCASE e un numero ");
           $(this).addClass("er");
       }
       else	//Tutt a post
@@ -54,73 +72,23 @@ var username=$("#username")
     	  }
     })
 
-
-
-
-
-
-
-
-
-/*
-
- function emailCheck(campo) {
-    let regex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    console.log(regex.test(campo.val()))
-    return regex.test(campo.val());
-}
-
-function usernameCheck(campo) {
-    let regex =  /^[a-zA-Z0-9]+([._]?[a-zA-Z0-9]+)*$/
-    return regex.test(campo.value);
-}
-
-
-function passwdCheck(campo) {
-    let regex = /^\S{6,}$/;
-    return regex.test(campo.value);
-}
-
-function ivaCheck(campo) {
-    let regex =/^[0-9]{11}$/
-    return regex.test(campo.value);
-}
-
-function dataCheck(campo) {
-    if(campo.value!=null)
-    	return  true;
-    else 
-    	return false;
-}
-
-function checkCampiFormLogin() {
-    const form = document.getElementById("login-form");
-    const email = form.email;
-    const password = form.password;
-
-    let ch1 = emailCheck(email);
-    let ch2 = passwdCheck(password);
-
-    console.log(ch1 && ch2);
-    return (ch1 && ch2);
-}
-
-function checkCampiRegistrazione() {
-    const form = document.getElementById("signup-form");
-    const username = form.username;
-    const pIva= form.pIva;
-    const email = form.email;
-    const password = form.password;
-    const data=form.data;
+var iva=$("#iva")
+    iva.focusout(function() {
+        
+    var ivaReg=/^[0-9]{11}$/;
    
-    let ch1 = emailCheck(email);
-    
-    /*
-   
-    let ch2 = passwdCheck(password);
-    let ch3 = usernameCheck(username);
-    let ch4 = ivaCheck(pIva);
-	let ch5 = dataCheck(data);
-
-
-}*/
+    if(!iva.val())	//Iva non inserita
+    	iva.next().show().text("Devi inserire la tua IVA");
+    else
+      if(!ivaReg.test(username.val()))	//Password non corretta
+      { 
+         
+    	  iva.next().show().text("Iva non corretta");
+          $(this).addClass("er");
+      }
+      else	//Tutt a post
+    	  {
+    	  	error.hide();
+    	  	console.log("ok");
+    	  }
+    })

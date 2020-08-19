@@ -41,10 +41,14 @@
             <input type="email" name="email" id="email" placeholder="E-mail" required/>
           	<span class="error"></span>
             <input type="text" name="username" class="username" id="username" placeholder="Username" required/>
+            <span class="error"></span>
             <input type="text" name="pIva" class="pIva" id="iva" placeholder="Partita IVA">
+            <span class="error"></span>
             <input type="hidden" id="data" name="dataIscrizione">
-            <input type="password" name="password" class="password" id="passoword" placeholder="Password" required/>
-			<input type="file" name="immagine" class="immagine" accept="image/*">         
+            <input type="password" name="password" class="password" id="password" placeholder="Password" required/>
+			<span class="error"></span>
+			<input type="file" name="immagine" class="immagine" accept="image/*">
+			<span class="error"></span>
     		<button type="submit" class="btn signup">Crea account</button> 
             
         </form>

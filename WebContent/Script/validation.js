@@ -75,19 +75,19 @@ function dataCheck(campo) {
 }
 
 function checkCampiFormLogin() {
-    const form = document.getElementById("login-form")
+    const form = document.getElementById("login-form");
     const email = form.email;
     const password = form.password;
 
     let ch1 = emailCheck(email);
     let ch2 = passwdCheck(password);
 
-    console.log(ch1 && ch2)
+    console.log(ch1 && ch2);
     return (ch1 && ch2);
 }
 
 function checkCampiRegistrazione() {
-    const form = document.getElementById("signup-form")
+    const form = document.getElementById("signup-form");
     const username = form.username;
     const pIva= form.pIva;
     const email = form.email;

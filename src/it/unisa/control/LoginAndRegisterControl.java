@@ -23,17 +23,25 @@ import it.unisa.model.utente.UtenteBean;
 import it.unisa.model.utente.UtenteBean.Tipo;
 import it.unisa.model.utente.UtenteModel;
 
-@WebServlet(name = "/LoginAndRegisterServlet", urlPatterns = { "/LoginAndRegisterServlet", "/ciccio" })
+@WebServlet(name = "/LoginAndRegisterControl", urlPatterns = { "/LoginAndRegisterControl", "" })
 @MultipartConfig(fileSizeThreshold = 1024 * 1024 * 2, // 2MB after which the file will be
 														// temporarily stored on disk
 		maxFileSize = 1024 * 1024 * 10, // 10MB maximum size allowed for uploaded files
 		maxRequestSize = 1024 * 1024 * 50) // 50MB overall size of all uploaded files
-
-public class LoginAndRegisterServlet extends HttpServlet {
+/**
+ * Questa Servlet svolge il compito di controller sulle funzionalità di login e registrazione.<br>
+ * A questa servlet possono essere impartiti solamente due tipi di comandi tramite il parametro action nella richiesta:
+ * -register       -> Registra un nuovo utente inserendo le credenziali 
+ * -validateLogin  -> Valida una richiesta di login inviata 
+ * tutte le altre eventuali action inviate avranno come conseguenza il reindirizzamento alla pagina home 
+ * @author della
+ *
+ */
+public class LoginAndRegisterControl extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private UtenteModel userModel = new UtenteModel();
 
-	public LoginAndRegisterServlet() {
+	public LoginAndRegisterControl() {
 		super();
 
 	}
@@ -47,18 +55,25 @@ public class LoginAndRegisterServlet extends HttpServlet {
 		String regPsw="^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$";
 		
 		String action = request.getParameter("action");
-		System.out.println(action);
+		
+		if(action==null) {
+			response.sendRedirect("index.jsp");
+			return;
+		}
+		System.out.println("La servlet di login e registrazione sta svològendo l'azione di :"+action);
 
 		switch (action) {
 
-		case "register":
+		case "register": //Effettuo la registrazione dell'utente
 			
 			try (ByteArrayOutputStream bos = new ByteArrayOutputStream()) {
 				HttpSession session=request.getSession();
 				//Impostiamogli eventuali errori avuti in precedenza a null per evitare problemi nella visualizzazione
-				session.setAttribute("error-type", null);
-				session.setAttribute("error", null);
-				session.setAttribute("error-location", null);
+				session.setAttribute("error-type", null); //error-type ci fornisce il campo sul quale abbiamo riscontrato l'errore
+				session.setAttribute("error", null); // error ci fornisce il messaggio di errore da visualizzare
+				session.setAttribute("error-location", null); //error-location ci fornisce l'indicazione su quale 
+															  //dei due form (login|signup) sia presente l'errore
+				
 				
 				//Controllo se la mail inserita in fase di registrazione sia già stata associata a qualche altro utente 
 				if (userModel.doRetriveByKey(request.getParameter("email")) != null) {
@@ -67,8 +82,9 @@ public class LoginAndRegisterServlet extends HttpServlet {
 					session.setAttribute("error-location", "signup");
 					response.sendRedirect(request.getContextPath()+"/FormLoginAndRegister.jsp");
 				}
-				//Controllo se la mail inserita in fase di registrazione sia scritta correttamente
-				//(cosa che controlla javascript, ma nel caso sia disattivato evitiamo l'inserimento di dati erronei)
+				//Di seguito ci sono vari controlli sui campi inseriti in fase di registrazione
+				//(controllati nel caso javascript sia disattivato così da evitiare l'inserimento di dati erronei)
+				
 				else if(!request.getParameter("email").matches(regEmail)) {
 					System.out.println("mi fermo alla mail");
 					session.setAttribute("error-type", "email");
@@ -109,10 +125,10 @@ public class LoginAndRegisterServlet extends HttpServlet {
 					utente.setTipo(Tipo.utente);
 					utente.setPassword(request.getParameter("password"));
 
-					//immagine -> BASE64
-					Part part = request.getPart("immagine");
+					//Immagine -> BASE64
+					Part part = request.getPart("immagine"); //Prende la parte dal multipart form che rappresenta l'immagine di profilo dell'utente
 					InputStream fis = null;
-					if (part != null) {
+					if (part != null) { //se l'immagine è stata inserita procediamo al parsing in base64
 						fis = part.getInputStream();
 
 						byte[] buf = new byte[4096];
@@ -123,8 +139,6 @@ public class LoginAndRegisterServlet extends HttpServlet {
 						}
 						byte[] bytes = bos.toByteArray();
 						String img = "data:image/jpeg;base64, " + Base64.getEncoder().encodeToString(bytes);
-						// System.out.println("immagine base64= " + img);
-
 						utente.setImg(img);
 						userModel.doSave(utente);
 						session.setAttribute("user", utente);
@@ -133,31 +147,34 @@ public class LoginAndRegisterServlet extends HttpServlet {
 				}
 				
 			} catch (IOException ex) {
-				// TODO Auto-generated catch block
 				ex.printStackTrace();
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 
 			break;
 
-		case "validateLogin":
+		case "validateLogin": //Effettuo la validazione del login
 
 			try {
-				MessageDigest md;
-				md = MessageDigest.getInstance("SHA-256");
-				String str = request.getParameter("password");
-				System.out.println(str);
-				byte curr[] = md.digest(str.getBytes());
-				byte user[] = userModel.getUserPassword(request.getParameter("email"));
-				System.out.println("Risutato" + Arrays.compare(curr, user));
-				if (Arrays.compare(curr, user) == 0) {
-					UtenteBean utente=userModel.doRetriveByKey(request.getParameter("email"));
-					request.getSession().setAttribute("user", utente);
-					response.sendRedirect("index.jsp");
-				} else {
-					response.sendRedirect("FormLogin.jsp");
+				MessageDigest md = MessageDigest.getInstance("SHA-256");// Istanzio un MessageDigest con un algoritmo di cifratura SHA 256 
+																		//già implementato nativamente in Java
+				
+				String str = request.getParameter("password");//Prendo la password passata in plain-text 
+				byte curr[] = md.digest(str.getBytes());//utilizzo la cifratura SHA-256 per cifrare la stringa
+				byte user[] = userModel.getUserPassword(request.getParameter("email")); //Prendo la password dal database corrispondente alla mail inserita
+				
+				if (Arrays.compare(curr, user) == 0) { //Se le due password cifrate coincidono
+					
+					UtenteBean utente=userModel.doRetriveByKey(request.getParameter("email")); //Prendo il bean dal database che è identificato univocamente tramite la mail
+					request.getSession().setAttribute("user", utente); //Inserisco l'utente correttamente loggato in sessione
+					response.sendRedirect("index.jsp"); //Reindirizzo l'utente loggato alla pagina iniziale dove potrà svolgere tutte le attività consentite da utente
+					
+				} else {//Se le due password non coincidono
+					request.getSession().setAttribute("error-type", "wrongCred");
+					request.getSession().setAttribute("error", "Deve essere almeno 8 caratteri con almeno:un carattere speciale,un lowercase,un UPPERCASE e un numero ");
+					request.getSession().setAttribute("error-location", "login");
+					response.sendRedirect("FormLoginAndRegister.jsp"); //Reindirizzo l'utente nuovamente alla schermata di inserimento delle credenziali
 				}
 
 			} catch (SQLException e) {
@@ -169,8 +186,15 @@ public class LoginAndRegisterServlet extends HttpServlet {
 			}
 
 			break;
-
+			
+			default:
+				
+			response.sendRedirect("index.jsp");
+			break;
+			
 		}
+		
+		
 		// Montefusco merda non cancellare da questo commento
 		// String imagine ="data:image/jpeg;base64,
 		// "+Base64.getEncoder().encodeToString(bytes);

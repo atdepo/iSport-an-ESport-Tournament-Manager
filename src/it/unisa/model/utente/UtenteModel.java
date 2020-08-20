@@ -35,12 +35,29 @@ public class UtenteModel implements ModelInterface<UtenteBean, String>{
 					bean.setPassword(rs.getString("passw"));
 					bean.setUsername(rs.getString("username"));
 					bean.setpIVA(rs.getString("pIVA"));
+					
+					switch(rs.getString("TipoDiUtente")) {
+					
+					case "utente":
+						bean.setTipo(Tipo.utente);
+					break;
+					
+					case "admin":
+						bean.setTipo(Tipo.admin);
+					break;
+					
+					case "tecnico":
+						bean.setTipo(Tipo.tecnico);
+					break;
+					}
 				}
 			}
+			
 			if(bean.isEmpty())
 				return null;
 			else
 				return bean;
+			
 		} else {
 			// TODO ERRORE
 			return null;
@@ -78,6 +95,22 @@ public class UtenteModel implements ModelInterface<UtenteBean, String>{
 				bean.setPassword(rs.getString("passw"));
 				bean.setUsername(rs.getString("username"));
 				bean.setpIVA(rs.getString("pIVA"));
+
+				switch(rs.getString("TipoDiUtente")) {
+				
+				case "utente":
+					bean.setTipo(Tipo.utente);
+				break;
+				
+				case "admin":
+					bean.setTipo(Tipo.admin);
+				break;
+				
+				case "tecnico":
+					bean.setTipo(Tipo.tecnico);
+				break;
+				}
+				
 				collection.add(bean);
 			}
 		}

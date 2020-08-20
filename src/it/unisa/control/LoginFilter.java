@@ -24,7 +24,7 @@ public class LoginFilter implements Filter{
 	
 		HttpServletRequest hRequest=(HttpServletRequest)request; 
 		HttpServletResponse hResponse=(HttpServletResponse)response; 
-		
+		System.out.println("Sto filtrando la richiesta");
 		String requestURI=hRequest.getRequestURI();
 		
 		if(requestURI.contains("/user/")) {
@@ -44,13 +44,16 @@ public class LoginFilter implements Filter{
 	}
 	
 	
-	public void checkAccess(HttpSession session, ServletRequest req, ServletResponse resp, FilterChain chain, HttpServletResponse hresponse, HttpServletRequest hrequest, String tipoUtente) throws IOException, ServletException{
+	public void checkAccess(HttpSession session, ServletRequest sRequest, ServletResponse sResponse, FilterChain chain, HttpServletResponse hResponse, HttpServletRequest hRequest, String tipoUtente) throws IOException, ServletException{
 		
-		UtenteBean user=(UtenteBean) session.getAttribute("user");
-		if(user!=null && user.getTipo().equals("utente"))
-			chain.doFilter(req, resp);
-		else
-			hresponse.sendRedirect(hrequest.getContextPath()+"/FormLoginAndRegister.jsp");
+		if(session!=null) {
+			UtenteBean user=(UtenteBean) session.getAttribute("user");
+			if(user!=null && user.getTipo().equals(tipoUtente))
+				chain.doFilter(sRequest, sResponse);
+			else
+				hResponse.sendRedirect(hRequest.getContextPath()+"/FormLoginAndRegister.jsp");
+		}
+		
 		
 		
 		

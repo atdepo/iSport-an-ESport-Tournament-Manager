@@ -26,11 +26,13 @@ public class UtenteBean implements Serializable {
 	}
 	
 	public String getTipo() {
-		return tipo.toString();
+		return tipo.name();
 	}
 
 	public void setTipo(Tipo tipo) {
 		this.tipo = tipo;
+		
+
 	}
 
 	public String getpIVA() {

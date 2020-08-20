@@ -1,6 +1,6 @@
 
-/* Questa funzione aggiunge un listener al form, nel momento in cui viene effettuato un submit
-	* nel form di registrazione di un nuovo utente viene controllato se i campi sono stati inseriti correttamente
+/* Questa funzione aggiunge un listener al form che, nel momento in cui viene effettuato un submit
+	* nel form di registrazione di un nuovo utente, viene controllato se i campi sono stati inseriti correttamente
 	* prima di passare il controllo al backend per il controllo di ulteriori informazioni
 	*/
 	$(function(){
@@ -22,6 +22,17 @@
 		});
 		
 	});
+	
+	
+	//Questa funzione aggiunge un listener al form che controlla se la mail è stata inserita correttamente
+	$(function(){
+		$('.log').submit(function(){
+			
+			return mailCheck() && passCheck();
+		});
+		
+	});
+	
 
 
 	//I campi di errore vengono nascosti per essere mostrati quando serve
@@ -31,9 +42,20 @@
 	   
 	//--------------------------------Funzione per il controllo del campo email------------------------------------------------------------
  function mailCheck(){
- 	var email=$("#email");
+		if($('#login-form').css("display")=="block")
+			var email=$(".email");
+		else
+			var email=$("#email");
+		
  	var emailReg=/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    let error=email.next();
+ 	
+ 	//alert($('#signup-form').css("display")=="block");
+ 	if($('#login-form').css("display")=="block"){
+ 		var error=$('.error-mail');
+ 		
+ 	}
+ 	else
+ 		var error=email.next();
      
  	if(!email.val()){	//Email non inserita
 			error.text("Inserisci un'e-mail, non ti posso inviare spam altrimenti");
@@ -49,7 +71,7 @@
 				return false;
  		}
  	     
- 		else{	//Tutt a post
+ 		else{	//Controllo passato
  				error.text("");
 				console.log("email check passed");
 				return true;
@@ -79,7 +101,7 @@
 				return false;
 			}
 			
-			else{	//Tutt a post
+			else{	//Controllo passato
 				
 				error.text("");
 				console.log('username check passed');
@@ -93,9 +115,17 @@
 
 	//-----------------------------------------Funzione per il controllo del campo password--------------------------------------------------
  function passCheck(){
-	var password=$("#password");
+	if($('#login-form').css("display")=="block")
+		var password=$('.password');
+	else
+		var password=$("#password");
+	
 	var passwordReg=/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/;
-    let error=$('.psw');
+   
+	if($('#login-form').css("display")=="block")
+		var error=$('.error-cred');
+	else
+		var error=$('.psw');
 
 	if(!password.val()){	//Password non inserita
 		error.text("Devi mettere una password prova Kekko2000!");
@@ -109,7 +139,7 @@
 			console.log('password check not passed');
 			return false;
 		}
-		else{	//Tutt a post
+		else{	//Controllo passato
             error.text("");
             console.log('password check passed');
 			return true;
@@ -131,7 +161,7 @@
 			console.log('Iva check not passed');
 			return false;
 		}
-		else{	//Tutt a post
+		else{	//Controllo passato
 			error.text("");
 			console.log('Iva check passed');
 			return true;
@@ -139,12 +169,17 @@
     }
 //--------------------------------------Funzione per lo show della password------------------------------------------   
     function showPass() {
-  var x = document.getElementById("password");
-  if (x.type === "password") {
-    x.type = "text";
-  } else {
-    x.type = "password";
-  }
+    	
+    	if($('#login-form').css("display")=="block")
+    		var x=$('.password');
+    	else
+    		var x=$('#password');
+    	
+    	if(x.attr("type")==="password")
+    		x.attr("type","text");
+    	else
+    		x.attr("type","password");
+
 }
 
 

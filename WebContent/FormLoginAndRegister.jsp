@@ -46,9 +46,13 @@ System.out.println(errorLocation);
  	   
     <%} %>
     
-        <form action="LoginAndRegisterServlet?action=validateLogin" method="post" class="log">
+        <form action="LoginAndRegisterControl?action=validateLogin" method="post" class="log">
             <input type="email" name ="email" class="email" placeholder="Inserisci l'email"/>
-            <input type="password" name="password" placeholder="Inserisci la password"/>
+            <span class="error-mail"></span>
+            <input type="password" name="password" class="password" placeholder="Inserisci la password"/>
+            <input type="checkbox" onclick="showPass()">
+            <label class="showpsw">Show Password</label><br>
+            <span class="error-cred"><%if(type.equals("wrongCred")){ %><%=error%><%}%></span>
             <button type="submit" class="btn login">Accedi</button>
             <p><a href="javascript:void(0)">Password dimenticata</a> </p>
 		          
@@ -61,18 +65,19 @@ System.out.println(errorLocation);
     	
     <%}else {%>
     
-    	<div id="signup-form" style="display: none"><%} %>
+    	<div id="signup-form" style="display: none">
+    <%} %>
         
-        <form action="LoginAndRegisterServlet?action=register" method="post" class="sub" enctype="multipart/form-data">
+        <form action="LoginAndRegisterControl?action=register" method="post" class="sub" enctype="multipart/form-data">
             <input type="email" name="email" id="email" placeholder="E-mail"/>
             <span class="error"><%if(type.equals("email")){ %><%=error%><%}%></span>
             <input type="text" name="username" class="username" id="username" placeholder="Username"/>
-            <span class="error"></span>
+            <span class="error"><%if(type.equals("email")){ %><%=error%><%}%></span>
             <input type="text" name="pIva" class="pIva" id="iva" placeholder="Opzionale: Partita IVA">
             <span class="error"></span>
-            <input type="password" name="password" class="password" id="password" placeholder="Password"/>
-            	<input type="checkbox" onclick="showPass()">
-            	<label class="showpsw">Show Password</label><br>
+            <input type="password" name="password" id="password" placeholder="Password"/>
+            <input type="checkbox" onclick="showPass()">
+            <label class="showpsw">Show Password</label><br>
             <span class="psw error"></span>
             <input type="file" name="immagine" class="immagine" accept="image/*">
             <span class="error"></span>

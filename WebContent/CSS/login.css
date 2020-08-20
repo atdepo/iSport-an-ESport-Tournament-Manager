@@ -1,9 +1,8 @@
-@import url('https://fonts.googleapis.com/css?family=Montserrat|Quicksand');
-
 *{
-    font-family: 'quicksand',Arial, Helvetica, sans-serif;
     box-sizing: border-box;
 }
+
+
 body{background-image: url(../img/loginBackground.jpg);
   background-position: center center;
   background-repeat: no-repeat;
@@ -141,7 +140,6 @@ span{
     margin-bottom:0.6em;
     border-radius: 5px;
     border:none;
-   /* background:#ebebeb;*/
     outline:none;
     font-weight: bold;
     transition:0.4s;

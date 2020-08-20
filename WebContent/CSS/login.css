@@ -200,3 +200,6 @@ span{
         display: none!important;
     }
 }
+input[type=checkbox]{
+	display:flex;
+}

@@ -71,7 +71,8 @@ System.out.println(errorLocation);
             <input type="text" name="pIva" class="pIva" id="iva" placeholder="Opzionale: Partita IVA">
             <span class="error"></span>
             <input type="password" name="password" class="password" id="password" placeholder="Password"/>
-            <span class="error"></span>
+            <span class="psw error"></span>
+            	<input type="checkbox" onclick="showPass()">Show Password
             <input type="file" name="immagine" class="immagine" accept="image/*">
             <span class="error"></span>
             <input type="hidden" id="data" name="dataIscrizione">

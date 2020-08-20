@@ -32,7 +32,6 @@
 			if(!emailReg.test(email.val())){	//Email non corretta
 				
  	    	    error.text("Inserisci un'e-mail credibile dai");
-				$(this).addClass("er");
 				console.log("email check not passed");
 				return false;
  		}
@@ -63,7 +62,6 @@
 		
 			if(!usernameReg.test(username.val())){ 	//Username non corretto
 				error.text("Magari qualcosa di decente");
-				$(this).addClass("er");
 				console.log('username check not passed');
 				return false;
 			}
@@ -95,7 +93,6 @@
 	else{
 		if(!passwordReg.test(password.val())){	//Password non corretta
 			error.text("Deve essere almeno 8 caratteri con almeno:un carattere speciale,un lowercase,un UPPERCASE e un numero ");
-			$(this).addClass("er");
 			console.log('password check not passed');
 			return false;
 		}
@@ -118,7 +115,6 @@
 
 		if(iva.val() && !ivaReg.test(iva.val())){	//Iva non corretta
 			error.text("Iva non corretta");
-			$(this).addClass("er");
 			console.log('Iva check not passed');
 			return false;
 		}

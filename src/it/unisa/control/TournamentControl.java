@@ -144,7 +144,7 @@ public class TournamentControl extends HttpServlet {
 				System.out.println((String)sess.getAttribute("nomeGioco")+ " "+(String)sess.getAttribute("modalita") );
 				sess.setAttribute("numPartecipanti",bean.getNumPartecipanti()/2);
 				response.setStatus(200);
-				response.sendRedirect("FormInserimentoGiocatori.jsp?nomesquadra="+request.getParameter("nomesquadra"));
+				response.sendRedirect(request.getContextPath()+"FormInserimentoGiocatori.jsp?nomesquadra="+request.getParameter("nomesquadra"));
 				
 			} catch (SQLException e1) {
 				// TODO Auto-generated catch block
@@ -154,7 +154,7 @@ public class TournamentControl extends HttpServlet {
 			break;
 			
 			
-		case "validate":
+		case "validate"://TODO da rivedere
 			response.setCharacterEncoding("UTF-8");
 			System.out.println("Sto validando il torneo");
 			request.setAttribute("error", null);

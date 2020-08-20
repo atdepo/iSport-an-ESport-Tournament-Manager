@@ -13,18 +13,18 @@
 <html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="CSS/button-input.css" type="text/css">
-<link rel="stylesheet" href="CSS/2RadioButton.css" type="text/css">
-<link rel="stylesheet" href="CSS/Tendina.css" type="text/css">
-<link rel="stylesheet" href="CSS/CreazioneTorneo.css" type="text/css">
+<link rel="stylesheet" href="../CSS/button-input.css" type="text/css">
+<link rel="stylesheet" href="../CSS/2RadioButton.css" type="text/css">
+<link rel="stylesheet" href="../CSS/Tendina.css" type="text/css">
+<link rel="stylesheet" href="../CSS/CreazioneTorneo.css" type="text/css">
 
 <meta charset="UTF-8">
 
 <title>Crea il tuo Torneo</title>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script src="Script/mode.js"></script>
-<script src="Script/button-input.js"></script>
+<script src="../Script/mode.js"></script>
+<script src="../Script/button-input.js"></script>
 <script src="https://kit.fontawesome.com/a076d05399.js"></script>
 </head>
 

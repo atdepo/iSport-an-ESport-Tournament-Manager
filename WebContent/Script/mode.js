@@ -30,7 +30,7 @@ $(document).ready(function() {
 		}
 		
 	}
-	xhr.open('GET', 'TournamentControl?action=initTorneo', true);
+	xhr.open('GET', '../TournamentControl?action=initTorneo', true);
 	xhr.send();
 
 });
@@ -72,7 +72,7 @@ function getStrutture(){
 		}
 	}
 		
-	xhr.open('GET', 'TournamentControl?action=getStrutture', true);
+	xhr.open('GET', '../TournamentControl?action=getStrutture', true);
 	xhr.send();
 	
 	
@@ -97,7 +97,7 @@ function getMode(k) {
 		}
 	}
 
-	xhr.open('GET', 'TournamentControl?action=getMode&gioco=' + k, true);
+	xhr.open('GET', '../TournamentControl?action=getMode&gioco=' + k, true);
 	xhr.send();
 
 }

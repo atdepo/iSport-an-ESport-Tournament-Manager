@@ -1,10 +1,6 @@
 package it.unisa.control;
 
-import java.util.Base64.Encoder;
 import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.security.MessageDigest;
@@ -28,8 +24,7 @@ import it.unisa.model.utente.UtenteBean;
 import it.unisa.model.utente.UtenteBean.Tipo;
 import it.unisa.model.utente.UtenteModel;
 
-@WebServlet(name = "/LoginAndRegisterServlet", urlPatterns = { "/LoginAndRegisterServlet" }, initParams = {
-		@WebInitParam(name = "file-upload", value = "tmpDir") })
+@WebServlet(name = "/LoginAndRegisterServlet", urlPatterns = { "/LoginAndRegisterServlet","/ciccio" })
 @MultipartConfig(fileSizeThreshold = 1024 * 1024 * 2, // 2MB after which the file will be
 														// temporarily stored on disk
 		maxFileSize = 1024 * 1024 * 10, // 10MB maximum size allowed for uploaded files
@@ -55,6 +50,20 @@ public class LoginAndRegisterServlet extends HttpServlet {
 
 		case "register":
 
+		
+			try {
+				if(userModel.doRetriveByKey(request.getParameter("email"))==null)
+					System.out.println("non ho trovato utenti con questa mail");
+				else
+					System.out.println("questa mail non si può utilizzare");
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			
+			
+			
+			
 			UtenteBean utente = new UtenteBean();
 			utente.setEmail(request.getParameter("email"));
 			utente.setUsername(request.getParameter("username"));

@@ -9,8 +9,7 @@
     <link rel="stylesheet" type="text/css" href="CSS/login.css">
     <script src = "https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script type="text/javascript" src="Script/login-register.js"></script>
-    <script src="Script/validation.js"></script>
-    
+
 </head>
 <body>
 	<%@ include file="header.jsp"%>
@@ -35,18 +34,18 @@
     <div id="signup-form" >
         <form action="LoginAndRegisterServlet?action=register" method="post" class="sub" enctype="multipart/form-data">
             <input type="email" name="email" id="email" placeholder="E-mail"/>
-          	<span class="error"></span>
+            <span class="error"></span>
             <input type="text" name="username" class="username" id="username" placeholder="Username"/>
             <span class="error"></span>
             <input type="text" name="pIva" class="pIva" id="iva" placeholder="Opzionale: Partita IVA">
             <span class="error"></span>
-            <input type="hidden" id="data" name="dataIscrizione">
             <input type="password" name="password" class="password" id="password" placeholder="Password"/>
-			<span class="error"></span>
-			<input type="file" name="immagine" class="immagine" accept="image/*">
-			<span class="error"></span>
-    		<button type="submit" class="btn signup">Crea account</button> 
-            
+            <span class="error"></span>
+            <input type="file" name="immagine" class="immagine" accept="image/*">
+            <span class="error"></span>
+            <input type="hidden" id="data" name="dataIscrizione">
+            <button type="submit" class="btn signup">Crea account</button> 
+                  
         </form>
     </div>
 
@@ -68,5 +67,4 @@
   
 
 </body>
-  <script type="text/javascript" src="Script/validation.js"></script>
 </html>

@@ -9,11 +9,7 @@
     <link rel="stylesheet" type="text/css" href="CSS/login.css">
     <script src = "https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script type="text/javascript" src="Script/login-register.js"></script>
-  
     <script src="Script/validation.js"></script>
-    
-  <style type="text/css"> .er{color: darkred;}
-  							span{background-color: #008080; } </style>
     
 </head>
 <body>
@@ -27,7 +23,7 @@
     </div>
 
     <div id="login-form">
-        <form action="LoginAndRegisterServlet?action=validateLogin" method="post">
+        <form action="LoginAndRegisterServlet?action=validateLogin" method="post" class="log">
             <input type="email" name ="email" class="email" placeholder="Inserisci l'email"/>
             <input type="password" name="password" placeholder="Inserisci la password"/>
             <button type="submit" class="btn login">Accedi</button>
@@ -37,15 +33,15 @@
     </div>
 
     <div id="signup-form" >
-        <form action="LoginAndRegisterServlet?action=register" method="post" enctype="multipart/form-data">
-            <input type="email" name="email" id="email" placeholder="E-mail" required/>
+        <form action="LoginAndRegisterServlet?action=register" method="post" class="sub" enctype="multipart/form-data">
+            <input type="email" name="email" id="email" placeholder="E-mail"/>
           	<span class="error"></span>
-            <input type="text" name="username" class="username" id="username" placeholder="Username" required/>
+            <input type="text" name="username" class="username" id="username" placeholder="Username"/>
             <span class="error"></span>
-            <input type="text" name="pIva" class="pIva" id="iva" placeholder="Partita IVA">
+            <input type="text" name="pIva" class="pIva" id="iva" placeholder="Opzionale: Partita IVA">
             <span class="error"></span>
             <input type="hidden" id="data" name="dataIscrizione">
-            <input type="password" name="password" class="password" id="password" placeholder="Password" required/>
+            <input type="password" name="password" class="password" id="password" placeholder="Password"/>
 			<span class="error"></span>
 			<input type="file" name="immagine" class="immagine" accept="image/*">
 			<span class="error"></span>

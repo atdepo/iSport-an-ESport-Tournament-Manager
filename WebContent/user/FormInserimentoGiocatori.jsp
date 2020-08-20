@@ -26,10 +26,9 @@ if(urlParams.get('nomesquadra')===""||!urlParams.has('nomesquadra')){
 <link rel="stylesheet" href="CSS/Tendina.css" type="text/css">
 <link href='https://fonts.googleapis.com/css?family=Lato:100,200,300,400,500,600,700' rel='stylesheet' type='text/css'>
 
-<a href="http://scribblerockerz.com/drag-n-drop-file-input-without-javascript/" class="back-to-article" target="_blank">back to Article</a>
 </head>
 <body>
-	<%@ include file="header.jsp"%>
+	<%@ include file="../header.jsp"%>
 	
 	<input type="hidden" id="nPartecipanti" value=<%=(Integer)session.getAttribute("numPartecipanti")%>>
 	

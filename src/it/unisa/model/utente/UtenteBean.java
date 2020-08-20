@@ -3,7 +3,6 @@ package it.unisa.model.utente;
 import java.io.Serializable;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.sql.Blob;
 
 public class UtenteBean implements Serializable {
 
@@ -21,27 +20,18 @@ public class UtenteBean implements Serializable {
 		this.username = "";
 		this.dataIscrizione = "";
 		this.email ="" ;
-		this.password = new byte[32];
+		this.password =new byte[32];;
 		this.img="";
 		
 	}
-	
-
-
 	
 	public String getTipo() {
 		return tipo.toString();
 	}
 
-
-
-
 	public void setTipo(Tipo tipo) {
 		this.tipo = tipo;
 	}
-
-
-
 
 	public String getpIVA() {
 		return pIVA;
@@ -100,5 +90,12 @@ public class UtenteBean implements Serializable {
 			e.printStackTrace();
 		}
 		
+	}
+	
+	public boolean isEmpty() {
+		if(email==null||email=="")
+			return true;
+		else
+			return false;
 	}
 }

@@ -6,14 +6,27 @@
 	$(function(){
 		$('.sub').submit(function () { 
 		
-			return mailCheck() && userCheck() && ivaCheck() && passCheck();	
+			var res= mailCheck() && userCheck() && ivaCheck() && passCheck();	
+			if(res){
+				var d = new Date();
+				var month = d.getMonth()+1;
+				var day = d.getDate();
+				var output = d.getFullYear() + '/' +
+				    (month<10 ? '0' : '') + month + '/' +
+				    (day<10 ? '0' : '') + day;
+				$('#data').val(output);
+				return true;
+			}
+			else
+				return false;
 		});
 		
 	});
 
 	//I campi di errore vengono nascosti per essere mostrati quando serve
-	
-	$('span').text("");
+	$(document).ready(function(){
+		$('span').text("");
+	})
 	   
 	//--------------------------------Funzione per il controllo del campo email------------------------------------------------------------
  function mailCheck(){
@@ -31,7 +44,6 @@
 			if(!emailReg.test(email.val())){	//Email non corretta
 				
  	    	    error.text("Inserisci un'e-mail credibile dai");
-				$(this).addClass("er");
 				console.log("email check not passed");
 				return false;
  		}
@@ -62,7 +74,6 @@
 		
 			if(!usernameReg.test(username.val())){ 	//Username non corretto
 				error.text("Magari qualcosa di decente");
-				$(this).addClass("er");
 				console.log('username check not passed');
 				return false;
 			}
@@ -82,8 +93,8 @@
 	//-----------------------------------------Funzione per il controllo del campo password--------------------------------------------------
  function passCheck(){
 	var password=$("#password");
-	var passwordReg=/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*+-/\?&])[A-Za-z\d@$!%*?&]{8,}$/;
-    let error=password.next();
+	var passwordReg=/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/;
+    let error=$('.psw');
 
 	if(!password.val()){	//Password non inserita
 		error.text("Devi mettere una password prova Kekko2000!");
@@ -94,7 +105,6 @@
 	else{
 		if(!passwordReg.test(password.val())){	//Password non corretta
 			error.text("Deve essere almeno 8 caratteri con almeno:un carattere speciale,un lowercase,un UPPERCASE e un numero ");
-			$(this).addClass("er");
 			console.log('password check not passed');
 			return false;
 		}
@@ -117,7 +127,6 @@
 
 		if(iva.val() && !ivaReg.test(iva.val())){	//Iva non corretta
 			error.text("Iva non corretta");
-			$(this).addClass("er");
 			console.log('Iva check not passed');
 			return false;
 		}
@@ -127,8 +136,15 @@
 			return true;
 		}
     }
-    
-
+//--------------------------------------Funzione per lo show della password------------------------------------------   
+    function showPass() {
+  var x = document.getElementById("password");
+  if (x.type === "password") {
+    x.type = "text";
+  } else {
+    x.type = "password";
+  }
+}
 
 
 //---------------Funzioni per cambiare il tipo di azione da compiere(login|register)----------------------------------

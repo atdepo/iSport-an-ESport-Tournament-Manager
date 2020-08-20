@@ -57,26 +57,6 @@ public class SponsorModel implements ModelInterface<SponsorBean, SponsorKey>{
 		ArrayList<SponsorBean> collection= new ArrayList<SponsorBean>();
 		String sql = "SELECT DISTINCT nome FROM sponsor";
 		
-		Encoder enc=Base64.getEncoder();
-		File file= new File("");
-		try {
-			FileInputStream fstream= new FileInputStream(file);
-			 byte fileData[] = new byte[(int) file.length()];
-	         fstream.read(fileData);
-	         String base64File = Base64.getEncoder().encodeToString(fileData);
-	         System.out.println(base64File);
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		    
-		    
-		    
-		
 			try (Connection con = DriverManagerConnectionPool.getConnection()) {
 				statement = con.prepareStatement(sql);
 				System.out.println("DoRetriveAll=" + statement.toString());

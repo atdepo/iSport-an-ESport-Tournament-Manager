@@ -27,10 +27,6 @@ public class UtenteModel implements ModelInterface<UtenteBean, String>{
 				System.out.println("DoRetriveByKey=" + statement.toString());
 				ResultSet rs = statement.executeQuery();
 				
-				if(!rs.next())  // se non sono stati trovati utenti
-					return null;
-				
-				rs.previous(); //altrimenti ritorna alla riga analizzata in precedenza e restituisci l'oggetto
 				
 				while (rs.next()) {
 					bean.setDataIscrizione(rs.getString("dataiscrizione"));
@@ -41,7 +37,10 @@ public class UtenteModel implements ModelInterface<UtenteBean, String>{
 					bean.setpIVA(rs.getString("pIVA"));
 				}
 			}
-			return bean;
+			if(bean.isEmpty())
+				return null;
+			else
+				return bean;
 		} else {
 			// TODO ERRORE
 			return null;

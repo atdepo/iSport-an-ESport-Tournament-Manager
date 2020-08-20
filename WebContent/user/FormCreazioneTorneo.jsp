@@ -47,7 +47,6 @@
 				</div>
 			</div>
 			
-		<!--<div class="progress-bar-wrapper"></div>-->
 			<form action="#" method="post">
 		<div class="page slidepage">
 			<div class="title">Informazioni di base:</div>
@@ -64,7 +63,6 @@
 
 			<div class="field">
 				 <label for="number-container">Qual'è il budget stimato per il torneo?</label>
-				<!--<input type="number" class="feedback-input" min="0" max=10000000 name="budget" required> -->
 				
 				<div class="number-container budget" title="Premi shift cliccando i selettori per avanzare di +/- 100 e premi CTRL sx per avanzare di +/- 1000">
 					<span class="next"></span>

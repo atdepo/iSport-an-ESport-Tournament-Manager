@@ -95,7 +95,7 @@
  function passCheck(){
 	var password=$("#password");
 	var passwordReg=/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/;
-    let error=password.next();
+    let error=$('.psw');
 
 	if(!password.val()){	//Password non inserita
 		error.text("Devi mettere una password prova Kekko2000!");

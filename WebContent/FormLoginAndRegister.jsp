@@ -71,7 +71,9 @@ System.out.println(errorLocation);
             <input type="text" name="pIva" class="pIva" id="iva" placeholder="Opzionale: Partita IVA">
             <span class="error"></span>
             <input type="password" name="password" class="password" id="password" placeholder="Password"/>
-            <span class="error"></span>
+            	<input type="checkbox" onclick="showPass()">
+            	<label class="showpsw">Show Password</label><br>
+            <span class="psw error"></span>
             <input type="file" name="immagine" class="immagine" accept="image/*">
             <span class="error"></span>
             <input type="hidden" id="data" name="dataIscrizione">
@@ -82,23 +84,5 @@ System.out.println(errorLocation);
 
 </div>
 
-
-<!-- 
-<script type="text/javascript">
-		$(document).ready(function(){
-			var d = new Date();
-
-			var month = d.getMonth()+1;
-			var day = d.getDate();
-
-			var output = d.getFullYear() + '/' +
-			    (month<10 ? '0' : '') + month + '/' +
-			    (day<10 ? '0' : '') + day;
-			$('#data').val(output);
-		})
-	
-	</script>
-  
- -->
 </body>
 </html>

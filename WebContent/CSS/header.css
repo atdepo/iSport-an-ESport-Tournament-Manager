@@ -1,6 +1,13 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat|Quicksand');
+
+*{
+	font-family: 'quicksand',Arial, Helvetica, sans-serif;
+}
+
 
 body{
 	background-color:#1F2833;
+	
 	
 }
 
@@ -20,7 +27,6 @@ body{
 	.nav a {
   		float: left;
   		display: block;
-  		color: #f2f2f2;
   		text-align: center;
   		padding: 14px 16px;
   		text-decoration: none;
@@ -32,11 +38,7 @@ body{
  		color:lime;		
 		background-color:#1F2833;
 	}
-
-	.nav a.active {
- 
-	}
-
+	
 	.nav .icon {
  	 display: none;
 	}

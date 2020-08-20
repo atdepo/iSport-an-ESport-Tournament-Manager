@@ -34,7 +34,6 @@
 	});
 	
 
-
 	//I campi di errore vengono nascosti per essere mostrati quando serve
 	$(document).ready(function(){
 		$('span').text("");

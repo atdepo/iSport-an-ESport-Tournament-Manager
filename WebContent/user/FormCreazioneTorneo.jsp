@@ -29,7 +29,7 @@
 </head>
 
 <body>
-	<%@ include file="header.jsp"%>
+	<%@ include file="../header.jsp"%>
 	
 	<div class="total-container">
 		<header>Iniziamo con la creazione del tuo torneo!</header>

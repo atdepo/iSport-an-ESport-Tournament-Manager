@@ -26,7 +26,7 @@
 </head>
 
 <body>
-	<%@ include file="header.jsp"%>
+	<%@ include file="../header.jsp"%>
 	<div class="squadra">
 		<h3>Montefusco merda</h3><br>
 		

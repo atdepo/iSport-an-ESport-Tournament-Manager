@@ -201,5 +201,5 @@ span{
     }
 }
 input[type=checkbox]{
-	display:flex;
+	width:5%;
 }

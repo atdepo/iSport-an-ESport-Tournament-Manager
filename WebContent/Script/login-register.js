@@ -82,7 +82,7 @@
  function passCheck(){
 	var password=$("#password");
 	var passwordReg=/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*+-/\?&])[A-Za-z\d@$!%*?&]{8,}$/;
-    let error=password.next();
+    let error=$('.psw');
 
 	if(!password.val()){	//Password non inserita
 		error.text("Devi mettere una password prova Kekko2000!");
@@ -124,8 +124,15 @@
 			return true;
 		}
     }
-    
-
+//--------------------------------------Funzione per lo show della password------------------------------------------   
+    function showPass() {
+  var x = document.getElementById("password");
+  if (x.type === "password") {
+    x.type = "text";
+  } else {
+    x.type = "password";
+  }
+}
 
 
 //---------------Funzioni per cambiare il tipo di azione da compiere(login|register)----------------------------------

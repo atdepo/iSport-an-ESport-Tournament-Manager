@@ -101,4 +101,11 @@ public class UtenteBean implements Serializable {
 		}
 		
 	}
+	
+	public boolean isEmpty() {
+		if((username==""||username==null) && (dataIscrizione==""||dataIscrizione==null) && (email==""||email==null )&& (pIVA==""||pIVA==null) && (img==""||img==null) && tipo==null && password.length==0)
+			return true;
+		else
+			return false;
+	}
 }

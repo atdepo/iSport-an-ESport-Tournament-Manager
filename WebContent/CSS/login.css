@@ -15,10 +15,6 @@ input[type=file]{
 	position:relative;
 }
 
-.er{
-    color: darkred;
-}
-
 span{
     font-weight: 900;
     background-color: darkred;

@@ -18,7 +18,7 @@ public class UtenteModel implements ModelInterface<UtenteBean, String>{
 	public UtenteBean doRetriveByKey(String code) throws SQLException {
 		PreparedStatement statement = null;
 		UtenteBean bean= new UtenteBean();
-		String sql="Select * from utente where email=?";
+		String sql="SELECT * FROM utenti WHERE email=?";
 		if(code!=null) {
 			try (Connection con = DriverManagerConnectionPool.getConnection()) {
 				statement = con.prepareStatement(sql);
@@ -26,7 +26,8 @@ public class UtenteModel implements ModelInterface<UtenteBean, String>{
 
 				System.out.println("DoRetriveByKey=" + statement.toString());
 				ResultSet rs = statement.executeQuery();
-
+				
+				
 				while (rs.next()) {
 					bean.setDataIscrizione(rs.getString("dataiscrizione"));
 					bean.setEmail(rs.getString("email"));
@@ -36,7 +37,10 @@ public class UtenteModel implements ModelInterface<UtenteBean, String>{
 					bean.setpIVA(rs.getString("pIVA"));
 				}
 			}
-			return bean;
+			if(bean.isEmpty())
+				return null;
+			else
+				return bean;
 		} else {
 			// TODO ERRORE
 			return null;

@@ -5,37 +5,43 @@
 
 
 
-	error=$(".error");
+	var error=$(".error");
 	error.hide();
    
   //CONTROLL EMAIL
   
     var email=$("#email")
-    email.focusout(function() {
+    giacomo=(function() {
         
     var emailReg=/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
    
     if(!email.val())	//Email non inserita
-    	
-    	error.show().text("Inserisci un'e-mail, non ti posso inviare spam altrimenti");
-   
+    	{
+    		error.show().text("Inserisci un'e-mail, non ti posso inviare spam altrimenti");
+    		return false;
+    	}
     else
     
     	if(!emailReg.test(email.val()))	//Email non corretta
       { 
     	  email.next().show().text("Inserisci un'e-mail credibile dai");
           $(this).addClass("er");
+          return false;
       }
      
     	else	//Tutt a post
     	  {
     	  	error.hide();
     	  	console.log("ok");
+    	  	return true;
     	  }
+    
     })
 
 
-
+    email.focusout(giacomo);
+   
+   
 
 
 
@@ -75,19 +81,19 @@ function dataCheck(campo) {
 }
 
 function checkCampiFormLogin() {
-    const form = document.getElementById("login-form");
+    const form = document.getElementById("login-form")
     const email = form.email;
     const password = form.password;
 
     let ch1 = emailCheck(email);
     let ch2 = passwdCheck(password);
 
-    console.log(ch1 && ch2);
+    console.log(ch1 && ch2)
     return (ch1 && ch2);
 }
 
 function checkCampiRegistrazione() {
-    const form = document.getElementById("signup-form");
+    const form = document.getElementById("signup-form")
     const username = form.username;
     const pIva= form.pIva;
     const email = form.email;

@@ -40,24 +40,66 @@ public class LoginAndRegisterServlet extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
+		
+		String regEmail="^(([^<>()\\[\\]\\\\.,;:\\s@\"]+(\\.[^<>()\\[\\]\\\\.,;:\\s@\"]+)*)|(\".+\"))@((\\[[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}])|(([a-zA-Z\\-0-9]+\\.)+[a-zA-Z]{2,}))$";
+		String regUser="^[a-zA-Z0-9]+([._]?[a-zA-Z0-9]+)*$";
+		String regIva="^[0-9]{11}$";
+		String regPsw="^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$";
+		
 		String action = request.getParameter("action");
-
 		System.out.println(action);
 
 		switch (action) {
 
 		case "register":
-
+			
 			try (ByteArrayOutputStream bos = new ByteArrayOutputStream()) {
 				HttpSession session=request.getSession();
+				//Impostiamogli eventuali errori avuti in precedenza a null per evitare problemi nella visualizzazione
+				session.setAttribute("error-type", null);
+				session.setAttribute("error", null);
+				session.setAttribute("error-location", null);
+				
+				//Controllo se la mail inserita in fase di registrazione sia già stata associata a qualche altro utente 
 				if (userModel.doRetriveByKey(request.getParameter("email")) != null) {
 					session.setAttribute("error-type", "email");
 					session.setAttribute("error", "Questa mail è già stata utilizzata, scegline un'altra");
 					session.setAttribute("error-location", "signup");
 					response.sendRedirect(request.getContextPath()+"/FormLoginAndRegister.jsp");
 				}
+				//Controllo se la mail inserita in fase di registrazione sia scritta correttamente
+				//(cosa che controlla javascript, ma nel caso sia disattivato evitiamo l'inserimento di dati erronei)
+				else if(!request.getParameter("email").matches(regEmail)) {
+					System.out.println("mi fermo alla mail");
+					session.setAttribute("error-type", "email");
+					session.setAttribute("error", "La mail non è scritta correttamente");
+					session.setAttribute("error-location", "signup");
+					response.sendRedirect(request.getContextPath()+"/FormLoginAndRegister.jsp");
+				}
+				else if(!request.getParameter("username").matches(regUser)) {
+					System.out.println("mi fermo allo username");
+					session.setAttribute("error-type", "username");
+					session.setAttribute("error", "Utente non scritto correttamente");
+					session.setAttribute("error-location", "signup");
+					response.sendRedirect(request.getContextPath()+"/FormLoginAndRegister.jsp");
+				}
 				
+				else if(!request.getParameter("pIva").isEmpty() && !request.getParameter("pIva").matches(regIva)) {
+					System.out.println("mi fermo alla piva");
+					session.setAttribute("error-type", "iva");
+					session.setAttribute("error", "Partita Iva non scritta correttamente");
+					session.setAttribute("error-location", "signup");
+					response.sendRedirect(request.getContextPath()+"/FormLoginAndRegister.jsp");
+				}
+				else if(!request.getParameter("password").matches(regPsw)) {
+					System.out.println("mi fermo alla psw");
+					session.setAttribute("error-type", "psw");
+					session.setAttribute("error", "Deve essere almeno 8 caratteri con almeno:un carattere speciale,un lowercase,un UPPERCASE e un numero ");
+					session.setAttribute("error-location", "signup");
+					response.sendRedirect(request.getContextPath()+"/FormLoginAndRegister.jsp");
+				}
+				//Se tutti i controlli sono stati superati si crea il bean e si inserisce nel database
+
 				else {
 					UtenteBean utente = new UtenteBean();
 					utente.setEmail(request.getParameter("email"));
@@ -85,6 +127,7 @@ public class LoginAndRegisterServlet extends HttpServlet {
 
 						utente.setImg(img);
 						userModel.doSave(utente);
+						session.setAttribute("user", utente);
 						response.sendRedirect("index.jsp");
 					}
 				}
@@ -110,6 +153,8 @@ public class LoginAndRegisterServlet extends HttpServlet {
 				byte user[] = userModel.getUserPassword(request.getParameter("email"));
 				System.out.println("Risutato" + Arrays.compare(curr, user));
 				if (Arrays.compare(curr, user) == 0) {
+					UtenteBean utente=userModel.doRetriveByKey(request.getParameter("email"));
+					request.getSession().setAttribute("user", utente);
 					response.sendRedirect("index.jsp");
 				} else {
 					response.sendRedirect("FormLogin.jsp");

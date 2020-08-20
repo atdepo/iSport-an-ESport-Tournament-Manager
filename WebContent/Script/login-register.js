@@ -6,15 +6,28 @@
 	$(function(){
 		$('.sub').submit(function () { 
 		
-			return mailCheck() && userCheck() && ivaCheck() && passCheck();	
+			var res= mailCheck() && userCheck() && ivaCheck() && passCheck();	
+			if(res){
+				var d = new Date();
+				var month = d.getMonth()+1;
+				var day = d.getDate();
+				var output = d.getFullYear() + '/' +
+				    (month<10 ? '0' : '') + month + '/' +
+				    (day<10 ? '0' : '') + day;
+				$('#data').val(output);
+				return true;
+			}
+			else
+				return false;
 		});
 		
 	});
 
 
 	//I campi di errore vengono nascosti per essere mostrati quando serve
-	
-	$('span').text("");
+	$(document).ready(function(){
+		$('span').text("");
+	})
 	   
 	//--------------------------------Funzione per il controllo del campo email------------------------------------------------------------
  function mailCheck(){
@@ -81,7 +94,7 @@
 	//-----------------------------------------Funzione per il controllo del campo password--------------------------------------------------
  function passCheck(){
 	var password=$("#password");
-	var passwordReg=/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*+-/\?&])[A-Za-z\d@$!%*?&]{8,}$/;
+	var passwordReg=/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/;
     let error=password.next();
 
 	if(!password.val()){	//Password non inserita

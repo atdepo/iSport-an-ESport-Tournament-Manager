@@ -81,6 +81,9 @@ System.out.println(errorLocation);
     </div>
 
 </div>
+
+
+<!-- 
 <script type="text/javascript">
 		$(document).ready(function(){
 			var d = new Date();
@@ -96,6 +99,6 @@ System.out.println(errorLocation);
 	
 	</script>
   
-
+ -->
 </body>
 </html>

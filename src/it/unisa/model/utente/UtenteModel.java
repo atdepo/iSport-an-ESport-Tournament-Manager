@@ -18,7 +18,7 @@ public class UtenteModel implements ModelInterface<UtenteBean, String>{
 	public UtenteBean doRetriveByKey(String code) throws SQLException {
 		PreparedStatement statement = null;
 		UtenteBean bean= new UtenteBean();
-		String sql="SELECT * FROM utente WHERE email=?";
+		String sql="SELECT * FROM utenti WHERE email=?";
 		if(code!=null) {
 			try (Connection con = DriverManagerConnectionPool.getConnection()) {
 				statement = con.prepareStatement(sql);

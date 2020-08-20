@@ -11,7 +11,6 @@
 		
 	});
 
-
 	//I campi di errore vengono nascosti per essere mostrati quando serve
 	
 	$('span').text("");

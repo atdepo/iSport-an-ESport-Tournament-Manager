@@ -87,20 +87,15 @@ body{
  	 display: none;
 	}
 
-	@media screen and (max-width: 680px) {
-  		.nav a{
-  		display: none;
-  		}
-  		#login-register{
-  		display:block;
-  		}
+	@media screen and (max-width: 580px) {
+  		.nav a:not(:first-child) {display: none;}
   		.nav a.icon {
-    	float: left;
+    	float: right;
     	display: block;
   	}
 	}
 
-	@media screen and (max-width: 680px) {
+	@media screen and (max-width: 580px) {
   		.nav.responsive {position: relative;}
   		.nav.responsive .icon {
    		position: absolute;

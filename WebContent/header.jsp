@@ -9,7 +9,7 @@
 <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 <meta charset="UTF-8">
 
-
+<%UtenteBean utente=(UtenteBean)session.getAttribute("user");%>
 </head>
 <meta charset="UTF-8">
 <body>
@@ -24,8 +24,17 @@
   		
   		UtenteBean user= (UtenteBean)session.getAttribute("user");
   		%>
-  		<a href="<%session.invalidate(); %>" id="login-register" class="profile-image"><img src="<%=user.getImg()%>" class="source"></a>
+  		<a href="LoginAndRegisterControl?action=logout" title="Cliccami per fare logout" id="login-register"  class="profile-image">>
+		  <img src="<%=user.getImg()%>" class="source"></a>
   		<%} %>
+
+
+  		
+  		<a href="<%=response.encodeURL(request.getContextPath()+"/FormLoginAndRegister.jsp")%>" id="login-register">Login/register</a>
+  		<%}else { %>
+  			<a href="LoginAndRegisterControl?action=logout"  title="Cliccami per fare logout"	id="login-register">Ciao, <%=utente.getUsername() %></a>
+  			
+  			<%} %> 
   		<a href="javascript:void(0);" class="icon" onclick="funzione()">
   		
     		<i class="fa fa-bars" aria-hidden="true"></i>

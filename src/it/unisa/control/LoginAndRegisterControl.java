@@ -63,6 +63,11 @@ public class LoginAndRegisterControl extends HttpServlet {
 		System.out.println("La servlet di login e registrazione sta svolgendo l'azione di :"+action);
 
 		switch (action) {
+		
+		case "logout":
+			request.getSession().invalidate();
+			response.sendRedirect("index.jsp");
+			break;
 
 		case "register": //Effettuo la registrazione dell'utente
 			
@@ -185,7 +190,7 @@ public class LoginAndRegisterControl extends HttpServlet {
 					
 				} else {//Se le due password non coincidono
 					request.getSession().setAttribute("error-type", "wrongCred");
-					request.getSession().setAttribute("error", "Deve essere almeno 8 caratteri con almeno:un carattere speciale,un lowercase,un UPPERCASE e un numero ");
+					request.getSession().setAttribute("error", "Password o email errate");
 					request.getSession().setAttribute("error-location", "login");
 					response.sendRedirect("FormLoginAndRegister.jsp"); //Reindirizzo l'utente nuovamente alla schermata di inserimento delle credenziali
 				}

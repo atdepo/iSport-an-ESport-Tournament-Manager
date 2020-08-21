@@ -30,11 +30,6 @@
 
 
   		
-  		<a href="<%=response.encodeURL(request.getContextPath()+"/FormLoginAndRegister.jsp")%>" id="login-register">Login/register</a>
-  		<%}else { %>
-  			<a href="LoginAndRegisterControl?action=logout"  title="Cliccami per fare logout"	id="login-register">Ciao, <%=utente.getUsername() %></a>
-  			
-  			<%} %> 
   		<a href="javascript:void(0);" class="icon" onclick="funzione()">
   		
     		<i class="fa fa-bars" aria-hidden="true"></i>

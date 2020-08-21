@@ -64,15 +64,20 @@ body{
  	 display: none;
 	}
 
-	@media screen and (max-width: 580px) {
-  		.nav a:not(:first-child) {display: none;}
+	@media screen and (max-width: 680px) {
+  		.nav a{
+  		display: none;
+  		}
+  		#login-register{
+  		display:block;
+  		}
   		.nav a.icon {
-    	float: right;
+    	float: left;
     	display: block;
   	}
 	}
 
-	@media screen and (max-width: 580px) {
+	@media screen and (max-width: 680px) {
   		.nav.responsive {position: relative;}
   		.nav.responsive .icon {
    		position: absolute;

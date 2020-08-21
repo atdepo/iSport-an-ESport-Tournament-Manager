@@ -113,6 +113,7 @@ public class ModalitaModel implements ModelInterface<ModalitaBean, ModalitaKey> 
 			statement.setString(3,product.getNomeGioco());
 			System.out.println("doSave="+statement);
 			statement.executeUpdate();
+			con.commit();//<----- a volte vorrei non essere così tanto forte
 		}
 
 	}
@@ -124,8 +125,18 @@ public class ModalitaModel implements ModelInterface<ModalitaBean, ModalitaKey> 
 	}
 
 	@Override
-	public void doDelete(ModalitaBean product) throws SQLException {
-		// TODO Auto-generated method stub
+	public void doDelete(ModalitaKey key) throws SQLException {
+		
+		String sql = "DELETE FROM modalita WHERE tipo=? AND nomegioco=?";
+		
+		try(Connection con = DriverManagerConnectionPool.getConnection();PreparedStatement statement= con.prepareStatement(sql)){
+			
+			statement.setString(1,key.getTipo());	
+			statement.setString(1,key.getNomeGioco());
+			System.out.println("doDelete="+statement);
+			statement.executeUpdate();
+			con.commit();//<----- a volte vorrei non essere così tanto forte
+		}
 
 	}
 }

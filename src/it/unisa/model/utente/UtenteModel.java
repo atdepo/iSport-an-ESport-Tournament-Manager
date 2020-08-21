@@ -158,19 +158,16 @@ public class UtenteModel implements ModelInterface<UtenteBean, String>{
 	}
 
 	@Override
-	public void doDelete(UtenteBean utente) throws SQLException {
-		PreparedStatement statement=null;
+	public void doDelete(String email) throws SQLException {
 		
-		String sql="Delete from utenti \" +\r\n" + 
-				"\"where username=? \" +\r\n";
+		String sql="DELETE FROM utenti WHERE email = ?";
 		
-		try (Connection con = DriverManagerConnectionPool.getConnection()) {
-			statement = con.prepareStatement(sql);
-			statement.setString(1,utente.getUsername());
+		try (Connection con = DriverManagerConnectionPool.getConnection();PreparedStatement statement=con.prepareStatement(sql);) {
 			
-			
+			statement.setString(1,email);
 			System.out.println("DoDelete=" + statement.toString());
-			 statement.executeUpdate(sql);
+			statement.executeUpdate();
+			con.commit();//<----- a volte vorrei non essere così tanto forte
 		
 	}
 		}

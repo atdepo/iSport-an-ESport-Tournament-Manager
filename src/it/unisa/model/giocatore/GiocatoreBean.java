@@ -4,18 +4,27 @@ import java.io.Serializable;
 
 public class GiocatoreBean implements Serializable {
 
-	String nickname,nome,cognome,ruolo,datanascita,nomesquadra,codtecnico;
+	String nickname,nome,cognome,ruolo,datanascita,nomesquadra,codtecnico,imgPlayer;
 	
 	public GiocatoreBean() {
-		String nickname="";
-		String nome="";
-		String cognome="";
-		String ruolo="";
-		String datanascita="";
-		String nomesquadra="";
-		String codtecnico="";
+		nickname="";
+		nome="";
+		cognome="";
+		ruolo="";
+		datanascita="";
+		nomesquadra="";
+		codtecnico="";
+		imgPlayer="";
 	}
 
+	public String getPlayerImage() {
+		return imgPlayer;
+	}
+	
+	public void setPlayerImage(String img) {
+		this.imgPlayer=img;
+	}
+	
 	public String getNickname() {
 		return nickname;
 	}

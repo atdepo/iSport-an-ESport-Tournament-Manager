@@ -91,6 +91,7 @@ public class StrutturaModel implements ModelInterface<StrutturaBean,KeyStruttura
 			statement.setInt(4, product.getCapienza());
 			System.out.println("doSave="+statement);
 			statement.executeUpdate();
+			con.commit();//<----- a volte vorrei non essere così tanto forte
 		}
 
 		
@@ -103,8 +104,19 @@ public class StrutturaModel implements ModelInterface<StrutturaBean,KeyStruttura
 	}
 
 	@Override
-	public void doDelete(StrutturaBean product) throws SQLException {
-		// TODO Auto-generated method stub
+	public void doDelete(KeyStruttura key) throws SQLException {
+		
+		String sql = "DELETE FROM struttura WHERE indirizzo = ? AND cap = ?";
+		
+		try(Connection con = DriverManagerConnectionPool.getConnection();PreparedStatement statement= con.prepareStatement(sql)){
+			
+			statement.setString(1,key.getIndirizzo());
+			statement.setString(1,key.getCAP());
+			System.out.println("doDelete="+statement);
+			statement.executeUpdate();
+			con.commit();//<----- a volte vorrei non essere così tanto forte
+		}
+		
 		
 	}
 

@@ -35,6 +35,7 @@ public class GiocatoreModel implements ModelInterface<GiocatoreBean, String> {
 				bean.setNome(rs.getString("nome"));
 				bean.setNomesquadra(rs.getString("nomesquadra"));
 				bean.setRuolo(rs.getString("ruolo"));
+				bean.setPlayerImage(rs.getString("playerImage"));
 				
 			}
 		}
@@ -64,6 +65,7 @@ public class GiocatoreModel implements ModelInterface<GiocatoreBean, String> {
 				bean.setNome(rs.getString("nome"));
 				bean.setNomesquadra(rs.getString("nomesquadra"));
 				bean.setRuolo(rs.getString("ruolo"));
+				bean.setPlayerImage(rs.getString("playerImage"));
 				collection.add(bean);
 			}
 		}
@@ -73,7 +75,7 @@ public class GiocatoreModel implements ModelInterface<GiocatoreBean, String> {
 	@Override
 	public void doSave(GiocatoreBean giocatore) throws SQLException {
 		PreparedStatement statement = null;
-		String sql = "INSERT INTO giocatore values (?,?,?,?,?,?,?)";
+		String sql = "INSERT INTO giocatore values (?,?,?,?,?,?,?,?)";
 		
 		try(Connection con = DriverManagerConnectionPool.getConnection()){
 		
@@ -85,8 +87,10 @@ public class GiocatoreModel implements ModelInterface<GiocatoreBean, String> {
 			statement.setString(5,giocatore.getDatanascita());
 			statement.setString(6,giocatore.getNomesquadra());
 			statement.setString(7,giocatore.getCodtecnico());
+			statement.setString(8,giocatore.getPlayerImage());
 			System.out.println("doSave="+statement);
 			statement.executeUpdate();
+			con.commit();//<----- a volte vorrei non essere così tanto forte
 		}
 		
 		
@@ -99,17 +103,16 @@ public class GiocatoreModel implements ModelInterface<GiocatoreBean, String> {
 	}
 
 	@Override
-	public void doDelete(GiocatoreBean giocatore) throws SQLException {
-		PreparedStatement statement	 = null;
-		String sql = "DELETE FROM giocatore WHERE (nickname=?)";
-		GiocatoreBean bean= new GiocatoreBean();
-		try(Connection con = DriverManagerConnectionPool.getConnection()){
+	public void doDelete(String nick) throws SQLException {
 		
-			statement=con.prepareStatement(sql);
-			statement.setString(1,giocatore.getNickname());
-			
-			System.out.println("doSave="+statement);
+		String sql = "DELETE FROM giocatore WHERE (nickname=?)";
+		
+		try(Connection con = DriverManagerConnectionPool.getConnection();PreparedStatement statement= con.prepareStatement(sql)){
+		
+			statement.setString(1,nick);	
+			System.out.println("doDelete="+statement);
 			statement.executeUpdate();
+			con.commit();//<----- a volte vorrei non essere così tanto forte
 		}
 		
 		

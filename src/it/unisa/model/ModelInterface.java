@@ -47,7 +47,7 @@ public interface ModelInterface <T,U>{
 	 * @param bean il bean contenente i valori utilizzati per eliminare la riga dal database
 	 * @throws SQLException
 	 */
-	public void doDelete(T bean) throws SQLException;
+	public void doDelete(U bean) throws SQLException;
 	
 	
 }

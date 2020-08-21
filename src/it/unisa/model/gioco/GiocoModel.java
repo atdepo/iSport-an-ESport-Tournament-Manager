@@ -69,6 +69,7 @@ public class GiocoModel implements ModelInterface<GiocoBean, String> {
 			
 			System.out.println("doSave="+statement);
 			statement.executeUpdate();
+			con.commit();//<----- a volte vorrei non essere così tanto forte
 		}
 	}
 
@@ -79,8 +80,17 @@ public class GiocoModel implements ModelInterface<GiocoBean, String> {
 	}
 
 	@Override
-	public void doDelete(GiocoBean product) throws SQLException {
-		// TODO Auto-generated method stub
+	public void doDelete(String nome) throws SQLException {
+		
+		String sql = "DELETE FROM gioco WHERE NOME=?";
+		
+		try(Connection con = DriverManagerConnectionPool.getConnection();PreparedStatement statement= con.prepareStatement(sql)){
+			
+			statement.setString(1,nome);	
+			System.out.println("doDelete="+statement);
+			statement.executeUpdate();
+			con.commit();//<----- a volte vorrei non essere così tanto forte
+		}
 
 	}
 

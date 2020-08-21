@@ -60,7 +60,7 @@ public class LoginAndRegisterControl extends HttpServlet {
 			response.sendRedirect("index.jsp");
 			return;
 		}
-		System.out.println("La servlet di login e registrazione sta svològendo l'azione di :"+action);
+		System.out.println("La servlet di login e registrazione sta svolgendo l'azione di :"+action);
 
 		switch (action) {
 
@@ -68,6 +68,7 @@ public class LoginAndRegisterControl extends HttpServlet {
 			
 			try (ByteArrayOutputStream bos = new ByteArrayOutputStream()) {
 				HttpSession session=request.getSession();
+				
 				//Impostiamogli eventuali errori avuti in precedenza a null per evitare problemi nella visualizzazione
 				session.setAttribute("error-type", null); //error-type ci fornisce il campo sul quale abbiamo riscontrato l'errore
 				session.setAttribute("error", null); // error ci fornisce il messaggio di errore da visualizzare
@@ -77,10 +78,12 @@ public class LoginAndRegisterControl extends HttpServlet {
 				
 				//Controllo se la mail inserita in fase di registrazione sia già stata associata a qualche altro utente 
 				if (userModel.doRetriveByKey(request.getParameter("email")) != null) {
+					System.out.println("guarda che sta mail fa schifo");
 					session.setAttribute("error-type", "email");
 					session.setAttribute("error", "Questa mail è già stata utilizzata, scegline un'altra");
 					session.setAttribute("error-location", "signup");
 					response.sendRedirect(request.getContextPath()+"/FormLoginAndRegister.jsp");
+					return;
 				}
 				//Di seguito ci sono vari controlli sui campi inseriti in fase di registrazione
 				//(controllati nel caso javascript sia disattivato così da evitiare l'inserimento di dati erronei)
@@ -109,7 +112,7 @@ public class LoginAndRegisterControl extends HttpServlet {
 				}
 				else if(!request.getParameter("password").matches(regPsw)) {
 					System.out.println("mi fermo alla psw");
-					session.setAttribute("error-type", "psw");
+					session.setAttribute("error-type", "password");
 					session.setAttribute("error", "Deve essere almeno 8 caratteri con almeno:un carattere speciale,un lowercase,un UPPERCASE e un numero ");
 					session.setAttribute("error-location", "signup");
 					response.sendRedirect(request.getContextPath()+"/FormLoginAndRegister.jsp");
@@ -128,22 +131,32 @@ public class LoginAndRegisterControl extends HttpServlet {
 					//Immagine -> BASE64
 					Part part = request.getPart("immagine"); //Prende la parte dal multipart form che rappresenta l'immagine di profilo dell'utente
 					InputStream fis = null;
-					if (part != null) { //se l'immagine è stata inserita procediamo al parsing in base64
-						fis = part.getInputStream();
+					
+					fis = part.getInputStream();
+					System.out.println("ue uaglio bella sta immagine");
+					byte[] buf = new byte[4096];
 
-						byte[] buf = new byte[4096];
-
-						for (int readNum; (readNum = fis.read(buf)) != -1;) {
-							bos.write(buf, 0, readNum); // no doubt here is 0
-							System.out.println("read " + readNum + " bytes,");
-						}
-						byte[] bytes = bos.toByteArray();
-						String img = "data:image/jpeg;base64, " + Base64.getEncoder().encodeToString(bytes);
+					for (int readNum; (readNum = fis.read(buf)) != -1;) {
+						bos.write(buf, 0, readNum); // no doubt here is 0
+						System.out.println("read " + readNum + " bytes,");
+					}
+					byte[] bytes = bos.toByteArray();
+					
+					String img="";
+					if(bytes.length>0) {
+						img = "data:image/jpeg;base64, " + Base64.getEncoder().encodeToString(bytes);
+						System.out.println("bytes immagine "+bytes.length);
+					}
+					
+					else {
+						img="data:image/png;base64,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";
+						
+					}
 						utente.setImg(img);
 						userModel.doSave(utente);
 						session.setAttribute("user", utente);
 						response.sendRedirect("index.jsp");
-					}
+					
 				}
 				
 			} catch (IOException ex) {

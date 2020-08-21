@@ -12,7 +12,10 @@ if(session.getAttribute("error")!=null && session.getAttribute("error-type")!=nu
 	errorLocation =(String)session.getAttribute("error-location");
 }
 
-System.out.println(errorLocation);
+System.out.println("location "+errorLocation);
+System.out.println("error "+error);
+System.out.println("type "+type);
+
 
 %>
 <!DOCTYPE html>
@@ -72,7 +75,7 @@ System.out.println(errorLocation);
             <input type="email" name="email" id="email" placeholder="E-mail"/>
             <span class="error"><%if(type.equals("email")){ %><%=error%><%}%></span>
             <input type="text" name="username" class="username" id="username" placeholder="Username"/>
-            <span class="error"><%if(type.equals("email")){ %><%=error%><%}%></span>
+            <span class="error"><%if(type.equals("password")){ %><%=error%><%}%></span>
             <input type="text" name="pIva" class="pIva" id="iva" placeholder="Opzionale: Partita IVA">
             <span class="error"></span>
             <input type="password" name="password" id="password" placeholder="Password"/>

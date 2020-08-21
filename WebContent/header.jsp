@@ -1,3 +1,4 @@
+<%@page import="it.unisa.model.utente.UtenteBean"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -17,7 +18,14 @@
   		<a href="<%=response.encodeURL(request.getContextPath()+"/user/FormCreazioneTorneo.jsp")%>">Crea Torneo</a>
   		<a href="#">Elenco Squadre</a>
   		<a href="#">Elenco giocatori</a>
+  		<%if(session.getAttribute("user")==null) {%>
   		<a href="<%=response.encodeURL(request.getContextPath()+"/FormLoginAndRegister.jsp")%>" id="login-register">Login/register</a>
+  		<%} else{ 
+  		
+  		UtenteBean user= (UtenteBean)session.getAttribute("user");
+  		%>
+  		<a href="<%session.invalidate(); %>" id="login-register" class="profile-image"><img src="<%=user.getImg()%>" class="source"></a>
+  		<%} %>
   		<a href="javascript:void(0);" class="icon" onclick="funzione()">
   		
     		<i class="fa fa-bars" aria-hidden="true"></i>

@@ -11,6 +11,24 @@ body{
 	
 }
 
+.profile-image{
+	object-fit:contain;
+	height:50px;
+	width:50px;
+	margin-right:10px;
+}
+
+.source{
+	object-fit: cover;
+    width:49px;
+    margin-top:-13px;
+    margin-left:-20px;
+	border-radius:80%;
+	background-color:white;
+	border:#1F2833 solid 3px;
+}
+
+
 #login-register{float:right;}
 	*{
 		margin:0;
@@ -38,7 +56,10 @@ body{
  		color:lime;		
 		background-color:#1F2833;
 	}
-	
+	.nav a.source:hover {
+ 		color:lime;		
+		background-color:#1F2833;
+	}
 	.nav .icon {
  	 display: none;
 	}

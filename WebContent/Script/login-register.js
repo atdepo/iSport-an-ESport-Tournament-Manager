@@ -34,11 +34,13 @@
 	});
 	
 
+	
+	
 	//I campi di errore vengono nascosti per essere mostrati quando serve
-	$(document).ready(function(){
+/*	$(document).ready(function(){
 		$('span').text("");
 	})
-	   
+	*/   
 	//--------------------------------Funzione per il controllo del campo email------------------------------------------------------------
  function mailCheck(){
 		if($('#login-form').css("display")=="block")
@@ -50,13 +52,13 @@
  	
  	//alert($('#signup-form').css("display")=="block");
  	if($('#login-form').css("display")=="block"){
- 		var error=$('.error-mail');
- 		
+ 		var error=$('.error-mail');	
  	}
  	else
  		var error=email.next();
      
  	if(!email.val()){	//Email non inserita
+ 			$('span').text("");
 			error.text("Inserisci un'e-mail, non ti posso inviare spam altrimenti");
 			console.log("email check not passed");
 			return false;
@@ -64,7 +66,7 @@
 		
 		else {
 			if(!emailReg.test(email.val())){	//Email non corretta
-				
+				$('span').text("");
  	    	    error.text("Inserisci un'e-mail credibile dai");
 				console.log("email check not passed");
 				return false;
@@ -88,6 +90,7 @@
     let error=username.next();
      
 	    if(!username.val()){	//Username non inserito
+	    	$('span').text("");
 			error.text("Devi mettere uno username prova xxSpinnerKillerxx");
 			console.log('username check not passed');
 			return false;
@@ -95,6 +98,7 @@
 	    else{
 		
 			if(!usernameReg.test(username.val())){ 	//Username non corretto
+				$('span').text("");
 				error.text("Magari qualcosa di decente");
 				console.log('username check not passed');
 				return false;
@@ -127,6 +131,7 @@
 		var error=$('.psw');
 
 	if(!password.val()){	//Password non inserita
+		$('span').text("");
 		error.text("Devi mettere una password prova Kekko2000!");
 		console.log('password check not passed');
 		return false;
@@ -134,6 +139,7 @@
 
 	else{
 		if(!passwordReg.test(password.val())){	//Password non corretta
+			$('span').text("");
 			error.text("Deve essere almeno 8 caratteri con almeno:un carattere speciale,un lowercase,un UPPERCASE e un numero ");
 			console.log('password check not passed');
 			return false;
@@ -156,6 +162,7 @@
         let error=iva.next();
 
 		if(iva.val() && !ivaReg.test(iva.val())){	//Iva non corretta
+			$('span').text("");
 			error.text("Iva non corretta");
 			console.log('Iva check not passed');
 			return false;

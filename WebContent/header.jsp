@@ -1,3 +1,4 @@
+<%@page import="it.unisa.model.utente.UtenteBean"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -8,7 +9,7 @@
 <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 <meta charset="UTF-8">
 
-
+<%UtenteBean utente=(UtenteBean)session.getAttribute("user");%>
 </head>
 <meta charset="UTF-8">
 <body>
@@ -17,7 +18,12 @@
   		<a href="<%=response.encodeURL(request.getContextPath()+"/user/FormCreazioneTorneo.jsp")%>">Crea Torneo</a>
   		<a href="#">Elenco Squadre</a>
   		<a href="#">Elenco giocatori</a>
+  		<%if(utente==null){ %>
   		<a href="<%=response.encodeURL(request.getContextPath()+"/FormLoginAndRegister.jsp")%>" id="login-register">Login/register</a>
+  		<%}else { %>
+  			<a href="LoginAndRegisterControl?action=logout"  title="Cliccami per fare logout"	id="login-register">Ciao, <%=utente.getUsername() %></a>
+  			
+  			<%} %> 
   		<a href="javascript:void(0);" class="icon" onclick="funzione()">
   		
     		<i class="fa fa-bars" aria-hidden="true"></i>

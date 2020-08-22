@@ -144,11 +144,6 @@ input:checked + .slide-container .nav label {
   display: block;
 }
 
-input#img-1:checked ~ .nav-dots label#img-dot-1,
-input#img-2:checked ~ .nav-dots label#img-dot-2,
-{
-  background: rgba(0, 0, 0, 0.8);
-}
  
 /* How it work */
 

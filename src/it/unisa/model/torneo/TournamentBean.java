@@ -3,18 +3,9 @@ package it.unisa.model.torneo;
 import java.io.Serializable;
 
 public class TournamentBean implements Serializable{
-String nome,data,indirizzoStruttura,codGioco;
-int CAPStruttura,codice;
-
-public TournamentBean(String nome,String data,String indirizzoStruttura, String codGioco,int CAPStruttura,int codice) {
-	
-	 this.nome=nome;
-	 this.data=data;
-	 this.indirizzoStruttura=indirizzoStruttura;
-	 this.codGioco=codGioco;
-	 this.CAPStruttura=CAPStruttura;
-	 this.codice=codice;
-}
+String nome,data,indirizzoStruttura,codGioco,proprietario;
+int CAPStruttura,codice,budget;
+boolean isHomePage;
 
 public TournamentBean() {
 	
@@ -22,17 +13,12 @@ public TournamentBean() {
 	data="";
 	indirizzoStruttura="";
 	codGioco="";
+	proprietario="";
+	budget=0;
 	CAPStruttura=0;
 	codice=0;
+	isHomePage=false;
 	
-}
-
-public int getCodice() {
-	return codice;
-}
-
-public void setCodice(int cod) {
-	codice=cod;
 }
 
 public String getNome() {
@@ -63,17 +49,50 @@ public String getCodGioco() {
 	return codGioco;
 }
 
-public void setCodGioco(String string) {
-	this.codGioco = string;
+public void setCodGioco(String codGioco) {
+	this.codGioco = codGioco;
+}
+
+public String getProprietario() {
+	return proprietario;
+}
+
+public void setProprietario(String proprietario) {
+	this.proprietario = proprietario;
 }
 
 public int getCAPStruttura() {
 	return CAPStruttura;
 }
 
-public void setCAPStruttura(int CAPStruttura) {
-	this.CAPStruttura = CAPStruttura;
+public void setCAPStruttura(int cAPStruttura) {
+	CAPStruttura = cAPStruttura;
 }
+
+public int getCodice() {
+	return codice;
+}
+
+public void setCodice(int codice) {
+	this.codice = codice;
+}
+
+public int getBudget() {
+	return budget;
+}
+
+public void setBudget(int budget) {
+	this.budget = budget;
+}
+
+public boolean isHomePage() {
+	return isHomePage;
+}
+
+public void setHomePage(boolean isHomePage) {
+	this.isHomePage = isHomePage;
+}
+
 
 
 }

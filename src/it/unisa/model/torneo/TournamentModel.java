@@ -33,6 +33,9 @@ public class TournamentModel implements ModelInterface<TournamentBean,String>{
 				bean.setIndirizzoStruttura(rs.getString("IndirizzoStruttura"));
 				bean.setNome(rs.getString("Nome"));
 				bean.setCodice(rs.getInt("Codice"));
+				bean.setBudget(rs.getInt("budget"));
+				bean.setHomePage(rs.getBoolean("isOnHomePage"));
+				bean.setProprietario(rs.getString("proprietarioTorneo"));
 				
 			}
 		}
@@ -62,6 +65,9 @@ public class TournamentModel implements ModelInterface<TournamentBean,String>{
 				bean.setIndirizzoStruttura(rs.getString("IndirizzoStruttura"));
 				bean.setNome(rs.getString("Nome"));
 				bean.setCodice(rs.getInt("Codice"));
+				bean.setBudget(rs.getInt("budget"));
+				bean.setHomePage(rs.getBoolean("isOnHomePage"));
+				bean.setProprietario(rs.getString("proprietarioTorneo"));
 				
 				collection.add(bean);
 			}
@@ -70,8 +76,24 @@ public class TournamentModel implements ModelInterface<TournamentBean,String>{
 	}
 
 	@Override
-	public void doSave(TournamentBean product) throws SQLException {
-		// TODO Auto-generated method stub
+	public void doSave(TournamentBean torneo) throws SQLException {
+		String sql = "INSERT INTO torneo VALUES (?,?,?,?,?,?,?,?,?)";
+		
+		try(Connection con = DriverManagerConnectionPool.getConnection();PreparedStatement statement= con.prepareStatement(sql)){
+			
+			statement.setInt(1,torneo.getCodice());
+			statement.setString(2,torneo.getNome());
+			statement.setString(3,torneo.getData());
+			statement.setString(4,torneo.getCodGioco());
+			statement.setString(5,torneo.getIndirizzoStruttura());
+			statement.setInt(6,torneo.getCAPStruttura());
+			statement.setBoolean(7,torneo.isHomePage());
+			statement.setString(8,torneo.getProprietario());
+
+			System.out.println("doSave="+statement);
+			statement.executeUpdate();
+			con.commit();//<----- a volte vorrei non essere così tanto forte
+		}
 		
 	}
 
@@ -82,9 +104,17 @@ public class TournamentModel implements ModelInterface<TournamentBean,String>{
 	}
 
 	@Override
-	public void doDelete(TournamentBean product) throws SQLException {
-		// TODO Auto-generated method stub
+	public void doDelete(String code) throws SQLException {
+
+		String sql = "DELETE FROM torneo WHERE codice=?";
 		
+		try(Connection con = DriverManagerConnectionPool.getConnection();PreparedStatement statement= con.prepareStatement(sql)){
+			
+			statement.setString(1,code);	
+			System.out.println("doDelete="+statement);
+			statement.executeUpdate();
+			con.commit();//<----- a volte vorrei non essere così tanto forte
+		}
 	}
 
 }

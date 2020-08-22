@@ -6,29 +6,74 @@ public class TecnicoBean implements Serializable{
 
 
 	private static final long serialVersionUID = 1960861329438531433L;
-	String codStaff,specializzazione;
+	String nome,cognome,dataDiNascita,indirizzo,recapito,CF,specializzazione;
 	
 	public TecnicoBean() {
-		String codStaff="";
-		String specializzazione="";
+		nome="";
+		cognome="";
+		dataDiNascita="";
+		indirizzo="";
+		recapito="";
+		CF="";
+		specializzazione="";
 	}
 
-	public String getCodStaff() {
-		return codStaff;
+	public String getNome() {
+		return nome;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+
+	public String getCognome() {
+		return cognome;
+	}
+
+	public void setCognome(String cognome) {
+		this.cognome = cognome;
+	}
+
+	public String getDataDiNascita() {
+		return dataDiNascita;
+	}
+
+	public void setDataDiNascita(String dataDiNascita) {
+		this.dataDiNascita = dataDiNascita;
+	}
+
+	public String getIndirizzo() {
+		return indirizzo;
+	}
+
+	public void setIndirizzo(String indirizzo) {
+		this.indirizzo = indirizzo;
+	}
+
+	public String getRecapito() {
+		return recapito;
+	}
+
+	public void setRecapito(String recapito) {
+		this.recapito = recapito;
+	}
+
+	public String getCF() {
+		return CF;
+	}
+
+	public void setCF(String cF) {
+		CF = cF;
 	}
 
 	public String getSpecializzazione() {
 		return specializzazione;
 	}
 
-	public void setCodStaff(String codStaff) {
-		this.codStaff = codStaff;
-	}
-
 	public void setSpecializzazione(String specializzazione) {
 		this.specializzazione = specializzazione;
 	}
-	
+
 	
 	
 }

@@ -10,6 +10,7 @@
 <meta charset="UTF-8">
 
 <%UtenteBean utente=(UtenteBean)session.getAttribute("user");%>
+
 </head>
 <meta charset="UTF-8">
 <body>
@@ -21,29 +22,31 @@
   		<%if(session.getAttribute("user")==null) {%>
   		<a href="<%=response.encodeURL(request.getContextPath()+"/FormLoginAndRegister.jsp")%>" id="login-register">Login/register</a>
   		<%} else{ 
-			  UtenteBean user= (UtenteBean)session.getAttribute("user");
-		%>
-		
-  		<a href="LoginAndRegisterControl?action=logout" title="Cliccami per fare logout" id="login-register"  class="profile-image">
+  		
+  		UtenteBean user= (UtenteBean)session.getAttribute("user");
+  		%>
+  		<a href="LoginAndRegisterControl?action=logout" title="Cliccami per fare logout" id="login-register"  class="profile-image">>
 		  <img src="<%=user.getImg()%>" class="source"></a>
   		<%} %>
+
+
   		
-  		<a href="javascript:void(0);" class="icon" onclick="nav()">
+  		<a href="javascript:void(0);" class="icon" onclick="funzione()">
   		
     		<i class="fa fa-bars" aria-hidden="true"></i>
   		</a>
 	</div>
 	
 	<script>
-	function nav(){
-	  	var x = document.getElementById("navigationBar");
-	  	if (x.className === "nav") {
-	    	x.className += " responsive";
-	  	} else {
-	    	x.className = "nav";
-	  	}
-	}
+  	var x = document.getElementById("navigationBar");
+  	if (x.className === "nav") {
+    	x.className += " responsive";
+  	} else {
+    	x.className = "nav";
+  	}
 	</script>
+
+
 
 </body>
 </html>

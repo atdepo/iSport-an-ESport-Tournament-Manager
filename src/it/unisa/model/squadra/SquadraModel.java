@@ -30,6 +30,7 @@ public class SquadraModel implements ModelInterface<SquadraBean, String>{
 			while (rs.next()) {
 				bean.setNome(rs.getString("nome"));
 				bean.setNazionalita(rs.getString("nazionalita"));
+				bean.setTeamImage(rs.getString("imgSquadra"));
 			}
 		}
 		return bean;
@@ -52,6 +53,7 @@ public class SquadraModel implements ModelInterface<SquadraBean, String>{
 				SquadraBean bean = new SquadraBean();
 				bean.setNome(rs.getString("nome"));
 				bean.setNazionalita(rs.getString("nazionalita"));
+				bean.setTeamImage(rs.getString("imgSquadra"));
 				collection.add(bean);
 			}
 		}
@@ -61,16 +63,17 @@ public class SquadraModel implements ModelInterface<SquadraBean, String>{
 	@Override
 	public void doSave(SquadraBean squadra) throws SQLException {
 		PreparedStatement statement = null;
-		String sql = "INSERT INTO squadra values (?,?)";
+		String sql = "INSERT INTO squadra values (?,?,?)";
 		GiocatoreBean bean= new GiocatoreBean();
 		try(Connection con = DriverManagerConnectionPool.getConnection()){
 		
 			statement=con.prepareStatement(sql);
 			statement.setString(1,squadra.getNome());
 			statement.setString(2,squadra.getNazionalita());
-			
+			statement.setString(2,squadra.getTeamImage());
 			System.out.println("doSave="+statement);
 			statement.executeUpdate();
+			con.commit();//<----- a volte vorrei non essere così tanto forte
 		}
 	}
 
@@ -81,18 +84,18 @@ public class SquadraModel implements ModelInterface<SquadraBean, String>{
 	}
 
 	@Override
-	public void doDelete(SquadraBean squadra) throws SQLException {
+	public void doDelete(String nome) throws SQLException {
 		PreparedStatement statement	 = null;
-		String sql = "DELETE FROM giocatore WHERE (nickname=?)";
-		GiocatoreBean bean= new GiocatoreBean();
+		String sql = "DELETE FROM squadra WHERE (nome=?)";
 		try(Connection con = DriverManagerConnectionPool.getConnection()){
 		
 			statement=con.prepareStatement(sql);
-			statement.setString(1,squadra.getNome());
+			statement.setString(1,nome);
 			
-			System.out.println("doSave="+statement);
-			statement.executeUpdate();		
-			}
+			System.out.println("doDelete="+statement);
+			statement.executeUpdate();	
+			con.commit();//<----- a volte vorrei non essere così tanto forte
+		}
 	}
 
 	

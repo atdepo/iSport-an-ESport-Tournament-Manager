@@ -74,7 +74,18 @@ public class SponsorModel implements ModelInterface<SponsorBean, SponsorKey>{
 
 	@Override
 	public void doSave(SponsorBean bean) throws SQLException {
-		// TODO Auto-generated method stub
+		
+		String sql = "INSERT INTO sponsor VALUES (?,?)";
+		
+		try(Connection con = DriverManagerConnectionPool.getConnection();PreparedStatement statement= con.prepareStatement(sql)){
+			
+			statement.setString(1,bean.getNome());
+			statement.setInt(2,bean.getCodTorneo());
+			System.out.println("doSave="+statement);
+			statement.executeUpdate();
+			con.commit();//<----- a volte vorrei non essere così tanto forte
+		}
+
 		
 	}
 
@@ -85,8 +96,18 @@ public class SponsorModel implements ModelInterface<SponsorBean, SponsorKey>{
 	}
 
 	@Override
-	public void doDelete(SponsorBean bean) throws SQLException {
-		// TODO Auto-generated method stub
+	public void doDelete(SponsorKey key) throws SQLException {
+		
+		String sql = "DELETE FROM sponsor WHERE nome = ? AND codtorneo = ?";
+		
+		try(Connection con = DriverManagerConnectionPool.getConnection();PreparedStatement statement= con.prepareStatement(sql)){
+			
+			statement.setString(1,key.getNome());
+			statement.setInt(1,key.getCodTorneo());
+			System.out.println("doDelete="+statement);
+			statement.executeUpdate();
+			con.commit();//<----- a volte vorrei non essere così tanto forte
+		}
 		
 	}
 

@@ -53,12 +53,12 @@
 
 			<div class="field">
 				<label for="nometorneo">Qual'è il nome del torneo da creare?</label>
-				<input type="text" class="feedback-input nome-torneo" name="nometorneo" required>
+				<input type="text" class="feedback-input nome-torneo" name="nometorneo">
 			</div>	
 
 			<div class="field">
 				<label for="datatorneo">Che giorno vuoi svolgere il torneo?</label>
-				<input type="date" class="feedback-input data-torneo" name="datatorneo" required>
+				<input type="date" class="feedback-input data-torneo" name="datatorneo">
 			</div>
 
 			<div class="field">

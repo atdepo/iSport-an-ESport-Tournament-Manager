@@ -28,14 +28,17 @@ public class LoginFilter implements Filter{
 		String requestURI=hRequest.getRequestURI();
 		
 		if(requestURI.contains("/user/")) {
+			System.out.println("il path contiene *user*");
 			HttpSession session= hRequest.getSession(false);
 			checkAccess(session, request, response, chain, hResponse, hRequest, "utente");
 		}
 		else if(requestURI.contains("/admin/")) {
+			System.out.println("il path contiene *admin*");
 			HttpSession session= hRequest.getSession(false);
 			checkAccess(session, request, response, chain, hResponse, hRequest, "admin");
 		}
 		else if(requestURI.contains("/tecnico/")) {
+			System.out.println("il path contiene *tecnico*");
 			HttpSession session= hRequest.getSession(false);
 			checkAccess(session, request, response, chain, hResponse, hRequest, "tecnico");
 			
@@ -47,6 +50,7 @@ public class LoginFilter implements Filter{
 	public void checkAccess(HttpSession session, ServletRequest sRequest, ServletResponse sResponse, FilterChain chain, HttpServletResponse hResponse, HttpServletRequest hRequest, String tipoUtente) throws IOException, ServletException{
 		
 		if(session!=null) {
+			System.out.println("la sessione va bene");
 			UtenteBean user=(UtenteBean) session.getAttribute("user");
 			if(user!=null && user.getTipo().equals(tipoUtente))
 				chain.doFilter(sRequest, sResponse);

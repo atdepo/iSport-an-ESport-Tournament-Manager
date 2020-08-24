@@ -63,11 +63,6 @@ public class LoginAndRegisterControl extends HttpServlet {
 		System.out.println("La servlet di login e registrazione sta svolgendo l'azione di :"+action);
 
 		switch (action) {
-		
-		case "logout":
-			request.getSession().invalidate();
-			response.sendRedirect("index.jsp");
-			break;
 
 		case "register": //Effettuo la registrazione dell'utente
 			

@@ -13,7 +13,6 @@
 	<%@ include file="header.jsp"%>
 	<div class="intro-section" style="background-image: url('img/homeBackground.jpg');">
 		<h1>Il Posto Perfetto per Competere</h1>
-    
 	</div>
 
 <main class="page-content">

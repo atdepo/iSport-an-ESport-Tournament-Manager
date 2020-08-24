@@ -12,6 +12,7 @@
 <html>
 <head>
 <script src = "https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src = "Script/header.js"></script>
 <link rel="stylesheet" href="<%=request.getContextPath()+"/CSS/header.css"%>" type="text/css">
 <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 <script src="https://kit.fontawesome.com/9e043e54f0.js" crossorigin="anonymous"></script>
@@ -19,26 +20,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<script>
-function toggle(){
-	
-	if($('#user-img').val()!=="null"){
-		if($('#check').prop('checked')){
-			$('ul li').each(function(i){
-				if(i===3){
-					$(this).empty().html('<li><a href="Logout">VAFFANCULO STRONZO</a></li>');
-				}
-			})
-		} else{
-			$('ul li').each(function(i){
-				if(i===3){
-					$(this).empty().html('<div class="div-profile-image"><a href="Logout"><img src="'+$('#user-img').val()+'" class="source"></a></div>');
-				}
-			})
-		}
-	}
-}
-</script>
+
 
 </head>
 
@@ -55,17 +37,37 @@ function toggle(){
 	<li><a href="<%=response.encodeURL(request.getContextPath()+"/user/FormCreazioneTorneo.jsp")%>">CREA TORNEO</a></li>
 	<li><a href="#">CONTATTI</a></li>
 	
-		<%if(utente==null) {%>
+		<!--<%if(utente==null) {%>
   			<li><a href="<%=response.encodeURL(request.getContextPath()+"/FormLoginAndRegister.jsp")%>">ACCEDI O REGISTRATI</a></li>
   		<%} else{%>
 		  <li>
 			  <div class="div-profile-image">
-			  	<a href="Logout">
+			  	  <a href=""> 
 			  		<img src="<%=userImg%>" class="source">
 			  	</a>
 			  </div>
 		  </li>
-  		<%} %>
+  		<%} %>-->
+  	<li>	
+  	<div class="avatar-dropdown-menu">
+      <div class="avatar-image"><img src="<%=userImg%>" ></div>
+      <div class="avatar-dropdown-menu-items">
+        <ul>
+          <li>
+            <a>My account</a>
+          </li>
+          <li>
+            <a>Settings</a>
+          </li>
+          <li>
+            <a>Log out</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    </li>
+
+
 	</ul>
 	
 	</nav>

@@ -146,6 +146,7 @@ function slide(){
 					
 		if($(event.target).hasClass("nextBtn1")){ //JQuery >> tutto
 			if($('.nome-torneo').val()!==""&& $('.data-torneo').val()!==""){
+				$('header').empty().text("Informazioni sul gioco:");
 				slidePage.css("marginLeft","-25%"); //JQuery >> tutto 
 				$('#first-step').removeClass("is-active");
 				$('#second-step').addClass("is-active");
@@ -153,6 +154,7 @@ function slide(){
 
 		}
 		else if($(event.target).hasClass("nextBtn2")){
+			$('header').empty().text("Organizzazione:");
 			slidePage.css("marginLeft","-50%"); //JQuery >> tutto
 			$('#second-step').removeClass("is-active");
 			$('#third-step').addClass("is-active");
@@ -162,12 +164,14 @@ function slide(){
 			
 		}
 		else if($(event.target).hasClass("prevBtn2")){
+			$('header').empty().text("Informazioni di base:");
 			slidePage.css("marginLeft","0%"); //JQuery >> tutto
 			$('#second-step').removeClass("is-active");
 			$('#first-step').addClass("is-active");
 			current-=1;
 		}
 		else if($(event.target).hasClass("prevBtn3")){
+			$('header').empty().text("Informazioni sul gioco:");
 			slidePage.css("marginLeft","-25%"); //JQuery >> tutto
 			$('#third-step').removeClass("is-active");
 			$('#second-step').addClass("is-active");

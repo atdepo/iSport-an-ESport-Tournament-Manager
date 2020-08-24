@@ -14,9 +14,9 @@
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="../CSS/button-input.css" type="text/css">
-<link rel="stylesheet" href="../CSS/2RadioButton.css" type="text/css">
 <link rel="stylesheet" href="../CSS/Tendina.css" type="text/css">
 <link rel="stylesheet" href="../CSS/CreazioneTorneo.css" type="text/css">
+<link rel="stylesheet" href="../CSS/2RadioButton.css" type="text/css">
 
 <meta charset="UTF-8">
 
@@ -32,7 +32,7 @@
 	<%@ include file="../header.jsp"%>
 	
 	<div class="total-container">
-		<header>Iniziamo con la creazione del tuo torneo!</header>
+		<header>Informazioni di base:</header>
 		<div class="form-div">
 		
 			<div class="progress-bar-wrapper">
@@ -49,8 +49,6 @@
 			
 			<form action="#" method="post">
 		<div class="page slidepage">
-			<div class="title">Informazioni di base:</div>
-
 			<div class="field">
 				<label for="nometorneo">Qual'è il nome del torneo da creare?</label>
 				<input type="text" class="feedback-input nome-torneo" name="nometorneo">
@@ -90,7 +88,7 @@
 		</div>
 		
 		<div class="page">
-			<div class="title">Informazioni sul gioco:</div>
+			<div class="title"></div>
 
 			<div class="field">
 				<label for="gioco">Gioco di riferimento</label>	
@@ -120,8 +118,6 @@
 		</div>
 		
 		<div class="page">
-			<div class="title">Organizzazione:</div>
-
 			
 				<label for="radio">Come vuoi che sia organizzato il tuo torneo?</label>
 					<div class="contieniBottoni radio">

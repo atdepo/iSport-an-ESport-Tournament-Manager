@@ -32,7 +32,7 @@ body{
 	float:left;
 	left: 50%;
 	position: absolute;*/
-	width:400px;
+	width:550px;
 	margin:auto;
 	padding: 50px 35px 10px 35px;
 	text-align: center;	
@@ -76,11 +76,6 @@ body{
 	 color: #5DEFB9;
 }
  .multi-steps > li:before {
-	 /*content: '\f00c';
-	 content: '\2713';
-	 content: '\10003';
-	 content: '\10004';
-	 content: '\2713';*/
 	 display: block;
 	 margin: 0 auto 4px;
 	 background-color: #fff;
@@ -123,7 +118,7 @@ body{
  
 .total-container header{
 	font-size: 35px;
-	font-weight: 600px;
+	font-weight: 600;
 	margin: 0 0 0 0;
 
 }
@@ -233,12 +228,14 @@ input:hover, input:focus{
 .number-container.budget{
 
 	margin-top:5%;
-	left:28%;
+	margin-bottom:5%;
+	left:35%;
 	width: 130px;
 }	
 
 .number-container.budget:hover{
-	width: 180px;
+	width: 200px;
+	left:29%;
 }	
 
 
@@ -340,7 +337,7 @@ ul.ks-cboxtags li input[type="checkbox"]:focus + label {
   border: 2px solid #e9a1ff;
 }
 
-@media only screen and (max-width: 650px) {
+@media only screen and (max-width: 770px) {
 	.total-container{	
 		width: 95%;
 		margin-left: -48%;
@@ -362,8 +359,34 @@ ul.ks-cboxtags li input[type="checkbox"]:focus + label {
 	padding-right:0%;
 	
 	}
+	 .number-container.budget{
+        font-weight:300;
+        font-size:10px;
+    	left:32%;
+    	width:35%;
+    }
+
+    .number-container.budget:hover{
+	width: 60%;
+	left:24%;
+    }
+
+    #number-box{
+        font-size:20px;
+    }
 
 }
+
+@media screen and (max-width:400px){
+
+	 #number-box{
+        font-size:15px;
+    }
+}
+
+	
+
+
 
 
 

@@ -178,6 +178,7 @@ body{
 	 font-size: 1.3rem;
 	 font-weight: bold;
 	 line-height: 1.2;
+	 z-index:-1;
 }
  .copy {
 	 font-family: var(--font-serif);

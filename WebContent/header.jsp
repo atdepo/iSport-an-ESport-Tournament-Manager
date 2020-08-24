@@ -8,43 +8,40 @@
 <link rel="stylesheet" href="<%=request.getContextPath()+"/CSS/header.css"%>" type="text/css">
 <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
 
 <%UtenteBean utente=(UtenteBean)session.getAttribute("user");%>
-
 </head>
-<meta charset="UTF-8">
+
 <body>
-	<div class="nav" id="navigationBar">
-  		<a href="<%=request.getContextPath()+"/index.jsp"%>" class="active">Home</a>
-  		<a href="<%=response.encodeURL(request.getContextPath()+"/user/FormCreazioneTorneo.jsp")%>">Crea Torneo</a>
-  		<a href="#">Elenco Squadre</a>
-  		<a href="#">Elenco giocatori</a>
-  		<%if(session.getAttribute("user")==null) {%>
-  		<a href="<%=response.encodeURL(request.getContextPath()+"/FormLoginAndRegister.jsp")%>" id="login-register">Login/register</a>
+	<nav>
+	<input type="checkbox" id="check">
+	<label for="check" class="checkbtn">
+	<i class="fa fa-bars" aria-hidden="true"></i>
+	</label>
+	<label class="logo">MONTEFUSCOMERDA</label>
+	<ul>
+	<li><a href="<%=request.getContextPath()+"/index.jsp"%>" class="active">HOME</a></li>
+	<li><a href="<%=response.encodeURL(request.getContextPath()+"/user/FormCreazioneTorneo.jsp")%>">CREA TORNEO</a></li>
+	<li><a href="#">CONTATTI</a></li>
+	
+	<%if(session.getAttribute("user")==null) {%>
+  		<li><a href="<%=response.encodeURL(request.getContextPath()+"/FormLoginAndRegister.jsp")%>">ACCEDI O REGISTRATI</a></li>
   		<%} else{ 
-  		
   		UtenteBean user= (UtenteBean)session.getAttribute("user");
   		%>
-  		<a href="LoginAndRegisterControl?action=logout" title="Cliccami per fare logout" id="login-register"  class="profile-image">>
-		  <img src="<%=user.getImg()%>" class="source"></a>
+  		<li><a href="LoginAndRegisterControl?action=logout" title="Cliccami per fare logout" id="login-register"  class="profile-image">
+		  <img src="<%=user.getImg()%>" class="source"></a></li>
   		<%} %>
+	</ul>
+	
+	</nav>
 
-
-  		
   		<a href="javascript:void(0);" class="icon" onclick="funzione()">
   		
-    		<i class="fa fa-bars" aria-hidden="true"></i>
+    		
   		</a>
-	</div>
-	
-	<script>
-  	var x = document.getElementById("navigationBar");
-  	if (x.className === "nav") {
-    	x.className += " responsive";
-  	} else {
-    	x.className = "nav";
-  	}
-	</script>
 
 
 

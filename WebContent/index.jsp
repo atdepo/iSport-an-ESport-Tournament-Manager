@@ -6,7 +6,7 @@
 	<script src = "https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 	<link rel="stylesheet" href="CSS/index.css" type="text/css">
 	<meta charset="UTF-8">
-	<title>"Negozio di modelle da torneo"</title>
+	<title>Negozio di modelle da torneo</title>
 </head>
 
 <body>

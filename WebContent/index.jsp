@@ -15,7 +15,7 @@
 		<h1>Il Posto Perfetto per Competere</h1>
 	</div>
 
-<main class="page-content">
+<div class="page-content">
   <div class="card">
     <div class="content">
       <h2 class="title">Registrati</h2>
@@ -40,7 +40,7 @@
       <p class="copy">Ora le squadre possono comepetere come professionisti</p>
     </div>
   </div>
-</main>
+</div>
         
         
 	<%@ include file="Footer.jsp"%>

@@ -31,11 +31,11 @@ public class LoginFilter implements Filter{
 			HttpSession session= hRequest.getSession(false);
 			checkAccess(session, request, response, chain, hResponse, hRequest, "utente");
 		}
-		else if(requestURI.contains("/admin/")) {
+		else if(requestURI.contains("/admin/")||requestURI.contains("/user/")) {
 			HttpSession session= hRequest.getSession(false);
 			checkAccess(session, request, response, chain, hResponse, hRequest, "admin");
 		}
-		else if(requestURI.contains("/tecnico/")) {
+		else if(requestURI.contains("/tecnico/")||requestURI.contains("/user/")) {
 			HttpSession session= hRequest.getSession(false);
 			checkAccess(session, request, response, chain, hResponse, hRequest, "tecnico");
 			

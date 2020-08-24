@@ -28,11 +28,12 @@
 	
 	<%if(session.getAttribute("user")==null) {%>
   		<li><a href="<%=response.encodeURL(request.getContextPath()+"/FormLoginAndRegister.jsp")%>">ACCEDI O REGISTRATI</a></li>
-  		<%} else{ 
+  		<%}else if(==){ %>
+  		<%}else{ 
   		UtenteBean user= (UtenteBean)session.getAttribute("user");
   		%>
   		<li><a href="LoginAndRegisterControl?action=logout" title="Cliccami per fare logout" id="login-register"  class="profile-image">
-		  <img src="<%=user.getImg()%>" class="source"></a></li>
+		  <img src="<%=user.getImg()%>" style="z-index: 5" class="source"></a></li>
   		<%} %>
 	</ul>
 	

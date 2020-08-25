@@ -179,10 +179,11 @@ public class TournamentControl extends HttpServlet {
 			SimpleDateFormat df = new SimpleDateFormat("YYYY-MM-dd");
 			String data = df.format(d1);
 			if (controlloData(data, request.getParameter("datatorneo"))) {
+				System.out.println("A maronn");
 				String errore="Non possediamo una DeLorean, pertanto ci è impossibile organizzare tornei nel passato!";
 				session.setAttribute("error",errore);
 				session.setAttribute("error-type","data");
-				response.sendRedirect("FormCreazioneTorneo.jsp");
+				response.sendRedirect("/user/FormCreazioneTorneo.jsp");
 				return;
 			}
 			
@@ -192,6 +193,7 @@ public class TournamentControl extends HttpServlet {
 				ArrayList<TournamentBean> tornei = (ArrayList<TournamentBean>) tModel.doRetriveAll(null);
 				for (TournamentBean t : tornei) {
 					if (t.getData().equals(dataTorneoDaCreare)) {
+						System.out.println("O patatern");
 						String s = request.getParameter("struttura");
 						String tmp = s.substring(s.indexOf(',') + 2);
 						int value = Integer.parseInt(tmp.replaceAll("[^0-9]", ""));
@@ -201,7 +203,7 @@ public class TournamentControl extends HttpServlet {
 							String errore = "In questa data la struttura selezionata è già occupata, selezionarne una diversa";
 							session.setAttribute("error",errore);
 							session.setAttribute("error-type", "struttura");
-							response.sendRedirect("FormCreazioneTorneo.jsp");
+							response.sendRedirect("/user/FormCreazioneTorneo.jsp");
 							
 							return;
 							
@@ -214,9 +216,9 @@ public class TournamentControl extends HttpServlet {
 				catch (SQLException e) {
 					e.printStackTrace();
 				}
-			break;
+			
 				
-		case "mimmo":
+		
 				HttpSession sessione= request.getSession();
 				sessione.setAttribute("nomeTorneo", request.getParameter("nometorneo"));
 				sessione.setAttribute("dataTorneo", request.getParameter("datatorneo"));
@@ -227,7 +229,8 @@ public class TournamentControl extends HttpServlet {
 				sessione.setAttribute("budget", request.getParameter("budget"));
 				sessione.setAttribute("totaleTecnici", request.getParameter("tot_tecnici"));
 				sessione.setAttribute("tecniciFisici", request.getParameter("tecnici_fisici"));
-				response.sendRedirect(request.getContextPath()+"/FormInserimentoSquadre.jsp");			
+				response.sendRedirect(request.getContextPath()+"/user/FormInserimentoSquadre.jsp");			
+				
 		
 		break;
 		

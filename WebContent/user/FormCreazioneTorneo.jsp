@@ -63,22 +63,21 @@
 				 <label for="number-container">Qual'è il budget stimato per il torneo?</label>
 				
 				<div class="number-container budget" title="Premi shift cliccando i selettori per avanzare di +/- 100 e premi CTRL sx per avanzare di +/- 1000">
-					<span class="next"></span>
-					<span class="prev"></span>
+					<span class="next budget"></span>
+					<span class="prev budget"></span>
 					<div class="box-span">
-						<span id="number-box">0 €</span>
+						<span class="number-box-budget">0 €</span>
 					</div>
 				
 				</div>
 			</div>
-			<div class="field">
-				<label for="homePage">Vuoi che il torneo sia mostrato in home page?</label>
-				<label for="yes">Si</label>
-				<input type="radio" class = "yes" name="show" value="si">
-				<label for="yes">No</label>
-				<input type="radio" class = "no" name="show" value="no">		
 			
-			</div>
+				<label for="homePage">Vuoi che il torneo sia mostrato in home page?<br><small style="color:red">(Questa opzione aggiungerà un costo di 250€ per ogni squadra partecipante)</small><br></label>
+				
+				<input id="toggle-on" class="toggle toggle-left" name="toggle" value="false" type="radio" checked>
+				<label for="toggle-on" class="btn">Si</label>
+				<input id="toggle-off" class="toggle toggle-right" name="toggle" value="true" type="radio">
+				<label for="toggle-off" class="btn">No</label>
 			
 			
 			<div class="field">
@@ -129,16 +128,20 @@
 		<div class="page">
 			
 				<label for="radio">Come vuoi che sia organizzato il tuo torneo?</label>
-					<div class="contieniBottoni radio">
 					
-						 <input id="on-line" type="radio" name="sel"
+				<input id="toggle-online" class="toggle toggle-left" name="toggle" value="false" type="radio" onclick="hide()" checked>
+				<label for="toggle-online" class="btn">Online</label>
+				<input id="toggle-offline" class="toggle toggle-right" name="toggle" value="true" type="radio" onclick="show()">
+				<label for="toggle-offline" class="btn">Fisico</label>
+						 
+						<!--   <input id="on-line" type="radio" name="sel"
 							value="on-line" onclick="hide()" checked class="sel bt1">
 							
 						<label class="radioLabel" for="on-line">On-line</label>
 						 <input id="fisico" type="radio" name="sel" value="fisico"
 								onclick="show()" class="sel bt2"> <label
-								class="radioLabel" for="fisico">Fisico </label>
-					</div>
+								class="radioLabel" for="fisico">Fisico </label>-->
+					
 			
 			<div class="field">
 				<label for="datatorneo">Che giorno vuoi svolgere il torneo?</label>
@@ -152,12 +155,25 @@
 				<!-- Da generare dinamicamente se il torneo è fisico -->
 			</div>
 			
-			<div class="tecnici">
+			<div class="field">
+				 <label for="number-container">Quanti tecnici desideri avere per il tuo torneo?</label>
+				
+				<div class="number-container tecnici" title="Premi shift cliccando i selettori per avanzare di +/- 100 e premi CTRL sx per avanzare di +/- 1000">
+					<span class="next tecnici"></span>
+					<span class="prev tecnici"></span>
+					<div class="box-span">
+						<span class="number-box-tecnici">0 €</span>
+					</div>
+				
+				</div>
+			</div>
+			
+			<!-- <div class="tecnici">
 				<div class="field">
 					<label for="tot_tecnici">Quanti tecnici desideri avere per il tuo torneo?</label>
 					<input type="number" min="0" name="tot_tecnici" id="tot_tecnici"
 					class="feedback-input" onchange="numTecnici()" required>
-				</div>
+				</div> -->
 	
 				<div class="field">
 					<div class="tecniciFisici"></div>

@@ -42,15 +42,19 @@ $("#"+k).toggleClass("active");
 }
 
 function tendina(k){
+	
 	var selected=$('.selected.'+event.target.name);
 	var optionsContainer = $("#"+event.target.name);
 	selected.text($("label[for='"+k+"']").html());
     optionsContainer.toggleClass("active");
+    
     if(event.target.name==="gioco"){
     	
     	$('.selected.mode').text("Modalità di gioco");
     getMode($("label[for='"+k+"']").html());
+    
     }
+    
 }
 
 function getStrutture(){

@@ -78,6 +78,37 @@ public class TecnicoModel implements ModelInterface<TecnicoBean, String> {
 
 	}
 
+	public int doRetrieveTecniciFisici() throws SQLException {
+		
+
+		String sql = "SELECT * FROM tecnico WHERE specializzazione=locale";
+		
+		ArrayList<TecnicoBean> collection= new ArrayList<TecnicoBean>();
+
+		try (Connection con = DriverManagerConnectionPool.getConnection();PreparedStatement statement = con.prepareStatement(sql)) {
+			
+			System.out.println("DoRetriveByKey=" + statement.toString());
+			ResultSet rs = statement.executeQuery();
+
+			while (rs.next()) {
+				TecnicoBean bean = new TecnicoBean();
+
+				bean.setCF(rs.getString("CF"));
+				bean.setRecapito(rs.getString("recapito"));
+				bean.setIndirizzo(rs.getString("indirizzo"));
+				bean.setNome(rs.getString("nome"));
+				bean.setCognome(rs.getString("cognome"));
+				bean.setDataDiNascita(rs.getString("dataN"));
+				bean.setSpecializzazione(rs.getString("specializzazione"));
+				
+				collection.add(bean);
+			}
+			return collection.size();
+			
+		}
+	}
+	
+	
 	@Override
 	public void doSave(TecnicoBean tecnico) throws SQLException {
 		PreparedStatement statement = null;

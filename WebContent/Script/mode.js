@@ -9,12 +9,12 @@ $(document).ready(function() {
 			console.log(data);
 			var game = $('#gioco');
 			var sponsor=$('.ks-cboxtags');
-			
 			var dataGiochi= data['0'];
 			var dataSponsor= data['1'];
-			var numTecnici= data['2'];
-			document.getElementById("tot_tecnici").setAttribute("max" , numTecnici);
-			
+			var totTecnici= data['2'];
+			var maxTecniciFisici= data['3'];
+			$('.max-tecnici-fisici').attr("value",maxTecniciFisici);
+			$('.tot-tecnici').attr("value",totTecnici);			
 				
 			for (var i = 0; i < dataGiochi.length; i++) {
 					var nome = dataGiochi[i].nomeGioco.replace(/\s/g, '');
@@ -125,8 +125,10 @@ function show(){
 	if($(".tecniciFisici").empty()&&$(".strutture").empty()){
 		
 		$("label[for='tecnici_fisici']").show();
-		$(".tecniciFisici").append('<label for="tecnici_fisici">Di cui presenti fisicamente </label>'+ 
-								   '<input type="number" min="0"  max="10" name="tecnici_fisici" class=" feedback-input" id="tecnici_fisici" required>');
+		$(".tecniciFisici").append(' <label for="tecnici-fisici">Quanti tecnici desideri avere fisicamente al tuo torneo?</label>'+
+				'<div class="number-container tecnici-fisici" title="Premi shift cliccando i selettori per avanzare di +/- 100 e premi CTRL sx per avanzare di +/- 1000">'+
+				'<span class="next tecnici-fisici" onclick="gestioneFisici()"></span> <span class="prev tecnici-fisici" onclick="gestioneFisici()"></span> <div class="box-span">'+
+				'<span class="number-box-tecnici-fisici">0</span></div>');
 		
 		numTecnici();
 		
@@ -142,6 +144,42 @@ function show(){
 		}
 }
 
+function gestioneFisici(){
+	if($(event.target).hasClass('next')){
+	var max_value=$('.max-tecnici-fisici').val();
+	 
+    var curr_val=parseInt($('.number-box-tecnici-fisici').text());
+    if(event.shiftKey){
+    	if(curr_val+100<=max_value)
+            $('.number-box-tecnici-fisici').html(curr_val+100); 
+    }
+    else if(event.ctrlKey){
+    	if(curr_val+1000<=max_value)
+            $('.number-box-tecnici-fisici').html(curr_val+1000); 
+    }
+    else if(curr_val+1<=max_value)
+        $('.number-box-tecnici-fisici').html(curr_val+1);
+}
+
+
+	else if ($(event.target).hasClass('prev')){
+	
+	var min_value=0;
+	var curr_val=parseInt($('number-box-tecnici-fisici').text());
+	if(e.shiftKey){
+		if(curr_val-100>=min_value)
+			$('number-box-tecnici-fisici').html(curr_val-100); 
+		}
+	else if(e.ctrlKey){
+		if(curr_val-1000>=min_value)
+			$('number-box-tecnici-fisici').html(curr_val-1000); 
+		}
+	else if(curr_val-1>=min_value)
+		$('number-box-tecnici-fisici').html(curr_val-1);
+		}
+
+}
+	
 
 
 var current=1;

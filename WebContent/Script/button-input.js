@@ -19,36 +19,61 @@ $('.next').click(function (e) {
 	} 
 	else if($(event.target).hasClass('tecnici')){
 		
-		 var max_value=10;
+		
+		 var max_value=$('.tot-tecnici').val();
 		    var curr_val=parseInt($('.number-box-tecnici').text());
 		    if(e.shiftKey){
 		    	if(curr_val+100<=max_value)
-		            $('.number-box-tecnici').html(curr_val+100+' €'); 
+		            $('.number-box-tecnici').html(curr_val+100); 
 		    }
 		    else if(e.ctrlKey){
 		    	if(curr_val+1000<=max_value)
-		            $('.number-box-tecnici').html(curr_val+1000+' €'); 
+		            $('.number-box-tecnici').html(curr_val+1000); 
 		    }
 		    else if(curr_val+1<=max_value)
-		        $('.number-box-tecnici').html(curr_val+1+' €');
-			} 
+		        $('.number-box-tecnici').html(curr_val+1);
+			}
     
      });
 
 
+
+
+
+
 $('.prev').click(function (e) { 
-    var min_value=0;
-    var curr_val=parseInt($('#number-box').text());
-    if(e.shiftKey){
-    	if(curr_val-100>=min_value)
-            $('#number-box').html(curr_val-100+' €'); 
-    }
-    else if(e.ctrlKey){
-    	if(curr_val-1000>=min_value)
-            $('#number-box').html(curr_val-1000+' €'); 
-    }
-    else if(curr_val-1>=min_value)
-        $('#number-box').html(curr_val-1+' €');
+	
+	
+if($(event.target).hasClass('budget')){
+	    var min_value=0;
+	    var curr_val=parseInt($('.number-box-budget').text());
+	    if(e.shiftKey){
+	    	if(curr_val-100>=min_value)
+	            $('.number-box-budget').html(curr_val-100+' €'); 
+	    }
+	    else if(e.ctrlKey){
+	    	if(curr_val-1000>=min_value)
+	            $('.number-box-budget').html(curr_val-1000+' €'); 
+	    }
+	    else if(curr_val-1>=min_value)
+	        $('.number-box-budget').html(curr_val-1+' €');
+	} 
+	else if($(event.target).hasClass('tecnici')){
+		
+		 var min_value=0;
+		    var curr_val=parseInt($('.number-box-tecnici').text());
+		    if(e.shiftKey){
+		    	if(curr_val-100>=min_value)
+		            $('.number-box-tecnici').html(curr_val-100); 
+		    }
+		    else if(e.ctrlKey){
+		    	if(curr_val-1000>=min_value)
+		            $('.number-box-tecnici').html(curr_val-1000); 
+		    }
+		    else if(curr_val-1>=min_value)
+		        $('.number-box-tecnici').html(curr_val-1);
+			}
+	
 });
 
 })

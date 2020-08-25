@@ -81,7 +81,7 @@ public class TecnicoModel implements ModelInterface<TecnicoBean, String> {
 	public int doRetrieveTecniciFisici() throws SQLException {
 		
 
-		String sql = "SELECT * FROM tecnico WHERE specializzazione=locale";
+		String sql = "SELECT * FROM tecnico WHERE specializzazione='locale'";
 		
 		ArrayList<TecnicoBean> collection= new ArrayList<TecnicoBean>();
 

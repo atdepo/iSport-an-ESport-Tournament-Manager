@@ -8,10 +8,9 @@
 	pageEncoding="UTF-8"%>
 <%
 	String error = null ;
-	String error_location = null ;
-	if(session.getAttribute("error")!=null && session.getAttribute("error-location")!=null){
+	if(session.getAttribute("error")!=null ){
 		error=(String)session.getAttribute("error");
-		error_location=(String)session.getAttribute("error-location");
+		System.out.println(error);
 	}
 %>
 <!DOCTYPE html>
@@ -44,16 +43,17 @@
 				<div class="container-fluid">
 				  
 				  <ul class="list-unstyled multi-steps">
-				    <li id="first-step" class="is-active fas fa-check">Start</li>
-				    <li id="second-step" class="fas fa-check">Middle-Step</li>
-				    <li id="third-step" class="fas fa-check">Finish</li>
+				    <li id="first-step" class="is-active">Informazioni di base</li>
+				    <li id="second-step" class="">Scegli gioco e modalità</li>
+				    <li id="third-step" class="">Crea il tuo torneo!</li>
 				    
 				  </ul>
 				</div>
 			</div>
 			
-			<form action="TournamentControl?action=validateTorneo" method="post">
-		<div class="page slidepage">
+			<form action="<%=request.getContextPath()+"/TournamentControl?action=validateTorneo"%>" method="post">
+			
+		<div class="page slidepage" <%if(error!=null){%> style="margin-left:-50%<%}%>">
 			<div class="field">
 				<label for="nometorneo">Qual'è il nome del torneo da creare?</label>
 				<input type="text" class="feedback-input nome-torneo" name="nometorneo">
@@ -99,7 +99,9 @@
 			<div class="title"></div>
 
 			<div class="field">
-				<label for="gioco">Scegli un gioco!</label>	
+				<label for="gioco">Seleziona il videogioco sul quale preferisci incentrare il tuo torneo e crea sfide epiche!
+				<br><small style="color:red">Scegli bene perchè non potrai cambiarlo in seguito</small></label>	
+				
 					<div class="container gioco">
 						<div class="select-box">
 							<div class="options-container" id="gioco"></div>
@@ -109,7 +111,7 @@
 			</div>
 
 			<div class="field">
-				<label for="mod">Che modalità vuoi giocare?</label>
+				<label for="mod">Seleziona la modalità nella quale le squadre si affronteranno!</label>
 					<div class="container mod">
 						<div class="select-box">
 							<div class="options-container" id="mode"></div>
@@ -127,70 +129,57 @@
 		
 		<div class="page">
 			
-				<label for="radio">Come vuoi che sia organizzato il tuo torneo?</label>
+				<label for="radio">Come vuoi che sia organizzato il tuo torneo?</label><br>
 					
-				<input id="toggle-online" class="toggle toggle-left" name="toggle" value="false" type="radio" onclick="hide()" checked>
+				<input id="toggle-online" class="toggle toggle-left" name="r-button" value="false" type="radio" onclick="hide()" checked>
 				<label for="toggle-online" class="btn">Online</label>
-				<input id="toggle-offline" class="toggle toggle-right" name="toggle" value="true" type="radio" onclick="show()">
+				<input id="toggle-offline" class="toggle toggle-right" name="r-button" value="true" type="radio" onclick="show()">
 				<label for="toggle-offline" class="btn">Fisico</label>
-						 
-						<!--   <input id="on-line" type="radio" name="sel"
-							value="on-line" onclick="hide()" checked class="sel bt1">
-							
-						<label class="radioLabel" for="on-line">On-line</label>
-						 <input id="fisico" type="radio" name="sel" value="fisico"
-								onclick="show()" class="sel bt2"> <label
-								class="radioLabel" for="fisico">Fisico </label>-->
-					
 			
 			<div class="field">
 				<label for="datatorneo">Che giorno vuoi svolgere il torneo?</label>
 				<input type="date" class="feedback-input data-torneo" name="datatorneo">
-				<span class="error"></span>
+				<span class="error-data"></span>
 			</div>
 			
 			<div class="field">
 				<div class="strutture"></div>
-				<span class="error"></span>
+				<span class="error-struttura"></span>
 				<!-- Da generare dinamicamente se il torneo è fisico -->
 			</div>
 			
 			<div class="field">
-				 <label for="number-container">Quanti tecnici desideri avere per il tuo torneo?</label>
+				 <label for="tecnici">Quanti tecnici desideri avere per il tuo torneo?</label>
 				
 				<div class="number-container tecnici" title="Premi shift cliccando i selettori per avanzare di +/- 100 e premi CTRL sx per avanzare di +/- 1000">
 					<span class="next tecnici"></span>
 					<span class="prev tecnici"></span>
 					<div class="box-span">
-						<span class="number-box-tecnici">0 €</span>
-					</div>
+					<span class="number-box-tecnici">0</span>
+				</div>
 				
+				<input type="hidden" class="tot-tecnici">
+				<input type="hidden" class="max-tecnici-fisici">
 				</div>
 			</div>
-			
-			<!-- <div class="tecnici">
-				<div class="field">
-					<label for="tot_tecnici">Quanti tecnici desideri avere per il tuo torneo?</label>
-					<input type="number" min="0" name="tot_tecnici" id="tot_tecnici"
-					class="feedback-input" onchange="numTecnici()" required>
-				</div> -->
 	
 				<div class="field">
 					<div class="tecniciFisici"></div>
+					
 					<!-- Da generare dinamicamente se il torneo è fisico -->
+					
 				</div>
-				
-			</div>
-			<div class="field-btn">
+				<div class="field-btn">
 				<input type="button" class="button-blue prevBtn3" onclick="slide()" value="Previous">
 				<input type="submit" class="button-blue subBtn" value="Finish">
 				
 			</div>
+			</div>
+			</form>
 		</div>
-		</form>
+		
 		
 		
 	</div>
-</div>
 </body>
 </html>

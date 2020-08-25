@@ -7,6 +7,8 @@
   text-align: center;
   -webkit-transition: background 600ms ease, color 600ms ease;
   transition: background 600ms ease, color 600ms ease;
+   margin-top:10px;
+    margin-bottom:10px;
 }
 
 input[type="radio"].toggle {

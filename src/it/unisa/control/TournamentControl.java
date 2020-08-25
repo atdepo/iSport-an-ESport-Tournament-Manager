@@ -70,12 +70,15 @@ public class TournamentControl extends HttpServlet {
 				
 				ArrayList<GiocoBean> giochi = (ArrayList<GiocoBean>) gModel.doRetriveAll(null);
 				ArrayList<String> numeroTecnici = new ArrayList<String>();
+				ArrayList<String> maxTecniciFisici = new ArrayList<String>();
 				ArrayList<SponsorBean> sponsor= (ArrayList<SponsorBean>) spModel.doRetriveAll(null);
 				numeroTecnici.add(String.valueOf(tecModel.doRetriveAll(null).size()));
-				ArrayList<ArrayList> col= new ArrayList<ArrayList>();
+				maxTecniciFisici.add(String.valueOf(tecModel.doRetrieveTecniciFisici()));
+				ArrayList<ArrayList<?>> col= new ArrayList<ArrayList<?>>();
 				col.add(giochi);
 				col.add(sponsor);
 				col.add(numeroTecnici);
+				col.add(maxTecniciFisici);
 				theJson += gson.toJson(col);
 				response.getWriter().print(theJson);
 				response.getWriter().flush();	
@@ -178,8 +181,8 @@ public class TournamentControl extends HttpServlet {
 			if (controlloData(data, request.getParameter("datatorneo"))) {
 				String errore="Non possediamo una DeLorean, pertanto ci è impossibile organizzare tornei nel passato!";
 				session.setAttribute("error",errore);
-				session.setAttribute("error-location", "first-step");
-				response.sendRedirect("/FormCreazioneTorneo.jsp");
+				session.setAttribute("error-type","data");
+				response.sendRedirect("FormCreazioneTorneo.jsp");
 				return;
 			}
 			
@@ -196,9 +199,9 @@ public class TournamentControl extends HttpServlet {
 
 						if (t.getCAPStruttura() == value && t.getIndirizzoStruttura().equals(address)) {
 							String errore = "In questa data la struttura selezionata è già occupata, selezionarne una diversa";
-							session.setAttribute("error", errore);
-							session.setAttribute("error-location", "third-step");
-							response.sendRedirect("/FormCreazioneTorneo.jsp");
+							session.setAttribute("error",errore);
+							session.setAttribute("error-type", "struttura");
+							response.sendRedirect("FormCreazioneTorneo.jsp");
 							
 							return;
 							

@@ -11,7 +11,6 @@
 	margin: 0;
 	padding: 0;
 	outline: none;
-
 }
 
 
@@ -55,10 +54,12 @@ body{
 	margin-bottom:10%;
 }
 
+
+
 .multi-steps > li.is-active:before, .multi-steps > li.is-active ~ li:before {
 	 content: counter(stepNum);
-	 font-family: inherit;
-	 font-weight: 700;
+	 font-family: 'quicksand',Arial, Helvetica, sans-serif;
+	 font-weight: 900;
 }
  .multi-steps > li.is-active:after, .multi-steps > li.is-active ~ li:after {
 	 background-color: #ededed;
@@ -76,6 +77,7 @@ body{
 	 color: #5DEFB9;
 }
  .multi-steps > li:before {
+	 content: '\2713';
 	 display: block;
 	 margin: 0 auto 4px;
 	 background-color: #fff;
@@ -174,8 +176,8 @@ label,.selected{
 	border-radius: 11px;
 	background-color: #fbfbfb;
 	padding: 13px 13px 13px 54px;
-	margin-top:10px;
-	margin-bottom: 10px;
+	margin-top:20px;
+	margin-bottom: 20px;
 	width:89%;
 	-webkit-box-sizing: border-box;
 	-moz-box-sizing: border-box;
@@ -343,7 +345,7 @@ ul.ks-cboxtags li input[type="checkbox"]:focus + label {
   border: 2px solid white;
 }
 
-@media only screen and (max-width: 770px) {
+@media only screen and (max-width: 660px) {
 	.total-container{	
 		width: 95%;
 		margin-left: -48%;

@@ -133,6 +133,8 @@ public class TournamentControl extends HttpServlet {
 			
 		break;
 	
+	
+			
 		case "getGiocatori":
 			
 			
@@ -244,7 +246,26 @@ public class TournamentControl extends HttpServlet {
 			
 			break;
 			
+		case "deleteTorneo":
 			
+			try {
+				/*TournamentBean t = new TournamentBean();
+				t.setBudget(311);
+				t.setCAPStruttura(80654);
+				t.setCodGioco("Rocket League");
+				t.setData("2032-10-30");
+				t.setHomePage(true);
+				t.setIndirizzoStruttura("Via Francia");
+				t.setNome("TEST");
+				t.setProprietario("test@test.com");
+				tModel.doSave(t);*/
+				tModel.doDelete((String)request.getParameter("cod"));
+				
+				response.sendRedirect(request.getContextPath()+"/ListaTornei.jsp");
+			} catch (Exception e) {
+				// TODO: handle exception
+			}
+			break;
 		case "getTornei":
 			
 		try {
@@ -253,7 +274,7 @@ public class TournamentControl extends HttpServlet {
 			String torneo="";
 			ArrayList<TournamentBean> tornei = (ArrayList<TournamentBean>) tModel.doRetriveAll(null);
 			torneo=gson.toJson(tornei);
-			System.out.println("ciao mamma");
+			System.out.println("ciao mamma, questi sono i tornei");
 			response.getWriter().print(torneo);
 			response.getWriter().flush();
 			response.setStatus(200);

@@ -65,10 +65,10 @@ public class TournamentModel implements ModelInterface<TournamentBean,String>{
 				bean.setIndirizzoStruttura(rs.getString("IndirizzoStruttura"));
 				bean.setNome(rs.getString("Nome"));
 				bean.setCodice(rs.getInt("Codice"));
-				bean.setBudget(rs.getInt("budget"));
+				bean.setBudget(rs.getInt("budgetTorneo"));
 				bean.setHomePage(rs.getBoolean("isOnHomePage"));
 				bean.setProprietario(rs.getString("proprietarioTorneo"));
-				
+				System.out.println(bean.getNome());
 				collection.add(bean);
 			}
 		}
@@ -77,18 +77,22 @@ public class TournamentModel implements ModelInterface<TournamentBean,String>{
 
 	@Override
 	public void doSave(TournamentBean torneo) throws SQLException {
-		String sql = "INSERT INTO torneo VALUES (?,?,?,?,?,?,?,?,?)";
+		String sql = "INSERT INTO torneo (nome,datatorneo,codgioco,indirizzostruttura,capstruttura,"
+				+ "isOnHomePage,budgetTorneo,proprietarioTorneo)"
+				+ " VALUES (?,?,?,?,?,?,?,?)";
 		
 		try(Connection con = DriverManagerConnectionPool.getConnection();PreparedStatement statement= con.prepareStatement(sql)){
 			
-			statement.setInt(1,torneo.getCodice());
-			statement.setString(2,torneo.getNome());
-			statement.setString(3,torneo.getData());
-			statement.setString(4,torneo.getCodGioco());
-			statement.setString(5,torneo.getIndirizzoStruttura());
-			statement.setInt(6,torneo.getCAPStruttura());
-			statement.setBoolean(7,torneo.isHomePage());
+			
+			statement.setString(1,torneo.getNome());
+			statement.setString(2,torneo.getData());
+			statement.setString(3,torneo.getCodGioco());
+			statement.setString(4,torneo.getIndirizzoStruttura());
+			statement.setInt(5,torneo.getCAPStruttura());
+			statement.setBoolean(6,torneo.isHomePage());
+			statement.setInt(7, torneo.getBudget());
 			statement.setString(8,torneo.getProprietario());
+			
 
 			System.out.println("doSave="+statement);
 			statement.executeUpdate();

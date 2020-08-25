@@ -17,8 +17,8 @@ public class SquadraBean implements Serializable {
 		return teamImage;
 	}
 	
-	public String setTeamImage(String img) {
-		return teamImage=img;
+	public void setTeamImage(String img) {
+		 teamImage=img;
 	}
 
 	public String getNazionalita() {

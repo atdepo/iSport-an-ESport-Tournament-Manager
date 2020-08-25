@@ -149,7 +149,7 @@ public class TournamentControl extends HttpServlet {
 				System.out.println((String)sess.getAttribute("nomeGioco")+ " "+(String)sess.getAttribute("modalita") );
 				sess.setAttribute("numPartecipanti",bean.getNumPartecipanti()/2);
 				response.setStatus(200);
-				response.sendRedirect(request.getContextPath()+"FormInserimentoGiocatori.jsp?nomesquadra="+request.getParameter("nomesquadra"));
+				response.sendRedirect(request.getContextPath()+"../user/FormInserimentoGiocatori.jsp?nomesquadra="+request.getParameter("nomesquadra"));
 				
 			} catch (SQLException e1) {
 				// TODO Auto-generated catch block
@@ -234,6 +234,25 @@ public class TournamentControl extends HttpServlet {
 		
 		break;
 		
+		case"getImgSquadra":
+			try {
+				System.out.println("L'anm e "+request.getParameter("squadraScelta"));
+				SquadraBean s=(SquadraBean)sqModel.doRetriveByKey(request.getParameter("squadraScelta"));
+				ArrayList<String> immagine=new ArrayList<String>();
+				immagine.add(s.getTeamImage());
+				String img=gson.toJson(immagine);
+				System.out.println("Mammt"+s.getTeamImage());
+				response.getWriter().print(img);
+				response.getWriter().flush();
+				System.out.println("il json dell'immagine è stato creato con successo");
+				response.setStatus(200);
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
+			
+			
+			break;
+		
 		case "getSquadre":
 			response.setCharacterEncoding("UTF-8");
 			
@@ -245,7 +264,6 @@ public class TournamentControl extends HttpServlet {
 				System.out.println("il json delle squadre ï¿½ stato creato con successo");
 				response.setStatus(200);
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			

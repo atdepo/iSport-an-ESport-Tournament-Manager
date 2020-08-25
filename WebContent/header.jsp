@@ -33,7 +33,7 @@
 	<ul id="link">
 	<li><a href="<%=request.getContextPath()+"/index.jsp"%>" class="active">HOME</a></li>
 	<li><a href="<%=response.encodeURL(request.getContextPath()+"/user/FormCreazioneTorneo.jsp")%>">CREA TORNEO</a></li>
-	<li><a href="#">CONTATTI</a></li>	
+	<li><a href="<%=request.getContextPath()+"/contatti.jsp"%>">CONTATTI</a></li>	
   	<%if(utente==null){%>
   	  <li><a href="<%=request.getContextPath()+"/FormLoginAndRegister.jsp"%>">ACCEDI O REGISTRATI</a></li>
   	

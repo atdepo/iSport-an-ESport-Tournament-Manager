@@ -82,7 +82,7 @@ public class TournamentControl extends HttpServlet {
 				theJson += gson.toJson(col);
 				response.getWriter().print(theJson);
 				response.getWriter().flush();	
-				System.out.println("il json di inizializzazione del form è stato creato con successo");
+				System.out.println("il json di inizializzazione del form ï¿½ stato creato con successo");
 				request.getSession().setAttribute("error", null);
 				request.getSession().setAttribute("error-type", null);
 				response.setStatus(200);
@@ -148,7 +148,7 @@ public class TournamentControl extends HttpServlet {
 				System.out.println((String)sess.getAttribute("nomeGioco")+ " "+(String)sess.getAttribute("modalita") );
 				sess.setAttribute("numPartecipanti",bean.getNumPartecipanti()/2);
 				response.setStatus(200);
-				response.sendRedirect(request.getContextPath()+"FormInserimentoGiocatori.jsp?nomesquadra="+request.getParameter("nomesquadra"));
+				response.sendRedirect(request.getContextPath()+"../user/FormInserimentoGiocatori.jsp?nomesquadra="+request.getParameter("nomesquadra"));
 				
 			} catch (SQLException e1) {
 				// TODO Auto-generated catch block
@@ -159,11 +159,11 @@ public class TournamentControl extends HttpServlet {
 			
 		/** Questo case viene chiamato nel terzo step del form di creazione di un nuovo torneo.	
 		 * Viene utilizzato per validare la data di svolgimento del torneo, in particolare:
-		 * -controlla se la data di svolgimento del torneo è nel passato(controllo già fatto nel front-end ma js è disattivabile).
+		 * -controlla se la data di svolgimento del torneo ï¿½ nel passato(controllo giï¿½ fatto nel front-end ma js ï¿½ disattivabile).
 		 * -controlla se, nel caso in cui il torneo sia organizzato presso una struttura fisica, che tale struttura in quella giornata
 		 * sia effettivamente libera e utilizzabile.
 		 * 
-		 * Nel caso in cui venga riscontrato un errore, un oggetto error in sessione viene creato e inserito opportunamente dove è presente l'errore. 
+		 * Nel caso in cui venga riscontrato un errore, un oggetto error in sessione viene creato e inserito opportunamente dove ï¿½ presente l'errore. 
 		 */
 		case "validateTorneo":
 			HttpSession session= request.getSession();
@@ -172,13 +172,14 @@ public class TournamentControl extends HttpServlet {
 			response.setCharacterEncoding("UTF-8");
 			System.out.println("Sto validando il torneo");
 			
-			//Controllo se la data è nel passato
+			//Controllo se la data ï¿½ nel passato
 			String dataTorneoDaCreare = (String) request.getParameter("datatorneo");
 			Date d1 = new Date();
 			SimpleDateFormat df = new SimpleDateFormat("YYYY-MM-dd");
 			String data = df.format(d1);
 			if (controlloData(data, request.getParameter("datatorneo"))) {
-				String errore="Non possediamo una DeLorean, pertanto ci è impossibile organizzare tornei nel passato!";
+				System.out.println("A maronn");
+				String errore="Non possediamo una DeLorean, pertanto ci ï¿½ impossibile organizzare tornei nel passato!";
 				session.setAttribute("error",errore);
 				session.setAttribute("error-type","data");
 				response.sendRedirect(request.getContextPath()+"/user/FormCreazioneTorneo.jsp");
@@ -186,21 +187,22 @@ public class TournamentControl extends HttpServlet {
 			}
 			
 			
-			//Controllo se la struttura nella data specificata è già stata occupata
+			//Controllo se la struttura nella data specificata ï¿½ giï¿½ stata occupata
 			try {
 				ArrayList<TournamentBean> tornei = (ArrayList<TournamentBean>) tModel.doRetriveAll(null);
 				for (TournamentBean t : tornei) {
 					if (t.getData().equals(dataTorneoDaCreare)) {
+						System.out.println("O patatern");
 						String s = request.getParameter("struttura");
 						String tmp = s.substring(s.indexOf(',') + 2);
 						int value = Integer.parseInt(tmp.replaceAll("[^0-9]", ""));
 						String address = tmp.substring(0, tmp.indexOf('-') - 1);
 
 						if (t.getCAPStruttura() == value && t.getIndirizzoStruttura().equals(address)) {
-							String errore = "In questa data la struttura selezionata è già occupata, selezionarne una diversa";
+							String errore = "In questa data la struttura selezionata ï¿½ giï¿½ occupata, selezionarne una diversa";
 							session.setAttribute("error",errore);
 							session.setAttribute("error-type", "struttura");
-							response.sendRedirect(request.getContextPath()+"/user/FormCreazioneTorneo.jsp");
+							response.sendRedirect("/user/FormCreazioneTorneo.jsp");
 							
 							return;
 							
@@ -213,6 +215,9 @@ public class TournamentControl extends HttpServlet {
 				catch (SQLException e) {
 					e.printStackTrace();
 				}
+			
+				
+		
 				HttpSession sessione= request.getSession();
 				sessione.setAttribute("nomeTorneo", request.getParameter("nometorneo"));
 				sessione.setAttribute("dataTorneo", request.getParameter("datatorneo"));
@@ -224,8 +229,28 @@ public class TournamentControl extends HttpServlet {
 				sessione.setAttribute("totaleTecnici", request.getParameter("tot_tecnici"));
 				sessione.setAttribute("tecniciFisici", request.getParameter("tecnici_fisici"));
 				response.sendRedirect(request.getContextPath()+"/user/FormInserimentoSquadre.jsp");			
+				
 		
 		break;
+		
+		case"getImgSquadra":
+			try {
+				System.out.println("L'anm e "+request.getParameter("squadraScelta"));
+				SquadraBean s=(SquadraBean)sqModel.doRetriveByKey(request.getParameter("squadraScelta"));
+				ArrayList<String> immagine=new ArrayList<String>();
+				immagine.add(s.getTeamImage());
+				String img=gson.toJson(immagine);
+				System.out.println("Mammt"+s.getTeamImage());
+				response.getWriter().print(img);
+				response.getWriter().flush();
+				System.out.println("il json dell'immagine ï¿½ stato creato con successo");
+				response.setStatus(200);
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
+			
+			
+			break;
 		
 		case "getSquadre":
 			response.setCharacterEncoding("UTF-8");
@@ -238,7 +263,6 @@ public class TournamentControl extends HttpServlet {
 				System.out.println("il json delle squadre ï¿½ stato creato con successo");
 				response.setStatus(200);
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			

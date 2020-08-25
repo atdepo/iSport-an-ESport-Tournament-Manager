@@ -14,7 +14,7 @@
 	<div class="intro-section" style="background-image: url('img/homeBackground.jpg');">
 		<h1>Il Posto Perfetto per Competere</h1>
 	</div>
-
+<label class="how">Come funziona?</label>
 <div class="page-content">
   <div class="card">
     <div class="content">

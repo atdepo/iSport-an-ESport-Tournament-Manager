@@ -31,6 +31,7 @@ public class SquadraModel implements ModelInterface<SquadraBean, String>{
 				bean.setNome(rs.getString("nome"));
 				bean.setNazionalita(rs.getString("nazionalita"));
 				bean.setTeamImage(rs.getString("imgSquadra"));
+				System.out.println("Ho trovato la squadra"+nome);
 			}
 		}
 		return bean;

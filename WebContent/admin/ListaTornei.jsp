@@ -5,6 +5,7 @@
 <head>
 	<meta charset="UTF-8">
 	
+	<link rel="stylesheet"  href="../CSS/ListaTornei.css" type="text/css">
 	<script src = "https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 	<script>
 	
@@ -19,7 +20,7 @@
 				console.log(data);			
 				var div=$(".mimmo");
 				for (var i = 0; i < data.length; i++) {
-					div.append('<p>'+data[i].nome+' <a href="../TournamentControl?action=deleteTorneo&cod='+data[i].codice+'"><i class="fas fa-dumpster-fire"></i></a><br>');	
+					div.append('<p>Nome Torneo= '+data[i].nome+' <a href="../TournamentControl?action=deleteTorneo&cod='+data[i].codice+'"><i class="fas fa-dumpster-fire"></i></a><br>');	
 		
 				}
 			
@@ -30,13 +31,8 @@
 	xhr.open('GET', '../TournamentControl?action=getTornei', true);		
 	xhr.send();
 		})
-	
-	
-	
+		
 	</script>
-	<style type="text/css">
-	.fa-dumpster-fire{color: red}
-	</style>
 </head>
 	
 <body>

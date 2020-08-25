@@ -21,9 +21,9 @@
 	}
 }
 $(function() {
-	var $dropDownMenu = $(".avatar-dropdown-menu");
+	var dropDownMenu = $(".avatar-dropdown-menu");
 
-	$dropDownMenu.click(function(e) {		
+	dropDownMenu.click(function(e) {		
 		e.stopPropagation();
 
 		$(document).on("click", menuCloseListener);
@@ -32,7 +32,7 @@ $(function() {
 	});
 
 	var toggleMenu = function() {
-		$dropDownMenu.toggleClass("open");
+		dropDownMenu.toggleClass("open");
 	}
 
 	var menuCloseListener = function() {

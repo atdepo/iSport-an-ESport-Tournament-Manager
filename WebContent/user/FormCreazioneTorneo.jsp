@@ -7,7 +7,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%
-	String error = (String) request.getAttribute("error");
+	String error = null ;
+	String error_location = null ;
+	if(session.getAttribute("error")!=null && session.getAttribute("error-location")!=null){
+		error=(String)session.getAttribute("error");
+		error_location=(String)session.getAttribute("error-location");
+	}
 %>
 <!DOCTYPE html>
 <html>
@@ -47,17 +52,12 @@
 				</div>
 			</div>
 			
-			<form action="#" method="post">
+			<form action="TournamentControl?action=validateTorneo" method="post">
 		<div class="page slidepage">
 			<div class="field">
 				<label for="nometorneo">Qual'è il nome del torneo da creare?</label>
 				<input type="text" class="feedback-input nome-torneo" name="nometorneo">
 			</div>	
-
-			<div class="field">
-				<label for="datatorneo">Che giorno vuoi svolgere il torneo?</label>
-				<input type="date" class="feedback-input data-torneo" name="datatorneo">
-			</div>
 
 			<div class="field">
 				 <label for="number-container">Qual'è il budget stimato per il torneo?</label>
@@ -71,7 +71,16 @@
 				
 				</div>
 			</div>
-
+			<div class="field">
+				<label for="homePage">Vuoi che il torneo sia mostrato in home page?</label>
+				<label for="yes">Si</label>
+				<input type="radio" class = "yes" name="show" value="si">
+				<label for="yes">No</label>
+				<input type="radio" class = "no" name="show" value="no">		
+			
+			</div>
+			
+			
 			<div class="field">
 			<label for="contieniSponsor">Scegli degli sponsor</label>
 				<div class="contieniSponsor">
@@ -91,7 +100,7 @@
 			<div class="title"></div>
 
 			<div class="field">
-				<label for="gioco">Gioco di riferimento</label>	
+				<label for="gioco">Scegli un gioco!</label>	
 					<div class="container gioco">
 						<div class="select-box">
 							<div class="options-container" id="gioco"></div>
@@ -101,7 +110,7 @@
 			</div>
 
 			<div class="field">
-				<label for="mod">Modalita di gioco</label>
+				<label for="mod">Che modalità vuoi giocare?</label>
 					<div class="container mod">
 						<div class="select-box">
 							<div class="options-container" id="mode"></div>
@@ -132,7 +141,14 @@
 					</div>
 			
 			<div class="field">
+				<label for="datatorneo">Che giorno vuoi svolgere il torneo?</label>
+				<input type="date" class="feedback-input data-torneo" name="datatorneo">
+				<span class="error"></span>
+			</div>
+			
+			<div class="field">
 				<div class="strutture"></div>
+				<span class="error"></span>
 				<!-- Da generare dinamicamente se il torneo è fisico -->
 			</div>
 			

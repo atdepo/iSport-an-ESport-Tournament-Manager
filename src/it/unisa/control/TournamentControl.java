@@ -153,26 +153,36 @@ public class TournamentControl extends HttpServlet {
 			
 			break;
 			
-			
-		case "validate"://TODO da rivedere
+		/** Questo case viene chiamato nel terzo step del form di creazione di un nuovo torneo.	
+		 * Viene utilizzato per validare la data di svolgimento del torneo, in particolare:
+		 * -controlla se la data di svolgimento del torneo è nel passato(controllo già fatto nel front-end ma js è disattivabile).
+		 * -controlla se, nel caso in cui il torneo sia organizzato presso una struttura fisica, che tale struttura in quella giornata
+		 * sia effettivamente libera e utilizzabile.
+		 * 
+		 * Nel caso in cui venga riscontrato un errore, un oggetto error in sessione viene creato e inserito opportunamente dove è presente l'errore. 
+		 */
+		case "validateTorneo":
+			HttpSession session= request.getSession();
+			session.setAttribute("error", null);
+			session.setAttribute("error-location", null);
 			response.setCharacterEncoding("UTF-8");
 			System.out.println("Sto validando il torneo");
-			request.setAttribute("error", null);
+			
+			//Controllo se la data è nel passato
 			String dataTorneoDaCreare = (String) request.getParameter("datatorneo");
 			Date d1 = new Date();
 			SimpleDateFormat df = new SimpleDateFormat("YYYY-MM-dd");
 			String data = df.format(d1);
-
 			if (controlloData(data, request.getParameter("datatorneo"))) {
-				request.setAttribute("error",
-						"Non possediamo una DeLorean, pertanto ci ï¿½ impossibile organizzare tornei nel passato!");
-				RequestDispatcher dispatcher = request.getServletContext().getRequestDispatcher("/FormCreazioneTorneo.jsp");
-				dispatcher.forward(request, response);
-				
-
+				String errore="Non possediamo una DeLorean, pertanto ci è impossibile organizzare tornei nel passato!";
+				session.setAttribute("error",errore);
+				session.setAttribute("error-location", "first-step");
+				response.sendRedirect("/FormCreazioneTorneo.jsp");
 				return;
 			}
-
+			
+			
+			//Controllo se la struttura nella data specificata è già stata occupata
 			try {
 				ArrayList<TournamentBean> tornei = (ArrayList<TournamentBean>) tModel.doRetriveAll(null);
 				for (TournamentBean t : tornei) {
@@ -183,21 +193,25 @@ public class TournamentControl extends HttpServlet {
 						String address = tmp.substring(0, tmp.indexOf('-') - 1);
 
 						if (t.getCAPStruttura() == value && t.getIndirizzoStruttura().equals(address)) {
-							System.out.println("PROBLEMAAAAA");
-							String errore = "In questa data la struttura selezionata ï¿½ giï¿½ occupata, selezionarne una diversa";
-							request.setAttribute("error", errore);
-							RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher("/FormCreazioneTorneo.jsp");
-							dispatcher.forward(request, response);
+							String errore = "In questa data la struttura selezionata è già occupata, selezionarne una diversa";
+							session.setAttribute("error", errore);
+							session.setAttribute("error-location", "third-step");
+							response.sendRedirect("/FormCreazioneTorneo.jsp");
+							
 							return;
 							
-						}
+							}
 
+						}
 					}
+				
 				}
+				catch (SQLException e) {
+					e.printStackTrace();
+				}
+			break;
 				
-				
-				//System.out.println("mannagg geppett");
-				
+		case "mimmo":
 				HttpSession sessione= request.getSession();
 				sessione.setAttribute("nomeTorneo", request.getParameter("nometorneo"));
 				sessione.setAttribute("dataTorneo", request.getParameter("datatorneo"));
@@ -208,13 +222,8 @@ public class TournamentControl extends HttpServlet {
 				sessione.setAttribute("budget", request.getParameter("budget"));
 				sessione.setAttribute("totaleTecnici", request.getParameter("tot_tecnici"));
 				sessione.setAttribute("tecniciFisici", request.getParameter("tecnici_fisici"));
-				response.sendRedirect(request.getContextPath()+"/FormInserimentoSquadre.jsp");
-
-				return;
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-			
+				response.sendRedirect(request.getContextPath()+"/FormInserimentoSquadre.jsp");			
+		
 		break;
 		
 		case "getSquadre":

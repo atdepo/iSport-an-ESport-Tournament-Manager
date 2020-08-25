@@ -36,7 +36,7 @@ body{
 	margin:auto;
 	padding: 50px 35px 10px 35px;
 	text-align: center;	
-	background-color:rgba(99,83,105,0.7);
+	background-color:rgba(99,74,86,0.8);
 	padding-left:35px;
 	padding-right:35px;
 	padding-top:35px;
@@ -156,6 +156,12 @@ margin:10px;
 	display:flex;
 }
 
+label,.selected{
+	font-weight: 600;
+    font-size: 22px;
+    color: blanchedalmond;
+}
+
 .page .tecnici{
 	display:flex;
 }
@@ -163,8 +169,8 @@ margin:10px;
 .feedback-input {
 	color:#3c3c3c;
 	font-family: 'Montserrat', Arial, Helvetica, sans-serif;
-  	font-weight:500;
-	font-size: 15px;
+  	font-weight:00;
+	font-size: 20px;
 	border-radius: 11px;
 	background-color: #fbfbfb;
 	padding: 13px 13px 13px 54px;
@@ -321,7 +327,7 @@ ul.ks-cboxtags li input[type="checkbox"]:checked + label::before {
 
 ul.ks-cboxtags li input[type="checkbox"]:checked + label {
     border: 2px solid #1bdbf8;
-    background-color: #12bbd4;
+    background-color: #0082e6;
     color: #fff;
     transition: all .2s;
 }
@@ -334,7 +340,7 @@ ul.ks-cboxtags li input[type="checkbox"] {
   opacity: 0;
 }
 ul.ks-cboxtags li input[type="checkbox"]:focus + label {
-  border: 2px solid #e9a1ff;
+  border: 2px solid white;
 }
 
 @media only screen and (max-width: 770px) {
@@ -353,6 +359,13 @@ ul.ks-cboxtags li input[type="checkbox"]:focus + label {
 		width:110%
 
 	}
+	
+	
+	input[type=number]{
+	
+	width:50%;
+	}
+	
 	
 	.container{
 	padding-left:0%;

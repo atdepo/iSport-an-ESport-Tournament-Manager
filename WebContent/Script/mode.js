@@ -145,7 +145,18 @@ function slide(){
 		const slidePage= $('.slidepage');
 					
 		if($(event.target).hasClass("nextBtn1")){ //JQuery >> tutto
-			if($('.nome-torneo').val()!==""&& $('.data-torneo').val()!==""){
+			
+			/*var xhr = new XMLHttpRequest();
+			xhr.onreadystatechange = function() {
+				if (xhr.status == 200 && xhr.readyState == 4) {
+					}
+				}
+			xhr.open('GET', '../TournamentControl?action=validate', true);
+			xhr.send();
+			
+			*/
+			
+			if($('.nome-torneo').val()!==""){
 				$('header').empty().text("Informazioni sul gioco:");
 				slidePage.css("marginLeft","-25%"); //JQuery >> tutto 
 				$('#first-step').removeClass("is-active");

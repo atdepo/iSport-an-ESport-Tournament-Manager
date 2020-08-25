@@ -4,3 +4,14 @@ li{
 	margin-top: 2%;
 	color:#45A29E;
 }
+body{
+	color:#45A29E;
+	background:url(../img/black-gradient.png) repeat;
+}
+.fa-dumpster-fire{
+	color: red
+}
+p{
+	padding: 10px;
+	font-weight: bolder;
+}

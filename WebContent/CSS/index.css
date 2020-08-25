@@ -26,11 +26,6 @@
    transform:translateX(-50%) translateY(-50%);
    color:#45A29E;
   }
-  .intro-section a:hover{
- 		color:lime;		
-		background-color:#1F2833;
-  
-  }
   .intro-section:before {
     position: absolute;
     height: 100%;
@@ -68,6 +63,11 @@ body{
 
 /* How it work */
 
+.how{
+	text-align:center;
+	color:#45A29E;
+	font-size:30px;
+}
  :root {
 	 --d: 700ms;
 	 --e: cubic-bezier(0.19, 1, 0.22, 1);

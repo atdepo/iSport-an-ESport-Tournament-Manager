@@ -1,0 +1,27 @@
+@charset "UTF-8";
+
+body{
+	color:#45A29E;
+	background:url(../img/black-gradient.png) repeat;
+}
+
+h2{
+	text-align:center;
+	padding-top:1%;
+}
+
+p{
+	display:inline-block;
+}
+
+p.nome{
+	font-size: 20px;
+}
+
+.link:hover{		
+		background-color:gray;
+  }
+a{
+	color:lime;
+	padding-left:1%;
+}

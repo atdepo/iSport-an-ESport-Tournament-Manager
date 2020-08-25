@@ -251,8 +251,8 @@ public class TournamentControl extends HttpServlet {
 			
 		case "deleteTorneo":
 			
-			try {
-				/*TournamentBean t = new TournamentBean();
+			try {/*
+				TournamentBean t = new TournamentBean();
 				t.setBudget(311);
 				t.setCAPStruttura(80654);
 				t.setCodGioco("Rocket League");
@@ -264,7 +264,7 @@ public class TournamentControl extends HttpServlet {
 				tModel.doSave(t);*/
 				tModel.doDelete((String)request.getParameter("cod"));
 				
-				response.sendRedirect(request.getContextPath()+"/ListaTornei.jsp");
+				response.sendRedirect(request.getContextPath()+"/admin/ListaTornei.jsp");
 			} catch (Exception e) {
 				// TODO: handle exception
 			}

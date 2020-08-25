@@ -32,6 +32,16 @@ $(document).ready(function() {
 	}
 	xhr.open('GET', '../TournamentControl?action=initTorneo', true);
 	xhr.send();
+	
+	if($('.data-error-message').val()!=='null'){
+		alert($('.data-error-message').val());
+		$('.error-data').empty().text($('.data-error-message').val());
+		
+	} else if($('.struttura-error-message').val()!=='null'){
+		alert('errore struttura!');
+		$('.error-struttura').empty().text($('.struttura-error-message').val());
+	}
+	
 
 });
 

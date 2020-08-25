@@ -83,10 +83,9 @@ public class TournamentControl extends HttpServlet {
 				response.getWriter().print(theJson);
 				response.getWriter().flush();	
 				System.out.println("il json di inizializzazione del form è stato creato con successo");
+				request.getSession().setAttribute("error", null);
+				request.getSession().setAttribute("error-type", null);
 				response.setStatus(200);
-
-				
-				
 			} catch (SQLException e1) {
 				e1.printStackTrace();
 			}
@@ -169,7 +168,7 @@ public class TournamentControl extends HttpServlet {
 		case "validateTorneo":
 			HttpSession session= request.getSession();
 			session.setAttribute("error", null);
-			session.setAttribute("error-location", null);
+			session.setAttribute("error-type", null);
 			response.setCharacterEncoding("UTF-8");
 			System.out.println("Sto validando il torneo");
 			
@@ -182,7 +181,7 @@ public class TournamentControl extends HttpServlet {
 				String errore="Non possediamo una DeLorean, pertanto ci è impossibile organizzare tornei nel passato!";
 				session.setAttribute("error",errore);
 				session.setAttribute("error-type","data");
-				response.sendRedirect("FormCreazioneTorneo.jsp");
+				response.sendRedirect(request.getContextPath()+"/user/FormCreazioneTorneo.jsp");
 				return;
 			}
 			
@@ -201,7 +200,7 @@ public class TournamentControl extends HttpServlet {
 							String errore = "In questa data la struttura selezionata è già occupata, selezionarne una diversa";
 							session.setAttribute("error",errore);
 							session.setAttribute("error-type", "struttura");
-							response.sendRedirect("FormCreazioneTorneo.jsp");
+							response.sendRedirect(request.getContextPath()+"/user/FormCreazioneTorneo.jsp");
 							
 							return;
 							
@@ -214,9 +213,6 @@ public class TournamentControl extends HttpServlet {
 				catch (SQLException e) {
 					e.printStackTrace();
 				}
-			break;
-				
-		case "mimmo":
 				HttpSession sessione= request.getSession();
 				sessione.setAttribute("nomeTorneo", request.getParameter("nometorneo"));
 				sessione.setAttribute("dataTorneo", request.getParameter("datatorneo"));
@@ -227,7 +223,7 @@ public class TournamentControl extends HttpServlet {
 				sessione.setAttribute("budget", request.getParameter("budget"));
 				sessione.setAttribute("totaleTecnici", request.getParameter("tot_tecnici"));
 				sessione.setAttribute("tecniciFisici", request.getParameter("tecnici_fisici"));
-				response.sendRedirect(request.getContextPath()+"/FormInserimentoSquadre.jsp");			
+				response.sendRedirect(request.getContextPath()+"/user/FormInserimentoSquadre.jsp");			
 		
 		break;
 		

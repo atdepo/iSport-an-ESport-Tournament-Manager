@@ -49,7 +49,7 @@
             <a class="dropdown-item">I MIEI TORNEI</a>
           </li>
           <li>
-            <a href="Logout" class="dropdown-item">LOG OUT</a>
+            <a href="<%=request.getContextPath()+"/Logout"%>" class="dropdown-item">LOG OUT</a>
           </li>
         </ul>
       </div>

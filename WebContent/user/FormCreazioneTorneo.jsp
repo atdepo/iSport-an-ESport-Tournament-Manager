@@ -7,9 +7,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%
-	String error = null ;
-	if(session.getAttribute("error")!=null ){
+	String error = null;
+	String error_type=null;
+	if(session.getAttribute("error")!=null && session.getAttribute("error-type")!=null){
 		error=(String)session.getAttribute("error");
+		error_type=(String) session.getAttribute("error-type");
 		System.out.println(error);
 	}
 %>
@@ -139,8 +141,12 @@
 			<div class="field">
 				<label for="datatorneo">Che giorno vuoi svolgere il torneo?</label>
 				<input type="date" class="feedback-input data-torneo" name="datatorneo">
-				<span class="error-data"></span>
+				<br><span class="error-data" style="color:red"></span>
 			</div>
+			
+				<input type="hidden" class="data-error-message" value="<%=error%>">
+				<input type="hidden" class="struttura-error-message" value="<%=error%>">
+			
 			
 			<div class="field">
 				<div class="strutture"></div>

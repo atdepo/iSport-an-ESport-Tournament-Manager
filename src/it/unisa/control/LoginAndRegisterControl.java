@@ -170,7 +170,9 @@ public class LoginAndRegisterControl extends HttpServlet {
 			
 			
 		case "validateLogin": //Effettuo la validazione del login
-
+			HttpSession session=request.getSession(false);
+			
+			
 			try {
 				MessageDigest md = MessageDigest.getInstance("SHA-256");// Istanzio un MessageDigest con un algoritmo di cifratura SHA 256 
 																		//già implementato nativamente in Java
@@ -182,13 +184,13 @@ public class LoginAndRegisterControl extends HttpServlet {
 				if (Arrays.compare(curr, user) == 0) { //Se le due password cifrate coincidono
 					
 					UtenteBean utente=userModel.doRetriveByKey(request.getParameter("email")); //Prendo il bean dal database che è identificato univocamente tramite la mail
-					request.getSession().setAttribute("user", utente); //Inserisco l'utente correttamente loggato in sessione
+					session.setAttribute("user", utente); //Inserisco l'utente correttamente loggato in sessione
 					response.sendRedirect("index.jsp"); //Reindirizzo l'utente loggato alla pagina iniziale dove potrà svolgere tutte le attività consentite da utente
 					
 				} else {//Se le due password non coincidono
-					request.getSession().setAttribute("error-type", "wrongCred");
-					request.getSession().setAttribute("error", "Password o email errate");
-					request.getSession().setAttribute("error-location", "login");
+					session.setAttribute("error-type", "wrongCred");
+					session.setAttribute("error", "Password o email errate");
+					session.setAttribute("error-location", "login");
 					response.sendRedirect("FormLoginAndRegister.jsp"); //Reindirizzo l'utente nuovamente alla schermata di inserimento delle credenziali
 				}
 

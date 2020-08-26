@@ -47,58 +47,71 @@ public class SquadreControl extends HttpServlet {
 		Gson gson = new Gson();
 		
 		switch (action) {
-				case "getGiocatori":
-					try {
-						
-						request.setAttribute("error", null);
-						HttpSession sess=request.getSession();
-						ModalitaBean bean=modModel.doRetriveByKey(new ModalitaKey((String)sess.getAttribute("nomeGioco"),(String)sess.getAttribute("modalita")));
-						System.out.println((String)sess.getAttribute("nomeGioco")+ " "+(String)sess.getAttribute("modalita") );
-						sess.setAttribute("numPartecipanti",bean.getNumPartecipanti()/2);
-						response.setStatus(200);
-						response.sendRedirect(request.getContextPath()+"../user/FormInserimentoGiocatori.jsp?nomesquadra="+request.getParameter("nomesquadra"));
-						
-					} catch (SQLException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-					}
+		case "getGiocatori":
+
+			try {
+				
+				request.setAttribute("error", null);
+				HttpSession sess=request.getSession();
+				String nomeGioco=(String)sess.getAttribute("nomeGioco");
+				String modalita=(String)sess.getAttribute("modalita");
+				
+				if(nomeGioco!=null && !nomeGioco.equals(" ") && modalita!=null && !modalita.equals(" ")) {
+					ModalitaBean bean=modModel.doRetriveByKey(new ModalitaKey(nomeGioco,modalita));
 					
-					break;
+					System.out.println("Cerco il numero di giocatori per squadra della modalita' "+(String)sess.getAttribute("modalita")+
+					" del gioco "+(String)sess.getAttribute("nomeGioco") );
 					
-				case"getImgSquadra":
-					try {
-						System.out.println("L'anm e "+request.getParameter("squadraScelta"));
-						SquadraBean s=(SquadraBean)sqModel.doRetriveByKey(request.getParameter("squadraScelta"));
-						ArrayList<String> immagine=new ArrayList<String>();
-						immagine.add(s.getTeamImage());
-						String img=gson.toJson(immagine);
-						System.out.println("Mammt"+s.getTeamImage());
-						response.getWriter().print(img);
-						response.getWriter().flush();
-						System.out.println("il json dell'immagine � stato creato con successo");
-						response.setStatus(200);
-					} catch (SQLException e1) {
-						e1.printStackTrace();
-					}
+					sess.setAttribute("numPartecipanti",bean.getNumPartecipanti()/2);
+					response.setStatus(200);
+					response.sendRedirect(request.getContextPath()+"../user/FormInserimentoGiocatori.jsp?nomesquadra="+request.getParameter("nomesquadra"));
+				}
+				else {
 					
+					response.setStatus(404);
+					System.out.println("Il gioco o la modalit� non sono stati indicati correttamente");
+				}
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			
+			break;
 					
-					break;
-				case "getSquadre":
-					response.setCharacterEncoding("UTF-8");
-					
-					try {
-						ArrayList<SquadraBean> squadre= (ArrayList<SquadraBean>) sqModel.doRetriveAll(null);
-						String mode=gson.toJson(squadre);
-						response.getWriter().print(mode);
-						response.getWriter().flush();
-						System.out.println("il json delle squadre � stato creato con successo");
-						response.setStatus(200);
-					} catch (SQLException e) {
-						e.printStackTrace();
-					}
-					
-					
-					break;
+		case"getImgSquadra":
+			try {
+				SquadraBean s=(SquadraBean)sqModel.doRetriveByKey(request.getParameter("squadraScelta"));
+				ArrayList<String> immagine=new ArrayList<String>();
+				immagine.add(s.getTeamImage());
+				String img=gson.toJson(immagine);
+				System.out.println("Mammt"+s.getTeamImage());
+				response.getWriter().print(img);
+				response.getWriter().flush();
+				System.out.println("il json dell'immagine e' stato creato con successo");
+				response.setStatus(200);
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
+			
+			
+			break;
+		
+		case "getSquadre":
+			response.setCharacterEncoding("UTF-8");
+			
+			try {
+				ArrayList<SquadraBean> squadre= (ArrayList<SquadraBean>) sqModel.doRetriveAll(null);
+				String mode=gson.toJson(squadre);
+				response.getWriter().print(mode);
+				response.getWriter().flush();
+				System.out.println("il json delle squadre � stato creato con successo");
+				response.setStatus(200);
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			
+			
+			break;
 		
 		}
 		

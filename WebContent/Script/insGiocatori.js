@@ -1,38 +1,30 @@
+
 $(document).ready(function(){
 	
-	/*var div=$ (".inseriamo");
-	  var numeroGiocatori= $("#giocatori").val();
-	  
-	  for (let i = 0; i < numeroGiocatori; i++) {
-		  div.append("<div class='giocatore'>" +
-		  		"<input type='text' placeholder='nickname' id='nickname'>" +
-		  		"<input type='text' placeholder='nome' id='nome'>" +
-		  		"<input type='text' placeholder='cognome' id='cognome'>" +
-		  		"<input type='date' id='data'" +
-		  		"<h3>"+$('#nSquadra').val()+"</h3></div>");
-	  }
-	  
-	  */
 	 var xhr = new XMLHttpRequest();
-	alert("mammt");
 		xhr.onreadystatechange = function() {
 
 			if (xhr.status == 200 && xhr.readyState == 4) {
-			
-			let data = JSON.parse(xhr.responseText);
-			console.log(data);
-			alert(data[0]);
+				
+				let data = JSON.parse(xhr.responseText);
+				console.log(data);
+				var num=data['0'];
+				var step=$('.list-unstyled');
+				var page=$('#the-form');
+				for (var i = 1; i <= num; i++) {
+					step.append('<li id="'+i+'-step" class="is-active">Giocatore '+i+'</li>');
 				}
 			}
-			xhr.open('GET', 'SquadreControl?action=getGiocatori', true);
-			xhr.send();
+		}
+	xhr.open('GET', 'SquadreControl?action=getGiocatori', true);
+	xhr.send();
 	//inserisciGiocatore();
 
 })
 
 
 function inserisciGiocatore(){
-	const queryString = window.location.search;
+	/*const queryString = window.location.search;
 	const urlParams = new URLSearchParams(queryString);
 	var nome= urlParams.get('nomesquadra');
 	var div=$ (".inseriamo");
@@ -41,7 +33,12 @@ function inserisciGiocatore(){
 	  		"<input type='text' required placeholder='nome' id='nome'>" +
 	  		"<input type='text' required placeholder='cognome' id='cognome'>" +
 	  		"<input type='date' required id='data'" +
-	  		"<h3> Squadra: "+nome+"</h3></div>");
+	  		"<h3> Squadra: "+nome+"</h3></div>");*/
+	
+	
+	
+	
+	
 }
 
 

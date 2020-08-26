@@ -47,16 +47,19 @@ public class SquadreControl extends HttpServlet {
 		Gson gson = new Gson();
 		
 		switch (action) {
+		
 		case "getGiocatori":
 			HttpSession session=request.getSession();
 			try {
+				//Temporaneo
+				session.setAttribute("nomeGioco", "League of Legends");
+				session.setAttribute("modalita", "Summoner Rift");
+				
 				ModalitaBean squadre= modModel.doRetriveByKey(new ModalitaKey((String)session.getAttribute("nomeGioco"),(String)session.getAttribute("modalita")));
-				ArrayList<ModalitaBean> coso=new ArrayList<ModalitaBean>();
-				String mode=gson.toJson(squadre);
-				response.getWriter().print(mode);
-				response.getWriter().flush();
-				System.out.println("il json delle squadre � stato creato con successo");
-				response.setStatus(200);
+				Integer num=squadre.getNumPartecipanti()/2;
+				System.out.println("servlet"+num);
+				session.setAttribute("numGiocatori", num);
+				response.sendRedirect(request.getContextPath()+"/FormInserimentoGiocatori.jsp");
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
@@ -70,7 +73,6 @@ public class SquadreControl extends HttpServlet {
 				ArrayList<String> immagine=new ArrayList<String>();
 				immagine.add(s.getTeamImage());
 				String img=gson.toJson(immagine);
-				System.out.println("Mammt"+s.getTeamImage());
 				response.getWriter().print(img);
 				response.getWriter().flush();
 				System.out.println("il json dell'immagine e' stato creato con successo");
@@ -90,7 +92,7 @@ public class SquadreControl extends HttpServlet {
 				String mode=gson.toJson(squadre);
 				response.getWriter().print(mode);
 				response.getWriter().flush();
-				System.out.println("il json delle squadre � stato creato con successo");
+				System.out.println("il json delle squadre e' stato creato con successo");
 				response.setStatus(200);
 			} catch (SQLException e) {
 				e.printStackTrace();
@@ -106,7 +108,6 @@ public class SquadreControl extends HttpServlet {
 
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
 

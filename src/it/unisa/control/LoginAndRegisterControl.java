@@ -155,6 +155,9 @@ public class LoginAndRegisterControl extends HttpServlet {
 						utente.setImg(img);
 						userModel.doSave(utente);
 						session.setAttribute("user", utente);
+						session.setAttribute("error-type", null); 
+						session.setAttribute("error", null);
+						session.setAttribute("error-location", null);
 						response.sendRedirect("index.jsp");
 					
 				}

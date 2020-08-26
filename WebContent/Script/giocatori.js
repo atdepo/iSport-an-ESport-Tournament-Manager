@@ -29,7 +29,7 @@ function tendina(k){
 function add(){
 
 	if($("input[type=radio][name=sel]:checked").attr("id")==="nuova")
-		window.location.replace('../SquadreControl?action=getGiocatori&nomesquadra='+$('.nomeSquadra').val());
+		window.location.replace('FormInserimentoGiocatori.jsp?nomesquadra='+$('.nomeSquadra').val());
 	else{
 		var squadre=$("#listaSquadre");	//div che contiene le img delle squadre
 		var check=$(".squadraSelezionata:checked").val();	//nome della squadra scelta

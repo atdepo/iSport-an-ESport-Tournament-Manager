@@ -27,7 +27,7 @@ import it.unisa.model.torneo.TournamentModel;
 /**
  * Servlet implementation class SquadreControl
  */
-@WebServlet("/SquadreControl")
+@WebServlet(urlPatterns = {"/SquadreControl","/user/SquadreControl"})
 public class SquadreControl extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	TournamentModel tModel = new TournamentModel();
@@ -48,33 +48,19 @@ public class SquadreControl extends HttpServlet {
 		
 		switch (action) {
 		case "getGiocatori":
-
+			HttpSession session=request.getSession();
 			try {
-				
-				request.setAttribute("error", null);
-				HttpSession sess=request.getSession();
-				String nomeGioco=(String)sess.getAttribute("nomeGioco");
-				String modalita=(String)sess.getAttribute("modalita");
-				
-				if(nomeGioco!=null && !nomeGioco.equals(" ") && modalita!=null && !modalita.equals(" ")) {
-					ModalitaBean bean=modModel.doRetriveByKey(new ModalitaKey(nomeGioco,modalita));
-					
-					System.out.println("Cerco il numero di giocatori per squadra della modalita' "+(String)sess.getAttribute("modalita")+
-					" del gioco "+(String)sess.getAttribute("nomeGioco") );
-					
-					sess.setAttribute("numPartecipanti",bean.getNumPartecipanti()/2);
-					response.setStatus(200);
-					response.sendRedirect(request.getContextPath()+"../user/FormInserimentoGiocatori.jsp?nomesquadra="+request.getParameter("nomesquadra"));
-				}
-				else {
-					
-					response.setStatus(404);
-					System.out.println("Il gioco o la modalit� non sono stati indicati correttamente");
-				}
-			} catch (SQLException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
+				ModalitaBean squadre= modModel.doRetriveByKey(new ModalitaKey((String)session.getAttribute("nomeGioco"),(String)session.getAttribute("modalita")));
+				ArrayList<ModalitaBean> coso=new ArrayList<ModalitaBean>();
+				String mode=gson.toJson(squadre);
+				response.getWriter().print(mode);
+				response.getWriter().flush();
+				System.out.println("il json delle squadre � stato creato con successo");
+				response.setStatus(200);
+			} catch (SQLException e) {
+				e.printStackTrace();
 			}
+		
 			
 			break;
 					

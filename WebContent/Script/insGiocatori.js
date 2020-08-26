@@ -13,7 +13,20 @@ $(document).ready(function(){
 	  }
 	  
 	  */
-	inserisciGiocatore();
+	 var xhr = new XMLHttpRequest();
+	alert("mammt");
+		xhr.onreadystatechange = function() {
+
+			if (xhr.status == 200 && xhr.readyState == 4) {
+			
+			let data = JSON.parse(xhr.responseText);
+			console.log(data);
+			alert(data[0]);
+				}
+			}
+			xhr.open('GET', 'SquadreControl?action=getGiocatori', true);
+			xhr.send();
+	//inserisciGiocatore();
 
 })
 
@@ -30,6 +43,7 @@ function inserisciGiocatore(){
 	  		"<input type='date' required id='data'" +
 	  		"<h3> Squadra: "+nome+"</h3></div>");
 }
+
 
 
 $(function(){

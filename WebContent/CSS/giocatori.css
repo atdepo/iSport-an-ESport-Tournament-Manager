@@ -1,5 +1,4 @@
 
-/* ===================== FILE INPUT ===================== */
 .file-area {
   width: 100%;
   position: relative;
@@ -52,13 +51,8 @@
     input[type=file]:valid + .file-dummy .default {
       display: none;
     }
-  
-
-@import url(https://fonts.googleapis.com/css?family=Montserrat:400,700);
-@import url(https://fonts.googleapis.com/css2?family=Rowdies&display=swap);
-@import url('https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@700&display=swap');
-
-
+ 
+ 
 body{
 	background:url(../img/background.jpg);
   background-position: center center;
@@ -66,8 +60,6 @@ body{
   background-attachment: fixed;
   background-size: cover;	
 	display: block;
-	/*align-items: center;
-	justify-content: center;*/
 	min-height: 100vh;
 }
 
@@ -78,6 +70,7 @@ body{
 	margin:auto;
 	padding: 50px 35px 10px 35px;
 	text-align: center;	
+	overflow:hidden;
 	background-color:rgba(99,74,86,0.8);
 	padding-left:35px;
 	padding-right:35px;
@@ -96,8 +89,6 @@ body{
 	margin-top:10%;
 	margin-bottom:10%;
 }
-
-
 
 .multi-steps > li.is-active:before, .multi-steps > li.is-active ~ li:before {
 	 content: counter(stepNum);
@@ -194,13 +185,6 @@ margin:10px;
 	display:flex;
 }
 
-label,.selected{
-	font-weight: 600;
-    font-size: 22px;
-    color: blanchedalmond;
-}
-
-
 .feedback-input {
 	color:#3c3c3c;
 	font-family: 'Montserrat', Arial, Helvetica, sans-serif;
@@ -286,15 +270,6 @@ input:hover, input:focus{
 	 	width:100%;
 	}
 
-.contieniSponsor{
-	display: flex;
-    align-items: center;
-    justify-content: center;
-	max-width: 640px;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    font-size: 13px;
-}
-
 @media only screen and (max-width: 660px) {
 	.total-container{	
 		width: 95%;
@@ -320,71 +295,15 @@ input:hover, input:focus{
 
 }
 
-@media screen and (max-width:400px){
-
-	 #number-box{
-        font-size:15px;
-    }
-}
-
-	
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/* ===================== BASIC STYLING ===================== */
-/*
-* {
-  box-sizing: border-box;
-  font-family: 'Lato', sans-serif;
-}
-
-html,
-body {
-  margin: 0;
-  padding: 0;
-  font-weight: 300;
-  height: 100%;
-  
-  color: #fff;
-  font-size: 16px;
-  
-}
-*/
-h1 {
-  text-align: center;
-  margin: 50px auto;
-  font-weight: 100;
-}
-
-label {
-  font-weight: 500;
+.testlabel {
+  font-weight: 600;
+  font-size: 19px;
+  color: blanchedalmond;
   margin: 4px 0;
   text-transform: uppercase;
-  font-size: 13px;
+  display:block;
   
 }
-  span {
-    float: right;
-    text-transform: none;
-    font-weight: 200;
-    line-height: 1em;
-    font-style: italic;
-    opacity: 0.8;
-  }
 
 
 .form-controll {
@@ -419,19 +338,4 @@ button {
   max-width: 500px;
   margin: auto;
   margin-bottom: 30px;
-}
-
-.back-to-article {
-  color: #fff;
-  text-transform: uppercase;
-  font-size: 12px;
-  position: absolute;
-  right: 20px;
-  top: 20px;
-  text-decoration: none;
-  display: inline-block;
-  background: rgba(0,0,0,0.6);
-  padding: 10px 18px;
-  transition: all 0.3s ease-in-out;
-  opacity: 0.6;
 }

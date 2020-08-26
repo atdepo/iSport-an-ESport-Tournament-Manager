@@ -8,17 +8,15 @@ if(session.getAttribute("numGiocatori")==null){
 	RequestDispatcher disp= request.getRequestDispatcher("../SquadreControl?action=getGiocatori");
 	disp.forward(request, response);
 }
-Integer tmp=(Integer)session.getAttribute("numGiocatori");
-System.out.println(tmp);
-int numeroGiocatoriSquadra= tmp.intValue();
+	Integer tmp=(Integer)session.getAttribute("numGiocatori");
+	System.out.println(tmp);
+	int numeroGiocatoriSquadra= tmp.intValue();
 
 %>
 <!DOCTYPE html>
 <html>
 
 <head>
-
-
 
 <script src = "https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script type="text/javascript" src="../Script/insGiocatori.js"></script>
@@ -33,14 +31,16 @@ int numeroGiocatoriSquadra= tmp.intValue();
 </head>
 <body>
 	<%@ include file="../header.jsp"%>	
+	<input type="hidden" value="<%=numeroGiocatoriSquadra%>" id="numGiocatori">
 <div class="total-container">
 	<div class="form-div">
+	<header>ASD</header>
 		<div class="progress-bar-wrapper">
 			<div class="container-fluid">
 				<ul class="list-unstyled multi-steps">
 				<%for(int j=1;j<=numeroGiocatoriSquadra;j++){%>
 				
-					<li id="<%=j%>-step" class="is-active">Giocatore <%=j%></li>
+					<li id="<%=j%>-step" <%if(j==1){%>class="is-active"<%}%>>Giocatore <%=j%></li>
 				<%}%>
 				</ul>
 			</div>
@@ -50,37 +50,38 @@ int numeroGiocatoriSquadra= tmp.intValue();
 		
 		<%for(int i=1;i<=numeroGiocatoriSquadra;i++){%>
 		
-		<div class="page <%if(i==1){%>slidepage">
-			<%}else{%>"> <%}%>
+		<div class="page page-<%=i%> <%if(i==1){%>slidepage" style="display:block">
+			<%}else{%>"style="display:none"> 
+			<%}%>
 			 		
 			<div class="field">
-				<label for="nickname">Nickname</label>
+				<label for="nickname" class="testlabel">Nickname</label>
 				<input type="text" class="feedback-input nome-torneo" placeholder="SuperMario64" name="nickname">
 			</div>	
 			
 			<div class="field">
-				<label for="nome">Nome</label>
+				<label for="nome" class="testlabel">Nome</label>
 				<input type="text" class="feedback-input nome-torneo" placeholder="Mario" name="nome">
 			</div>
 			
 			<div class="field">
-				<label for="cognome">Cognome</label>
+				<label for="cognome" class="testlabel">Cognome</label>
 				<input type="text" class="feedback-input nome-torneo" placeholder="Rossi" name="cognome">
 			</div>	
 			
 			<div class="field">
-				<label for="ruolo">Ruolo</label>
+				<label for="ruolo" class="testlabel">Ruolo</label>
 				<input type="text" class="feedback-input nome-torneo" placeholder="Jungler" name="ruolo">
 			</div>
 				
-			<div class="field">
-				<label for="nascita">Data di Nascita</label>
+			<div class="field" class="testlabel">
+				<label for="nascita" class="testlabel">Data di Nascita</label>
 				<input type="date" class="feedback-input nome-torneo" name="nascita">
 			</div>	
 		
 			<div class="field">
 				<div class="form-group file-area">
-        			<label for="images">Immagine<span>La tua immagine deve essere 150x150</span></label>
+        			<label for="images" class="testlabel">Immagine<span>La tua immagine deve essere 150x150</span></label>
    				 	<input type="file" name="images" id="images-<%=i%>" required="required" multiple="multiple"/>
   				 <div class="file-dummy">
      			 <div class="success">Hai inserito un immagine BRAV</div>
@@ -89,7 +90,11 @@ int numeroGiocatoriSquadra= tmp.intValue();
   				</div>
 			</div>		
 			<div class="field-btn">
-				<input type="button" class="button-blue nextBtn1" onclick="slide()" value="Next">
+				<%if(i>1){%>
+					<input type="button" class="button-blue prevBtn<%=i%>" onclick="cambiaPagina()" value="Prev">
+				<%}%>
+				<input type="button" class="button-blue nextBtn<%=i%>" onclick="cambiaPagina()" value="Next">
+				
 			</div>
 			
 		</div>

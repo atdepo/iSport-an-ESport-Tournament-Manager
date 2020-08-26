@@ -100,8 +100,5 @@ function cambiaTipo(){
 		$('.squadreEsistenti').empty();
 		$('#aggiungi').attr("value","Aggiungi una squadra esistente");
 	}
-	
-	
 }
-
 

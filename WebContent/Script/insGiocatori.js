@@ -1,23 +1,6 @@
 
 $(document).ready(function(){
-	
-	 var xhr = new XMLHttpRequest();
-		xhr.onreadystatechange = function() {
 
-			if (xhr.status == 200 && xhr.readyState == 4) {
-				
-				let data = JSON.parse(xhr.responseText);
-				console.log(data);
-				var num=data['0'];
-				var step=$('.list-unstyled');
-				var page=$('#the-form');
-				for (var i = 1; i <= num; i++) {
-					step.append('<li id="'+i+'-step" class="is-active">Giocatore '+i+'</li>');
-				}
-			}
-		}
-	xhr.open('GET', 'SquadreControl?action=getGiocatori', true);
-	xhr.send();
 	//inserisciGiocatore();
 
 })
@@ -41,6 +24,51 @@ function inserisciGiocatore(){
 	
 }
 
+function cambiaPagina(){
+	var called = $(event.target).attr("class").replace(/\D/g,'');
+	
+	if($(event.target).val()=="Prev"){
+		var tmp = (called-2)*25;
+	
+		
+		$('#'+called+'-step').removeClass("is-active");
+		$('#'+(called-1)+'-step').addClass("is-active");
+		
+		var change= '-'+tmp+'%';
+		
+		$('.slidepage').css("marginLeft",change);
+		setTimeout(() => {$('.page-'+called).css("display","none");
+		$('.page-'+(called-1)).css("display","block");}, 300);
+		
+	}
+	else 
+		if($(event.target).val()=="Next" && called<$('#numGiocatori').val()){
+			var tmp = called*25;
+			var src= 1+parseInt(called);
+			
+			$('#'+called+'-step').removeClass("is-active");			
+			$('#'+(src)+'-step').addClass("is-active");
+			
+			var change= '-'+tmp+'%';
+			
+			$('.slidepage').css("marginLeft",change);
+			
+			setTimeout(() => {$('.page-'+called).css("display","none");
+			$('.page-'+(src)).css("display","block");}, 300);
+			
+
+		}
+		
+	
+}
+
+function sleep(milliseconds) {
+	  const date = Date.now();
+	  let currentDate = null;
+	  do {
+	    currentDate = Date.now();
+	  } while (currentDate - date < milliseconds);
+	}
 
 
 $(function(){

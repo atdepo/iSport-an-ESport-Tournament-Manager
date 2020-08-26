@@ -3,8 +3,36 @@
 <!DOCTYPE html>
 <html>
 <head>
+<style type="text/css">
+body{
+	color:#45A29E;
+	background:url(img/black-gradient.png) repeat;
+}
+
+h2{
+	text-align:center;
+	padding-top:1%;
+}
+
+p{
+	display:inline-block;
+}
+
+p.nome{
+	font-size: 20px;
+}
+
+.link:hover{		
+		background-color:gray;
+  }
+a{
+	color:lime;
+	padding-left:1%;
+}
+</style>
+
 	<meta charset="UTF-8">
-	<link rel="stylesheet" href="CSS/contatti.css" type="text/css">
+
 </head>
 <body>
 	<%@ include file="../header.jsp"%>

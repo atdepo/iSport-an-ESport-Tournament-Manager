@@ -3,9 +3,25 @@
 <!DOCTYPE html>
 <html>
 <head>
+	<style>
+	li{
+		margin-top: 2%;
+		color:#45A29E;
+	}
+	body{
+		color:#45A29E;
+		background:url(../img/black-gradient.png) repeat;
+	}
+	.fa-dumpster-fire{
+		color: red
+	}
+	p{
+		padding: 10px;
+		font-weight: bolder;
+	}
+	</style>
 	<meta charset="UTF-8">
 	
-	<link rel="stylesheet"  href="../CSS/ListaTornei.css" type="text/css">
 	<script src = "https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 	<script>
 	

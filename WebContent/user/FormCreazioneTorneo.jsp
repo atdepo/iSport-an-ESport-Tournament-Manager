@@ -55,7 +55,7 @@
 			
 			<form action="<%=request.getContextPath()+"/TournamentControl?action=validateTorneo"%>" method="post">
 			
-		<div class="page slidepage" <%if(error!=null){%> style="margin-left:-50%<%}%>">
+		<div class="page slidepage">
 			<div class="field">
 				<label for="nometorneo">Qual'è il nome del torneo da creare?</label>
 				<input type="text" class="feedback-input nome-torneo" name="nometorneo">

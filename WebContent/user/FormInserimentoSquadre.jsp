@@ -28,14 +28,14 @@
 <body>
 	<%@ include file="../header.jsp"%>
 	<div class="squadra">
-		<h3>Montefusco merda</h3><br>
+		<h3><%=session.getAttribute("nomeTorneo") %></h3><br>
 		
 		<div class="papino">
 		<div class="contieniBottoni">
 			
 			<input type="radio" id="esistente" class="sel bt1" value="Aggiungi squadra esistente" name="sel" onclick="cambiaTipo()">
 			<label class="radioLabel" for="esistente">Esistente</label>
-			<input type="radio" id="nuova" class="sel bt2" value="Aggiungi una nuova squadra" name="sel" onclick="cambiaTipo()">
+			<input type="radio" id="nuova" class="sel bt2" value="Aggiungi una nuova squadra"  name="sel" onclick="cambiaTipo()">
 			<label class="radioLabel" for="nuova">Nuova</label>
 			</div>
 			<div>

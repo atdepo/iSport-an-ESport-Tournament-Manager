@@ -137,25 +137,7 @@ public class TournamentControl extends HttpServlet {
 	
 	
 			
-		case "getGiocatori":
-			
-			
-			try {
-				
-				request.setAttribute("error", null);
-				HttpSession sess=request.getSession();
-				ModalitaBean bean=modModel.doRetriveByKey(new ModalitaKey((String)sess.getAttribute("nomeGioco"),(String)sess.getAttribute("modalita")));
-				System.out.println((String)sess.getAttribute("nomeGioco")+ " "+(String)sess.getAttribute("modalita") );
-				sess.setAttribute("numPartecipanti",bean.getNumPartecipanti()/2);
-				response.setStatus(200);
-				response.sendRedirect(request.getContextPath()+"../user/FormInserimentoGiocatori.jsp?nomesquadra="+request.getParameter("nomesquadra"));
-				
-			} catch (SQLException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
-			
-			break;
+		
 			
 		/** Questo case viene chiamato nel terzo step del form di creazione di un nuovo torneo.	
 		 * Viene utilizzato per validare la data di svolgimento del torneo, in particolare:
@@ -232,42 +214,6 @@ public class TournamentControl extends HttpServlet {
 				
 		
 		break;
-		
-		case"getImgSquadra":
-			try {
-				System.out.println("L'anm e "+request.getParameter("squadraScelta"));
-				SquadraBean s=(SquadraBean)sqModel.doRetriveByKey(request.getParameter("squadraScelta"));
-				ArrayList<String> immagine=new ArrayList<String>();
-				immagine.add(s.getTeamImage());
-				String img=gson.toJson(immagine);
-				System.out.println("Mammt"+s.getTeamImage());
-				response.getWriter().print(img);
-				response.getWriter().flush();
-				System.out.println("il json dell'immagine � stato creato con successo");
-				response.setStatus(200);
-			} catch (SQLException e1) {
-				e1.printStackTrace();
-			}
-			
-			
-			break;
-		
-		case "getSquadre":
-			response.setCharacterEncoding("UTF-8");
-			
-			try {
-				ArrayList<SquadraBean> squadre= (ArrayList<SquadraBean>) sqModel.doRetriveAll(null);
-				String mode=gson.toJson(squadre);
-				response.getWriter().print(mode);
-				response.getWriter().flush();
-				System.out.println("il json delle squadre � stato creato con successo");
-				response.setStatus(200);
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-			
-			
-			break;
 			
 		case "deleteTorneo":
 			

@@ -29,7 +29,7 @@ function tendina(k){
 function add(){
 
 	if($("input[type=radio][name=sel]:checked").attr("id")==="nuova")
-		window.location.replace('TournamentControl?action=getGiocatori&nomesquadra='+$('.nomeSquadra').val());
+		window.location.replace('../SquadreControl?action=getGiocatori&nomesquadra='+$('.nomeSquadra').val());
 	else{
 		var squadre=$("#listaSquadre");	//div che contiene le img delle squadre
 		var check=$(".squadraSelezionata:checked").val();	//nome della squadra scelta
@@ -43,7 +43,7 @@ function add(){
 			squadre.append('<div class='+check+'><img  onclick="eliminaSquadra(\''+check+'\')" src='+data['0']+'></div>');
 				}
 			}
-			xhr.open('GET', '../TournamentControl?action=getImgSquadra&squadraScelta='+check, true);
+			xhr.open('GET', '../SquadreControl?action=getImgSquadra&squadraScelta='+check, true);
 			xhr.send();
 				
 		}
@@ -92,7 +92,7 @@ function cambiaTipo(){
 		}
 			
 	  }	
-	xhr.open('GET', '../TournamentControl?action=getSquadre', true);
+	xhr.open('GET', '../SquadreControl?action=getSquadre', true);
 	xhr.send();
 	
 	} else{

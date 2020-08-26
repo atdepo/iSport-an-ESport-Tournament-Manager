@@ -3,8 +3,47 @@
 <!DOCTYPE html>
 <html>
 <head>
+<style>
+.site-footer {
+  font-size: 15px;
+  line-height: 24px;
+  color: #737373;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+ 
+}
+
+.site-footer hr {
+  border-top-color: #bbb;
+  opacity: 0.5;
+}
+
+.site-footer h6 {
+  color: #737373;
+  font-size: 16px;
+  text-transform: uppercase;
+  margin-top: 5px;
+  letter-spacing: 2px;
+}
+.Copyright{
+	  flex:right;
+}
+.copyright-text {
+  margin: 0;
+}
+
+@media (max-width: 991px) {
+  .site-footer [class^=col-] {
+    margin-bottom: 30px;
+  }
+}
+@media (max-width: 767px) {
+  .site-footer {
+    padding-bottom: 0;
+  }
+</style>
 <meta charset="UTF-8">
-<link rel="stylesheet" href="CSS/Footer.css" type="text/css">
 </head>
 <body>
 <footer class="site-footer">

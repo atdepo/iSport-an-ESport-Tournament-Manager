@@ -59,7 +59,7 @@ if($(event.target).hasClass('budget')){
 	        $('.number-box-budget').html(curr_val-1+' €');
 	} 
 	else if($(event.target).hasClass('tecnici')){
-		
+		 var curr_fisici_value=parseInt($('.number-box-tecnici-fisici').text())
 		 var min_value=0;
 		    var curr_val=parseInt($('.number-box-tecnici').text());
 		    if(e.shiftKey){
@@ -70,9 +70,13 @@ if($(event.target).hasClass('budget')){
 		    	if(curr_val-1000>=min_value)
 		            $('.number-box-tecnici').html(curr_val-1000); 
 		    }
-		    else if(curr_val-1>=min_value)
-		        $('.number-box-tecnici').html(curr_val-1);
+		    else if(curr_val-1>=min_value){
+		    	$('.number-box-tecnici').html(curr_val-1);
+		    	if(!isNaN(curr_fisici_value) && curr_val-1<curr_fisici_value){
+		    		$('.number-box-tecnici-fisici').html(curr_val-1);
+		    	}
 			}
+	}
 	
 });
 

@@ -1,5 +1,13 @@
-
+/**
+ * Nel momento in cui il documento FormCreazioneTorneo viene creato, questa funzione  
+ * riempie le tendine dei giochi e degli sponsor, che sono le uniche fra tutte le tendine che sono obbligatoriamente mostrate.
+ * 
+ * Inoltre, tramite l'utilizzo di due campi hidden, fa visualizzare un messaggio di errore proveniente dalla validazione di backend
+ * nel caso in cui non sia andata a buon fine. 
+ * 
+ */
 $(document).ready(function() {
+	
 	var xhr = new XMLHttpRequest();
 	xhr.onreadystatechange = function() {
 
@@ -15,12 +23,15 @@ $(document).ready(function() {
 			var maxTecniciFisici= data['3'];
 			$('.max-tecnici-fisici').attr("value",maxTecniciFisici);
 			$('.tot-tecnici').attr("value",totTecnici);			
-				
+			
+			//Questa funzione riempie la tendina dei giochi 
 			for (var i = 0; i < dataGiochi.length; i++) {
-					var nome = dataGiochi[i].nomeGioco.replace(/\s/g, '');
+					var nome = dataGiochi[i].nomeGioco.replace(/\s/g, '');//Questa variabile è stata creata per non assegnare calssi multiple ad un tag.
+																		  //Es. Desideriamo avere una classe singola "LeagueofLegends" che tre classi "League of Legends"
+					
 					game.append('<div class="option"><input name="gioco" value="'+dataGiochi[i].nomeGioco+'" onclick="tendina(\''+nome+'\')" type="radio" class="radio" id="'+nome+'"> <label for="'+nome+'">'+dataGiochi[i].nomeGioco+'</label></div>');
 			}			
-			
+			//Questa funzione riempie la tendina degli sponsor
 			for (var i = 0; i < dataSponsor.length; i++) {
 
 				sponsor.append('<li><input type="checkbox" id="'+dataSponsor[i].nome+'" value="'+dataSponsor[i].nome+'"><label for="'+dataSponsor[i].nome+'">'+dataSponsor[i].nome+'</label></li>')		
@@ -30,27 +41,51 @@ $(document).ready(function() {
 		}
 		
 	}
+	//La richiesta alla servlet
 	xhr.open('GET', '../TournamentControl?action=initTorneo', true);
 	xhr.send();
 	
+	//Se è presente un errore relativo alla data
 	if($('.data-error-message').val()!=='null'){
-		alert($('.data-error-message').val());
 		$('.error-data').empty().text($('.data-error-message').val());
+		$('header').empty().text("Organizzazione:");
+		$('.slidepage').css("marginLeft","-50%"); //JQuery >> tutto
+		$('#first-step').removeClass("is-active");
+		$('#third-step').addClass("is-active");
 		
-	} else if($('.struttura-error-message').val()!=='null'){
-		alert('errore struttura!');
+	}
+	//Se è presente un errore relativo alla struttura
+	else if($('.struttura-error-message').val()!=='null'){
 		$('.error-struttura').empty().text($('.struttura-error-message').val());
+		$('header').empty().text("Organizzazione:");
+		$('.slidepage').css("marginLeft","-50%"); //JQuery >> tutto
+		$('#first-step').removeClass("is-active");
+		$('#third-step').addClass("is-active");
+		
 	}
 	
 
 });
 
+
+/**
+ * Questa funzione "apre" la tendina il cui ID è specificato da k
+ * @param k l'ID della tendina da aprire
+ * 
+ */
 function menu(k){
 	
 $("#"+k).toggleClass("active");
 	
 }
 
+
+/**
+ * Questa funzione si occupa di sostituire come nome scritto sulla tendina, quello del gioco cliccato dalle sue opzioni, 
+ * in questo caso identificato tramite il parametro k
+ * @param k il nome del gioco da scrivere nella barra principale della tendina
+ * @returns
+ */
 function tendina(k){
 	
 	var selected=$('.selected.'+event.target.name);
@@ -61,12 +96,18 @@ function tendina(k){
     if(event.target.name==="gioco"){
     	
     	$('.selected.mode').text("Modalità di gioco");
-    getMode($("label[for='"+k+"']").html());
+    	getMode($("label[for='"+k+"']").html());
     
     }
     
 }
 
+
+/**
+ * Questa funzione si occupa di chiamare la servlet e di farsi restituire tutte le strutture 
+ * presenti all'interno del database e riempire la tendina corrispondente
+ * 
+ */
 function getStrutture(){
 	
 	var xhr = new XMLHttpRequest();
@@ -88,12 +129,15 @@ function getStrutture(){
 		
 	xhr.open('GET', '../TournamentControl?action=getStrutture', true);
 	xhr.send();
-	
-	
 }
 
 
-
+/**
+ * Questa funzione si occupa di prendere tutte le modalità di un dato gioco e riempire la tendina corrispondente.
+ * Questa funzione viene chiamata ogni volta che un gioco viene selezionato
+ * @param k il gioco dal quale prelevare le modalità
+ * @returns
+ */
 function getMode(k) {
 	
 	var xhr = new XMLHttpRequest();
@@ -116,12 +160,12 @@ function getMode(k) {
 
 }
 
-function numTecnici(){
 
-	$('.tecniciFisici').attr("max",$("#tot_tecnici").val());
-}
-
-
+/**
+ * Questa funzione viene chiamata quando si sceglie di organizzare un torneo on-line,
+ * e si occupa di nascondere il numero di tecnici fisici desiderati e le strutture
+ * 
+ */
 function hide(){
 
 	
@@ -131,6 +175,13 @@ function hide(){
 	$("label[for='strutture']").hide();
 }
 
+
+/**
+ * Questa funzione viene chiamata quando si sceglie di organizzare un torneo fisico,
+ * e si occupa di mostrare il numero di tecnici fisici desiderati e le strutture,
+ * chiamando opportunamente la funzioni adibita al riempimento della tendina delle strutture.
+ * 
+ */
 function show(){
 	if($(".tecniciFisici").empty()&&$(".strutture").empty()){
 		
@@ -138,10 +189,7 @@ function show(){
 		$(".tecniciFisici").append(' <label for="tecnici-fisici">Quanti tecnici desideri avere fisicamente al tuo torneo?</label>'+
 				'<div class="number-container tecnici-fisici" title="Premi shift cliccando i selettori per avanzare di +/- 100 e premi CTRL sx per avanzare di +/- 1000">'+
 				'<span class="next tecnici-fisici" onclick="gestioneFisici()"></span> <span class="prev tecnici-fisici" onclick="gestioneFisici()"></span> <div class="box-span">'+
-				'<span class="number-box-tecnici-fisici">0</span></div>');
-		
-		numTecnici();
-		
+				'<span class="number-box-tecnici-fisici">0</span></div>');		
 		
 		$(".strutture").append('<label for="strutture">In che struttura vuoi che sia organizzato il tuo torneo?</label> <div class="container"> <div class="select-box">'+
 				'<div class="options-container" id="strutture">'+
@@ -154,10 +202,16 @@ function show(){
 		}
 }
 
+
+/**
+ * Questa funzione si occupa di gestire i bottoni next e previous
+ * del campo in cui è possibile scegliere i tecnici fisici.
+ * 
+ */
 function gestioneFisici(){
 	if($(event.target).hasClass('next')){
 	var max_value=$('.max-tecnici-fisici').val();
-	 
+	var curr_tot_val=parseInt($('.number-box-tecnici').text());
     var curr_val=parseInt($('.number-box-tecnici-fisici').text());
     if(event.shiftKey){
     	if(curr_val+100<=max_value)
@@ -167,7 +221,7 @@ function gestioneFisici(){
     	if(curr_val+1000<=max_value)
             $('.number-box-tecnici-fisici').html(curr_val+1000); 
     }
-    else if(curr_val+1<=max_value)
+    else if(curr_val+1<=max_value && curr_val+1<=curr_tot_val)
         $('.number-box-tecnici-fisici').html(curr_val+1);
 }
 
@@ -175,17 +229,17 @@ function gestioneFisici(){
 	else if ($(event.target).hasClass('prev')){
 	
 	var min_value=0;
-	var curr_val=parseInt($('number-box-tecnici-fisici').text());
-	if(e.shiftKey){
+	var curr_val=parseInt($('.number-box-tecnici-fisici').text());
+	if(event.shiftKey){
 		if(curr_val-100>=min_value)
-			$('number-box-tecnici-fisici').html(curr_val-100); 
+			$('.number-box-tecnici-fisici').html(curr_val-100); 
 		}
-	else if(e.ctrlKey){
+	else if(event.ctrlKey){
 		if(curr_val-1000>=min_value)
-			$('number-box-tecnici-fisici').html(curr_val-1000); 
+			$('.number-box-tecnici-fisici').html(curr_val-1000); 
 		}
 	else if(curr_val-1>=min_value)
-		$('number-box-tecnici-fisici').html(curr_val-1);
+		$('.number-box-tecnici-fisici').html(curr_val-1);
 		}
 
 }
@@ -193,21 +247,16 @@ function gestioneFisici(){
 
 
 var current=1;
+/**
+ * Questa funzione si occupa di gestire lo slide del form a destra e a sinistra quando 
+ * i bottoni next e previous sono stati premuti. Si occupa anche di gestire il fatto 
+ * che i campi obbligatori siano stati riempiti. 
+ */
 function slide(){
+	
 		const slidePage= $('.slidepage');
 					
 		if($(event.target).hasClass("nextBtn1")){ //JQuery >> tutto
-			
-			/*var xhr = new XMLHttpRequest();
-			xhr.onreadystatechange = function() {
-				if (xhr.status == 200 && xhr.readyState == 4) {
-					}
-				}
-			xhr.open('GET', '../TournamentControl?action=validate', true);
-			xhr.send();
-			
-			*/
-			
 			if($('.nome-torneo').val()!==""){
 				$('header').empty().text("Informazioni sul gioco:");
 				slidePage.css("marginLeft","-25%"); //JQuery >> tutto 
@@ -217,14 +266,26 @@ function slide(){
 
 		}
 		else if($(event.target).hasClass("nextBtn2")){
-			$('header').empty().text("Organizzazione:");
-			slidePage.css("marginLeft","-50%"); //JQuery >> tutto
-			$('#second-step').removeClass("is-active");
-			$('#third-step').addClass("is-active");
-
+			if($('.gioco').text()!=="Gioco di Riferimento"&&$('.mode').text()!=="Modalità di gioco"){
+				$('header').empty().text("Organizzazione:");
+				slidePage.css("marginLeft","-50%"); //JQuery >> tutto
+				$('#second-step').removeClass("is-active");
+				$('#third-step').addClass("is-active");
+			}
 		} 
 		else if($(event.target).hasClass("subBtn")){
-			
+			if($('#toggle-online:checked')){
+				if($('.data-torneo').val()!==""){
+					alert('maaammt');
+					return true;
+				}
+			}
+			else if($('#toggle-offline:checked')){
+				
+				return true;
+			}
+			else
+				return false;
 		}
 		else if($(event.target).hasClass("prevBtn2")){
 			$('header').empty().text("Informazioni di base:");
@@ -240,10 +301,6 @@ function slide(){
 			$('#second-step').addClass("is-active");
 			current-=1;
 		}
-
-		
-	
-		
 
 }
 

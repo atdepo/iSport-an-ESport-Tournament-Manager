@@ -7,16 +7,7 @@ $(document).ready(function(){
 
 
 function inserisciGiocatore(){
-	/*const queryString = window.location.search;
-	const urlParams = new URLSearchParams(queryString);
-	var nome= urlParams.get('nomesquadra');
-	var div=$ (".inseriamo");
-	div.append("<div class='giocatore'>" +
-	  		"<input type='text' required placeholder='nickname' id='nickname'>" +
-	  		"<input type='text' required placeholder='nome' id='nome'>" +
-	  		"<input type='text' required placeholder='cognome' id='cognome'>" +
-	  		"<input type='date' required id='data'" +
-	  		"<h3> Squadra: "+nome+"</h3></div>");*/
+	
 	
 	
 	

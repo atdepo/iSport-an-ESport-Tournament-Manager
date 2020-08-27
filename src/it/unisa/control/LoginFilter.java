@@ -24,22 +24,27 @@ public class LoginFilter implements Filter{
 	
 		HttpServletRequest hRequest=(HttpServletRequest)request; 
 		HttpServletResponse hResponse=(HttpServletResponse)response; 
+		
+		System.out.println("la sessione è valida?"+hRequest.isRequestedSessionIdValid());
+		HttpSession session= hRequest.getSession(false);// Prendo la sessione, ma non ne creo un'altra se è invalida
+		if(!hRequest.isRequestedSessionIdValid()) {//se la sessione non è valida
+			
+			session=hRequest.getSession(true);//ne creo una nuova
+		}
+		
 		System.out.println("Sto filtrando la richiesta");
 		String requestURI=hRequest.getRequestURI();
 		
 		if(requestURI.contains("/user/")) {
 			System.out.println("il path contiene *user*");
-			HttpSession session= hRequest.getSession(false);
 			checkAccess(session, request, response, chain, hResponse, hRequest, "utente");
 		}
 		else if(requestURI.contains("/admin/")) {
 			System.out.println("il path contiene *admin*");
-			HttpSession session= hRequest.getSession(false);
 			checkAccess(session, request, response, chain, hResponse, hRequest, "admin");
 		}
 		else if(requestURI.contains("/tecnico/")) {
 			System.out.println("il path contiene *tecnico*");
-			HttpSession session= hRequest.getSession(false);
 			checkAccess(session, request, response, chain, hResponse, hRequest, "tecnico");
 			
 		}

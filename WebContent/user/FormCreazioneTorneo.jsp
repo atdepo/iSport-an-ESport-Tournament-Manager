@@ -53,7 +53,7 @@
 				</div>
 			</div>
 			
-			<form action="<%=request.getContextPath()+"/TournamentControl?action=validateTorneo"%>" method="post">
+			<form id="insTorneo" action="<%=request.getContextPath()+"/TournamentControl?action=validateTorneo"%>" method="post">
 			
 		<div class="page slidepage">
 			<div class="field">

@@ -6,7 +6,20 @@
  * nel caso in cui non sia andata a buon fine. 
  * 
  */
+
+$(function() {
+	$("#insTorneo").submit(function() {
+		var data=$(".data-torneo").val();
+
+		if(data=="")
+			return false;
+	})
+})
+
 $(document).ready(function() {
+	
+	
+
 	
 	var xhr = new XMLHttpRequest();
 	xhr.onreadystatechange = function() {
@@ -245,7 +258,6 @@ function gestioneFisici(){
 }
 	
 
-
 var current=1;
 /**
  * Questa funzione si occupa di gestire lo slide del form a destra e a sinistra quando 
@@ -257,6 +269,7 @@ function slide(){
 		const slidePage= $('.slidepage');
 					
 		if($(event.target).hasClass("nextBtn1")){ //JQuery >> tutto
+			alert("GIACOMO LENzi");
 			if($('.nome-torneo').val()!==""){
 				$('header').empty().text("Informazioni sul gioco:");
 				slidePage.css("marginLeft","-25%"); //JQuery >> tutto 
@@ -266,6 +279,7 @@ function slide(){
 
 		}
 		else if($(event.target).hasClass("nextBtn2")){
+			alert("MMMMMMMMM");
 			if($('.gioco').text()!=="Gioco di Riferimento"&&$('.mode').text()!=="Modalità di gioco"){
 				$('header').empty().text("Organizzazione:");
 				slidePage.css("marginLeft","-50%"); //JQuery >> tutto
@@ -273,21 +287,7 @@ function slide(){
 				$('#third-step').addClass("is-active");
 			}
 		} 
-		else if($(event.target).hasClass("subBtn")){
-			if($('#toggle-online:checked')){
-				if($('.data-torneo').val()!==""){
-					alert('maaammt');
-					return true;
-				}
-			}
-			else if($('#toggle-offline:checked')){
-				
-				return true;
-			}
-			else
-				return false;
-		}
-		else if($(event.target).hasClass("prevBtn2")){
+		else  if($(event.target).hasClass("prevBtn2")){
 			$('header').empty().text("Informazioni di base:");
 			slidePage.css("marginLeft","0%"); //JQuery >> tutto
 			$('#second-step').removeClass("is-active");

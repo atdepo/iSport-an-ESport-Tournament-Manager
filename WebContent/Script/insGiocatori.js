@@ -2,22 +2,42 @@
 $(document).ready(function(){
 
 	//inserisciGiocatore();
-
+	creaSteps();
+	cambiaPagina();
+	
 })
 
+	
 
-function inserisciGiocatore(){
+
+function creaSteps() {
+	var xhr = new XMLHttpRequest();
+	xhr.onreadystatechange = function() {
+
+		if (xhr.status == 200 && xhr.readyState == 4) {
+		
+		let data = JSON.parse(xhr.responseText);
+		console.log(data);
+		var multi=$(".multi-steps");
+		var form=$("#the-form");
+		
+		for(var j=1;j<=parseInt(data);j++){	//For per gli indicatori del multistep
+			
+			multi.append('<li id="'+j+'-step">Giocatore '+j+'</li>')
+		
+			form.append('<div class="page page-'+j+'"><div class="field"><label for="nickname" class="testlabel">Nickname</label><input type="text" class="feedback-input nome-torneo" placeholder="SuperMario64" name="nickname"></div><div class="field"><label for="nome" class="testlabel">Nome</label><input type="text" class="feedback-input nome-torneo" placeholder="Mario" name="nome"></div><div class="field"><label for="cognome" class="testlabel">Cognome</label><input type="text" class="feedback-input nome-torneo" placeholder="Rossi" name="cognome"></div><div class="field"><label for="ruolo" class="testlabel">Ruolo</label><input type="text" class="feedback-input nome-torneo" placeholder="Jungler" name="ruolo"></div><div class="field" class="testlabel"><label for="nascita" class="testlabel">Data di Nascita</label><input type="date" class="feedback-input nome-torneo" name="nascita"></div><div class="field"><div class="form-group file-area"><label for="images" class="testlabel">Immagine<span>La tua immagine deve essere 150x150</span></label><input type="file" name="images" id="images-<%=i%>" required="required"/><div class="file-dummy"><div class="success">Hai inserito un immagine BRAV</div><div class="default">Favorire documento,grazie!</div></div></div></div><div class="field-btn"><input type="button" class="button-blue prevBtn'+j+'" onclick="cambiaPagina()" value="Prev"><input type="button" class="button-blue nextBtn'+j+'" onclick="cambiaPagina()" value="Next"></div></div>')
+		}
+			}
+		}
 	
-	
-	
-	
-	
-	
+		xhr.open('GET', '../SquadreControl?action=getGiocatori', true);
+		xhr.send();
 }
 
+
 function cambiaPagina(){
-	var called = $(event.target).attr("class").replace(/\D/g,'');
 	
+	var called = $(event.target).attr("class").replace(/\D/g,'');
 	if($(event.target).val()=="Prev"){
 		var tmp = (called-2)*25;
 	
@@ -28,12 +48,12 @@ function cambiaPagina(){
 		var change= '-'+tmp+'%';
 		
 		$('.slidepage').css("marginLeft",change);
-		setTimeout(() => {$('.page-'+called).css("display","none");
-		$('.page-'+(called-1)).css("display","block");}, 300);
+		$('.page-'+called).css("display","none");
+		$('.page-'+(called-1)).css("display","block");
 		
 	}
 	else 
-		if($(event.target).val()=="Next" && called<$('#numGiocatori').val()){
+		if($(event.target).val()=="Next" ){
 			var tmp = called*25;
 			var src= 1+parseInt(called);
 			
@@ -44,8 +64,8 @@ function cambiaPagina(){
 			
 			$('.slidepage').css("marginLeft",change);
 			
-			setTimeout(() => {$('.page-'+called).css("display","none");
-			$('.page-'+(src)).css("display","block");}, 300);
+			$('.page-'+called).css("display","none");
+			$('.page-'+(src)).css("display","block");
 			
 
 		}

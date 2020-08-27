@@ -52,14 +52,16 @@ public class SquadreControl extends HttpServlet {
 			HttpSession session=request.getSession();
 			try {
 				//Temporaneo
-				session.setAttribute("nomeGioco", "League of Legends");
-				session.setAttribute("modalita", "Summoner Rift");
+				session.setAttribute("nomeGioco", "Rocket League");
+				session.setAttribute("modalita", "2v2");
 				
 				ModalitaBean squadre= modModel.doRetriveByKey(new ModalitaKey((String)session.getAttribute("nomeGioco"),(String)session.getAttribute("modalita")));
 				Integer num=squadre.getNumPartecipanti()/2;
-				System.out.println("servlet"+num);
-				session.setAttribute("numGiocatori", num);
-				response.sendRedirect(request.getContextPath()+"/FormInserimentoGiocatori.jsp");
+				String test=gson.toJson(num);
+				response.getWriter().print(test);
+				response.getWriter().flush();
+
+				System.out.println("il json del numero di giocatori e' stato creato con successo");
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}

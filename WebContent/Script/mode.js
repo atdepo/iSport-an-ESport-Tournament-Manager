@@ -7,6 +7,8 @@
  * 
  */
 
+
+
 $(function() {
 	$("#insTorneo").submit(function() {
 		var data=$(".data-torneo").val();
@@ -269,7 +271,7 @@ function slide(){
 		const slidePage= $('.slidepage');
 					
 		if($(event.target).hasClass("nextBtn1")){ //JQuery >> tutto
-			alert("GIACOMO LENzi");
+			
 			if($('.nome-torneo').val()!==""){
 				$('header').empty().text("Informazioni sul gioco:");
 				slidePage.css("marginLeft","-25%"); //JQuery >> tutto 
@@ -279,7 +281,7 @@ function slide(){
 
 		}
 		else if($(event.target).hasClass("nextBtn2")){
-			alert("MMMMMMMMM");
+			
 			if($('.gioco').text()!=="Gioco di Riferimento"&&$('.mode').text()!=="Modalità di gioco"){
 				$('header').empty().text("Organizzazione:");
 				slidePage.css("marginLeft","-50%"); //JQuery >> tutto

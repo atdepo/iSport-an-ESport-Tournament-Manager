@@ -51,9 +51,6 @@ public class SquadreControl extends HttpServlet {
 		case "getGiocatori":
 			HttpSession session=request.getSession();
 			try {
-				//Temporaneo
-				session.setAttribute("nomeGioco", "Rocket League");
-				session.setAttribute("modalita", "2v2");
 				
 				ModalitaBean squadre= modModel.doRetriveByKey(new ModalitaKey((String)session.getAttribute("nomeGioco"),(String)session.getAttribute("modalita")));
 				Integer num=squadre.getNumPartecipanti()/2;

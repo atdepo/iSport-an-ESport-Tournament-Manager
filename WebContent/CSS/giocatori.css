@@ -54,13 +54,17 @@
  
  
 body{
-	background:url(../img/background.jpg);
-  background-position: center center;
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-  background-size: cover;	
+	background:url(../img/arena2.jpg);
+  	background-position: center center;
+  	background-repeat: no-repeat;
+  	background-attachment: fixed;
+  	background-size: cover;	
 	display: block;
 	min-height: 100vh;
+}
+header{
+	font-size:24px;
+	color:blanchedalmond;
 }
 
 .total-container{

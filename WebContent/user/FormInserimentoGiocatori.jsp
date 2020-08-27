@@ -22,6 +22,7 @@
 <div class="total-container">
 	<div class="form-div">
 	<header>Creiamo la squadra</header>
+
 		<div class="progress-bar-wrapper">
 			<div class="container-fluid">
 				<ul class="list-unstyled multi-steps">
@@ -43,7 +44,7 @@
 			</div>
 			<div class="field">
 				<div class="form-group file-area">
-        			<label for="images" class="testlabel">Immagine Squadra<span>La tua immagine deve essere 150x150</span></label>
+        			<label for="images" class="testlabel">Immagine Squadra<span> La tua immagine deve essere 150x150</span></label>
    				 	<input type="file" name="images" id="images-0" required="required" />
   				 <div class="file-dummy">
      			 <div class="success">Hai inserito un immagine BRAV</div>

@@ -21,7 +21,7 @@
 	<%@ include file="../header.jsp"%>	
 <div class="total-container">
 	<div class="form-div">
-	<header>ASD</header>
+	<header>Creiamo la squadra</header>
 		<div class="progress-bar-wrapper">
 			<div class="container-fluid">
 				<ul class="list-unstyled multi-steps">

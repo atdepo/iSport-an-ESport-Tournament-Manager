@@ -26,7 +26,7 @@ public class LoginFilter implements Filter{
 		HttpServletResponse hResponse=(HttpServletResponse)response; 
 		
 		System.out.println("la sessione è valida?"+hRequest.isRequestedSessionIdValid());
-		HttpSession session= hRequest.getSession(false);// Prendo la sessione, ma non ne creo un'altra se è invalida
+		HttpSession session= hRequest.getSession(true);// Prendo la sessione, ma non ne creo un'altra se è invalida
 		if(!hRequest.isRequestedSessionIdValid()) {//se la sessione non è valida
 			
 			session=hRequest.getSession(true);//ne creo una nuova

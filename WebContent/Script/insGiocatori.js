@@ -3,7 +3,6 @@ $(document).ready(function(){
 
 	//inserisciGiocatore();
 	creaSteps();
-	cambiaPagina();
 	
 })
 
@@ -39,7 +38,7 @@ function cambiaPagina(){
 	
 	var called = $(event.target).attr("class").replace(/\D/g,'');
 	if($(event.target).val()=="Prev"){
-		var tmp = (called-2)*25;
+		var tmp = (called-1)*25;
 	
 		
 		$('#'+called+'-step').removeClass("is-active");
@@ -48,24 +47,22 @@ function cambiaPagina(){
 		var change= '-'+tmp+'%';
 		
 		$('.slidepage').css("marginLeft",change);
-		$('.page-'+called).css("display","none");
-		$('.page-'+(called-1)).css("display","block");
+		
 		
 	}
 	else 
 		if($(event.target).val()=="Next" ){
-			var tmp = called*25;
-			var src= 1+parseInt(called);
+			var tmp = (1+parseInt(called))*25;
+		
 			
 			$('#'+called+'-step').removeClass("is-active");			
-			$('#'+(src)+'-step').addClass("is-active");
+			$('#'+(1+parseInt(called))+'-step').addClass("is-active");
 			
 			var change= '-'+tmp+'%';
 			
 			$('.slidepage').css("marginLeft",change);
 			
-			$('.page-'+called).css("display","none");
-			$('.page-'+(src)).css("display","block");
+			
 			
 
 		}

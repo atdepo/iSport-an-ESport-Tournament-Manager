@@ -35,11 +35,11 @@
 		<div class="page page-0 slidepage">
 			<div class="field">
 				<label for="nomeSquadra" class="testlabel">Nome</label>
-				<input type="text" class="feedback-input nome-torneo" placeholder="Inserisci il nome della Squadra" name="nomeSquadra">
+				<input type="text" class=" nome-torneo" placeholder="Inserisci il nome della Squadra" name="nomeSquadra">
 			</div>	
 			<div class="field">
 				<label for="nazionalita" class="testlabel">Nazionalità</label>
-				<input type="text" class="feedback-input nome-torneo" placeholder="Inserisci la nazionalità" name="nazionalita">
+				<input type="text" class=" nome-torneo" placeholder="Inserisci la nazionalità" name="nazionalita">
 			</div>
 			<div class="field">
 				<div class="form-group file-area">

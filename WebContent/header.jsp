@@ -33,7 +33,7 @@
 	<ul id="link">
 	<li><a href="<%=request.getContextPath()+"/index.jsp"%>" class="active">HOME</a></li>
 	<li><a href="<%=response.encodeURL(request.getContextPath()+"/user/FormCreazioneTorneo.jsp")%>">CREA TORNEO</a></li>
-
+	<li><a href="<%=request.getContextPath()+"/contatti.jsp"%>">CONTATTI</a></li>	
 	
 		
   	<%if(utente==null){%>
@@ -41,7 +41,7 @@
   	
       <%}else{ %>
       <%if(utente.getTipo()=="admin"){ %>
-       <li><a href="<%=request.getContextPath()+"/listaTornei.jsp"%>">Lista Tornei</a></li>
+       <li><a href="<%=request.getContextPath()+"/admin/ListaTornei.jsp"%>">LISTA TORNEI</a></li>
       
       <%} %>
       <li><div class="avatar-dropdown-menu">
@@ -51,9 +51,7 @@
           <li>
             <a class="dropdown-item">IL MIO PROFILO</a>
           </li>
-          <li>
-            <a class="dropdown-item">I MIEI TORNEI</a>
-          </li>
+         
           <li>
             <a href="<%=request.getContextPath()+"/Logout"%>" class="dropdown-item">LOG OUT</a>
           </li>

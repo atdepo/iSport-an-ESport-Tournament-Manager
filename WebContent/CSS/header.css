@@ -10,7 +10,7 @@
 	
 }
 
-
+.logo:hover{background: #1b9bff;	}
 .avatar-image {
 	 object-fit:contain;
 	 height:50px;

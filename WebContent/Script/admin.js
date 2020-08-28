@@ -1,7 +1,6 @@
 	$(document).ready(function(){
 	
 		var xhr = new XMLHttpRequest();
-		$(".listaTornei").append(xhr.readyState);
 		xhr.onreadystatechange = function() {
 			
 			if (xhr.status == 200 && xhr.readyState == 4) {

@@ -5,50 +5,53 @@
 <html>
 
 	<head>
+	<script src = "https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
      <link rel="stylesheet" href="../CSS/Profilo.css" type="text/css">
+     <script src = "<%=request.getContextPath()+"/Script/profilo.js"%>"></script>
 	</head>	
 <body>
-		<%@ include file="../header.jsp"%>				
+		<%@ include file="../header.jsp"%>	
+			
 		<div class=tuttecose>
 			<table>
 			<tr>
 			<th>
-				<div class=Immagine>
-					<img src="http://bit.ly/2tFWqOx" class="profile-picture">
+				<div class=immagine>
+					<img src="<%=utente.getImg() %>" class="profile-picture">
 				</div>
 			</th>
+			
 			<th>
 		<div class="dati">
-		<label for="Nome" class="testlabel">Nome</label>
-				<input type="text" class=" nome" disabled name="nome">
+		
+		<label for="Nome" class="testlabel">Username</label>
+				<input type="text" class=" nome" disabled value="<%=utente.getUsername() %>" name="nome">
 			
 			<div class="field">
-				<label for="cognome" class="testlabel">Cognome</label>
-				<input type="text" class="cognome" disabled name="cognome">
+				<label for="mail" class="testlabel">E-Mail</label>
+				<input type="text" class="mail" disabled value="<%=utente.getEmail() %>" name="mail">
 			</div>
 			
-			<div class="field">
-				<label for="mail" class="testlabel">Mail</label>
-				<input type="text" class="mail" disabled name="mail">
-			</div>
 			
-			<div class="field">
-				<label for="iva" class="testlabel">Partita IVA</label>
-				<input type="text" class="iva" disabled name="iva">
-			</div>
-			<div class="field">
-				<div class="form-group file-area">
-        		<label for="images" class="testlabel">Cambia immagine<span> La tua immagine deve essere 150x150</span></label>
-   			 	<input type="file" name="images" id="images-0" required="required" />
-   				</div>
+			
    			</div>
-			</div>
+			
 			</th>
 			</tr>
 			<tr>
 			<th>
-				<input type="text">
+				
 			</th>
+			</tr>
+			<tr>
+			<th>
+			<div class="field">
+				<div class="form-group file-area">
+        		<label for="images" class="testlabel">Cambia immagine <br><span> La tua immagine deve essere 150x150</span></label>
+   			 	<input type="file" name="images" id="images-0" required="required" />
+   				</div>
+   			</div>
+   			</th>
 			</tr>
 			</table>
 		</div>	

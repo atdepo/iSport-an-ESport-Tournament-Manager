@@ -20,6 +20,7 @@ import it.unisa.model.squadra.SquadraModel;
 import it.unisa.model.struttura.StrutturaModel;
 import it.unisa.model.tecnico.TecnicoModel;
 import it.unisa.model.torneo.TournamentModel;
+import it.unisa.model.utente.UtenteBean;
 import it.unisa.model.torneo.TournamentBean;
 /**
  * Servlet implementation class UserControl
@@ -63,12 +64,14 @@ public class UserControl extends HttpServlet {
 			e2.printStackTrace();
 		}
 		break;
-			}
+		}
 		}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
+	
+	
 
 }

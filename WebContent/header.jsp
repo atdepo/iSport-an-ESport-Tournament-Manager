@@ -2,9 +2,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%UtenteBean utente=(UtenteBean)session.getAttribute("user");
-		String userImg=null;
+	String userpIVA=null;
+	String userImg=null;
 	if(utente!=null){
 		userImg=utente.getImg();
+		if(utente.getpIVA()!=null)
+			userpIVA=utente.getpIVA();
 	}
 %>    
     
@@ -24,6 +27,7 @@
 
 <body>
 <input type="hidden" id="user-img" value ="<%=userImg%>">
+	<input type="hidden" id="user-pIVA" value="<%=userpIVA%>">
 	<nav>
 	<input type="checkbox" id="check" onclick="toggle()">
 	<label for="check" class="checkbtn">
@@ -50,9 +54,6 @@
         <ul id="test">
           <li>
             <a href="<%=request.getContextPath()+"/user/Profilo.jsp"%>"class="dropdown-item">IL MIO PROFILO</a>
-          </li>
-          <li>
-            <a href="<%=request.getContextPath()+"/user/MieiTornei.jsp"%>"class="dropdown-item">I MIEI TORNEI</a>
           </li>
           <li>
             <a href="<%=request.getContextPath()+"/Logout"%>" class="dropdown-item">LOG OUT</a>

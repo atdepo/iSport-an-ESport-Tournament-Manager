@@ -25,15 +25,32 @@ table{
 	font-size:20px;
 }
 input[type="text"]{
-	width:50%;
+	width:40%;
 	color:#3c3c3c;
 	font-family: 'Montserrat', Arial, Helvetica, sans-serif;
 	font-size: 20px;
 	border-radius: 11px;
 	background-color: #fbfbfb;
-	padding: 13px 13px 13px 54px;
+	padding: 13px 13px 13px 14px;
 	margin-top: 10px;
 	box-sizing: border-box;
  	border: 3px solid rgba(0,0,0,0);
   	flex-grow:1;
+}
+.immagine{
+	width:150px;
+	height:150px;
+	margin-left:40%;
+	position:relative;
+	background-color:white; 
+}
+@media (max-width: 600px) {
+	 table {
+		 grid-template-columns: repeat(2, 1fr);
+	}
+}
+ @media (max-width: 800px) {
+	 table {
+		 grid-template-columns: repeat(4, 1fr);
+	}
 }

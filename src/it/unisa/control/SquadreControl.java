@@ -57,7 +57,6 @@ public class SquadreControl extends HttpServlet {
 				String test=gson.toJson(num);
 				response.getWriter().print(test);
 				response.getWriter().flush();
-
 				System.out.println("il json del numero di giocatori e' stato creato con successo");
 			} catch (SQLException e) {
 				e.printStackTrace();
@@ -100,6 +99,15 @@ public class SquadreControl extends HttpServlet {
 			
 			break;
 		
+		case "validate":{
+			String =request.getParameter("action");
+			
+			
+			
+		}
+			
+			
+			
 		}
 		
 		

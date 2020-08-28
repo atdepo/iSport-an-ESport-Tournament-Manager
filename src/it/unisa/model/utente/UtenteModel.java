@@ -1,12 +1,17 @@
 package it.unisa.model.utente;
 
 
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
+
+import javax.security.auth.message.callback.PrivateKeyCallback.Request;
 
 import it.unisa.model.ModelInterface;
 import it.unisa.model.connessione.DriverManagerConnectionPool;
@@ -156,7 +161,54 @@ public class UtenteModel implements ModelInterface<UtenteBean, String>{
 		// TODO Auto-generated method stub
 		
 	}
-
+	/**
+	 * Questo metodo viene utilizzato per effettuare il cambio della password
+	 * @param email la mail dell'utente in cui cambiare la password
+	 * @param nuovaPassword la nuova password da inserire
+	 * @param vecchiaPassword la vecchia password per controllare se l'utente effettivamente la conosce 
+	 * @return <strong>true</strong> se il cambio di password è stato eseguito con successo, <strong>false</strong> altrimenti 
+	 * @throws SQLException
+	 */
+	public boolean cambiaPassword(String email,String nuovaPassword,String vecchiaPassword) throws SQLException {
+		
+		
+		if(email!=null && nuovaPassword!=null) { //Se la password o la mail sono state inserite 	
+				//Effettuo l'hashing della password passata
+				try {
+					MessageDigest md;
+					md = MessageDigest.getInstance("SHA-256");
+					byte nuova[]=md.digest(nuovaPassword.getBytes());
+					byte vecchia[]=md.digest(vecchiaPassword.getBytes());
+					
+					//Se la vecchia password è la stessa che ho inserito all'interno del database
+					if(Arrays.compare(vecchia, this.getUserPassword("email"))==0) {
+						
+						String sql="UPDATE utenti SET passw=? WHERE email=?";
+						try (Connection con = DriverManagerConnectionPool.getConnection();PreparedStatement stat=con.prepareStatement(sql)){
+							stat.setBytes(1, nuova);
+							stat.setString(2, email);
+							stat.executeUpdate();//cambio la password
+							con.commit(); //e faccio la commit dell'update
+							return true;
+						}
+					}
+					else
+						return false;//se le due password non combaciano
+				}
+					 catch (NoSuchAlgorithmException e) {
+						 e.printStackTrace();
+						 return false;//se non è presente l'algoritmo id hashing SHA256
+				}
+			
+		}
+		
+		else 
+			return false; //se non ho inserito correttamente mail o passowrd
+		
+		
+	}
+	
+	
 	@Override
 	public void doDelete(String email) throws SQLException {
 		

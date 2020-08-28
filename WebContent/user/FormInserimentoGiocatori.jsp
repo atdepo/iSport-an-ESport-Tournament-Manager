@@ -32,26 +32,25 @@
 		</div>
 			
 		<form action="#" method="post" id="the-form" enctype="multipart/form-data">
+		
 		<!--Pagina per la creazione della squadra, page 0 del multistep -->
 		<div class="page page-0 slidepage">
 			<div class="field">
-				<label for="nomeSquadra" class="testlabel">Nome</label>
-				<input type="text" class=" nome-torneo" placeholder="Inserisci il nome della Squadra" name="nomeSquadra">
+				<label for="nome-squadra" class="form-label">Nome</label>
+				<input type="text" class="feedback-input nome-squadra" placeholder="Inserisci il nome della Squadra" name="nome-squadra">
 			</div>	
+			
 			<div class="field">
-				<label for="nazionalita" class="testlabel">Nazionalità</label>
-				<input type="text" class=" nome-torneo" placeholder="Inserisci la nazionalità" name="nazionalita">
+				<label for="nazionalita" class="form-label">Nazionalità</label>
+				<input type="text" class="feedback-input nazionalita" placeholder="Inserisci la nazionalità" name="nazionalita">
 			</div>
+			
 			<div class="field">
-				<div class="form-group file-area">
-        			<label for="images" class="testlabel">Immagine Squadra<span> La tua immagine deve essere 150x150</span></label>
-   				 	<input type="file" name="images" id="images-0" required="required" />
-  				 <div class="file-dummy">
-     			 <div class="success">Hai inserito un immagine BRAV</div>
-     			 <div class="default">Favorire documento,grazie!</div>
-    				</div>
-  				</div>
+        		<label for="images-0" class="form-label">Immagine Squadra<br><small>La tua immagine deve essere massimo 150x150</small></label>
+   				<input type="file" name="images" id="images-0" required="required"> 
+
 			</div>	
+			
 			<div class="field-btn">
 				<input type="button" class="button-blue nextBtn0" onclick="cambiaPagina()" value="Next">
 				

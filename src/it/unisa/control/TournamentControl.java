@@ -33,6 +33,8 @@ import it.unisa.model.struttura.StrutturaModel;
 import it.unisa.model.tecnico.TecnicoModel;
 import it.unisa.model.torneo.TournamentBean;
 import it.unisa.model.torneo.TournamentModel;
+import it.unisa.model.utente.UtenteBean;
+import it.unisa.model.utente.UtenteModel;
 
 @WebServlet("/TournamentControl")
 public class TournamentControl extends HttpServlet {
@@ -44,6 +46,7 @@ public class TournamentControl extends HttpServlet {
 	ModalitaModel modModel = new ModalitaModel();
 	SquadraModel sqModel= new SquadraModel();
 	SponsorModel spModel= new SponsorModel();
+	
 
 	public TournamentControl() {
 		super();

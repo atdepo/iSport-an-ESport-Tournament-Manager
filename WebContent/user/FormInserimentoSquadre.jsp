@@ -11,7 +11,7 @@
 <title>Montefusco pupù</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="../Script/giocatori.js"></script>
-<link rel="stylesheet" href="../CSS/giocatori.css" type="text/css">
+
 <link rel="stylesheet" href="../CSS/Tendina.css" type="text/css">
 <link rel="stylesheet" href="../CSS/2RadioButton.css" type="text/css">
 
@@ -38,9 +38,7 @@
 			<input type="radio" id="nuova" class="sel bt2" value="Aggiungi una nuova squadra"  name="sel" onclick="cambiaTipo()">
 			<label class="radioLabel" for="nuova">Nuova</label>
 			</div>
-			<div>
-			<input type="text" class="nomeSquadra" placeholder="Inserisci il nome squadra">
-			</div>
+			
 			<div class="squadreEsistenti"></div>
 			<input type="button" value="Aggiungi una nuova squadra" id="aggiungi" onclick="add()">
 

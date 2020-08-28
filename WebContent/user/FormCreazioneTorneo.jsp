@@ -136,7 +136,7 @@
 				<input id="toggle-online" class="toggle toggle-left" name="r-button" value="false" type="radio" onclick="hide()" checked>
 				<label for="toggle-online" class="btn">Online</label>
 				<input id="toggle-offline" class="toggle toggle-right" name="r-button" value="true" type="radio" onclick="show()">
-				<label for="toggle-offline" class="btn">Fisico</label>
+				<label for="toggle-offline" class="btn">Fisico </label>
 			
 			<div class="field">
 				<label for="datatorneo">Che giorno vuoi svolgere il torneo?</label>

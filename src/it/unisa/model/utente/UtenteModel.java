@@ -208,17 +208,19 @@ public class UtenteModel implements ModelInterface<UtenteBean, String>{
 	}
 	
 	public boolean cambiaCose(String cosa,String valore,String email) {
-		String sql="UPDATE utenti SET ?=? WHERE email=?";
+		String sql="UPDATE utenti SET email=? WHERE email=?";
 		try (Connection con = DriverManagerConnectionPool.getConnection();PreparedStatement stat=con.prepareStatement(sql)){
-			stat.setString(1, cosa);
-			stat.setString(2, valore);
-			stat.setString(3, email);
+			//stat.setString(1, cosa);
+			stat.setString(1, valore);
+			stat.setString(2, email);
 			
+			System.out.println("UPDATE utenti SET "+cosa+"="+valore+" WHERE email="+email);
 			stat.executeUpdate();//Me lo faccio in mano perchè non ho voglia di scrivere tanto codice a differenza di adp anche se questo commento è più lungo del codice scritto per questa funzione
 			con.commit(); //e faccio la commit dell'update
 			return true;
 		}
 		catch (Exception e) {
+			e.printStackTrace();
 			return false;
 		}
 	}

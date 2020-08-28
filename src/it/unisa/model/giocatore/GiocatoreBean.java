@@ -81,7 +81,12 @@ public class GiocatoreBean implements Serializable {
 		this.codtecnico = codtecnico;
 	}
 	
-	
+	public boolean isEmpty() {
+		if(nickname.equals(""))
+			return true;
+		else
+			return false;
+	}
 	
 	
 }

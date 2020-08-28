@@ -1,9 +1,7 @@
 
 $(document).ready(function(){
-
-	//inserisciGiocatore();
 	creaSteps();
-	
+
 })
 
 	
@@ -52,16 +50,28 @@ function cambiaPagina(){
 	}
 	else 
 		if($(event.target).val()=="Next" ){
-			var tmp = (1+parseInt(called))*18;
-		
 			
-			$('#'+called+'-step').removeClass("is-active");			
-			$('#'+(1+parseInt(called))+'-step').addClass("is-active");
+			var xhr = new XMLHttpRequest();
+			if(called==0)
+				xhr.open('GET', '../SquadreControl?action=validateTeam&teamName='+$('.nome-squadra').val(), true);
+			else
+				xhr.open('GET', '../SquadreControl?action=validatePlayer&nick='+$('nickname-player-'+called).val(), true);
+
+			xhr.send();
 			
-			var change= '-'+tmp+'%';
-			
-			$('.slidepage').css("marginLeft",change);
-			
+			var error=$('.error');
+			var errorpage=$('.error-page');
+			alert(error.val()=='null'+' '+errorpage.val()=='null');
+			if(error.val()=='null' && errorpage.val()=='null'){
+				var tmp = (1+parseInt(called))*18;
+				$('#'+called+'-step').removeClass("is-active");			
+				$('#'+(1+parseInt(called))+'-step').addClass("is-active");
+				var change= '-'+tmp+'%';
+				$('.slidepage').css("marginLeft",change);
+			}
+			else{
+				alert('Errore:'+error.val()+' alla pagina '+errorpage.val());
+			}
 			
 			
 

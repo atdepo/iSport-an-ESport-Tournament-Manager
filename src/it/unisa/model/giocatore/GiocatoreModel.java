@@ -39,7 +39,10 @@ public class GiocatoreModel implements ModelInterface<GiocatoreBean, String> {
 				
 			}
 		}
-		return bean;
+		if(!bean.isEmpty())
+			return bean;
+		else
+			return null;
 	}
 
 	@Override

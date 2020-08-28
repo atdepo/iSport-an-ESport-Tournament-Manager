@@ -13,6 +13,7 @@ import javax.servlet.http.HttpSession;
 
 import com.google.gson.Gson;
 
+import it.unisa.model.giocatore.GiocatoreModel;
 import it.unisa.model.gioco.GiocoModel;
 import it.unisa.model.modalita.ModalitaBean;
 import it.unisa.model.modalita.ModalitaKey;
@@ -30,13 +31,11 @@ import it.unisa.model.torneo.TournamentModel;
 @WebServlet(urlPatterns = {"/SquadreControl","/user/SquadreControl"})
 public class SquadreControl extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	TournamentModel tModel = new TournamentModel();
-	StrutturaModel sModel = new StrutturaModel();
 	GiocoModel gModel = new GiocoModel();
 	TecnicoModel tecModel = new TecnicoModel();
 	ModalitaModel modModel = new ModalitaModel();
 	SquadraModel sqModel= new SquadraModel();
-	SponsorModel spModel= new SponsorModel();
+	GiocatoreModel pModel = new GiocatoreModel();
 
     public SquadreControl() {
         super();
@@ -99,12 +98,49 @@ public class SquadreControl extends HttpServlet {
 			
 			break;
 		
-		case "validate":{
-			String =request.getParameter("action");
+		case "validatePlayer":
+			String nick=request.getParameter("nick");
+			
+			try {
+				HttpSession sess= request.getSession();
+				if(pModel.doRetriveByKey(nick)!=null) 
+					sess.setAttribute("error", "Nickname già utilizzato");
+				
+				response.sendRedirect(request.getContextPath()+"/user/FormInserimentoGiocatori.jsp");
+			} catch (Exception e) {
+				// TODO: handle exception
+			}
+		break;
+		
+		case "validateTeam":
+		
+			String name=request.getParameter("teamName");
+			
+			try {
+				HttpSession sess= request.getSession();
+				if(sqModel.doRetriveByKey(name)!=null) {
+					sess.setAttribute("error", "Nome della squadra già utilizzato");
+					sess.setAttribute("error-page", "0");
+					System.out.println("problema nel controller!");
+					response.sendRedirect(request.getContextPath()+"/user/FormInserimentoGiocatori.jsp");
+				}
+				else {
+					sess.setAttribute("error", null);
+					sess.setAttribute("error-page", null);
+					response.sendRedirect(request.getContextPath()+"/user/FormInserimentoGiocatori.jsp");
+					System.out.println("non ho avuto problemi nel controller!");
+
+
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		
 			
 			
 			
-		}
+		break;
+		
 			
 			
 			

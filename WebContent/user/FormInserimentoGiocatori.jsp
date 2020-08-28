@@ -1,6 +1,18 @@
 <%@page import="java.util.Enumeration"%>
 <%@page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
+<%
+	String error=null;
+	String errorpage=null;
+	if(session.getAttribute("error")!=null && session.getAttribute("error-page")!=null){
+		error=(String)session.getAttribute("error");
+		errorpage=(String)session.getAttribute("error-page");
+}
+	
+	System.out.println("Gli errori sono "+error+" "+errorpage);
+
+%>
+
 <!DOCTYPE html>
 <html>
 
@@ -37,7 +49,7 @@
 		<div class="page page-0 slidepage">
 			<div class="field">
 				<label for="nome-squadra" class="form-label">Nome</label>
-				<input type="text" class="feedback-input nome-squadra" placeholder="Inserisci il nome della Squadra" name="nome-squadra">
+				<input type="text" class="feedback-input nome-squadra" placeholder="Inserisci il nome della Squadra" class="nome-squadra">
 			</div>	
 			
 			<div class="field">
@@ -61,7 +73,8 @@
 		</form>
 </div>
 		
-		
+		<input type="hidden" class="error" value="<%=error%>">
+		<input type="hidden" class="error-page" value="<%=errorpage%>">
 		
 	</div>
 

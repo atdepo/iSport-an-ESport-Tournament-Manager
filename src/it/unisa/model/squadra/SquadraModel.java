@@ -34,7 +34,16 @@ public class SquadraModel implements ModelInterface<SquadraBean, String>{
 				System.out.println("Ho trovato la squadra"+nome);
 			}
 		}
-		return bean;
+		if(!bean.isEmpty()) {
+			System.out.println("ho trovato la squadra che cercavi");
+			return bean;
+		}
+			
+		else {
+			System.out.println("Non ho trovato la squadra");
+			return null;
+		}
+			
 	}
 
 	@Override

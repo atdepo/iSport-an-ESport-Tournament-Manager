@@ -37,6 +37,9 @@ public class SquadraBean implements Serializable {
 		this.nazionalita = nazionalita;
 	}
 	
+	public boolean isEmpty() {
+		return nome.equals("");
+	}
 	
 
 }

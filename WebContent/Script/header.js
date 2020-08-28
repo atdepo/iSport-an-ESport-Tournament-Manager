@@ -8,7 +8,8 @@
 		if($('#check').prop('checked')){
 			$('ul li').each(function(i){
 				if(i===3){
-					$(this).empty().html('<li><a href="">VAFFANCULO STRONZO</a></li>');
+					var ctx=window.location.pathname.substring(0, window.location.pathname.indexOf("/",2));
+					$(this).empty().html('<li><a href="'+ctx+'/Logout">LOG OUT</a></li>');
 				}
 			})
 		} else{

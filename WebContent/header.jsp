@@ -49,9 +49,11 @@
       <div class="avatar-dropdown-menu-items">
         <ul id="test">
           <li>
-            <a class="dropdown-item">IL MIO PROFILO</a>
+            <a href="<%=request.getContextPath()+"/user/Profilo.jsp"%>"class="dropdown-item">IL MIO PROFILO</a>
           </li>
-         
+          <li>
+            <a href="<%=request.getContextPath()+"/user/MieiTornei.jsp"%>"class="dropdown-item">I MIEI TORNEI</a>
+          </li>
           <li>
             <a href="<%=request.getContextPath()+"/Logout"%>" class="dropdown-item">LOG OUT</a>
           </li>

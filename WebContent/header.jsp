@@ -16,7 +16,7 @@
 <link rel="stylesheet" href="<%=request.getContextPath()+"/CSS/header.css"%>" type="text/css">
 <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 <script src="https://kit.fontawesome.com/9e043e54f0.js" crossorigin="anonymous"></script>
-
+<style type="text/css">.logo:hover{cursor:pointer;}</style>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -29,15 +29,21 @@
 	<label for="check" class="checkbtn">
 	<i class="fa fa-bars" aria-hidden="true"></i>
 	</label>
-	<label class="logo">MONTEFUSCOMERDA</label>
+	<a href="<%=request.getContextPath()+"/index.jsp"%>" ><label  class="logo">TournamentFactory</label></a>
 	<ul id="link">
 	<li><a href="<%=request.getContextPath()+"/index.jsp"%>" class="active">HOME</a></li>
 	<li><a href="<%=response.encodeURL(request.getContextPath()+"/user/FormCreazioneTorneo.jsp")%>">CREA TORNEO</a></li>
-	<li><a href="<%=request.getContextPath()+"/contatti.jsp"%>">CONTATTI</a></li>	
+
+	
+		
   	<%if(utente==null){%>
   	  <li><a href="<%=request.getContextPath()+"/FormLoginAndRegister.jsp"%>">ACCEDI O REGISTRATI</a></li>
   	
       <%}else{ %>
+      <%if(utente.getTipo()=="admin"){ %>
+       <li><a href="<%=request.getContextPath()+"/listaTornei.jsp"%>">Lista Tornei</a></li>
+      
+      <%} %>
       <li><div class="avatar-dropdown-menu">
       <div class="avatar-image"><img src="<%=userImg%>" class="source"></div>
       <div class="avatar-dropdown-menu-items">
@@ -51,6 +57,7 @@
           <li>
             <a href="<%=request.getContextPath()+"/Logout"%>" class="dropdown-item">LOG OUT</a>
           </li>
+          
         </ul>
       </div>
       <%} %>

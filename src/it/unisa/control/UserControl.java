@@ -21,6 +21,7 @@ import it.unisa.model.struttura.StrutturaModel;
 import it.unisa.model.tecnico.TecnicoModel;
 import it.unisa.model.torneo.TournamentModel;
 import it.unisa.model.utente.UtenteBean;
+import it.unisa.model.utente.UtenteModel;
 import it.unisa.model.torneo.TournamentBean;
 /**
  * Servlet implementation class UserControl
@@ -35,6 +36,7 @@ public class UserControl extends HttpServlet {
 	ModalitaModel modModel = new ModalitaModel();
 	SquadraModel sqModel= new SquadraModel();
 	SponsorModel spModel= new SponsorModel();
+	UtenteModel userModel= new UtenteModel();
 
     public UserControl() {
         super();
@@ -51,7 +53,8 @@ public class UserControl extends HttpServlet {
 		try {
 			response.setContentType("application/json");
 			response.setCharacterEncoding("UTF-8");
-			String email=(String) session.getAttribute("email");
+			UtenteBean user=(UtenteBean) session.getAttribute("user");
+			String email=user.getEmail();
 			String torneo="";
 			ArrayList<TournamentBean> tornei = (ArrayList<TournamentBean>) tModel.doRetriveByUser(email);
 			torneo=gson.toJson(tornei);
@@ -64,8 +67,22 @@ public class UserControl extends HttpServlet {
 			e2.printStackTrace();
 		}
 		break;
+		
+		
+		case "change":
+			String cosa=request.getParameter("cosa");
+			UtenteBean utente=(UtenteBean)session.getAttribute("user");
+			String valore=request.getParameter("valore");
+			System.out.println("mammt "+utente.getEmail());
+			System.out.println("Cambio "+cosa);
+			System.out.println(userModel.cambiaCose(cosa,valore,utente.getEmail()));
+			
+		break;
 		}
-		}
+		
+	}
+
+	
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub

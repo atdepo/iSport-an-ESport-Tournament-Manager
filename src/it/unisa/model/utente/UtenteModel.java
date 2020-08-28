@@ -11,7 +11,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 
-import javax.security.auth.message.callback.PrivateKeyCallback.Request;
 
 import it.unisa.model.ModelInterface;
 import it.unisa.model.connessione.DriverManagerConnectionPool;
@@ -208,6 +207,22 @@ public class UtenteModel implements ModelInterface<UtenteBean, String>{
 		
 	}
 	
+	public boolean cambiaCose(String cosa,String valore,String email) {
+		String sql="UPDATE utenti SET ?=? WHERE email=?";
+		try (Connection con = DriverManagerConnectionPool.getConnection();PreparedStatement stat=con.prepareStatement(sql)){
+			stat.setString(1, cosa);
+			stat.setString(2, valore);
+			stat.setString(3, email);
+			
+			stat.executeUpdate();//Me lo faccio in mano perchè non ho voglia di scrivere tanto codice a differenza di adp anche se questo commento è più lungo del codice scritto per questa funzione
+			con.commit(); //e faccio la commit dell'update
+			return true;
+		}
+		catch (Exception e) {
+			return false;
+		}
+	}
+		
 	
 	@Override
 	public void doDelete(String email) throws SQLException {

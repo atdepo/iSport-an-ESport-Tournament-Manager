@@ -5,9 +5,20 @@ body{
 	background:url(../img/black-gradient.png) repeat;
 }
 
+i:hover{
+	cursor:pointer;
+}
+
+h1{
+	text-align: center;
+}
+
 h2{
 
 	padding-top:1%;
+}
+h3{
+    display: inline;
 }
 .dati{
 	

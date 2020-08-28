@@ -23,15 +23,19 @@
 			
 			<th>
 		<div class="dati">
-		
+		<div class="gertrude">
 		<label for="Nome" class="testlabel">Username</label>
-				<input type="text" class=" nome" disabled value="<%=utente.getUsername() %>" name="nome">
-			
-			<div class="field">
-				<label for="mail" class="testlabel">E-Mail</label>
-				<input type="text" class="mail" disabled value="<%=utente.getEmail() %>" name="mail">
+				<input type="text" class=" nome" disabled value="<%=utente.getUsername() %>" name="username">
+				<i class="fas fa-user-edit nome"></i>
 			</div>
 			
+			<div class="gertrude">
+				<div class="field">
+					<label for="mail" class="testlabel">E-Mail</label>
+					<input type="text" class="mail" disabled value="<%=utente.getEmail() %>" name="email">
+					<i class="fas fa-user-edit mail"></i>
+				</div>
+			</div>
 			
 			
    			</div>
@@ -54,6 +58,8 @@
    			</th>
 			</tr>
 			</table>
+			<h1>I TUOI TORNEI</h1>
+			<div id="mieiTornei"></div>
 		</div>	
 </body>
 </html>

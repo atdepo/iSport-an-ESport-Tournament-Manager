@@ -45,12 +45,12 @@ public class TournamentModel implements ModelInterface<TournamentBean,String>{
 		PreparedStatement statement= null;
 		Collection<TournamentBean> collection= new ArrayList<TournamentBean>();
 		
-		String sql="SELECT * FROM torneo where email=?";
+		String sql="SELECT * FROM torneo where proprietarioTorneo=?";
 		
 		try (Connection con=DriverManagerConnectionPool.getConnection()){
 			statement = con.prepareStatement(sql);
-			
-			System.out.println("DoRetriveAll="+statement.toString());
+			statement.setString(1, email);
+			System.out.println("DoRetriveByUser="+statement.toString());
 			ResultSet rs= statement.executeQuery();
 			
 			while(rs.next()) {

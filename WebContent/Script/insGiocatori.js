@@ -13,23 +13,67 @@ function creaSteps() {
 
 		if (xhr.status == 200 && xhr.readyState == 4) {
 		
-		let data = JSON.parse(xhr.responseText);
-		console.log(data);
-		var multi=$(".multi-steps");
-		var form=$("#the-form");
-		
-		for(var j=1;j<=parseInt(data);j++){	//For per gli indicatori del multistep
+			let data = JSON.parse(xhr.responseText);
+			console.log(data);
+			var multi=$(".multi-steps");
+			var form=$("#the-form");
 			
-			multi.append('<li id="'+j+'-step">Giocatore '+j+'</li>')
-		
-			form.append('<div class="page page-'+j+'"><div class="field"><label for="nickname-player-'+j+'" class="form-label">Nickname</label><input type="text" class="feedback-input" placeholder="SuperMario64" name="nickname-player-'+j+'"></div><div class="field"><label for="nome-giocatore-'+j+'" class="form-label">Nome</label><input type="text" class="feedback-input" placeholder="Mario" name="nome-giocatore-'+j+'"></div><div class="field"><label for="cognome-giocatore-'+j+'" class="form-label">Cognome</label><input type="text" class="feedback-input" placeholder="Rossi" name="cognome-giocatore-'+j+'"></div><div class="field"><label for="ruolo-giocatore-'+j+'" class="form-label">Ruolo</label><input type="text" class="feedback-input" placeholder="Jungler" name="ruolo-giocatore-'+j+'"></div><div class="field" class="form-label"><label for="nascita-giocatore-'+j+'" class="form-label">Data di Nascita</label><input type="date" class="feedback-input" name="nascita-giocatore-'+j+'"></div><div class="field"><label for="images" class="form-label">Immagine<span>La tua immagine deve essere 150x150</span></label><input type="file" name="images" id="images-'+j+'>" required="required"/></div><div class="field-btn"><input type="button" class="button-blue prevBtn'+j+'" onclick="cambiaPagina()" value="Prev"><input type="button" class="button-blue nextBtn'+j+'" onclick="cambiaPagina()" value="Next"></div></div>')
-		}
+			for(var j=1;j<=parseInt(data);j++){	//For per gli indicatori del multistep
+				
+				multi.append('<li id="'+j+'-step">Giocatore '+j+'</li>')
+			
+				form.append('<div class="page page-'+j+'">'+
+
+				'<div class="field">'+
+
+				'<label for="nickname-player-'+j+'" class="form-label">Nickname</label>'+
+				'<input type="text" class="feedback-input nickname-player-'+j+'" placeholder="SuperMario64" name="nickname-player-'+j+'">'+
+				'<span class="error nick"></span>'+
+				'</div>'+
+				
+				'<div class="field">'+
+				'<label for="nome-giocatore-'+j+'" class="form-label">Nome</label>'+
+				'<input type="text" class="feedback-input" placeholder="Mario" name="nome-giocatore-'+j+'">'+
+				'<span class=" error nome"></span>'+
+				'</div>'+
+				
+				'<div class="field">'+
+				'<label for="cognome-giocatore-'+j+'" class="form-label">Cognome</label>'+
+				'<input type="text" class="feedback-input" placeholder="Rossi" name="cognome-giocatore-'+j+'">'+
+				'<span class=" error cognome"></span>'+
+				'</div>'+
+				
+				'<div class="field">'+
+				'<label for="ruolo-giocatore-'+j+'" class="form-label">Ruolo</label>'+
+				'<input type="text" class="feedback-input" placeholder="Jungler" name="ruolo-giocatore-'+j+'">'+
+				'<span class=" error ruolo"></span>'+
+				'</div>'+
+				
+				'<div class="field" class="form-label">'+
+				'<label for="nascita-giocatore-'+j+'" class="form-label">Data di Nascita</label>'+
+				'<input type="date" class="feedback-input" name="nascita-giocatore-'+j+'">'+
+				'<span class=" error nascita"></span>'+
+				'</div>'+
+				
+				'<div class="field"><label for="images" class="form-label">Inserisci una immagine massimo 150x150</label>'+
+				'<input type="file" name="images" id="images-'+j+'>" required="required">'+
+				'<span class=" error img"></span>'+
+				'</div>'+
+				
+				'<div class="field-btn">'+
+				'<input type="button" class="button-blue prevBtn'+j+'" onclick="cambiaPagina()" value="Prev">'+
+				'<input type="button" class="button-blue nextBtn'+j+'" onclick="cambiaPagina()" value="Next">'+
+				'</div>'+
+				'</div>');
 			}
 		}
+	}
 	
 		xhr.open('GET', '../SquadreControl?action=getGiocatori', true);
 		xhr.send();
 }
+
+
 
 
 function cambiaPagina(){
@@ -55,30 +99,53 @@ function cambiaPagina(){
 			if(called==0)
 				xhr.open('GET', '../SquadreControl?action=validateTeam&teamName='+$('.nome-squadra').val(), true);
 			else
-				xhr.open('GET', '../SquadreControl?action=validatePlayer&nick='+$('nickname-player-'+called).val(), true);
+				xhr.open('GET', '../SquadreControl?action=validatePlayer&nick='+$('.nickname-player-'+called).val(), true);
 
 			xhr.send();
 			
-			var error=$('.error');
-			var errorpage=$('.error-page');
-			alert(error.val()=='null'+' '+errorpage.val()=='null');
-			if(error.val()=='null' && errorpage.val()=='null'){
-				var tmp = (1+parseInt(called))*18;
-				$('#'+called+'-step').removeClass("is-active");			
-				$('#'+(1+parseInt(called))+'-step').addClass("is-active");
-				var change= '-'+tmp+'%';
-				$('.slidepage').css("marginLeft",change);
-			}
-			else{
-				alert('Errore:'+error.val()+' alla pagina '+errorpage.val());
-			}
-			
-			
+			xhr.onreadystatechange = function() {
 
+				if (xhr.status == 200 && xhr.readyState == 4) {
+					let data = JSON.parse(xhr.responseText);
+					console.log(data);
+					if(data['0']!=="null"){
+						if(called==0)
+						$('.error-name-'+called).text(data['0']);
+						else{
+							$('.nickname-player-'+called).next().text(data['0']);
+						}
+					}
+					else{
+						if(called==0)
+							$('.error-name-'+called).text("");
+						else
+							$('.nickname-player-'+called).next().text("");
+							
+						var tmp = (1+parseInt(called))*18;
+						$('#'+called+'-step').removeClass("is-active");			
+						$('#'+(1+parseInt(called))+'-step').addClass("is-active");
+						var change= '-'+tmp+'%';
+						$('.slidepage').css("marginLeft",change);
+						//alert('no errore!');
+					}
+				
+				}
+			}
 		}
-		
+}
+
+
+function validateCampi(i){
+	var regGeneral="/^['a-z''A-Z']{1,30}$/"
+
+
+
+
+
+
 	
 }
+
 
 $(function(){
 	  $('#upload').change(function(){

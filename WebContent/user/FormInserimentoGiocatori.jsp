@@ -50,10 +50,11 @@
 			<div class="field">
 				<label for="nome-squadra" class="form-label">Nome</label>
 				<input type="text" class="feedback-input nome-squadra" placeholder="Inserisci il nome della Squadra" class="nome-squadra">
+				<span class="error-name-0"></span>
 			</div>	
 			
 			<div class="field">
-				<label for="nazionalita" class="form-label">Nazionalità</label>
+				<label for="nazionalita" class="form-label">Nazionalità</label><!-- Qua ci va una tendina -->
 				<input type="text" class="feedback-input nazionalita" placeholder="Inserisci la nazionalità" name="nazionalita">
 			</div>
 			

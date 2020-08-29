@@ -21,7 +21,7 @@ header{
 	padding: 50px 35px 10px 35px;
 	text-align: center;	
 	overflow:hidden;
-	background-color:rgba(99,74,86,0.8);
+	background-color:rgba(0,129,230,0.5);
 	padding-left:35px;
 	padding-right:35px;
 	padding-top:35px;
@@ -143,6 +143,7 @@ margin:10px;
 	padding: 13px 13px 13px 54px;
 	margin-top:20px;
 	margin-bottom: 20px;
+	margin-left: 16px;
 	position:relative;
 	width: 90%;
     left: -6%;
@@ -281,3 +282,18 @@ input:hover, input:focus{
   margin: auto;
   margin-bottom: 30px;
 }
+
+span{
+	color: red;
+    font-size: 16px;
+    font-weight: 800;
+    padding-left: 20px;
+    position: relative;
+    display:block;
+    left: -8%;
+    margin-top: -10px;
+    margin-bottom: 20px;
+}
+
+
+

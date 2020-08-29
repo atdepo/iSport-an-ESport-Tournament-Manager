@@ -103,13 +103,26 @@ public class SquadreControl extends HttpServlet {
 			
 			try {
 				HttpSession sess= request.getSession();
-				if(pModel.doRetriveByKey(nick)!=null) 
-					sess.setAttribute("error", "Nickname già utilizzato");
-				
-				response.sendRedirect(request.getContextPath()+"/user/FormInserimentoGiocatori.jsp");
+				ArrayList<String> errori= new ArrayList<String>();
+				if(pModel.doRetriveByKey(nick)!=null) {
+					errori.add("Nickname gia' utilizzato");
+					String json=gson.toJson(errori);
+					response.getWriter().print(json);
+					response.getWriter().flush();
+					response.setStatus(200);
+					System.out.println("problema nel controller!");
+				}
+				else {
+					errori.add("null");
+					String json=gson.toJson(errori);
+					response.getWriter().print(json);
+					response.getWriter().flush();
+					response.setStatus(200);
+					System.out.println("non ho avuto problemi nel controller!");
+				}
 			} catch (Exception e) {
-				// TODO: handle exception
-			}
+				e.printStackTrace();
+}
 		break;
 		
 		case "validateTeam":
@@ -118,20 +131,24 @@ public class SquadreControl extends HttpServlet {
 			
 			try {
 				HttpSession sess= request.getSession();
+				ArrayList<String> errori= new ArrayList<String>();
 				if(sqModel.doRetriveByKey(name)!=null) {
-					sess.setAttribute("error", "Nome della squadra già utilizzato");
-					sess.setAttribute("error-page", "0");
+					errori.add("Nome della squadra gia' utilizzato");
+					String json=gson.toJson(errori);
+					response.getWriter().print(json);
+					response.getWriter().flush();
+					response.setStatus(200);
 					System.out.println("problema nel controller!");
-					response.sendRedirect(request.getContextPath()+"/user/FormInserimentoGiocatori.jsp");
 				}
 				else {
-					sess.setAttribute("error", null);
-					sess.setAttribute("error-page", null);
-					response.sendRedirect(request.getContextPath()+"/user/FormInserimentoGiocatori.jsp");
+					errori.add("null");
+					String json=gson.toJson(errori);
+					response.getWriter().print(json);
+					response.getWriter().flush();
+					response.setStatus(200);
 					System.out.println("non ho avuto problemi nel controller!");
-
-
 				}
+
 			} catch (Exception e) {
 				e.printStackTrace();
 			}

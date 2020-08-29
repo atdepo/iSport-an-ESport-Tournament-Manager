@@ -19,7 +19,7 @@ public class GiocatoreModel implements ModelInterface<GiocatoreBean, String> {
 		PreparedStatement statement = null;
 
 		GiocatoreBean bean = new GiocatoreBean();
-		String sql = "SELECT * FROM gioco WHERE nickname=?";
+		String sql = "SELECT * FROM giocatore WHERE nickname=?";
 
 		try (Connection con = DriverManagerConnectionPool.getConnection()) {
 			statement = con.prepareStatement(sql);

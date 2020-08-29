@@ -73,13 +73,23 @@ public class UserControl extends HttpServlet {
 			String cosa=request.getParameter("cosa");
 			UtenteBean utente=(UtenteBean)session.getAttribute("user");
 			String valore=request.getParameter("valore");
-			System.out.println("mammt "+utente.getEmail());
-			System.out.println("Cambio "+cosa);
-			System.out.println(userModel.cambiaCose(cosa,valore,utente.getEmail()));
-			
-		break;
-		}
+			userModel.cambiaCose(cosa, valore, utente.getEmail());
+			break;
 		
+		case "vecchiaPassword":
+			System.out.println("COntrolMammt");
+			UtenteBean userpsw=(UtenteBean)session.getAttribute("user");
+			String email=userpsw.getEmail();
+			
+			try {
+				boolean res=userModel.vecchiaPassword(request.getParameter("vecchiaPassword"), email);
+				System.out.println(res);
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			break;
+		}
 	}
 
 	

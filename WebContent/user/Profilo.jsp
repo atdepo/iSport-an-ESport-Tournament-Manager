@@ -26,7 +26,7 @@
 		<div class="gertrude">
 		<label for="Nome" class="testlabel">Username</label>
 				<input type="text" class=" nome" disabled value="<%=utente.getUsername() %>" name="username">
-				<i class="fas fa-user-edit nome"></i>
+				<i class="fas fa-user-edit nome" id="mammt"></i>
 			</div>
 			
 			<div class="gertrude">
@@ -36,6 +36,14 @@
 					<i class="fas fa-user-edit mail"></i>
 				</div>
 			</div>
+			<div class="gertrude">
+				<div class="field">
+					<label for="mail" class="testlabel">Password</label>
+					<input type="text" class="mail" disabled  name="email">
+					<i class="fas fa-user-edit mail " id="cambiaPass"></i>
+				</div>
+			</div>
+			
 			
 			
    			</div>

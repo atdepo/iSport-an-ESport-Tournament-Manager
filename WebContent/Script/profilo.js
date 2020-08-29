@@ -13,6 +13,8 @@
 			let data = JSON.parse(xhr.responseText);
 			console.log(data);			
 			var div=$("#mieiTornei");
+			if(data.length==0)
+				div.append("<h3>Non hai tornei, dai ordina il tuo primo torneo dalla sezione Crea Tornei</h3>");
 			for (var i = 0; i < data.length; i++) {
 				div.append('<h3>Nome='+data[i].nome+'</h3><h3>  Data='+data[i].data+'</h3><h3> Luogo='+data[i].indirizzoStruttura+' '+data[i].CAPStruttura+'</h3><h3> Gioco='+data[i].codGioco+'</h3><br>');	
 	
@@ -28,10 +30,21 @@ xhr.send();
  
  
 $(function() {
-	$('i').attr("title","modifica");
-	$('i').click(function() {
+	var i=$('i');
+	i.attr("title","modifica");
+	i.click(function() {
+		if(event.target.id){
+			var vecchia=prompt("Inserisci la tua vecchia password");
+			
+			var xhr = new XMLHttpRequest();
+			xhr.open('GET', '../UserControl?action=vecchiaPassword?vecchia='+vecchia);
+		
+			xhr.send();
+			 
+		}
+		else{
 		$(this).prev().attr("disabled",false);
-		$(this).prev().focus();
+		$(this).prev().focus();}
 	});
 	
 	$("input[type=text]").focusout(function() {

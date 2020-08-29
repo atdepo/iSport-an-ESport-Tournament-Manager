@@ -168,6 +168,34 @@ public class UtenteModel implements ModelInterface<UtenteBean, String>{
 	 * @return <strong>true</strong> se il cambio di password è stato eseguito con successo, <strong>false</strong> altrimenti 
 	 * @throws SQLException
 	 */
+	
+	
+	public boolean vecchiaPassword(String vecchia, String email) throws SQLException {
+		System.out.println("GEGU");
+		if(vecchia!=null)
+			try {
+				MessageDigest md;
+				md = MessageDigest.getInstance("SHA-256");
+				byte coded[]=md.digest(vecchia.getBytes());
+				String sql="Select passw from utenti where email=?";
+				try (Connection con = DriverManagerConnectionPool.getConnection();PreparedStatement stat=con.prepareStatement(sql)){
+					stat.setString(1, email);
+					System.out.println("vecchiaPassword=" + stat.toString());
+					ResultSet rs = stat.executeQuery();
+					rs.next();
+					byte pswDb[]=rs.getBytes("passw");
+					if(Arrays.compare(pswDb, coded)==0)
+					return true;
+				}
+			} 
+		catch (NoSuchAlgorithmException e) {
+				 e.printStackTrace();
+				 return false;//se non è presente l'algoritmo id hashing SHA256
+		}
+		return false;
+	}
+	
+	
 	public boolean cambiaPassword(String email,String nuovaPassword,String vecchiaPassword) throws SQLException {
 		
 		
@@ -208,23 +236,53 @@ public class UtenteModel implements ModelInterface<UtenteBean, String>{
 	}
 	
 	public boolean cambiaCose(String cosa,String valore,String email) {
-		String sql="UPDATE utenti SET email=? WHERE email=?";
-		try (Connection con = DriverManagerConnectionPool.getConnection();PreparedStatement stat=con.prepareStatement(sql)){
-			//stat.setString(1, cosa);
-			stat.setString(1, valore);
-			stat.setString(2, email);
-			
-			System.out.println("UPDATE utenti SET "+cosa+"="+valore+" WHERE email="+email);
-			stat.executeUpdate();//Me lo faccio in mano perchè non ho voglia di scrivere tanto codice a differenza di adp anche se questo commento è più lungo del codice scritto per questa funzione
-			con.commit(); //e faccio la commit dell'update
-			return true;
-		}
-		catch (Exception e) {
-			e.printStackTrace();
-			return false;
-		}
-	}
+		String sql="";
+		switch (cosa) {
 		
+		case "username": 
+			 sql="UPDATE utenti SET username=? WHERE email=?";
+			try (Connection con = DriverManagerConnectionPool.getConnection();PreparedStatement stat=con.prepareStatement(sql)){
+				stat.setString(1, valore);
+				stat.setString(2, email);
+				stat.executeUpdate();
+				con.commit();
+				return true;
+			} catch (SQLException e) {
+				e.printStackTrace();
+				
+			}
+			break;
+		case "email":
+			sql="UPDATE utenti SET email=? WHERE email=?";
+			try (Connection con = DriverManagerConnectionPool.getConnection();PreparedStatement stat=con.prepareStatement(sql)){
+				stat.setString(1, valore);
+				stat.setString(2, email);
+				stat.executeUpdate();
+				con.commit();
+				return true;
+			} catch (SQLException e) {
+				e.printStackTrace();
+				
+			}
+			break;
+		case "pIVA":
+			sql="UPDATE utenti SET piva=? WHERE email=?";
+			try (Connection con = DriverManagerConnectionPool.getConnection();PreparedStatement stat=con.prepareStatement(sql)){
+				stat.setString(1, valore);
+				stat.setString(2, email);
+				stat.executeUpdate();
+				con.commit();
+				return true;
+			} catch (SQLException e) {
+				e.printStackTrace();
+				
+			}
+			break;
+		}
+		
+		return false;
+
+	}
 	
 	@Override
 	public void doDelete(String email) throws SQLException {

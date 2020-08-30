@@ -1,16 +1,3 @@
-$(document).ready(function() {
-
-	$("input[type=radio][name=sel]").change(function() {	
-		
-			  cambiaTipo();   
-			  
-		});
-		
-		$("#nuova").attr("checked", true);
-
-
-})
-
 function menu(k){
 	
 $("#"+k).toggleClass("active");
@@ -101,4 +88,5 @@ function cambiaTipo(){
 		$('#aggiungi').attr("value","Aggiungi una squadra esistente");
 	}
 }
+
 

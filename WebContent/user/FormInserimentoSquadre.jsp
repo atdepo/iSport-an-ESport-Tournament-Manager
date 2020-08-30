@@ -10,7 +10,7 @@
 <meta charset="UTF-8">
 <title>Montefusco pupù</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script src="../Script/giocatori.js"></script>
+<script src="../Script/squadre.js"></script>
 
 <link rel="stylesheet" href="../CSS/Tendina.css" type="text/css">
 <link rel="stylesheet" href="../CSS/2RadioButton.css" type="text/css">
@@ -18,9 +18,31 @@
 </head>
 
 <style>
-
-	h3{background-color: purple; 
-			text-align: center;}
+	body{
+		color:#45A29E;
+		background:url(../img/black-gradient.png) repeat;
+	}
+	
+	h2{ 
+		text-align: center;
+	}		
+	.flex-container{
+		display:flex;
+		flex-wrap:wrap;
+		margin-top:20px;
+	}	
+	.flex-container > * {
+		margin-left:10px;
+		margine-right:10px;
+		
+	}
+	input[type="button"]{
+		margin-left:10px;
+	}
+	.contieniBottoni{
+		margin-left:10px;
+	}
+}
 
 </style>	
 </head>
@@ -28,14 +50,14 @@
 <body>
 	<%@ include file="../header.jsp"%>
 	<div class="squadra">
-		<h3><%=session.getAttribute("nomeTorneo") %></h3><br>
+		<h2>Ora aggiungi le squadre per <%=session.getAttribute("nomeTorneo") %></h2><br>
 		
 		<div class="papino">
 		<div class="contieniBottoni">
 			
-			<input type="radio" id="esistente" class="sel bt1" value="Aggiungi squadra esistente" name="sel" onclick="cambiaTipo()">
+			<input type="radio" id="esistente" class="sel bt1" value="Aggiungi squadra esistente" name="sel" onchange="cambiaTipo()">
 			<label class="radioLabel" for="esistente">Esistente</label>
-			<input type="radio" id="nuova" class="sel bt2" value="Aggiungi una nuova squadra"  name="sel" onclick="cambiaTipo()">
+			<input type="radio" id="nuova" checked class="sel bt2" value="Aggiungi una nuova squadra"  name="sel" onchange="cambiaTipo()">
 			<label class="radioLabel" for="nuova">Nuova</label>
 			</div>
 			
@@ -45,7 +67,7 @@
 		</div>
 		</div>
 		
-		<div id="listaSquadre">
+		<div id="listaSquadre"class="flex-container">
 			
 		
 		

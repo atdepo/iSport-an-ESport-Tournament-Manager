@@ -170,30 +170,7 @@ public class UtenteModel implements ModelInterface<UtenteBean, String>{
 	 */
 	
 	
-	public boolean vecchiaPassword(String vecchia, String email) throws SQLException {
-		System.out.println("GEGU");
-		if(vecchia!=null)
-			try {
-				MessageDigest md;
-				md = MessageDigest.getInstance("SHA-256");
-				byte coded[]=md.digest(vecchia.getBytes());
-				String sql="Select passw from utenti where email=?";
-				try (Connection con = DriverManagerConnectionPool.getConnection();PreparedStatement stat=con.prepareStatement(sql)){
-					stat.setString(1, email);
-					System.out.println("vecchiaPassword=" + stat.toString());
-					ResultSet rs = stat.executeQuery();
-					rs.next();
-					byte pswDb[]=rs.getBytes("passw");
-					if(Arrays.compare(pswDb, coded)==0)
-					return true;
-				}
-			} 
-		catch (NoSuchAlgorithmException e) {
-				 e.printStackTrace();
-				 return false;//se non è presente l'algoritmo id hashing SHA256
-		}
-		return false;
-	}
+	
 	
 	
 	public boolean cambiaPassword(String email,String nuovaPassword,String vecchiaPassword) throws SQLException {
@@ -235,23 +212,40 @@ public class UtenteModel implements ModelInterface<UtenteBean, String>{
 		
 	}
 	
-	public boolean cambiaCose(String cosa,String valore,String email) {
+	public boolean cambiaCose(String cosa,String valore,String email) throws SQLException {
 		String sql="";
 		switch (cosa) {
 		
 		case "username": 
-			 sql="UPDATE utenti SET username=? WHERE email=?";
-			try (Connection con = DriverManagerConnectionPool.getConnection();PreparedStatement stat=con.prepareStatement(sql)){
+			
+			 sql="select count(*)as num from utenti where username=?";
+			 PreparedStatement stat=null;
+			try (Connection con = DriverManagerConnectionPool.getConnection();){
+				stat=con.prepareStatement(sql);
 				stat.setString(1, valore);
-				stat.setString(2, email);
-				stat.executeUpdate();
-				con.commit();
-				return true;
-			} catch (SQLException e) {
-				e.printStackTrace();
+				ResultSet res=stat.executeQuery();
+				res.next();
+				if(res.getInt("num")==0) {
 				
+					sql="UPDATE utenti SET username=? WHERE email=?";
+					stat.setString(1, valore);
+					stat.setString(2, email);
+					stat.executeUpdate();
+					con.commit();
+					return true;
+				}
+				else
+				{
+					
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();			
+			}
+			finally {
+				stat.close();
 			}
 			break;
+		/*
 		case "email":
 			sql="UPDATE utenti SET email=? WHERE email=?";
 			try (Connection con = DriverManagerConnectionPool.getConnection();PreparedStatement stat=con.prepareStatement(sql)){
@@ -277,7 +271,7 @@ public class UtenteModel implements ModelInterface<UtenteBean, String>{
 				e.printStackTrace();
 				
 			}
-			break;
+			break;*/
 		}
 		
 		return false;

@@ -46,6 +46,7 @@ public class UserControl extends HttpServlet {
 		HttpSession session= request.getSession();
 		String action = request.getParameter("action"); // azione da far compiere alla servlet
 		Gson gson = new Gson();
+		System.out.println("Sto facendo questa action: "+ action);
 		
 		switch (action) {	
 		case "getMieiTornei":
@@ -73,22 +74,48 @@ public class UserControl extends HttpServlet {
 			String cosa=request.getParameter("cosa");
 			UtenteBean utente=(UtenteBean)session.getAttribute("user");
 			String valore=request.getParameter("valore");
-			userModel.cambiaCose(cosa, valore, utente.getEmail());
-			break;
-		
-		case "vecchiaPassword":
-			System.out.println("COntrolMammt");
-			UtenteBean userpsw=(UtenteBean)session.getAttribute("user");
-			String email=userpsw.getEmail();
+			
+			String regUser="^[a-zA-Z0-9]+([._]?[a-zA-Z0-9]+)*$";
+
+			System.out.println("Sto nel change");
+			//Impostiamogli eventuali errori avuti in precedenza a null per evitare problemi nella visualizzazione
+			session.setAttribute("error-type", null); //error-type ci fornisce il campo sul quale abbiamo riscontrato l'errore
+			session.setAttribute("error", null); // error ci fornisce il messaggio di errore da visualizzare
+			session.setAttribute("error-location", null); //error-location ci fornisce l'indicazione su quale 
+														  //dei due form (login|signup) sia presente l'errore
+			
 			
 			try {
-				boolean res=userModel.vecchiaPassword(request.getParameter("vecchiaPassword"), email);
-				System.out.println(res);
+				
+				//----------------Controllo username--------------------//
+				if (userModel.doRetriveByKey(request.getParameter("username")) != null) {
+					System.out.println("guarda che sto user è stato usato");
+					session.setAttribute("error-type", "username");
+					session.setAttribute("error", "Quest'username è stato utilizzato");
+					session.setAttribute("error-location", "signup");
+					response.sendRedirect(request.getContextPath()+"/FormLoginAndRegister.jsp");
+					return;
+				}	else if(!request.getParameter("username").matches(regUser)) {
+					System.out.println("mi fermo allo username");
+					session.setAttribute("error-type", "username");
+					session.setAttribute("error", "Utente non scritto correttamente");
+					session.setAttribute("error-location", "signup");
+					response.sendRedirect(request.getContextPath()+"/FormLoginAndRegister.jsp");
+				}
+			} catch (SQLException | IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			try {
+				System.out.println("Prima della chiamata di cambia cose");
+				userModel.cambiaCose(cosa, valore, utente.getEmail());
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			break;
+		
+	
 		}
 	}
 

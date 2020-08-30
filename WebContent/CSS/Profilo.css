@@ -8,7 +8,28 @@ body{
 i:hover{
 	cursor:pointer;
 }
+.button-blue{
+	font-family: 'Montserrat', Arial, Helvetica, sans-serif;
+	width: 40%;
+	border: #0088FF solid 4px;
+	border-radius: 11px;
+	cursor:pointer;
+	background-color: #5DEFB9;;
+	color:white;
+	font-size:14px;
+	padding-bottom:13px;
+	padding-top:10px;
+	-webkit-transition: all 0.3s;
+	-moz-transition: all 0.3s;
+	transition: all 0.3s;
+  	font-weight:700;
+  	margin-top: 10px;
+}
 
+.button-blue:hover{
+	background-color: rgba(0,0,0,0);
+	color: #0493bd;
+}
 h1{
 	text-align: center;
 }

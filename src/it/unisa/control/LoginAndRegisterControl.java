@@ -88,12 +88,24 @@ public class LoginAndRegisterControl extends HttpServlet {
 				//Di seguito ci sono vari controlli sui campi inseriti in fase di registrazione
 				//(controllati nel caso javascript sia disattivato così da evitiare l'inserimento di dati erronei)
 				
-				else if(!request.getParameter("email").matches(regEmail)) {
-					System.out.println("mi fermo alla mail");
-					session.setAttribute("error-type", "email");
-					session.setAttribute("error", "La mail non è scritta correttamente");
-					session.setAttribute("error-location", "signup");
-					response.sendRedirect(request.getContextPath()+"/FormLoginAndRegister.jsp");
+				else 
+					if (userModel.doRetriveByKey(request.getParameter("username")) != null) {
+						System.out.println("guarda che sto user è stato usato");
+						session.setAttribute("error-type", "username");
+						session.setAttribute("error", "Quest'username è stato utilizzato");
+						session.setAttribute("error-location", "signup");
+						response.sendRedirect(request.getContextPath()+"/FormLoginAndRegister.jsp");
+						return;
+					}
+					//Di seguito ci sono vari controlli sui campi inseriti in fase di registrazione
+					//(controllati nel caso javascript sia disattivato così da evitiare l'inserimento di dati erronei)
+					
+					else if(!request.getParameter("email").matches(regEmail)) {
+						System.out.println("mi fermo alla mail");
+						session.setAttribute("error-type", "email");
+						session.setAttribute("error", "La mail non è scritta correttamente");
+						session.setAttribute("error-location", "signup");
+						response.sendRedirect(request.getContextPath()+"/FormLoginAndRegister.jsp");
 				}
 				else if(!request.getParameter("username").matches(regUser)) {
 					System.out.println("mi fermo allo username");

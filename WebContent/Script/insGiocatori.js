@@ -5,7 +5,11 @@ $(document).ready(function(){
 })
 
 	
-
+$(function() {
+	$(".nextBtn1").click(function() {
+		alert("mammina");
+	})
+	});
 
 function creaSteps() {
 	var xhr = new XMLHttpRequest();
@@ -136,10 +140,20 @@ function cambiaPagina(){
 
 
 function validateCampi(i){
-	var regGeneral="/^['a-z''A-Z']{1,30}$/"
-
-
-
+	var regGeneral="^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$"
+	
+	var nickname=$("nickname-player-"+i);
+	var nome=$("nome-giocatore-"+i);
+	var cognome=$("cognome-giocatore"+i);
+	
+	if(!nickname.val()){//Nickname non inserito
+		var error=nickname.next();
+		$('span').text("");
+		error.text("Inserisci un nickname");
+		console.log("nickname non inserito");
+		return false;
+	
+	}
 
 
 

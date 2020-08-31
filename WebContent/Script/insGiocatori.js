@@ -1,6 +1,24 @@
 
 $(document).ready(function(){
+
 	creaSteps();
+	
+	var xhr = new XMLHttpRequest();
+	xhr.onreadystatechange = function() {
+		
+		if (xhr.status == 200 && xhr.readyState == 4) {
+			let data = JSON.parse(xhr.responseText);
+			var nazioni=$('#nazioni');
+			for(var i = 0 ; i < data.length ; i++){
+				var nome = data[i].replace(/\s/g, '');
+				nome=nome.toUpperCase();
+				nazioni.append('<div class="option"><input name="nazioni" value="'+nome+'" onclick="tendina(\''+nome+'\')" type="radio" class="radio" id="'+nome+'"> <label for="'+nome+'">'+nome+'</label></div>');
+			}
+
+		}
+	}
+	xhr.open('GET', '../Script/nation.json', true);
+	xhr.send();
 
 })
 
@@ -11,7 +29,23 @@ $(function() {
 	})
 	});
 
-function creaSteps() {
+
+	function menu(k){
+	
+	$("#"+k).toggleClass("active");
+		
+	}
+
+
+	function tendina(k){
+		var selected=$('.selected.'+event.target.name);
+		var optionsContainer = $("#"+event.target.name);
+		selected.text($("label[for='"+k+"']").html());
+	    optionsContainer.toggleClass("active");
+	}
+
+
+	function creaSteps() {
 	var xhr = new XMLHttpRequest();
 	xhr.onreadystatechange = function() {
 
@@ -37,25 +71,25 @@ function creaSteps() {
 				
 				'<div class="field">'+
 				'<label for="nome-giocatore-'+j+'" class="form-label">Nome</label>'+
-				'<input type="text" class="feedback-input" placeholder="Mario" name="nome-giocatore-'+j+'">'+
+				'<input type="text" class="feedback-input nome-giocatore-'+j+'" placeholder="Mario" name="nome-giocatore-'+j+'">'+
 				'<span class=" error nome"></span>'+
 				'</div>'+
 				
 				'<div class="field">'+
 				'<label for="cognome-giocatore-'+j+'" class="form-label">Cognome</label>'+
-				'<input type="text" class="feedback-input" placeholder="Rossi" name="cognome-giocatore-'+j+'">'+
+				'<input type="text" class="feedback-input cognome-giocatore-'+j+'" placeholder="Rossi" name="cognome-giocatore-'+j+'">'+
 				'<span class=" error cognome"></span>'+
 				'</div>'+
 				
 				'<div class="field">'+
 				'<label for="ruolo-giocatore-'+j+'" class="form-label">Ruolo</label>'+
-				'<input type="text" class="feedback-input" placeholder="Jungler" name="ruolo-giocatore-'+j+'">'+
+				'<input type="text" class="feedback-input ruolo-giocatore-'+j+'" placeholder="Jungler" name="ruolo-giocatore-'+j+'">'+
 				'<span class=" error ruolo"></span>'+
 				'</div>'+
 				
 				'<div class="field" class="form-label">'+
 				'<label for="nascita-giocatore-'+j+'" class="form-label">Data di Nascita</label>'+
-				'<input type="date" class="feedback-input" name="nascita-giocatore-'+j+'">'+
+				'<input type="date" class="feedback-input nascita-giocatore-'+j+'" name="nascita-giocatore-'+j+'">'+
 				'<span class=" error nascita"></span>'+
 				'</div>'+
 				
@@ -66,7 +100,7 @@ function creaSteps() {
 				
 				'<div class="field-btn">'+
 				'<input type="button" class="button-blue prevBtn'+j+'" onclick="cambiaPagina()" value="Prev">'+
-				'<input type="button" class="button-blue nextBtn'+j+'" onclick="cambiaPagina()" value="Next">'+
+				'<input type="button" class="button-blue nextBtn'+j+'" onclick="validateCampi('+j+')" value="Next">'+
 				'</div>'+
 				'</div>');
 			}
@@ -80,7 +114,7 @@ function creaSteps() {
 
 
 
-function cambiaPagina(){
+	function cambiaPagina(){
 	
 	var called = $(event.target).attr("class").replace(/\D/g,'');
 	if($(event.target).val()=="Prev"){
@@ -101,9 +135,9 @@ function cambiaPagina(){
 			
 			var xhr = new XMLHttpRequest();
 			if(called==0)
-				xhr.open('GET', '../SquadreControl?action=validateTeam&teamName='+$('.nome-squadra').val(), true);
+				xhr.open('GET', '../GiocatoreControl?action=validateTeam&teamName='+$('.nome-squadra').val(), true);
 			else
-				xhr.open('GET', '../SquadreControl?action=validatePlayer&nick='+$('.nickname-player-'+called).val(), true);
+				xhr.open('GET', '../GiocatoreControl?action=validatePlayer&nick='+$('.nickname-player-'+called).val(), true);
 
 			xhr.send();
 			
@@ -139,22 +173,82 @@ function cambiaPagina(){
 }
 
 
-function validateCampi(i){
+	function validateCampi(i){
 	var regGeneral="^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$"
 	
-	var nickname=$("nickname-player-"+i);
-	var nome=$("nome-giocatore-"+i);
-	var cognome=$("cognome-giocatore"+i);
-	
-	if(!nickname.val()){//Nickname non inserito
-		var error=nickname.next();
-		$('span').text("");
-		error.text("Inserisci un nickname");
-		console.log("nickname non inserito");
-		return false;
-	
-	}
+	if(i==0){ //Se sto validando i campi dell'inserimento della squadra
+		var nomesquadra=$('.nome-squadra');
+		var naz=$('.selected.nazioni');
+		if(!nomesquadra.val()){
 
+			var error=nomesquadra.next();
+			$('span').text("");
+			error.text("Inserisci un nome alla squadra");
+			console.log("Nome squadra non inserito");
+			return false;
+
+		}
+		else if(naz.text()=="Nazioni"){
+
+			var error=naz.next();
+			$('span').text("");
+			error.text("Inserisci una nazione");
+			console.log("Nome squadra non inserito");
+			return false;
+
+		} else{
+			cambiaPagina();
+		}
+
+		
+	} else{ //Se sto validando i campi dell'inserimento di un giocatore
+	
+	var nickname=$(".nickname-player-"+i);
+	var nome=$(".nome-giocatore-"+i);
+	var cognome=$(".cognome-giocatore"+i);
+	var ruolo=$('.ruolo-giocatore'+i);
+	var dataDiNascita=$();
+
+		if(!nickname.val()){//Nickname non inserito
+
+			var error=nickname.next();
+			$('span').text("");
+			error.text("Inserisci un nickname");
+			console.log("nickname non inserito");
+			return false;
+
+		} else if(!nome.val()){
+
+			var error=nome.next();
+			$('span').text("");
+			error.text("Inserisci un nome");
+			console.log("nome non inserito");
+			return false;
+
+		} else if(!cognome.val()){
+
+			var error=cognome.next();
+			$('span').text("");
+			error.text("Inserisci un cognome");
+			console.log("cognome non inserito");
+			return false;
+
+		} else if(!ruolo.val()){
+
+			var error=ruolo.next();
+			$('span').text("");
+			error.text("Inserisci un ruolo");
+			console.log("ruolo non inserito");
+			return false;
+
+		}
+		else{
+			cambiaPagina();
+		}
+
+	}
+	
+	
 
 
 	

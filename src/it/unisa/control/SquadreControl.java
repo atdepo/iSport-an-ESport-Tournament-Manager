@@ -95,78 +95,10 @@ public class SquadreControl extends HttpServlet {
 				e.printStackTrace();
 			}
 			
-			
 			break;
-		
-		case "validatePlayer":
-			String nick=request.getParameter("nick");
-			
-			try {
-				HttpSession sess= request.getSession();
-				ArrayList<String> errori= new ArrayList<String>();
-				if(pModel.doRetriveByKey(nick)!=null) {
-					errori.add("Nickname gia' utilizzato");
-					String json=gson.toJson(errori);
-					response.getWriter().print(json);
-					response.getWriter().flush();
-					response.setStatus(200);
-					System.out.println("problema nel controller!");
-				}
-				else {
-					errori.add("null");
-					String json=gson.toJson(errori);
-					response.getWriter().print(json);
-					response.getWriter().flush();
-					response.setStatus(200);
-					System.out.println("non ho avuto problemi nel controller!");
-				}
-			} catch (Exception e) {
-				e.printStackTrace();
-}
-		break;
-		
-		case "validateTeam":
-		
-			String name=request.getParameter("teamName");
-			
-			try {
-				HttpSession sess= request.getSession();
-				ArrayList<String> errori= new ArrayList<String>();
-				if(sqModel.doRetriveByKey(name)!=null) {
-					errori.add("Nome della squadra gia' utilizzato");
-					String json=gson.toJson(errori);
-					response.getWriter().print(json);
-					response.getWriter().flush();
-					response.setStatus(200);
-					System.out.println("problema nel controller!");
-				}
-				else {
-					errori.add("null");
-					String json=gson.toJson(errori);
-					response.getWriter().print(json);
-					response.getWriter().flush();
-					response.setStatus(200);
-					System.out.println("non ho avuto problemi nel controller!");
-				}
-
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-		
-			
-			
-			
-		break;
-		
-			
-			
-			
-		}
-		
-		
+		}	
 	}
 
-	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doGet(request, response);
 	}

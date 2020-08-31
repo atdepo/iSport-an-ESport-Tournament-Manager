@@ -147,7 +147,7 @@ public class TournamentControl extends HttpServlet {
 						response.setStatus(200);
 				}
 				else {
-					System.out.println("Il gioco non � stato indicato correttamente");
+					System.out.println("Il gioco non e' stato indicato correttamente");
 					response.setStatus(404);
 				}
 					

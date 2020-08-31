@@ -1,18 +1,6 @@
 <%@page import="java.util.Enumeration"%>
 <%@page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
-<%
-	String error=null;
-	String errorpage=null;
-	if(session.getAttribute("error")!=null && session.getAttribute("error-page")!=null){
-		error=(String)session.getAttribute("error");
-		errorpage=(String)session.getAttribute("error-page");
-}
-	
-	System.out.println("Gli errori sono "+error+" "+errorpage);
-
-%>
-
 <!DOCTYPE html>
 <html>
 
@@ -44,7 +32,7 @@
 			</div>
 		</div>
 			
-		<form action="#" method="post" id="the-form" enctype="multipart/form-data">
+		<form action="GiocatoreControl?action=totalValidate" method="post" id="the-form" enctype="multipart/form-data">
 		
 		<!--Pagina per la creazione della squadra, page 0 del multistep -->
 		<div class="page page-0 slidepage">
@@ -69,8 +57,8 @@
 			
 			<div class="field">
         		<label for="images-0" class="form-label">Immagine Squadra<br><small>La tua immagine deve essere massimo 150x150</small></label>
-   				<input type="file" name="images" id="images-0" required="required"> 
-
+   				<input type="file" name="images" onchange="checkImg(0)" id="images-0" required="required"> 
+				<span class="error-img"></span>
 			</div>	
 			
 			<div class="field-btn">
@@ -82,9 +70,6 @@
 
 		</form>
 </div>
-		
-		<input type="hidden" class="error" value="<%=error%>">
-		<input type="hidden" class="error-page" value="<%=errorpage%>">
 		
 	</div>
 

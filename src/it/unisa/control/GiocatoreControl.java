@@ -107,6 +107,13 @@ public class GiocatoreControl extends HttpServlet {
 			}
 			
 		break;
+		
+		case "totalValidate":
+			
+			
+			
+		break;
+    	
     	}
 	}
 

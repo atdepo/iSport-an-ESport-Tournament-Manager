@@ -22,16 +22,6 @@ $(document).ready(function(){
 
 })
 
-	
-$(function() {
-	$(".nextBtn1").click(function() {
-		alert("mammina");
-	});
-})
-
-	
-
-
 	function menu(k){
 	
 	$("#"+k).toggleClass("active");
@@ -92,12 +82,12 @@ $(function() {
 				'<div class="field" class="form-label">'+
 				'<label for="nascita-giocatore-'+j+'" class="form-label">Data di Nascita</label>'+
 				'<input type="date" class="feedback-input nascita-giocatore-'+j+'" name="nascita-giocatore-'+j+'">'+
-				'<span class=" error nascita"></span>'+
+				'<span class="error nascita"></span>'+
 				'</div>'+
 				
 				'<div class="field"><label for="images" class="form-label">Inserisci una immagine massimo 150x150</label>'+
-				'<input type="file" name="images" id="images-'+j+'>" required="required">'+
-				'<span class=" error img"></span>'+
+				'<input type="file" name="images" onchange="checkImg('+j+')" id="images-'+j+'>" required="required">'+
+				'<span class="error-img"></span>'+
 				'</div>'+
 				
 				'<div class="field-btn">'+
@@ -106,6 +96,7 @@ $(function() {
 				'</div>'+
 				'</div>');
 			}
+			form.append('<input type="hidden" name="numeroPartecipanti" value="'+parseInt(data)+'">')
 		}
 	}
 	
@@ -207,10 +198,14 @@ $(function() {
 	
 	var nickname=$(".nickname-player-"+i);
 	var nome=$(".nome-giocatore-"+i);
-	var cognome=$(".cognome-giocatore"+i);
-	var ruolo=$('.ruolo-giocatore'+i);
-	var dataDiNascita=$();
-
+	var cognome=$(".cognome-giocatore-"+i);
+	var ruolo=$('.ruolo-giocatore-'+i);
+	var dataDiNascita=$('.nascita-giocatore-'+i);
+	var birth= new Date(dataDiNascita.val());
+	var today= Date.now();
+	
+	
+	
 		if(!nickname.val()){//Nickname non inserito
 
 			var error=nickname.next();
@@ -243,19 +238,53 @@ $(function() {
 			console.log("ruolo non inserito");
 			return false;
 
+		} else if(Math.floor((today-birth)/(31557600000))<18){
+			var error=dataDiNascita.next();
+			$('span').text("");
+			error.text("Non sei maggiorenne!");
+			console.log("non sei maggiorenne");
+			return false;
 		}
 		else{
+			$('span').text("");
 			cambiaPagina();
 		}
-
 	}
-	
-	
-
-
-	
 }
 
+	 //Test per l'immagine 150x150
+	function checkImg(i) {
+		
+		var file = $(event.target)[0].files[0];
+		var img = new Image();
+		var imgwidth = 0;
+		var imgheight = 0;
+		var error=$(event.target).next();
+		
+		if(typeof file!==typeof undefined){
+			img.src = URL.createObjectURL(file);
+			img.onload=function(){
+			
+			imgwidth = this.width;
+			imgheight = this.height;
+			
+			if(imgwidth > parseInt(150) && imgheight > parseInt(150)){
+				error.text("Inserisci un'immagine di massimo 150x150"); 
+				$(".nextBtn"+i).prop('disabled', true);
+			}
+			else{
+				error.text(""); 
+				$(".nextBtn"+i).prop('disabled', false);
+			}
+		}
+		
+		} else{
+			error.text("");
+			$(".nextBtn"+i).prop('disabled', false);
+			return true;
+		}
+	} 
+	
 
 $(function(){
 	  $('#upload').change(function(){

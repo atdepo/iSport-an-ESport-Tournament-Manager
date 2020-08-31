@@ -50,7 +50,7 @@
 			{error.text("");$(".signup").prop('disabled', false);return true;}
 			} 
 	
-	 $(function() {
+	$(function() {
 		 $(".immagine").change(checkImg);
 		
 	})

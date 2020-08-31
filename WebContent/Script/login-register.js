@@ -23,6 +23,27 @@
 		
 	});
 	
+	 //Test per l'immagine 150x150
+	 
+	 $(function() {
+		 $(".immagine").change(function() {
+			var file = $(this)[0].files[0];
+			var img=new Image();
+			var imgwidth = 0;
+			var imgheight = 0;
+			img.src = _URL.createObjectURL(file);
+			img.onload=function(){
+			
+			alert("EIO");
+			imgwidth = this.width;
+			imgheight = this.height;
+			alert(imgwidth);
+			alert(imgheight);
+			
+			}	
+				});
+		
+	})
 	
 	//Questa funzione aggiunge un listener al form che controlla se la mail è stata inserita correttamente
 	$(function(){

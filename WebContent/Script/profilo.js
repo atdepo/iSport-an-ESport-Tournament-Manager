@@ -26,7 +26,7 @@ xhr.open('GET', '../UserControl?action=getMieiTornei', true);
 xhr.send();
  })
  
- 
+
  
  function confermaMod(){
 	 var uNome=$('#UtenteName').val();

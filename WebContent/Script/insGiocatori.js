@@ -1,15 +1,12 @@
 
 $(document).ready(function(){
 	creaSteps();
-
+	$(".nextBtn1").click(function() {
+		alert("mammina");
+	});
 })
 
 	
-$(function() {
-	$(".nextBtn1").click(function() {
-		alert("mammina");
-	})
-	});
 
 function creaSteps() {
 	var xhr = new XMLHttpRequest();

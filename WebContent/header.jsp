@@ -14,15 +14,15 @@
 <!DOCTYPE html>
 <html>
 <head>
-<script src = "https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script src = "<%=request.getContextPath()+"/Script/header.js"%>"></script>
-<link rel="stylesheet" href="<%=request.getContextPath()+"/CSS/header.css"%>" type="text/css">
-<link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
-<script src="https://kit.fontawesome.com/9e043e54f0.js" crossorigin="anonymous"></script>
-<style type="text/css">.logo:hover{cursor:pointer;}</style>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-
+	<script src = "https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<script src = "<%=request.getContextPath()+"/Script/header.js"%>"></script>
+	<link rel="stylesheet" href="<%=request.getContextPath()+"/CSS/header.css"%>" type="text/css">
+	<link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+	<script src="https://kit.fontawesome.com/9e043e54f0.js" crossorigin="anonymous"></script>
+	<style type="text/css">.logo:hover{cursor:pointer;}</style>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>i-Sport</title>
 </head>
 
 <body>

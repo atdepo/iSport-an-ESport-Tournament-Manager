@@ -24,7 +24,6 @@
 <script src="https://kit.fontawesome.com/a076d05399.js"></script>
 
 <meta charset="UTF-8">
-<title>Inserimento Squadre</title>
 <link rel="stylesheet" href="../CSS/giocatori.css" type="text/css">
 
 

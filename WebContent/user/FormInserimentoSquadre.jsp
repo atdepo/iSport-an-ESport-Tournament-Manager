@@ -8,7 +8,6 @@
 
 <head>
 <meta charset="UTF-8">
-<title>Montefusco pupù</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="../Script/squadre.js"></script>
 
@@ -22,9 +21,14 @@
 		color:#45A29E;
 		background:url(../img/black-gradient.png) repeat;
 	}
-	
+	.contenitore{
+		text-align:-webkit-center;
+	}
 	h2{ 
-		text-align: center;
+		text-align: -webkit-center;
+	}
+	label{
+		font-size:20px;
 	}		
 	.flex-container{
 		display:flex;
@@ -40,7 +44,7 @@
 		margin-left:10px;
 	}
 	.contieniBottoni{
-		margin-left:10px;
+		
 	}
 }
 
@@ -52,7 +56,7 @@
 	<div class="squadra">
 		<h2>Ora aggiungi le squadre per <%=session.getAttribute("nomeTorneo") %></h2><br>
 		
-		<div class="papino">
+		<div class="contenitore">
 		<div class="contieniBottoni">
 			
 			<input type="radio" id="esistente" class="sel bt1" value="Aggiungi squadra esistente" name="sel" onchange="cambiaTipo()">

@@ -1,7 +1,7 @@
 @charset "UTF-8";
 
 body{
-	color:#45A29E;
+	color:#0082e6;
 	background:url(../img/black-gradient.png) repeat;
 }
 
@@ -14,8 +14,8 @@ i:hover{
 	border: #0088FF solid 4px;
 	border-radius: 11px;
 	cursor:pointer;
-	background-color: #5DEFB9;;
-	color:white;
+	background-color: #5DEFB9;
+	color:#0082e6;
 	font-size:14px;
 	padding-bottom:13px;
 	padding-top:10px;
@@ -32,6 +32,7 @@ i:hover{
 }
 h1{
 	text-align: center;
+	padding-top: 10px;
 }
 
 h2{
@@ -40,6 +41,17 @@ h2{
 }
 h3{
     display: inline;
+}
+.tornei{
+	border-style:solid;
+	padding-bottom:4px;
+	border-color:cadetblue;
+	margin-bottom: 5px;
+}
+img{
+	border-style: outset;
+    border-color: #0082e6;
+    border-width: 10px;
 }
 .dati{
 	

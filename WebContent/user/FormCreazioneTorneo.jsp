@@ -26,8 +26,6 @@
 
 <meta charset="UTF-8">
 
-<title>Crea il tuo Torneo</title>
-
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="../Script/mode.js"></script>
 <script src="../Script/button-input.js"></script>

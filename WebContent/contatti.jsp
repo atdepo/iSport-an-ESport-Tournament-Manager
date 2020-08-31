@@ -4,31 +4,31 @@
 <html>
 <head>
 <style type="text/css">
-body{
-	color:#45A29E;
-	background:url(img/black-gradient.png) repeat;
-}
+	body{
+		color:#45A29E;
+		background:url(img/black-gradient.png) repeat;
+	}
 
-h2{
-	text-align:center;
-	padding-top:1%;
-}
+	h2{
+		text-align:center;
+		padding-top:1%;
+	}
 
-p{
-	display:inline-block;
-}
+	p{
+		display:inline-block;
+	}
 
-p.nome{
-	font-size: 20px;
-}
+	p.nome{
+		font-size: 20px;
+	}	
 
-.link:hover{		
+	.link:hover{		
 		background-color:gray;
-  }
-a{
-	color:lime;
-	padding-left:1%;
-}
+  	}
+	a{
+		color:lime;
+		padding-left:1%;
+	}
 </style>
 
 	<meta charset="UTF-8">

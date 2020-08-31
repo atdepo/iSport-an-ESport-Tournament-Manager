@@ -200,6 +200,11 @@ public class LoginAndRegisterControl extends HttpServlet {
 					
 					UtenteBean utente=userModel.doRetriveByKey(request.getParameter("email")); //Prendo il bean dal database che è identificato univocamente tramite la mail
 					session.setAttribute("user", utente); //Inserisco l'utente correttamente loggato in sessione
+					
+					//Setto gli errori a null
+					session.setAttribute("error-type", null); 
+					session.setAttribute("error", null);
+					session.setAttribute("error-location", null);
 					response.sendRedirect("index.jsp"); //Reindirizzo l'utente loggato alla pagina iniziale dove potrà svolgere tutte le attività consentite da utente
 					
 				} else {//Se le due password non coincidono

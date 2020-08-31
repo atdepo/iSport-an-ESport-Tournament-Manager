@@ -19,10 +19,7 @@ $(function() {
 })
 
 $(document).ready(function() {
-	
-	
 
-	
 	var xhr = new XMLHttpRequest();
 	xhr.onreadystatechange = function() {
 
@@ -41,7 +38,7 @@ $(document).ready(function() {
 			
 			//Questa funzione riempie la tendina dei giochi 
 			for (var i = 0; i < dataGiochi.length; i++) {
-					var nome = dataGiochi[i].nomeGioco.replace(/\s/g, '');//Questa variabile è stata creata per non assegnare calssi multiple ad un tag.
+					var nome = dataGiochi[i].nomeGioco.replace(/\s/g, '');//Questa variabile è stata creata per non assegnare classi multiple ad un tag.
 																		  //Es. Desideriamo avere una classe singola "LeagueofLegends" che tre classi "League of Legends"
 					
 					game.append('<div class="option"><input name="gioco" value="'+dataGiochi[i].nomeGioco+'" onclick="tendina(\''+nome+'\')" type="radio" class="radio" id="'+nome+'"> <label for="'+nome+'">'+dataGiochi[i].nomeGioco+'</label></div>');

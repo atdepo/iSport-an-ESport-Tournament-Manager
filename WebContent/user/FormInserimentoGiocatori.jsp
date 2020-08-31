@@ -21,11 +21,12 @@
 <script src = "https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script type="text/javascript" src="../Script/insGiocatori.js"></script>
 <script src="../Script/button-input.js"></script>
+
 <script src="https://kit.fontawesome.com/a076d05399.js"></script>
 
 <meta charset="UTF-8">
-<title>Inserimento Squadre</title>
 <link rel="stylesheet" href="../CSS/giocatori.css" type="text/css">
+<link rel="stylesheet" href="../CSS/Tendina.css" type="text/css"> 
 
 
 </head>
@@ -54,8 +55,16 @@
 			</div>	
 			
 			<div class="field">
-				<label for="nazionalita" class="form-label">Nazionalità</label><!-- Qua ci va una tendina -->
-				<input type="text" class="feedback-input nazionalita" placeholder="Inserisci la nazionalità" name="nazionalita">
+				
+			<div class="container nazioni">
+			
+				<div class="select-box">
+					<div class="options-container" id="nazioni"></div>
+					<div class="selected nazioni" onclick="menu('nazioni')">Nazioni</div>
+					<span class="error-nazione-0"></span>
+				</div>
+			</div>
+			
 			</div>
 			
 			<div class="field">
@@ -65,7 +74,7 @@
 			</div>	
 			
 			<div class="field-btn">
-				<input type="button" class="button-blue nextBtn0" onclick="cambiaPagina()" value="Next">
+				<input type="button" class="button-blue nextBtn0" onclick="validateCampi(0)" value="Next">
 				
 			</div>
 		</div>

@@ -30,12 +30,7 @@ import it.unisa.model.torneo.TournamentBean;
 public class UserControl extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	TournamentModel tModel = new TournamentModel();
-	StrutturaModel sModel = new StrutturaModel();
 	GiocoModel gModel = new GiocoModel();
-	TecnicoModel tecModel = new TecnicoModel();
-	ModalitaModel modModel = new ModalitaModel();
-	SquadraModel sqModel= new SquadraModel();
-	SponsorModel spModel= new SponsorModel();
 	UtenteModel userModel= new UtenteModel();
 
     public UserControl() {

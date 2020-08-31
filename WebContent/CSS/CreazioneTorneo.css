@@ -208,6 +208,9 @@ input:hover, input:focus{
 	padding:49%;
 	text-align:center;
 }
+.btn{
+	overflow:hidden;
+}
 
 .button-blue{
 	font-family: 'Montserrat', Arial, Helvetica, sans-serif;

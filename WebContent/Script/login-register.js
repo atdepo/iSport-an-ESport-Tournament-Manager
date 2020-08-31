@@ -24,24 +24,34 @@
 	});
 	
 	 //Test per l'immagine 150x150
-	 
+	function checkImg() {
+		var file = $(this)[0].files[0];
+		var img=new Image();
+		var imgwidth = 0;
+		var imgheight = 0;
+		var error=$(".immagine").next();
+		if(typeof file!==typeof undefined){
+		img.src = URL.createObjectURL(file);
+		img.onload=function(){
+		
+		imgwidth = this.width;
+		imgheight = this.height;
+		if(imgwidth>parseInt(150)&&imgheight>parseInt(150)){
+			error.text("Inserisci un'immagine di massimo 150x150"); 
+			$(".signup").prop('disabled', true);
+			}
+		else {
+			error.text(""); 
+			$(".signup").prop('disabled', false);
+			}
+		}
+		
+		}else
+			{error.text("");$(".signup").prop('disabled', false);return true;}
+			} 
+	
 	 $(function() {
-		 $(".immagine").change(function() {
-			var file = $(this)[0].files[0];
-			var img=new Image();
-			var imgwidth = 0;
-			var imgheight = 0;
-			img.src = _URL.createObjectURL(file);
-			img.onload=function(){
-			
-			alert("EIO");
-			imgwidth = this.width;
-			imgheight = this.height;
-			alert(imgwidth);
-			alert(imgheight);
-			
-			}	
-				});
+		 $(".immagine").change(checkImg);
 		
 	})
 	

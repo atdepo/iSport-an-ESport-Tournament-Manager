@@ -18,7 +18,7 @@
 
 <style>
 	body{
-		color:#45A29E;
+		color:#0082e6;
 		background:url(../img/black-gradient.png) repeat;
 	}
 	.contenitore{
@@ -26,6 +26,7 @@
 	}
 	h2{ 
 		text-align: -webkit-center;
+		margin-top:10px;
 	}
 	label{
 		font-size:20px;
@@ -42,13 +43,15 @@
 	}
 	input[type="button"]{
 		margin-left:10px;
+		height:25px;
 	}
-	.contieniBottoni{
-		
+	.radioLabel{
+		overflow:hidden;
 	}
 }
 
 </style>	
+<link rel="stylesheet" type="text/css" href="../CSS/2RadioButton.css">
 </head>
 
 <body>
@@ -59,10 +62,10 @@
 		<div class="contenitore">
 		<div class="contieniBottoni">
 			
-			<input type="radio" id="esistente" class="sel bt1" value="Aggiungi squadra esistente" name="sel" onchange="cambiaTipo()">
-			<label class="radioLabel" for="esistente">Esistente</label>
-			<input type="radio" id="nuova" checked class="sel bt2" value="Aggiungi una nuova squadra"  name="sel" onchange="cambiaTipo()">
-			<label class="radioLabel" for="nuova">Nuova</label>
+			<input type="radio" id="esistente" class="sel toggle toggle-left bt1" value="Aggiungi squadra esistente" name="sel" onchange="cambiaTipo()">
+			<label class="radioLabel btn" for="esistente">Esistente</label>
+			<input type="radio" id="nuova" checked class="sel toggle toggle-right bt2" value="Aggiungi una nuova squadra"  name="sel" onchange="cambiaTipo()">
+			<label class="radioLabel btn" for="nuova">Nuova</label>
 			</div>
 			
 			<div class="squadreEsistenti"></div>

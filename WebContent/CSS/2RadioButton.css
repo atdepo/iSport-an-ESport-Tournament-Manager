@@ -20,7 +20,7 @@ input[type="radio"].toggle + label {
 }
 input[type="radio"].toggle + label:hover {
   background: none;
-  color: #1a1a1a;
+  color: lime;
 }
 input[type="radio"].toggle + label:after {
   background: #1a1a1a;

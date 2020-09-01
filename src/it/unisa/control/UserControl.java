@@ -16,6 +16,7 @@ import com.google.gson.Gson;
 import it.unisa.model.gioco.GiocoModel;
 import it.unisa.model.modalita.ModalitaModel;
 import it.unisa.model.sponsor.SponsorModel;
+import it.unisa.model.squadra.SquadraBean;
 import it.unisa.model.squadra.SquadraModel;
 import it.unisa.model.struttura.StrutturaModel;
 import it.unisa.model.tecnico.TecnicoModel;
@@ -32,7 +33,7 @@ public class UserControl extends HttpServlet {
 	TournamentModel tModel = new TournamentModel();
 	GiocoModel gModel = new GiocoModel();
 	UtenteModel userModel= new UtenteModel();
-
+	
     public UserControl() {
         super();
     }
@@ -65,6 +66,25 @@ public class UserControl extends HttpServlet {
 		break;
 		
 		
+		case "getGiocatoreFromSquadra":
+		
+		break;
+		
+		
+		case "getSquadreFromTorneo":
+			response.setContentType("application/json");
+			response.setCharacterEncoding("UTF-8");
+			
+			int codTorneo=Integer.parseInt(request.getParameter("codTorneo"));
+			
+			ArrayList<SquadraBean> squadre=(ArrayList<SquadraBean>) userModel.getSquadreFromTornei(codTorneo);
+			String squadra=gson.toJson(squadre);
+			System.out.println("Ciao questi sono le squadre del torneo");
+			response.getWriter().print(squadra);
+			response.getWriter().flush();
+			response.setStatus(200);
+			
+			break;
 		case "change":
 			String cosa=request.getParameter("cosa");
 			UtenteBean utente=(UtenteBean)session.getAttribute("user");

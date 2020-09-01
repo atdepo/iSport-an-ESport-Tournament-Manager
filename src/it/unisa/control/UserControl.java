@@ -18,6 +18,8 @@ import it.unisa.model.modalita.ModalitaModel;
 import it.unisa.model.sponsor.SponsorModel;
 import it.unisa.model.squadra.SquadraBean;
 import it.unisa.model.squadra.SquadraModel;
+import it.unisa.model.struttura.KeyStruttura;
+import it.unisa.model.struttura.StrutturaBean;
 import it.unisa.model.struttura.StrutturaModel;
 import it.unisa.model.tecnico.TecnicoModel;
 import it.unisa.model.torneo.TournamentModel;
@@ -33,7 +35,8 @@ public class UserControl extends HttpServlet {
 	TournamentModel tModel = new TournamentModel();
 	GiocoModel gModel = new GiocoModel();
 	UtenteModel userModel= new UtenteModel();
-	
+	StrutturaModel sModel= new StrutturaModel();
+
     public UserControl() {
         super();
     }
@@ -54,7 +57,14 @@ public class UserControl extends HttpServlet {
 			String email=user.getEmail();
 			String torneo="";
 			ArrayList<TournamentBean> tornei = (ArrayList<TournamentBean>) tModel.doRetriveByUser(email);
-			torneo=gson.toJson(tornei);
+			ArrayList<String>strutture=new ArrayList<String>();
+			for(TournamentBean t:tornei) {
+				strutture.add(sModel.doRetriveByKey(new KeyStruttura(String.valueOf(t.getCAPStruttura()), t.getIndirizzoStruttura())).getNome());
+			}
+			ArrayList<ArrayList<?>>tutto=new ArrayList<ArrayList<?>>();
+			tutto.add(tornei);
+			tutto.add(strutture);
+			torneo=gson.toJson(tutto);
 			System.out.println("ciao mamma, questi sono i miei tornei");
 			response.getWriter().print(torneo);
 			response.getWriter().flush();
@@ -104,9 +114,9 @@ public class UserControl extends HttpServlet {
 				
 				//----------------Controllo username--------------------//
 				if (userModel.doRetriveByKey(request.getParameter("username")) != null) {
-					System.out.println("guarda che sto user è stato usato");
+					System.out.println("guarda che sto user ï¿½ stato usato");
 					session.setAttribute("error-type", "username");
-					session.setAttribute("error", "Quest'username è stato utilizzato");
+					session.setAttribute("error", "Quest'username ï¿½ stato utilizzato");
 					session.setAttribute("error-location", "signup");
 					response.sendRedirect(request.getContextPath()+"/FormLoginAndRegister.jsp");
 					return;

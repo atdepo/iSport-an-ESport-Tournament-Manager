@@ -10,7 +10,7 @@ i:hover{
 }
 .button-blue{
 	font-family: 'Montserrat', Arial, Helvetica, sans-serif;
-	width: 40%;
+	width: 50%;
 	border: #0088FF solid 4px;
 	border-radius: 11px;
 	cursor:pointer;
@@ -24,6 +24,7 @@ i:hover{
 	transition: all 0.3s;
   	font-weight:700;
   	margin-top: 10px;
+  	margin-left:10px;
 }
 
 .button-blue:hover{
@@ -45,31 +46,21 @@ h3{
 .tornei{
 	border-style:solid;
 	padding-bottom:4px;
-	border-color:cadetblue;
+	width: 100%;
+}
+.torneo{
 	margin-bottom: 5px;
-}
-img{
-	border-style: outset;
-    border-color: #0082e6;
-    border-width: 10px;
-}
-.dati{
-	
 }
 .testlabel{
 	display:block;
-}
-th{
-	margin-left:200px;
-}
-table{
-	width:100%;
+	margin-left:10px;
 }
 .tuttecose{
 	font-size:20px;
 }
+
 input[type="text"]{
-	width:40%;
+	width:98%;
 	color:#3c3c3c;
 	font-family: 'Montserrat', Arial, Helvetica, sans-serif;
 	font-size: 20px;
@@ -84,9 +75,39 @@ input[type="text"]{
 .immagine{
 	width:150px;
 	height:150px;
-	margin-left:40%;
+	margin-top:10px;
+	position:relative; 
+}
+img{
+	border-style: solid;
+}
+.top{
+	display:flex;
+	margin-bottom:10px;
+	margin-left:10px;
+}
+.usernameP{
+	width: 100%;
+	font-size:36px;
 	position:relative;
-	background-color:white; 
+	margin-top:60px;
+	left:2%;
+}
+.bottom{
+	display: flex;
+	margin-top:15px;
+}
+.dati{
+	width: 50%;
+}
+.field{
+	width:100%;
+}
+#images-0{
+	margin-left:10px;
+}
+.misure{
+	font-size:12px;
 }
 @media (max-width: 600px) {
 	 table {

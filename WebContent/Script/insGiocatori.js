@@ -48,7 +48,7 @@ $(document).ready(function(){
 			var multi=$(".multi-steps");
 			var form=$("#the-form");
 			
-			for(var j=1;j<=parseInt(data);j++){	//For per gli indicatori del multistep
+			for(var j=1;j<parseInt(data);j++){	//For per gli indicatori del multistep
 				
 				multi.append('<li id="'+j+'-step">Giocatore '+j+'</li>')
 			
@@ -96,6 +96,54 @@ $(document).ready(function(){
 				'</div>'+
 				'</div>');
 			}
+			
+			multi.append('<li id="'+parseInt(data)+'-step">Giocatore '+parseInt(data)+'</li>')
+			
+			form.append('<div class="page page-'+parseInt(data)+'">'+
+
+			'<div class="field">'+
+
+			'<label for="nickname-player-'+parseInt(data)+'" class="form-label">Nickname</label>'+
+			'<input type="text" class="feedback-input nickname-player-'+parseInt(data)+'" placeholder="SuperMario64" name="nickname-player-'+parseInt(data)+'">'+
+			'<span class="error nick"></span>'+
+			'</div>'+
+			
+			'<div class="field">'+
+			'<label for="nome-giocatore-'+parseInt(data)+'" class="form-label">Nome</label>'+
+			'<input type="text" class="feedback-input nome-giocatore-'+parseInt(data)+'" placeholder="Mario" name="nome-giocatore-'+parseInt(data)+'">'+
+			'<span class=" error nome"></span>'+
+			'</div>'+
+			
+			'<div class="field">'+
+			'<label for="cognome-giocatore-'+parseInt(data)+'" class="form-label">Cognome</label>'+
+			'<input type="text" class="feedback-input cognome-giocatore-'+parseInt(data)+'" placeholder="Rossi" name="cognome-giocatore-'+parseInt(data)+'">'+
+			'<span class=" error cognome"></span>'+
+			'</div>'+
+			
+			'<div class="field">'+
+			'<label for="ruolo-giocatore-'+parseInt(data)+'" class="form-label">Ruolo</label>'+
+			'<input type="text" class="feedback-input ruolo-giocatore-'+parseInt(data)+'" placeholder="Jungler" name="ruolo-giocatore-'+parseInt(data)+'">'+
+			'<span class=" error ruolo"></span>'+
+			'</div>'+
+			
+			'<div class="field" class="form-label">'+
+			'<label for="nascita-giocatore-'+parseInt(data)+'" class="form-label">Data di Nascita</label>'+
+			'<input type="date" class="feedback-input nascita-giocatore-'+parseInt(data)+'" name="nascita-giocatore-'+parseInt(data)+'">'+
+			'<span class="error nascita"></span>'+
+			'</div>'+
+			
+			'<div class="field"><label for="images" class="form-label">Inserisci una immagine massimo 150x150</label>'+
+			'<input type="file" name="images" onchange="checkImg('+parseInt(data)+')" id="images-'+parseInt(data)+'>" required="required">'+
+			'<span class="error-img"></span>'+
+			'</div>'+
+			
+			'<div class="field-btn">'+
+			'<input type="submit" class="button-blue submitbtn" onclick="submitForm()" value="Submit">'+
+			'</div>'+
+			'</div>');
+			
+			
+			
 			form.append('<input type="hidden" name="numeroPartecipanti" value="'+parseInt(data)+'">')
 		}
 	}
@@ -251,6 +299,14 @@ $(document).ready(function(){
 		}
 	}
 }
+	
+	
+	function submitForm(){
+		
+		$('#the-form').submit();
+	}
+	
+	
 
 	 //Test per l'immagine 150x150
 	function checkImg(i) {

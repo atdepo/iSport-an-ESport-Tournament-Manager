@@ -38,7 +38,7 @@
 		<div class="page page-0 slidepage">
 			<div class="field">
 				<label for="nome-squadra" class="form-label">Nome</label>
-				<input type="text" class="feedback-input nome-squadra" placeholder="Inserisci il nome della Squadra" class="nome-squadra">
+				<input type="text" class="feedback-input nome-squadra" placeholder="Inserisci il nome della Squadra" name="nome-squadra">
 				<span class="error-name-0"></span>
 			</div>	
 			

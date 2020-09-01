@@ -7,7 +7,7 @@
 <title>Error 401</title>
 <style >
 	body{
-		background:url(img/ErrorBackground401.jpg)no-repeat;
+		background:url(<%=request.getContextPath()+"/img/ErrorBackground401.jpg"%>)no-repeat;
  		background-color:#d6f3f1;   		
 	}
 </style>

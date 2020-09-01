@@ -4,10 +4,10 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Error 401</title>
+<title>Error 404</title>
 <style >
 	body{
-		background:url(img/ErrorBackground.png)no-repeat;
+		background:url(<%=request.getContextPath()+"/img/ErrorBackground404.png"%>)no-repeat;
  		background-color:#d6f3f1; 
  
   		

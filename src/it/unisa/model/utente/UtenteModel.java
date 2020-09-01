@@ -14,6 +14,7 @@ import java.util.Collection;
 
 import it.unisa.model.ModelInterface;
 import it.unisa.model.connessione.DriverManagerConnectionPool;
+import it.unisa.model.squadra.SquadraBean;
 import it.unisa.model.utente.UtenteBean.Tipo;
 
 public class UtenteModel implements ModelInterface<UtenteBean, String>{
@@ -70,6 +71,33 @@ public class UtenteModel implements ModelInterface<UtenteBean, String>{
 	
 	
 
+public Collection<SquadraBean> getSquadreFromTornei(int codTorneo) {
+	PreparedStatement statement = null;
+	
+	String sql="select s.nome,s.nazionalita,s.imgsquadra from torneo as t, composto as c ,squadra as s where t.codice=? and c.CodTorneo=t.codice and c.codsquadra=s.nome";
+	ArrayList<SquadraBean> collection=new ArrayList<SquadraBean>();
+	try (Connection con = DriverManagerConnectionPool.getConnection()) {
+		statement=con.prepareStatement(sql);
+		statement.setInt(1,codTorneo);
+		
+		System.out.println("getSquadreFromTornei="+statement.toString());
+		ResultSet rs=statement.executeQuery();
+		while(rs.next()) {
+			SquadraBean bean = new SquadraBean();
+			bean.setNazionalita(rs.getString("nazionalita"));
+			bean.setNome(rs.getString("nome"));
+			bean.setTeamImage(rs.getString("imgsquadra"));
+			
+			collection.add(bean);
+		}
+		return collection;
+	} catch (SQLException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+		return null;
+	}
+}
+	
 	@Override
 	/**
 	 * Questo metodo deve essere utilizzato specificando il tipo di utente da prelevare =utente|tecnico|admin
@@ -153,6 +181,7 @@ public class UtenteModel implements ModelInterface<UtenteBean, String>{
 			}
 		}
 		
+	
 	
 
 	@Override

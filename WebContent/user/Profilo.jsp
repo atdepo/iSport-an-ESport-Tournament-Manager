@@ -31,77 +31,64 @@ System.out.println("type "+type);
 	
 			
 		<div class=tuttecose>
-			<table>
-			<tr>
-			<th>
-				<div class=immagine>
+			<div class="top">
+				<div class="immagine">
 					<img src="<%=utente.getImg() %>" class="profile-picture">
 				</div>
-			</th>
-			
-			<th>
 			<!-- Dati dell'utente modificabili -->
-		<div class="dati">
-		
-			<div class="field">
-				<label for="Nome" class="testlabel">Username</label>
-				<input type="text" id="username"   value="<%=utente.getUsername() %>" name="username">
-				<span class="error"><%if(type.equals("username")){ %><%=error%><%}%></span>
-				
+				<div class="usernameP">
+					<label class="nome"><%=utente.getUsername() %></label>
+				</div>
 			</div>
 			
 			
-				<div class="field">
-					<label for="mail" class="testlabel">E-Mail</label>
-					<input type="text" id="email"  value="<%=utente.getEmail() %>" name="email">
-				<span class="error"><%if(type.equals("email")){ %><%=error%><%}%></span>
-				</div>
-			
-				<div class="field">
-					<label for="iva" class="testlabel">Partita IVA</label>
-					<input type="text" id="iva"   value="<%=utente.getpIVA()%>" name="pIVA">
-					<span class="error"></span>
-				</div>
-			<input type="button" class="button-blue" value="Conferma le modifiche" onclick="confermaMod()">	
-		</div>
-		
-		
-		<div class="passWord">
-				<div class="field">
-					<label for="mail" class="testlabel">Vecchia Password</label>
-					<input type="text" id="vecchia" name="vecchiaPsw">
-					
-				</div>
-				<div class="field">
-					<label for="mail" class="testlabel">Password</label>
-					<input type="text" id="nuova"  name="nuovaPsw">
-					
-			</div>
-		</div>
-			
-			
-   			
-			
-			</th>
-			</tr>
-			<tr>
-			<th>
-				
-			</th>
-			</tr>
-			<tr>
-			<th>
 			<div class="field">
 				<div class="form-group file-area">
-        		<label for="images" class="testlabel">Cambia immagine <br><span> La tua immagine deve essere 150x150</span></label>
-   			 	<input type="file" name="images" id="images-0" required="required" />
+        			<label for="images" class="testlabel">Cambia immagine <span class="misure"> La tua immagine deve essere 150x150</span></label>
+   			 		<input type="file" name="images" id="images-0" required="required" />
    				</div>
    			</div>
-   			</th>
-			</tr>
-			</table>
-			<h1>I TUOI TORNEI</h1>
-			<div id="mieiTornei"></div>
+   			<div class="bottom">
+				<div class="dati">
+					<div class="field">
+						<label for="username" class="testlabel">Username</label>
+						<input type="text" id="username"   value="<%=utente.getUsername() %>" name="username">
+						<span class="error"><%if(type.equals("username")){ %><%=error%><%}%></span>	
+					</div>
+					
+					<div class="field">
+						<label for="mail" class="testlabel">E-Mail</label>
+						<input type="text" id="email"  value="<%=utente.getEmail() %>" name="email">
+						<span class="error"><%if(type.equals("email")){ %><%=error%><%}%></span>
+					</div>
+			
+					<div class="field">
+						<label for="iva" class="testlabel">Partita IVA</label>
+						<input type="text" id="iva"   value="<%=utente.getpIVA()%>" name="pIVA">
+						<span class="error"></span>
+					</div>
+					
+					<input type="button" class="button-blue" value="Conferma le modifiche" onclick="confermaMod()">	
+
+
+					<div class="passWord">
+						<div class="field">
+							<label for="mail" class="testlabel">Vecchia Password</label>
+							<input type="text" id="vecchia" name="vecchiaPsw">
+						</div>
+						
+						<div class="field">
+							<label for="mail" class="testlabel">Password</label>
+							<input type="text" id="nuova"  name="nuovaPsw">
+						</div>
+					</div>
+				</div>
+		
+				<div class="tornei">
+   					<h1>I TUOI TORNEI</h1>
+					<div id="mieiTornei"></div>
+				</div>
+			</div>
 		</div>
 		
 		
@@ -110,7 +97,6 @@ System.out.println("type "+type);
 		<input type="hidden" id="UtenteEmail" value="<%=utente.getEmail() %>">
 		<input type="hidden" id="UtenteIVA" value="<%=utente.getpIVA()%>">
 		
-			
 </body>
 </html>
 

@@ -95,6 +95,10 @@ public class UserControl extends HttpServlet {
 			response.setStatus(200);
 			
 			break;
+		
+		case "init":
+			
+			break;
 		case "change":
 			String cosa=request.getParameter("cosa");
 			UtenteBean utente=(UtenteBean)session.getAttribute("user");

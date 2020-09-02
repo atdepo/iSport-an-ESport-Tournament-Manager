@@ -99,10 +99,9 @@ public class UserControl extends HttpServlet {
 			break;
 		
 		case "visualizza":
-			response.setContentType("text/html");
-			response.setCharacterEncoding("UTF-8");
+			System.out.println("entro in visualizza");
 			session.setAttribute("cod",request.getParameter("codtorneo"));
-			response.sendRedirect(request.getContextPath()+"/index.jsp");
+			response.sendRedirect(request.getContextPath()+"/torneo.jsp");
 			
 		break;
 		

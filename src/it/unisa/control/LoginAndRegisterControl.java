@@ -52,7 +52,7 @@ public class LoginAndRegisterControl extends HttpServlet {
 		String regUser="^[A-Za-z0-9_-]{0,30}$";
 		String regIva="^[0-9]{11}$";
 		String regPsw="^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$";
-		
+		String regMail="^(([^<>()\\[\\]\\\\.,;:\\s@\"]+(\\.[^<>()\\[\\]\\\\.,;:\\s@\"]+)*)|(\".+\"))@((\\[[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}])|(([a-zA-Z\\-0-9]+\\.)+[a-zA-Z]{2,}))$";
 		String action = request.getParameter("action");
 		
 		if(action==null) {
@@ -99,7 +99,7 @@ public class LoginAndRegisterControl extends HttpServlet {
 					//Di seguito ci sono vari controlli sui campi inseriti in fase di registrazione
 					//(controllati nel caso javascript sia disattivato così da evitiare l'inserimento di dati erronei)
 					
-					else if(!request.getParameter("email").matches(regEmail)) {
+					else if(!request.getParameter("email").matches(regMail)) {
 						System.out.println("mi fermo alla mail");
 						session.setAttribute("error-type", "email");
 						session.setAttribute("error", "La mail non è scritta correttamente");

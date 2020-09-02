@@ -22,7 +22,7 @@ import it.unisa.model.messaggio.MessaggioModel;
 public class MessaggiControl extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        Gson gson= new Gson();
-       MessaggioModel mModel;
+       MessaggioModel mModel=new MessaggioModel();
     /**
      * @see HttpServlet#HttpServlet()
      */

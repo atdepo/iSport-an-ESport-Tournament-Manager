@@ -1,13 +1,17 @@
 $(document).ready(function() {
 	getMessaggi();
 	
-	var check=$(".check");
-	check.click(function() {
-		delMessaggi(check.attr("id"));
-	})
+	
 });
 
-
+$(function(){
+	var check=$("i");
+	alert(check.hasClass('fa-check'));
+	check.click(function() {
+		alert("gesù")
+		delMessaggi(check.attr("id"));
+	})
+})
 
 function getMessaggi() {
 	var xhr = new XMLHttpRequest();
@@ -34,7 +38,7 @@ function getMessaggi() {
 
 function delMessaggi(cod){
 	var xhr = new XMLHttpRequest();
-	xhr.open('GET', 'MessaggiControl?action=delMessaggi&codice=cod', true);
+	xhr.open('GET', 'MessaggiControl?action=delMessaggi&codice='+cod, true);
 	xhr.send();
 	}
 		
@@ -44,8 +48,10 @@ function showMessage(i)  {
 
 		if (xhr.status == 200 && xhr.readyState == 4) {
 			
+			let data = JSON.parse(xhr.responseText);
+			console.log(data);
 			show=$(".viewerMessaggi");
-			show.text("<h4>"+data[0].testo+"</h4>");
+			show.html("<h4>"+data.testo+"</h4>");
 			
 			
 			

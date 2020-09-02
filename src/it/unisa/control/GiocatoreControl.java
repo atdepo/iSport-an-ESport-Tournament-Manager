@@ -15,7 +15,9 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.Gson;
 
+import it.unisa.model.giocatore.GiocatoreBean;
 import it.unisa.model.giocatore.GiocatoreModel;
+import it.unisa.model.squadra.SquadraBean;
 import it.unisa.model.squadra.SquadraModel;
 
 /**
@@ -189,7 +191,24 @@ case "validatePlayer":
 							response.sendRedirect(request.getContextPath()+"/oopsPage.jsp");// pagina oops	
 						}		
 					}
-					//quando ha successo
+					SquadraBean team= new SquadraBean();
+					team.setNazionalita(request.getParameter("nazioni"));
+					team.setNome(request.getParameter("nome-squadra"));
+					team.setTeamImage("");
+					sqModel.doSave(team);
+					
+					for(int j=1;j<=numeroGiocatori;j++) {
+						GiocatoreBean bean= new GiocatoreBean();
+						bean.setNickname(request.getParameter("nickname-player-"+j));
+						bean.setNome(request.getParameter("nome-giocatore-"+j));
+						bean.setCognome(request.getParameter("cognome-giocatore-"+j));
+						bean.setRuolo(request.getParameter("ruolo-giocatore-"+j));
+						bean.setDatanascita(request.getParameter("nascita-giocatore-"+j));
+						bean.setNomesquadra(team.getNome());
+						bean.setPlayerImage("");
+						bean.setCodtecnico("");
+						pModel.doSave(bean);
+					}
 					response.sendRedirect(request.getContextPath()+"/FormInserimentoSquadre.jsp");
 					
 				}

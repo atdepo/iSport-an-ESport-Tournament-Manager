@@ -138,7 +138,8 @@ $(document).ready(function(){
 			'</div>'+
 			
 			'<div class="field-btn">'+
-			'<input type="submit" class="button-blue submitbtn" onclick="submitForm()" value="Submit">'+
+			'<input type="button" class="button-blue prevBtn'+parseInt(data)+'" onclick="cambiaPagina()" value="Prev">'+
+			'<input type="submit" class="button-blue submitbtn'+parseInt(data)+'" onclick="submitForm()" value="Submit">'+
 			'</div>'+
 			'</div>');
 			
@@ -218,13 +219,69 @@ $(document).ready(function(){
 	
 	
 	function submitForm(){
-	
+		var i = $(event.target).attr("class").replace(/\D/g,'');
 		var xhr = new XMLHttpRequest();
-		if(called==0)
-			xhr.open('GET', '../GiocatoreControl?action=validateTeam&teamName='+$('.nome-squadra').val(), true);
-		else
-			xhr.open('GET', '../GiocatoreControl?action=validatePlayer&nick='+$('.nickname-player-'+called).val()+'&numPlayer='+called, true);
+		var nickname=$(".nickname-player-"+i);
+		var nome=$(".nome-giocatore-"+i);
+		var cognome=$(".cognome-giocatore-"+i);
+		var ruolo=$('.ruolo-giocatore-'+i);
+		var dataDiNascita=$('.nascita-giocatore-'+i);
+		var birth= new Date(dataDiNascita.val());
+		var today= Date.now();
+	
+			if(!nickname.val()){//Nickname non inserito
+
+				var error=nickname.next();
+				$('span').text("");
+				error.text("Inserisci un nickname");
+				console.log("nickname non inserito");
+				return false;
+
+			} else if(!nome.val()){
+
+				var error=nome.next();
+				$('span').text("");
+				error.text("Inserisci un nome");
+				console.log("nome non inserito");
+				return false;
+
+			} else if(!cognome.val()){
+
+				var error=cognome.next();
+				$('span').text("");
+				error.text("Inserisci un cognome");
+				console.log("cognome non inserito");
+				return false;
+
+			} else if(!ruolo.val()){
+
+				var error=ruolo.next();
+				$('span').text("");
+				error.text("Inserisci un ruolo");
+				console.log("ruolo non inserito");
+				return false;
+
+			}  else
+				if(birth instanceof Date && !isNaN(birth)){
+					if(Math.floor((today-birth)/(31557600000))<18){
+						var error=dataDiNascita.next();
+						$('span').text("");
+						error.text("Non sei maggiorenne!");
+						console.log("non sei maggiorenne");
+						return false;
+					}
+				}
+				else{
+					var error=dataDiNascita.next();
+					$('span').text("");
+					error.text("Inserisci una data di nascita!");
+					console.log("Inserisci una data di nascita");
+					return false;
+				}
 		
+		$('span').text("");
+
+		xhr.open('GET', '../GiocatoreControl?action=validatePlayer&nick='+$('.nickname-player-'+i).val()+'&numPlayer='+i, true);	
 		xhr.send();
 		
 		xhr.onreadystatechange = function() {
@@ -233,7 +290,7 @@ $(document).ready(function(){
 				let data = JSON.parse(xhr.responseText);
 				console.log(data);
 				if(data['0']!=="null")
-					alert('asd');
+					$('.nickname-player-'+i).next().text(data['0']);
 				else
 					$('#the-form').submit();
 			}
@@ -282,7 +339,6 @@ $(document).ready(function(){
 	var today= Date.now();
 	
 	
-	
 		if(!nickname.val()){//Nickname non inserito
 
 			var error=nickname.next();
@@ -315,17 +371,27 @@ $(document).ready(function(){
 			console.log("ruolo non inserito");
 			return false;
 
-		} else if(Math.floor((today-birth)/(31557600000))<18){
-			var error=dataDiNascita.next();
-			$('span').text("");
-			error.text("Non sei maggiorenne!");
-			console.log("non sei maggiorenne");
-			return false;
-		}
-		else{
+		} else
+			if(birth instanceof Date && !isNaN(birth)){
+				if(Math.floor((today-birth)/(31557600000))<18){
+					var error=dataDiNascita.next();
+					$('span').text("");
+					error.text("Non sei maggiorenne!");
+					console.log("non sei maggiorenne");
+					return false;
+				}
+			}
+			else{
+				var error=dataDiNascita.next();
+				$('span').text("");
+				error.text("Inserisci una data di nascita!");
+				console.log("Inserisci una data di nascita");
+				return false;
+			}
+		
 			$('span').text("");
 			cambiaPagina();
-		}
+		
 	}
 }
 	

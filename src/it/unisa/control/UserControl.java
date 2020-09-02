@@ -99,11 +99,13 @@ public class UserControl extends HttpServlet {
 			break;
 		
 		case "visualizza":
+			
 			System.out.println("entro in visualizza");
 			session.setAttribute("cod",request.getParameter("codtorneo"));
 			response.sendRedirect(request.getContextPath()+"/torneo.jsp");
 			
 		break;
+	
 		
 			/**
 			 * Questo case viene chiamato nel caso in cui l'utente voglia cambiare qualche campo delle 

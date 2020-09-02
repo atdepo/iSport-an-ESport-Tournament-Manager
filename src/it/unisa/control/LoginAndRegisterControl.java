@@ -23,7 +23,7 @@ import it.unisa.model.utente.UtenteBean;
 import it.unisa.model.utente.UtenteBean.Tipo;
 import it.unisa.model.utente.UtenteModel;
 
-@WebServlet(name = "/LoginAndRegisterControl", urlPatterns = { "/LoginAndRegisterControl", "" })
+@WebServlet(name = "/LoginAndRegisterControl", urlPatterns = { "/LoginAndRegisterControl"})
 @MultipartConfig(fileSizeThreshold = 1024 * 1024 * 2, // 2MB after which the file will be
 														// temporarily stored on disk
 		maxFileSize = 1024 * 1024 * 10, // 10MB maximum size allowed for uploaded files

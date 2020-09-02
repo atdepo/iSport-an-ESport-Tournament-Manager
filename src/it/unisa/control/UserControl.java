@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -29,7 +30,8 @@ import it.unisa.model.torneo.TournamentBean;
 /**
  * Servlet implementation class UserControl
  */
-@WebServlet("/UserControl")
+
+@WebServlet(urlPatterns = {"/UserControl","/user/UserControl"})
 public class UserControl extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	TournamentModel tModel = new TournamentModel();
@@ -96,7 +98,11 @@ public class UserControl extends HttpServlet {
 			
 			break;
 		
-		case "init":
+		case "visualizza":
+			response.setContentType("text/html");
+			response.setCharacterEncoding("UTF-8");
+			session.setAttribute("cod",request.getParameter("codtorneo"));
+			response.sendRedirect(request.getContextPath()+"/index.jsp");
 			
 		break;
 		
@@ -112,6 +118,7 @@ public class UserControl extends HttpServlet {
 			 * inserendone altri o non correttamente scritti oppure gia' associati a qualche altro utente
 			 */
 		case "change":
+			
 			String cosa=request.getParameter("cosa");
 			UtenteBean utente=(UtenteBean)session.getAttribute("user");
 			String valore=request.getParameter("valore");
@@ -170,12 +177,12 @@ public class UserControl extends HttpServlet {
 		}
 	}
 
-	
-
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
+	
+	
 	
 	
 

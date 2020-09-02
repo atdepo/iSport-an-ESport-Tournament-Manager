@@ -245,7 +245,7 @@ public Collection<SquadraBean> getSquadreFromTornei(int codTorneo) {
 	public boolean isExistingEmail(String mail){
 		
 		String sql="select count(*)as num from utenti where email=?";
-
+		
 		try (Connection con = DriverManagerConnectionPool.getConnection();PreparedStatement stat=con.prepareStatement(sql)){
 		
 			stat.setString(1, mail);

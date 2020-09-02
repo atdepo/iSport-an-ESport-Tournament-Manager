@@ -27,10 +27,9 @@ xhr.send();
  })
  
 function getSquadra(codice){
-	window.location.replace('../torneo.jsp');
-	/* var xhr = new XMLHttpRequest();
-    		xhr.open('GET', '../UserControl?action=getSquadreFromTorneo(codice)', true);		
-    	xhr.send(); */
+	var xhr = new XMLHttpRequest();
+	xhr.open('GET', '../UserControl?action=visualizza&codtorneo='+codice, true);		
+	xhr.send();
 }
 
  

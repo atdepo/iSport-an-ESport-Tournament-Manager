@@ -77,6 +77,8 @@ public class TecnicoModel implements ModelInterface<TecnicoBean, String> {
 		return collection;
 
 	}
+	
+	
 
 	public int doRetrieveTecniciFisici() throws SQLException {
 		
@@ -133,6 +135,8 @@ public class TecnicoModel implements ModelInterface<TecnicoBean, String> {
 
 	}
 
+	
+	
 	@Override
 	public void doUpdate(TecnicoBean product) throws SQLException {
 		// TODO Auto-generated method stub

@@ -72,7 +72,7 @@ public class UserControl extends HttpServlet {
 			response.getWriter().flush();
 			response.setStatus(200);
 		}
-		catch(SQLException e2) {
+		catch(SQLException e2) {	
 			e2.printStackTrace();
 		}
 		break;

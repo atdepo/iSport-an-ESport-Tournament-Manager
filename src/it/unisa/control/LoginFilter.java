@@ -21,10 +21,10 @@ public class LoginFilter implements Filter{
 
 	@Override
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
-	
+		
 		HttpServletRequest hRequest=(HttpServletRequest)request; 
 		HttpServletResponse hResponse=(HttpServletResponse)response; 
-		
+		//System.out.println("sono stata chiamata da "+hRequest.getHeader("referer"));<-- utile
 		System.out.println("la sessione è valida?"+hRequest.isRequestedSessionIdValid());
 		HttpSession session= hRequest.getSession(true);// Prendo la sessione, ma non ne creo un'altra se è invalida
 		if(!hRequest.isRequestedSessionIdValid()) {//se la sessione non è valida

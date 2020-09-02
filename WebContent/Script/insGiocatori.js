@@ -233,9 +233,9 @@ $(document).ready(function(){
 				let data = JSON.parse(xhr.responseText);
 				console.log(data);
 				if(data['0']!=="null")
-					$('#the-form').submit();
+					alert('asd');
 				else
-					
+					$('#the-form').submit();
 			}
 		}
 	}

@@ -1,5 +1,20 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
+<%
+	String error=" ";
+	String type=" ";
+	if(session.getAttribute("error")!=null && session.getAttribute("error-type")!=null){
+		error = (String)session.getAttribute("error");
+		type= (String)session.getAttribute("error-type");	
+	
+		System.out.println("error "+error);
+		System.out.println("type "+type);
+	}
+
+%>
+    
+    
 <!DOCTYPE html>
 
 <html>
@@ -8,22 +23,7 @@
 	<script src = "https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
      <link rel="stylesheet" href="../CSS/Profilo.css" type="text/css">
      <script src = "<%=request.getContextPath()+"/Script/profilo.js"%>"></script>
-     <%
-String error=" ";
-String type=" ";
-String errorLocation=" ";
-if(session.getAttribute("error")!=null && session.getAttribute("error-type")!=null && session.getAttribute("error-location")!=null){
-	error = (String)session.getAttribute("error");
-	type= (String)session.getAttribute("error-type");	
-	errorLocation =(String)session.getAttribute("error-location");
-}
 
-System.out.println("location "+errorLocation);
-System.out.println("error "+error);
-System.out.println("type "+type);
-
-
-%>
 	</head>	
 <body>
 		<%@ include file="../header.jsp"%>	
@@ -64,8 +64,8 @@ System.out.println("type "+type);
 			
 					<div class="field">
 						<label for="iva" class="testlabel">Partita IVA</label>
-						<input type="text" id="iva"   value="<%=utente.getpIVA()%>" name="pIVA">
-						<span class="error"></span>
+						<input type="text" id="iva" value="<%=utente.getpIVA()%>" name="pIVA">
+						<span class="error"><%if(type.equals("piva")){ %><%=error%><%}%></span>
 					</div>
 					
 					<input type="button" class="button-blue" value="Conferma le modifiche" onclick="confermaMod()">	

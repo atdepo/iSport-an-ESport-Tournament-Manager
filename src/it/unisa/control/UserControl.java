@@ -98,7 +98,19 @@ public class UserControl extends HttpServlet {
 		
 		case "init":
 			
-			break;
+		break;
+		
+			/**
+			 * Questo case viene chiamato nel caso in cui l'utente voglia cambiare qualche campo delle 
+			 * proprie informazioni.
+			 * 
+			 * Per chiamare questo case e' necessario specificare:
+			 * -cosa: il campo da modificare email|user|piva
+			 * -valore: il valore da modificare nel campo
+			 * 
+			 * Una validazione preventiva viene eseguita nel caso l'utente cerchi di modificare i suoi dati 
+			 * inserendone altri o non correttamente scritti oppure gia' associati a qualche altro utente
+			 */
 		case "change":
 			String cosa=request.getParameter("cosa");
 			UtenteBean utente=(UtenteBean)session.getAttribute("user");
@@ -107,44 +119,54 @@ public class UserControl extends HttpServlet {
 			String regUser="^[a-zA-Z0-9]+([._]?[a-zA-Z0-9]+)*$";
 
 			System.out.println("Sto nel change");
+			
 			//Impostiamogli eventuali errori avuti in precedenza a null per evitare problemi nella visualizzazione
-			session.setAttribute("error-type", null); //error-type ci fornisce il campo sul quale abbiamo riscontrato l'errore
+			
 			session.setAttribute("error", null); // error ci fornisce il messaggio di errore da visualizzare
-			session.setAttribute("error-location", null); //error-location ci fornisce l'indicazione su quale 
-														  //dei due form (login|signup) sia presente l'errore
 			
+			session.setAttribute("error-type", null); //error-type ci fornisce il campo sul quale abbiamo riscontrato l'errore
+						
+			switch(cosa) {
 			
-			try {
-				
-				//----------------Controllo username--------------------//
-				if (userModel.doRetriveByKey(request.getParameter("username")) != null) {
-					System.out.println("guarda che sto user � stato usato");
-					session.setAttribute("error-type", "username");
-					session.setAttribute("error", "Quest'username � stato utilizzato");
-					session.setAttribute("error-location", "signup");
-					response.sendRedirect(request.getContextPath()+"/FormLoginAndRegister.jsp");
-					return;
-				}	else if(!request.getParameter("username").matches(regUser)) {
-					System.out.println("mi fermo allo username");
-					session.setAttribute("error-type", "username");
-					session.setAttribute("error", "Utente non scritto correttamente");
-					session.setAttribute("error-location", "signup");
-					response.sendRedirect(request.getContextPath()+"/FormLoginAndRegister.jsp");
+			case "email":
+				if(!userModel.isExistingEmail(valore)) { 					//se la nuova mail non e' gia' presente nel db
+					userModel.cambiaEmail(valore, utente.getEmail());		//la cambio
 				}
-			} catch (SQLException | IOException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
-			try {
-				System.out.println("Prima della chiamata di cambia cose");
-				userModel.cambiaCose(cosa, valore, utente.getEmail());
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+				else {														//altrimenti setto gli errori
+					
+					session.setAttribute("error", "la mail scelta e' gia' stata utilizzato");
+					session.setAttribute("error-type", "mail");
+				}
+				
 			break;
+			
+			case "username":												//se il nuovo username non e' presente nel db
+				if(!userModel.isExistingUsername(valore)) {					//lo cambio
+					userModel.cambiaUsername(valore, utente.getEmail());	
+				}
+				else {														//altrimenti setto gli errori
+					
+					session.setAttribute("error", "l'username scelto e' gia' stato utilizzato");
+					session.setAttribute("error-type", "username");
+					
+				}
+				
+			break;
+			
+			case "pIVA":
+				if(!userModel.isExistingPIVA(valore)) {						//se la nuova p.IVA non e' presente nel db
+					userModel.cambiaPIVA(valore, utente.getEmail());		//la cambio
+				}
+				else {														//altrimenti setto gli errori
+					
+					session.setAttribute("error", "la partita iva scelta e' gia' stata utilizzato");
+					session.setAttribute("error-type", "piva");
+				}
+				
+			break;
+			
+			}
 		
-	
 		}
 	}
 

@@ -116,7 +116,10 @@ public class UserControl extends HttpServlet {
 			UtenteBean utente=(UtenteBean)session.getAttribute("user");
 			String valore=request.getParameter("valore");
 			
-			String regUser="^[a-zA-Z0-9]+([._]?[a-zA-Z0-9]+)*$";
+			String regUser="^[A-Za-z0-9_-]{0,30}$";
+			String regEmail="^(([^<>()\\[\\]\\\\.,;:\\s@\"]+(\\.[^<>()\\[\\]\\\\.,;:\\s@\"]+)*)|(\".+\"))@((\\[[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}])|(([a-zA-Z\\-0-9]+\\.)+[a-zA-Z]{2,}))$";
+			String regIva="^[0-9]{11}$";
+
 
 			System.out.println("Sto nel change");
 			
@@ -129,6 +132,10 @@ public class UserControl extends HttpServlet {
 			switch(cosa) {
 			
 			case "email":
+				if(valore.matches(regEmail))
+				{session.setAttribute("error", "la mail scelta non è valida");
+				session.setAttribute("error-type", "mail");}
+				else
 				if(!userModel.isExistingEmail(valore)) { 					//se la nuova mail non e' gia' presente nel db
 					userModel.cambiaEmail(valore, utente.getEmail());		//la cambio
 				}
@@ -141,6 +148,10 @@ public class UserControl extends HttpServlet {
 			break;
 			
 			case "username":												//se il nuovo username non e' presente nel db
+				if(valore.matches(regUser))
+				{session.setAttribute("error", "lo username inserito non è valido");
+				session.setAttribute("error-type", "mail");}
+				else
 				if(!userModel.isExistingUsername(valore)) {					//lo cambio
 					userModel.cambiaUsername(valore, utente.getEmail());	
 				}
@@ -154,6 +165,10 @@ public class UserControl extends HttpServlet {
 			break;
 			
 			case "pIVA":
+				if(valore.matches(regEmail))
+				{session.setAttribute("error", "la partita IVA inserita non è valida");
+				session.setAttribute("error-type", "mail");}
+				else
 				if(!userModel.isExistingPIVA(valore)) {						//se la nuova p.IVA non e' presente nel db
 					userModel.cambiaPIVA(valore, utente.getEmail());		//la cambio
 				}

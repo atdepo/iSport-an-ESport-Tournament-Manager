@@ -117,7 +117,7 @@
 	//--------------------------------------------Funzione per il controllo del campo username-------------------------------------------
  function userCheck(){
  	var username=$("#username");
- 	var usernameReg=/^[a-zA-Z0-9]+([._]?[a-zA-Z0-9]+)*$/;
+ 	var usernameReg=/^[A-Za-z0-9_-]{0,30}$/;
     let error=username.next();
      
 	    if(!username.val()){	//Username non inserito

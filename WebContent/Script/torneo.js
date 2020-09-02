@@ -13,6 +13,6 @@ $(document).ready(function(){
 		
 
 		}
-		xhr.open('GET', '../UserControl?action=getSquadreFromTorneo', true);	
+		xhr.open('GET', 'UserControl?action=getSquadreFromTorneo&codTorneo='+$('#torneo').val(), true);	
 		xhr.send();
  })

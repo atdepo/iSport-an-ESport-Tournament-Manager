@@ -86,7 +86,9 @@
 		
 				<div class="tornei">
    					<h1>I TUOI TORNEI</h1>
-					<div id="mieiTornei"></div>
+					<div id="mieiTornei">
+					
+					</div>
 				</div>
 			</div>
 		</div>

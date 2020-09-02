@@ -180,8 +180,6 @@ public class LoginAndRegisterControl extends HttpServlet {
 			}
 
 			break;
-
-			
 			
 		case "validateLogin": //Effettuo la validazione del login
 			HttpSession session=request.getSession(false);

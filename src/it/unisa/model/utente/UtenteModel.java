@@ -243,12 +243,13 @@ public Collection<SquadraBean> getSquadreFromTornei(int codTorneo) {
 	
 	public boolean cambiaCose(String cosa,String valore,String email) throws SQLException {
 		String sql="";
+		 PreparedStatement stat=null;
 		switch (cosa) {
 		
 		case "username": 
 			
 			 sql="select count(*)as num from utenti where username=?";
-			 PreparedStatement stat=null;
+			
 			try (Connection con = DriverManagerConnectionPool.getConnection();){
 				stat=con.prepareStatement(sql);
 				stat.setString(1, valore);
@@ -274,20 +275,65 @@ public Collection<SquadraBean> getSquadreFromTornei(int codTorneo) {
 				stat.close();
 			}
 			break;
-		/*
-		case "email":
-			sql="UPDATE utenti SET email=? WHERE email=?";
-			try (Connection con = DriverManagerConnectionPool.getConnection();PreparedStatement stat=con.prepareStatement(sql)){
+			
+		case "email": 
+			
+			 sql="select count(*)as num from utenti where email=?";
+			 stat=null;
+			try (Connection con = DriverManagerConnectionPool.getConnection();){
+				stat=con.prepareStatement(sql);
 				stat.setString(1, valore);
-				stat.setString(2, email);
-				stat.executeUpdate();
-				con.commit();
-				return true;
-			} catch (SQLException e) {
-				e.printStackTrace();
+				ResultSet res=stat.executeQuery();
+				res.next();
+				if(res.getInt("num")==0) {
 				
+					sql="UPDATE utenti SET email=? WHERE email=?";
+					stat.setString(1, valore);
+					stat.setString(2, email);
+					stat.executeUpdate();
+					con.commit();
+					return true;
+				}
+				else
+				{
+					
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();			
+			}
+			finally {
+				stat.close();
 			}
 			break;
+		case "pIVA": 
+			
+			 sql="select count(*)as num from utenti where piva=?";
+			try (Connection con = DriverManagerConnectionPool.getConnection();){
+				stat=con.prepareStatement(sql);
+				stat.setString(1, valore);
+				ResultSet res=stat.executeQuery();
+				res.next();
+				if(res.getInt("num")==0) {
+				
+					sql="UPDATE utenti SET pvia=? WHERE email=?";
+					stat.setString(1, valore);
+					stat.setString(2, email);
+					stat.executeUpdate();
+					con.commit();
+					return true;
+				}
+				else
+				{
+					
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();			
+			}
+			finally {
+				stat.close();
+			}
+			break;
+		/*
 		case "pIVA":
 			sql="UPDATE utenti SET piva=? WHERE email=?";
 			try (Connection con = DriverManagerConnectionPool.getConnection();PreparedStatement stat=con.prepareStatement(sql)){

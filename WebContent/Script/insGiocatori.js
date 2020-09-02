@@ -178,7 +178,7 @@ $(document).ready(function(){
 			if(called==0)
 				xhr.open('GET', '../GiocatoreControl?action=validateTeam&teamName='+$('.nome-squadra').val(), true);
 			else
-				xhr.open('GET', '../GiocatoreControl?action=validatePlayer&nick='+$('.nickname-player-'+called).val(), true);
+				xhr.open('GET', '../GiocatoreControl?action=validatePlayer&nick='+$('.nickname-player-'+called).val()+'&numPlayer='+called, true);
 
 			xhr.send();
 			
@@ -213,6 +213,35 @@ $(document).ready(function(){
 		}
 }
 
+	
+	
+	
+	
+	function submitForm(){
+	
+		var xhr = new XMLHttpRequest();
+		if(called==0)
+			xhr.open('GET', '../GiocatoreControl?action=validateTeam&teamName='+$('.nome-squadra').val(), true);
+		else
+			xhr.open('GET', '../GiocatoreControl?action=validatePlayer&nick='+$('.nickname-player-'+called).val()+'&numPlayer='+called, true);
+		
+		xhr.send();
+		
+		xhr.onreadystatechange = function() {
+
+			if (xhr.status == 200 && xhr.readyState == 4) {
+				let data = JSON.parse(xhr.responseText);
+				console.log(data);
+				if(data['0']!=="null")
+					$('#the-form').submit();
+				else
+					
+			}
+		}
+	}
+	
+	
+	
 
 	function validateCampi(i){
 	var regGeneral="^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$"
@@ -299,13 +328,6 @@ $(document).ready(function(){
 		}
 	}
 }
-	
-	
-	function submitForm(){
-		
-		$('#the-form').submit();
-	}
-	
 	
 
 	 //Test per l'immagine 150x150

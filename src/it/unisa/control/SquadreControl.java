@@ -24,6 +24,7 @@ import it.unisa.model.squadra.SquadraModel;
 import it.unisa.model.struttura.StrutturaModel;
 import it.unisa.model.tecnico.TecnicoModel;
 import it.unisa.model.torneo.TournamentModel;
+import it.unisa.model.utente.UtenteBean;
 
 /**
  * Servlet implementation class SquadreControl
@@ -44,11 +45,11 @@ public class SquadreControl extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String action = request.getParameter("action"); // azione da far compiere alla servlet
 		Gson gson = new Gson();
-		
+		HttpSession session=request.getSession();
 		switch (action) {
 		
 		case "getGiocatori":
-			HttpSession session=request.getSession();
+			
 			try {
 				
 				ModalitaBean squadre= modModel.doRetriveByKey(new ModalitaKey((String)session.getAttribute("nomeGioco"),(String)session.getAttribute("modalita")));
@@ -81,6 +82,18 @@ public class SquadreControl extends HttpServlet {
 			
 			break;
 		
+		case "getSquadreNoIva":
+			response.setCharacterEncoding("UTF-8");
+			UtenteBean u=(UtenteBean)session.getAttribute("user");
+			ArrayList<SquadraBean> squadr= (ArrayList<SquadraBean>) sqModel.doRetriveByUser(u.getEmail());
+			String mod=gson.toJson(squadr);
+			response.getWriter().print(mod);
+			response.getWriter().flush();
+			System.out.println("il json delle squadre e' stato creato con successo");
+			response.setStatus(200);
+			
+			break;
+			
 		case "getSquadre":
 			response.setCharacterEncoding("UTF-8");
 			

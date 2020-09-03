@@ -46,6 +46,33 @@ public class SquadraModel implements ModelInterface<SquadraBean, String>{
 			
 	}
 
+	public Collection<SquadraBean> doRetriveByUser(String email) {
+		PreparedStatement statement = null;
+
+		String sql = "select * from utente,squadra where squadra.proprietario=?";
+
+		ArrayList<SquadraBean> collection= new ArrayList<SquadraBean>();
+		
+		try (Connection con = DriverManagerConnectionPool.getConnection()) {
+			statement = con.prepareStatement(sql);
+			statement.setString(1, email);
+			System.out.println("DoRetriveByUser=" + statement.toString());
+			ResultSet rs = statement.executeQuery();
+
+			while (rs.next()) {
+				SquadraBean bean = new SquadraBean();
+				bean.setNome(rs.getString("nome"));
+				bean.setNazionalita(rs.getString("nazionalita"));
+				bean.setTeamImage(rs.getString("imgSquadra"));
+				collection.add(bean);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return collection;
+	}
+	
 	@Override
 	public Collection<SquadraBean> doRetriveAll(String order) throws SQLException {
 		PreparedStatement statement = null;

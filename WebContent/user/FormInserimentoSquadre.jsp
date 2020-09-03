@@ -15,7 +15,7 @@
 <link rel="stylesheet" href="../CSS/2RadioButton.css" type="text/css">
 
 </head>
-
+<%UtenteBean u= (UtenteBean)session.getAttribute("user"); %>
 <style>
 	body{
 		color:#0082e6;
@@ -76,7 +76,7 @@
 		
 		<div id="listaSquadre"class="flex-container">
 			
-		
+		<input type="hidden" value=<%=u.getpIVA()%> id="iva" >
 		
 		</div>
 		

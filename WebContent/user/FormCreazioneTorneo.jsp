@@ -80,13 +80,7 @@
 				<label for="toggle-off" class="btn">No</label>
 			
 			
-			<div class="field">
-			<label for="contieniSponsor">Scegli degli sponsor</label>
-				<div class="contieniSponsor">
-					<ul class="ks-cboxtags">
-					</ul>
-				</div>
-			</div>
+		
 
 			<div class="field-btn">
 				<input type="button" class="button-blue nextBtn1" onclick="slide()" value="Next">

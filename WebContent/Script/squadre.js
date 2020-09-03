@@ -53,7 +53,7 @@ function elimina(i){
 
 
 function cambiaTipo(){
-	
+	var iva=$("#iva").val();
 	if(event.target.id==="esistente"){
 	var xhr = new XMLHttpRequest();
 	xhr.onreadystatechange = function() {
@@ -79,9 +79,14 @@ function cambiaTipo(){
 		}
 			
 	  }	
-	xhr.open('GET', '../SquadreControl?action=getSquadre', true);
-	xhr.send();
-	
+		if(iva=="           "){
+		xhr.open('GET', '../SquadreControl?action=getSquadreNoIva', true);
+		xhr.send();
+		}else{
+			xhr.open('GET', '../SquadreControl?action=getSquadre', true);
+			xhr.send();
+			
+		}
 	} else{
 		
 		$('.squadreEsistenti').empty();

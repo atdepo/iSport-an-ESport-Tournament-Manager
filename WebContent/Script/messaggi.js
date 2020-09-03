@@ -6,7 +6,7 @@ $(document).ready(function() {
 
 $(function(){
 	var check=$("i");
-	alert(check.hasClass('fa-check'));
+	
 	check.click(function() {
 		alert("gesù")
 		delMessaggi(check.attr("id"));
@@ -25,7 +25,7 @@ function getMessaggi() {
 			container=$(".containerMessaggi");
 			
 			for (var i = 0; i < data.length; i++) {
-				container.append("<div onclick=showMessage("+data[i].codice+") id=messaggio"+data[i].codice+">Messaggio"+data[i].codice+"</div><i id="+data[i].codice+" class='check fas fa-check'></i>")
+				container.append("<div class='mess' onclick=showMessage("+data[i].codice+") id=messaggio"+data[i].codice+">Messaggio"+data[i].codice+"<i id="+data[i].codice+" class='messChecked check fas fa-check'></i></div>")
 			}
 			
 			

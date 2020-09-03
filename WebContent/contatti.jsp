@@ -35,7 +35,7 @@
 
 </head>
 <body>
-	<%@ include file="../header.jsp"%>
+	<%@ include file="header.jsp"%>
 	
 	<h2>Contattaci Personalmente</h2>
 	<br>

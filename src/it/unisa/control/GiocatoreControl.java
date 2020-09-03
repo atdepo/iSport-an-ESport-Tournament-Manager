@@ -1,8 +1,11 @@
 package it.unisa.control;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.Collection;
 import java.util.Enumeration;
 
@@ -12,6 +15,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.Part;
+
+import org.apache.tomcat.util.buf.ByteChunk.ByteOutputChannel;
 
 import com.google.gson.Gson;
 
@@ -191,10 +197,11 @@ case "validatePlayer":
 							response.sendRedirect(request.getContextPath()+"/oopsPage.jsp");// pagina oops	
 						}		
 					}
+					
 					SquadraBean team= new SquadraBean();
 					team.setNazionalita(request.getParameter("nazioni"));
 					team.setNome(request.getParameter("nome-squadra"));
-					team.setTeamImage("");
+					team.setTeamImage("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAJYAAACWCAAAAAAZai4+AAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAAAmJLR0QA/4ePzL8AAAAHdElNRQfkCQMIJQ5f/JLzAAAFCUlEQVR42u3biXbaOBQG4L7/cwnbYMzeAAFSAiGhBMISAgSwNVDKIbSSfRfLw5nx/wD4O5IX6eryLXOT+fZvA1JWykpZKStlpawbScpKWSnrFpKyUlbKuoX8t1nikhthHSBOvlxvPXS7P1qNqpe1YqBxWcIuNJ/n630gfyXwN+8/O2Unw5SxWCLjtSeb36Iv2c0fyxYLxmAJq/K0/tt0ynZUdxgwBqvwspMh8ac1+ohRWSLbXcuI7IaFpFmVWRClOmR1byXJstobAOo4k4McaSJJLOfJh6kOmRQoLgorN4RM4DmLUjKs7CsCdchHGT9eeJYzxKmkfMfPI5pl9TEzeMrUNc5qwe/2S4a2WZYoA98M1/E7ZlnZKUUl5QZ52yNZP/A31iljxyDLWxFV0m+ghgvFsp6pqsNbFfU0YliivKWz5ANmuFCj1WOo5Axzd2FY+Q8Oy79DDBeCJe6pj+EpQ8TaC8GykJ/oP7PKG2HlI1fJ4Qnq8FmEs0SdN4dSDoyM1hNTJefwZxHOsqdc1id83QVn5Vivh2P8WvwsUeS84k9pG2B9p6z/rtM3wGpwH0Qpn6EXQ7DabJUcGWB1+Kzx/4cVwyS+GmDFcMu/GGDF8YIwwCrt2KyOgY+PS971nINYnyI+1TMua1s0wMowdmOnvGfB10IsA5vcR3EIHwIEq0CqilwS3JtYNGfsCY+1QVTfMBsy5ufn1cyGjDmLQdPM9pX5LC5yiCuhSiO1PYP1iBkA1GjZjH31yjPGEqVP8p3VxlwIW6Qkb2Fn8Dc8geW+01S770ZLuuKOtLwJesgDPPRxQZfyZZzgppDAcn7iVfhDH/xRlPuGVa2r6IvgWcKb41SfmKIpmXVwTVFjdYe/BOn0VbgjxH1VTepQOJPJ9oFfx2BM6zkgNhxYDVARbtsjto6Qu0YiekaO8ac16q+TWcJqRqwK991s0s0swq70lxG7/2DZr9hEGIklnPoEVEndToh9SZT3llN/A5dJ/DcSDM0SFgL1G4ZvmEKzikP0gn4/LJplCadDOo9ad5AziWMVx8Q6RDDGDRiGZTUZJa5VE7NARbCcHqseuOshDqvhRUp3xCwkBSM3/rJbYcpDHTMFLyeALFFCLknVmZeA4wVjicoyDpWUywrMBWKJMvuI8xxgRx6EJYqLuFRSLkDlZgBLeOzS99fMPIALwMqO41RJOQZssaNZ9oB/BnWVYBDdKRjN6sSsOriiOwWjWKJKrrTp8xm5d4xi5WN8CC9ZRHUBRbCsFxMqKV8sDks0OLXlkOwjOhjDWV5M35y/s/QYrIEpVVTXVBhL1PhtNdpsQ/uAwlh2zK/364xtGkvc88/yQ+KHHS+GsHJGXlmXhJ1N6VmiHftX5zpBSDuXnmV6sEKHS8syPlihw6Vl8TsUozO1sSxxZ+iz8zV7bcVex7LQf5uhRNvmrGGxmx5g0fYg6FgPSaj0vf0alhPrZkcfXW+/miUq/GYtUHaaXbZmtB6TUWnbENQsJ5ZCCCSarnAlS5QTmsPDLKprEmpWQs/hMQ9wFvdfF5io+5SULDe2ulF0PlwoS1QT+B6es1fusJWsBG8tzc2lnMREPtPnKBsZVazk3lrHKN9cKpaXyOrhnI0HY4ma0Y3Yn1H+n0XFaiWpkrIFZLH+hohPD8ZK9kFUP4oKlo1uOeLlzQaxHOP71ussHBCL36+Py8qFsETBQG05LKo/4ilYya0BT1GtBP8BSE5nR7U+M5cAAAAldEVYdGRhdGU6Y3JlYXRlADIwMjAtMDktMDNUMDg6Mzc6MDArMDA6MDDaKuHIAAAAJXRFWHRkYXRlOm1vZGlmeQAyMDIwLTA5LTAzVDA4OjM3OjAwKzAwOjAwq3dZdAAAAABJRU5ErkJggg==\"");
 					sqModel.doSave(team);
 					
 					for(int j=1;j<=numeroGiocatori;j++) {
@@ -205,8 +212,30 @@ case "validatePlayer":
 						bean.setRuolo(request.getParameter("ruolo-giocatore-"+j));
 						bean.setDatanascita(request.getParameter("nascita-giocatore-"+j));
 						bean.setNomesquadra(team.getNome());
-						bean.setPlayerImage("");
-						bean.setCodtecnico("");
+						
+						//Immagine -> BASE64
+						ByteArrayOutputStream bos= new ByteArrayOutputStream();
+						Part part = request.getPart("image-"+j); //Prende la parte dal multipart form che rappresenta l'immagine del giocatore j-esimo
+						InputStream fis = null;
+						
+						fis = part.getInputStream();
+						byte[] buf = new byte[4096];
+
+						for (int readNum; (readNum = fis.read(buf)) != -1;) {
+							bos.write(buf, 0, readNum); // no doubt here is 0
+							System.out.println("read " + readNum + " bytes,");
+						}
+						byte[] bytes = bos.toByteArray();
+						
+						String img="";
+						if(bytes.length>0) {
+							img = "data:image/jpeg;base64, " + Base64.getEncoder().encodeToString(bytes);
+							System.out.println("bytes immagine "+bytes.length);
+						}
+						else
+							img="data:image/png;base64,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";
+						
+						bean.setPlayerImage(img);
 						pModel.doSave(bean);
 					}
 					response.sendRedirect(request.getContextPath()+"/FormInserimentoSquadre.jsp");

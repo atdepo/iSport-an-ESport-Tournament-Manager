@@ -77,8 +77,6 @@ public class TecnicoModel implements ModelInterface<TecnicoBean, String> {
 		return collection;
 
 	}
-	
-	
 
 	public int doRetrieveTecniciFisici() throws SQLException {
 		

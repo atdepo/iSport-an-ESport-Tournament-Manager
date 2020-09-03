@@ -13,7 +13,6 @@ public class GiocatoreBean implements Serializable {
 		ruolo="";
 		datanascita="";
 		nomesquadra="";
-		codtecnico="";
 		imgPlayer="";
 	}
 
@@ -49,10 +48,6 @@ public class GiocatoreBean implements Serializable {
 		return nomesquadra;
 	}
 
-	public String getCodtecnico() {
-		return codtecnico;
-	}
-
 	public void setNickname(String nickname) {
 		this.nickname = nickname;
 	}
@@ -75,10 +70,6 @@ public class GiocatoreBean implements Serializable {
 
 	public void setNomesquadra(String nomesquadra) {
 		this.nomesquadra = nomesquadra;
-	}
-
-	public void setCodtecnico(String codtecnico) {
-		this.codtecnico = codtecnico;
 	}
 	
 	public boolean isEmpty() {

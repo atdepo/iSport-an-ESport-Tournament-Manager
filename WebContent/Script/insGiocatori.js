@@ -133,7 +133,7 @@ $(document).ready(function(){
 			'</div>'+
 			
 			'<div class="field"><label for="images" class="form-label">Inserisci una immagine massimo 150x150</label>'+
-			'<input type="file" name="images" onchange="checkImg('+parseInt(data)+')" id="images-'+parseInt(data)+'>" required="required">'+
+			'<input type="file" name="images" onchange="checkImg('+parseInt(data)+')" id="images-'+parseInt(data)+'>">'+
 			'<span class="error-img"></span>'+
 			'</div>'+
 			

@@ -2,21 +2,8 @@
  * Nel momento in cui il documento FormCreazioneTorneo viene creato, questa funzione  
  * riempie le tendine dei giochi e degli sponsor, che sono le uniche fra tutte le tendine che sono obbligatoriamente mostrate.
  * 
- * Inoltre, tramite l'utilizzo di due campi hidden, fa visualizzare un messaggio di errore proveniente dalla validazione di backend
- * nel caso in cui non sia andata a buon fine. 
  * 
  */
-
-
-
-$(function() {
-	$("#insTorneo").submit(function() {
-		var data=$(".data-torneo").val();
-
-		if(data=="")
-			return false;
-	})
-})
 
 $(document).ready(function() {
 
@@ -57,27 +44,45 @@ $(document).ready(function() {
 	xhr.open('GET', '../TournamentControl?action=initTorneo', true);
 	xhr.send();
 	
-	//Se è presente un errore relativo alla data
-	if($('.data-error-message').val()!=='null'){
-		$('.error-data').empty().text($('.data-error-message').val());
-		$('header').empty().text("Organizzazione:");
-		$('.slidepage').css("marginLeft","-50%"); //JQuery >> tutto
-		$('#first-step').removeClass("is-active");
-		$('#third-step').addClass("is-active");
-		
-	}
-	//Se è presente un errore relativo alla struttura
-	else if($('.struttura-error-message').val()!=='null'){
-		$('.error-struttura').empty().text($('.struttura-error-message').val());
-		$('header').empty().text("Organizzazione:");
-		$('.slidepage').css("marginLeft","-50%"); //JQuery >> tutto
-		$('#first-step').removeClass("is-active");
-		$('#third-step').addClass("is-active");
-		
-	}
-	
-
 });
+
+
+/**
+ * Questa funzione aggiunge un click listener al bottone che si occupa della validazione
+ * dell'ultima pagina
+ * Nel caso in cui la data sia stata inserita in modo errato oppure la struttura sia gia' occupata, allora
+ * viene mostrato un errore, altrimenti si procede con il submit del form
+ */
+$(function(){
+	$(".subBtn").click(function(){
+		var data=$(".data-torneo").val();
+		if(data==""){
+			$('.error-data').empty().text("Inserisci una data!");
+			return false;
+		}
+		else{
+			var xhr = new XMLHttpRequest();
+			xhr.onreadystatechange = function() {
+				if (xhr.status == 200 && xhr.readyState == 4) {
+					let data = JSON.parse(xhr.responseText);
+					console.log(data);
+					var errore=data['0'];
+					if(errore=="null"){
+						$("#insTorneo").submit();
+					}
+					else{
+						$('.error-data').empty().text(errore);
+					}
+				}
+			}
+			xhr.open('GET', '../TournamentControl?action=validateTorneo&datatorneo='+data, true);
+			xhr.send();
+			
+		}
+	})
+	
+})
+
 
 
 /**
@@ -96,7 +101,7 @@ $("#"+k).toggleClass("active");
  * Questa funzione si occupa di sostituire come nome scritto sulla tendina, quello del gioco cliccato dalle sue opzioni, 
  * in questo caso identificato tramite il parametro k
  * @param k il nome del gioco da scrivere nella barra principale della tendina
- * @returns
+ * 
  */
 function tendina(k){
 	

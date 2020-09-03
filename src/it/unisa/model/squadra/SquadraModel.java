@@ -80,7 +80,7 @@ public class SquadraModel implements ModelInterface<SquadraBean, String>{
 			statement=con.prepareStatement(sql);
 			statement.setString(1,squadra.getNome());
 			statement.setString(2,squadra.getNazionalita());
-			statement.setString(2,squadra.getTeamImage());
+			statement.setString(3,squadra.getTeamImage());
 			System.out.println("doSave="+statement);
 			statement.executeUpdate();
 			con.commit();//<----- a volte vorrei non essere così tanto forte

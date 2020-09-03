@@ -29,7 +29,6 @@ public class GiocatoreModel implements ModelInterface<GiocatoreBean, String> {
 
 			while (rs.next()) {
 				bean.setNickname(rs.getString("nickname"));
-				bean.setCodtecnico(rs.getString("codtecnico"));
 				bean.setCognome(rs.getString("cognome"));
 				bean.setDatanascita(rs.getString("dataN"));
 				bean.setNome(rs.getString("nome"));
@@ -62,7 +61,6 @@ public class GiocatoreModel implements ModelInterface<GiocatoreBean, String> {
 				GiocatoreBean bean = new GiocatoreBean();
 
 				bean.setNickname(rs.getString("nickname"));
-				bean.setCodtecnico(rs.getString("codtecnico"));
 				bean.setCognome(rs.getString("cognome"));
 				bean.setDatanascita(rs.getString("dataN"));
 				bean.setNome(rs.getString("nome"));
@@ -89,8 +87,7 @@ public class GiocatoreModel implements ModelInterface<GiocatoreBean, String> {
 			statement.setString(4,giocatore.getRuolo());
 			statement.setString(5,giocatore.getDatanascita());
 			statement.setString(6,giocatore.getNomesquadra());
-			statement.setString(7,giocatore.getCodtecnico());
-			statement.setString(8,giocatore.getPlayerImage());
+			statement.setString(7,giocatore.getPlayerImage());
 			System.out.println("doSave="+statement);
 			statement.executeUpdate();
 			con.commit();//<----- a volte vorrei non essere così tanto forte

@@ -50,8 +50,8 @@
 				  </ul>
 				</div>
 			</div>
-			
-			<form id="insTorneo" action="<%=request.getContextPath()+"/TournamentControl?action=validateTorneo"%>" method="post">
+			<!--  -->
+			<form id="insTorneo" action="<%=request.getContextPath()+"/TournamentControl?action=saveTorneo"%>" method="post">
 			
 		<div class="page slidepage">
 			<div class="field">
@@ -175,7 +175,7 @@
 				</div>
 				<div class="field-btn">
 				<input type="button" class="button-blue prevBtn3" onclick="slide()" value="Previous">
-				<input type="submit" class="button-blue subBtn" value="Finish">
+				<input type="button" class="button-blue subBtn" value="Crea il tuo Torneo!">
 				
 			</div>
 			</div>

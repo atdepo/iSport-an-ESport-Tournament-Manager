@@ -88,9 +88,30 @@ public class UserControl extends HttpServlet {
 			response.setCharacterEncoding("UTF-8");
 			
 			int codTorneo=Integer.parseInt(request.getParameter("codTorneo"));
-			
+			System.out.println(codTorneo);
 			ArrayList<SquadraBean> squadre=(ArrayList<SquadraBean>) userModel.getSquadreFromTornei(codTorneo);
-			String squadra=gson.toJson(squadre);
+			for(SquadraBean bean: squadre) {
+				System.out.println(bean.getNome());
+			}
+			
+			ArrayList<String> dati= new ArrayList<String>();
+			try {
+				TournamentBean bean= tModel.doRetriveByKey(String.valueOf(codTorneo));
+				StrutturaBean struttura=sModel.doRetriveByKey(new KeyStruttura(String.valueOf(bean.getCAPStruttura()), bean.getIndirizzoStruttura()));
+				dati.add(bean.getNome());
+				dati.add(struttura.getNome());
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			for(String s:dati) {
+				System.out.println(s);
+			}
+			ArrayList<ArrayList<?>> cose= new ArrayList<ArrayList<?>>();
+			cose.add(squadre);
+			cose.add(dati);
+			String squadra=gson.toJson(cose);
 			System.out.println("Ciao questi sono le squadre del torneo");
 			response.getWriter().print(squadra);
 			response.getWriter().flush();

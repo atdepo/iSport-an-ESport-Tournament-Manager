@@ -57,7 +57,7 @@
 			
 			<div class="field">
         		<label for="images-0" class="form-label">Immagine Squadra<br><small>La tua immagine deve essere massimo 150x150</small></label>
-   				<input type="file" name="images" onchange="checkImg(0)" id="images-0" required="required"> 
+   				<input type="file" name="images" onchange="checkImg(0)" id="images-0"> 
 				<span class="error-img"></span>
 			</div>	
 			

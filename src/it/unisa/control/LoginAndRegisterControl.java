@@ -144,7 +144,7 @@ public class LoginAndRegisterControl extends HttpServlet {
 					InputStream fis = null;
 					
 					fis = part.getInputStream();
-					System.out.println("Immagine trovata");
+					//System.out.println("Immagine trovata");
 					byte[] buf = new byte[4096];
 
 					for (int readNum; (readNum = fis.read(buf)) != -1;) {

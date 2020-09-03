@@ -172,9 +172,11 @@ public class TournamentControl extends HttpServlet {
 		 */
 		case "validateTorneo":
 			HttpSession session= request.getSession();
-			session.setAttribute("error", null);
-			session.setAttribute("error-type", null);
+			//session.setAttribute("error", null);
+			//session.setAttribute("error-type", null);
 			response.setCharacterEncoding("UTF-8");
+			response.setContentType("application/json");
+			
 			System.out.println("Sto validando il torneo");
 			
 			//Controllo se la data e' nel passato
@@ -184,13 +186,21 @@ public class TournamentControl extends HttpServlet {
 			String data = df.format(d1);
 			if (controlloData(data, request.getParameter("datatorneo"))) {
 				String errore="Non possediamo una DeLorean, pertanto ci e' impossibile organizzare tornei nel passato!";
-				session.setAttribute("error",errore);
-				session.setAttribute("error-type","data");
-				response.sendRedirect(request.getContextPath()+"/user/FormCreazioneTorneo.jsp");
+				//session.setAttribute("error",errore);
+				//session.setAttribute("error-type","data");
+				//response.sendRedirect(request.getContextPath()+"/user/FormCreazioneTorneo.jsp");
+				//return;
+				ArrayList<String>err= new ArrayList<String>();
+				err.add(errore);
+				String wr=gson.toJson(err);
+				response.getWriter().print(wr);
+				response.getWriter().flush();
+				System.out.println("data nel passato");
+				response.setStatus(200);
 				return;
 			}
 			
-			
+			else {
 			//Controllo se la struttura nella data specificata e' gia' stata occupata
 				try {
 					ArrayList<TournamentBean> tornei = (ArrayList<TournamentBean>) tModel.doRetriveAll(null);
@@ -203,12 +213,14 @@ public class TournamentControl extends HttpServlet {
 	
 							if (t.getCAPStruttura() == value && t.getIndirizzoStruttura().equals(address)) {
 								String errore = "In questa data la struttura selezionata e' gia' occupata, selezionarne una diversa";
-								session.setAttribute("error",errore);
-								session.setAttribute("error-type", "struttura");
-								response.sendRedirect("/user/FormCreazioneTorneo.jsp");
-								
+								ArrayList<String>err= new ArrayList<String>();
+								err.add(errore);
+								String wr=gson.toJson(err);
+								response.getWriter().print(wr);
+								response.getWriter().flush();
+								System.out.println("struttura non valida");
+								response.setStatus(200);
 								return;
-								
 							}
 	
 						}
@@ -219,10 +231,21 @@ public class TournamentControl extends HttpServlet {
 				catch (SQLException e) {
 					e.printStackTrace();
 				}
+			}
 				
-				session.setAttribute("error",null);
-				session.setAttribute("error-type", null);
-		
+			ArrayList<String>err= new ArrayList<String>();
+			err.add("null");
+			String wr=gson.toJson(err);
+			response.getWriter().print(wr);
+			response.getWriter().flush();
+			//System.out.println("il json delle modalita' e' stato creato con successo");
+			response.setStatus(200);
+			break;
+			
+				//session.setAttribute("error",null);
+				//session.setAttribute("error-type", null);
+		case "saveTorneo":
+			
 				HttpSession sessione= request.getSession();
 				sessione.setAttribute("nomeTorneo", request.getParameter("nometorneo"));
 				sessione.setAttribute("dataTorneo", request.getParameter("datatorneo"));

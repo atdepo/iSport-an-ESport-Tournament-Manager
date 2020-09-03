@@ -33,7 +33,7 @@ public class TournamentModel implements ModelInterface<TournamentBean,String>{
 				bean.setIndirizzoStruttura(rs.getString("IndirizzoStruttura"));
 				bean.setNome(rs.getString("Nome"));
 				bean.setCodice(rs.getInt("Codice"));
-				bean.setBudget(rs.getInt("budget"));
+				bean.setBudget(rs.getInt("budgetTorneo"));
 				bean.setHomePage(rs.getBoolean("isOnHomePage"));
 				bean.setProprietario(rs.getString("proprietarioTorneo"));
 				

@@ -88,7 +88,12 @@ public class UserControl extends HttpServlet {
 			response.setCharacterEncoding("UTF-8");
 			
 			int codTorneo=Integer.parseInt(request.getParameter("codTorneo"));
+			System.out.println(codTorneo);
 			ArrayList<SquadraBean> squadre=(ArrayList<SquadraBean>) userModel.getSquadreFromTornei(codTorneo);
+			for(SquadraBean bean: squadre) {
+				System.out.println(bean.getNome());
+			}
+			
 			ArrayList<String> dati= new ArrayList<String>();
 			try {
 				TournamentBean bean= tModel.doRetriveByKey(String.valueOf(codTorneo));
@@ -98,6 +103,10 @@ public class UserControl extends HttpServlet {
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
+			}
+			
+			for(String s:dati) {
+				System.out.println(s);
 			}
 			ArrayList<ArrayList<?>> cose= new ArrayList<ArrayList<?>>();
 			cose.add(squadre);

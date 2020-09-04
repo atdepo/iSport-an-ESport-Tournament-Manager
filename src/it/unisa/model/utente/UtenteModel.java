@@ -167,7 +167,7 @@ public Collection<SquadraBean> getSquadreFromTornei(int codTorneo) {
 			statement.setBytes(3,utente.getPassword());
 			statement.setString(4,utente.getpIVA());
 			statement.setString(5,utente.getDataIscrizione());
-			statement.setString(6,utente.getTipo());
+			statement.setString(6,Tipo.tecnico.name());
 			statement.setString(7,utente.getImg());
 			
 			System.out.println("DoSave=" + statement.toString());

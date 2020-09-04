@@ -96,6 +96,36 @@ public class SquadraModel implements ModelInterface<SquadraBean, String>{
 		}
 		return collection;
 	}
+	
+	public Collection<GiocatoreBean> doRetrivePlayerFromSquadra(String name) throws SQLException {
+		PreparedStatement statement = null;
+
+		String sql = "SELECT * FROM giocatore where giocatore.nomesquadra=?";
+
+		ArrayList<GiocatoreBean> collection= new ArrayList<GiocatoreBean>();
+		System.out.println("Ciao"+name);
+		
+		try (Connection con = DriverManagerConnectionPool.getConnection()) {
+			statement = con.prepareStatement(sql);
+			statement.setString(1, name);
+			System.out.println("doRetrivePlayerFromSquadra=" + statement.toString());
+			ResultSet rs = statement.executeQuery();
+
+			while (rs.next()) {
+				GiocatoreBean bean = new GiocatoreBean();
+				bean.setNickname(rs.getString("nickname"));
+				bean.setCognome(rs.getString("cognome"));
+				bean.setDatanascita(rs.getString("dataN"));
+				bean.setNome(rs.getString("nome"));
+				bean.setNomesquadra(rs.getString("nomesquadra"));
+				bean.setRuolo(rs.getString("ruolo"));
+				bean.setPlayerImage(rs.getString("playerImage"));
+				collection.add(bean);
+				System.out.println(rs.getString("nickname"));
+			}
+		}
+		return collection;
+	}
 
 	@Override
 	public void doSave(SquadraBean squadra) throws SQLException {

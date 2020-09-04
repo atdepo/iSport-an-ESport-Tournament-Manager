@@ -13,6 +13,7 @@ import javax.servlet.http.HttpSession;
 
 import com.google.gson.Gson;
 
+import it.unisa.model.giocatore.GiocatoreBean;
 import it.unisa.model.giocatore.GiocatoreModel;
 import it.unisa.model.gioco.GiocoModel;
 import it.unisa.model.modalita.ModalitaBean;
@@ -103,6 +104,24 @@ public class SquadreControl extends HttpServlet {
 				response.getWriter().print(mode);
 				response.getWriter().flush();
 				System.out.println("il json delle squadre e' stato creato con successo");
+				response.setStatus(200);
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			
+			break;
+		case "getGiocatoriFromSquadra":
+			response.setCharacterEncoding("UTF-8");
+			session.setAttribute("nomeSquadra",request.getParameter("nomeSquadra"));
+			
+			
+			try {
+				String nome=(String)request.getParameter("nomeSquadra");
+				ArrayList<GiocatoreBean> squadre= (ArrayList<GiocatoreBean>) sqModel.doRetrivePlayerFromSquadra(nome);
+				String mode=gson.toJson(squadre);
+				response.getWriter().print(mode);
+				response.getWriter().flush();
+				System.out.println("il json dei giocatori della squadra "+nome+" e' stato creato con successo");
 				response.setStatus(200);
 			} catch (SQLException e) {
 				e.printStackTrace();

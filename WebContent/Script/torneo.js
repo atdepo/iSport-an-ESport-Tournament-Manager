@@ -12,10 +12,10 @@ $(document).ready(function(){
 				nomeS.append('<div class=nomeS><h3>Struttura='+data[1][1]+' </h3></div> ');
 				
 				for (var i = 0; i < data[0].length; i++) {
-					squadre.append('<div class=squadre>'+data[0][i].nome +' </div> ');	
+					squadre.append('<div class="squadre">'+data[0][i].nome +' </div> ');	
 				}
 				for (var i = 0; i < data[0].length; i++) {
-					sImage.append('<div class=sImage> <img src='+data[0][i].teamImage+'></img> </div> ');
+					sImage.append('<div class="sImage" id='+data[0][i].nome+' > <a href=SquadreControl?action=getGiocatoriFromSquadra&nomeSquadra='+data[0][i].nome+'> <img src='+data[0][i].teamImage+'></img></a> </div> ');
 				}
 			}
 		
@@ -24,3 +24,4 @@ $(document).ready(function(){
 		xhr.open('GET', 'UserControl?action=getSquadreFromTorneo&codTorneo='+$('#torneo').val(), true);	
 		xhr.send();
  })
+

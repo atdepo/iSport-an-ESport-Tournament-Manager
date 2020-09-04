@@ -67,7 +67,13 @@
 					<label for="toggle-off" class="btn">No</label>
 				</div>
 			</div>
-		
+			
+				<label for="homePage">Vuoi che il torneo sia mostrato in home page?<br><small style="color:red">(Questa opzione aggiungerà un costo di 250€ per ogni squadra partecipante)</small><br></label>
+				
+				<input id="toggle-on" class="toggle toggle-left" name="toggle" value="false" type="radio" checked>
+				<label for="toggle-on" class="btn">Si</label>
+				<input id="toggle-off" class="toggle toggle-right" name="toggle" value="true" type="radio">
+				<label for="toggle-off" class="btn">No</label>
 
 			<div class="field-btn">
 				<input type="button" class="button-blue nextBtn1" onclick="slide()" value="Next">

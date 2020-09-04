@@ -46,6 +46,7 @@
 				<div class="form-group file-area">
         			<label for="images" class="testlabel">Cambia immagine <span class="misure"> La tua immagine deve essere 150x150</span></label>
    			 		<input type="file" name="images" id="images-0" required="required" />
+   			 		<span class="error" id="errorImg"><%if(type.equals("img")){ %><%=error%><%}%></span>	
    				</div>
    			</div>
    			<div class="bottom">
@@ -80,6 +81,7 @@
 						<div class="field">
 							<label for="mail" class="testlabel">Password</label>
 							<input type="text" id="nuova"  name="nuovaPsw">
+							<input type="button" class="button-blue" value="Conferma le modifiche" onclick="cambiaPassword()">	
 						</div>
 					</div>
 				</div>
@@ -98,6 +100,7 @@
 		<input type="hidden" id="UtenteName" value="<%=utente.getUsername() %>">
 		<input type="hidden" id="UtenteEmail" value="<%=utente.getEmail() %>">
 		<input type="hidden" id="UtenteIVA" value="<%=utente.getpIVA()%>">
+		<input type="hidden" id="UtenteImg" value="<%=utente.getImg()%>">
 		
 </body>
 </html>

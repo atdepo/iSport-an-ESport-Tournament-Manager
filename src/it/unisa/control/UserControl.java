@@ -14,6 +14,8 @@ import javax.servlet.http.HttpSession;
 
 import com.google.gson.Gson;
 
+import it.unisa.model.giocatore.GiocatoreBean;
+import it.unisa.model.giocatore.GiocatoreModel;
 import it.unisa.model.gioco.GiocoModel;
 import it.unisa.model.modalita.ModalitaModel;
 import it.unisa.model.sponsor.SponsorModel;
@@ -38,6 +40,7 @@ public class UserControl extends HttpServlet {
 	GiocoModel gModel = new GiocoModel();
 	UtenteModel userModel= new UtenteModel();
 	StrutturaModel sModel= new StrutturaModel();
+	SquadraModel teamModel= new SquadraModel();
 
     public UserControl() {
         super();
@@ -78,10 +81,23 @@ public class UserControl extends HttpServlet {
 		break;
 		
 		
-		case "getGiocatoreFromSquadra":
-		
-		break;
-		
+		case "getGiocatoriFromSquadra":
+			response.setCharacterEncoding("UTF-8");
+			response.setContentType("application/json");			
+			
+			try {
+				String nome=(String)request.getParameter("nomeSquadra");
+				ArrayList<GiocatoreBean> squadre= (ArrayList<GiocatoreBean>) teamModel.doRetrivePlayerFromSquadra(nome);
+				String mode=gson.toJson(squadre);
+				response.getWriter().print(mode);
+				response.getWriter().flush();
+				System.out.println("il json dei giocatori della squadra "+nome+" e' stato creato con successo");
+				response.setStatus(200);
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			
+			break;
 		
 		case "getSquadreFromTorneo":
 			response.setContentType("application/json");
@@ -90,10 +106,6 @@ public class UserControl extends HttpServlet {
 			int codTorneo=Integer.parseInt(request.getParameter("codTorneo"));
 			System.out.println(codTorneo);
 			ArrayList<SquadraBean> squadre=(ArrayList<SquadraBean>) userModel.getSquadreFromTornei(codTorneo);
-			for(SquadraBean bean: squadre) {
-				System.out.println(bean.getNome());
-			}
-			
 			ArrayList<String> dati= new ArrayList<String>();
 			try {
 				TournamentBean bean= tModel.doRetriveByKey(String.valueOf(codTorneo));
@@ -126,6 +138,11 @@ public class UserControl extends HttpServlet {
 			
 		break;
 	
+		case "visualizzaSquadra":
+			session.setAttribute("nome",request.getParameter("nomeSquadra"));
+			System.out.println(request.getParameter("nomeSquadra"));
+			response.sendRedirect(request.getContextPath()+"/squadraView.jsp");
+		break;
 		
 			/**
 			 * Questo case viene chiamato nel caso in cui l'utente voglia cambiare qualche campo delle 

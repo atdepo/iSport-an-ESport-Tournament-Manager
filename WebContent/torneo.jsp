@@ -61,15 +61,15 @@
 <body>
 		<%@ include file="header.jsp"%>
 	<div class="tutto">
-		<div class="nomeT">  </div>
+		<div class="nomeT"></div>
 		
-		<div class="nomeS">	 </div>
+		<div class="nomeS"></div>
 		
 		<div class="nomiTeam">
 			<p>Team Partecipanti :</p>	
 		</div>
 			<h2>Loghi delle squadre partecipanti</h2>
-		<div class="loghi">		</div>
+		<div class="loghi"></div>
 
 	</div>
 </body>

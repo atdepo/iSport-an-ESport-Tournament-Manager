@@ -15,7 +15,7 @@ $(document).ready(function(){
 					squadre.append('<div class="squadre">'+data[0][i].nome +' </div> ');	
 				}
 				for (var i = 0; i < data[0].length; i++) {
-					sImage.append('<div class="sImage" id='+data[0][i].nome+' > <a href=SquadreControl?action=getGiocatoriFromSquadra&nomeSquadra='+data[0][i].nome+'> <img src='+data[0][i].teamImage+'></img></a> </div> ');
+					sImage.append('<div class="sImage" id='+data[0][i].nome+' > <a href=UserControl?action=visualizzaSquadra&nomeSquadra='+data[0][i].nome+'> <img src='+data[0][i].teamImage+'></img></a> </div> ');
 				}
 			}
 		

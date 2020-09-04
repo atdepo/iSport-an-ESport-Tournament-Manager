@@ -51,7 +51,7 @@
 				</div>
 			</div>
 			<!--  -->
-			<form id="insTorneo" action="<%=request.getContextPath()+"/TournamentControl?action=saveTorneo"%>" method="post">
+			<form id="insTorneo" action="#">
 			
 		<div class="page slidepage">
 			<div class="field">
@@ -61,19 +61,13 @@
 			<div class="field">
 				<label for="homePage">Vuoi che il torneo sia mostrato in home page?<br><span class="info">(Questa opzione aggiungerà un costo di 250€/settimana per ogni squadra partecipante)</span><br></label>
 				<div class="radiochoice">
-					<input id="toggle-on" class="toggle toggle-left" name="toggle" value="false" type="radio" checked>
+					<input id="toggle-on" class="toggle toggle-left" name="toggle" value="true" type="radio" checked>
 					<label for="toggle-on" class="btn">Si</label>
-					<input id="toggle-off" class="toggle toggle-right" name="toggle" value="true" type="radio">
+					<input id="toggle-off" class="toggle toggle-right" name="toggle" value="false" type="radio">
 					<label for="toggle-off" class="btn">No</label>
 				</div>
 			</div>
-			
-				<label for="homePage">Vuoi che il torneo sia mostrato in home page?<br><small style="color:red">(Questa opzione aggiungerà un costo di 250€ per ogni squadra partecipante)</small><br></label>
-				
-				<input id="toggle-on" class="toggle toggle-left" name="toggle" value="false" type="radio" checked>
-				<label for="toggle-on" class="btn">Si</label>
-				<input id="toggle-off" class="toggle toggle-right" name="toggle" value="true" type="radio">
-				<label for="toggle-off" class="btn">No</label>
+
 
 			<div class="field-btn">
 				<input type="button" class="button-blue nextBtn1" onclick="slide()" value="Next">
@@ -118,9 +112,9 @@
 			
 				<label for="radio">Come vuoi che sia organizzato il tuo torneo?</label><br>
 					
-				<input id="toggle-online" class="toggle toggle-left" name="r-button" value="false" type="radio" onclick="hide()" checked>
+				<input id="toggle-online" class="toggle toggle-left" name="r-button" value="on-line" type="radio" onclick="hide()" checked>
 				<label for="toggle-online" class="btn">Online</label>
-				<input id="toggle-offline" class="toggle toggle-right" name="r-button" value="true" type="radio" onclick="show()">
+				<input id="toggle-offline" class="toggle toggle-right" name="r-button" value="fisico" type="radio" onclick="show()">
 				<label for="toggle-offline" class="btn">Fisico </label>
 			
 			<div class="field">

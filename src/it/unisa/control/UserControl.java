@@ -30,7 +30,7 @@ import it.unisa.model.utente.UtenteBean;
 import it.unisa.model.utente.UtenteModel;
 import it.unisa.model.torneo.TournamentBean;
 /**
- * Servlet implementation class UserControl
+ * Questa servlet si occupa della gestione dell'utente e della visualizzazione dei suoi tornei
  */
 
 @WebServlet(urlPatterns = {"/UserControl","/user/UserControl"})
@@ -54,6 +54,10 @@ public class UserControl extends HttpServlet {
 		System.out.println("Sto facendo questa action: "+ action);
 		
 		switch (action) {	
+		/**
+		 * Questa action serve a prendere tutti i tornei di un dato utente
+		 * identificato univocamente dalla sua mail
+		 */
 		case "getMieiTornei":
 			
 		try {
@@ -71,7 +75,7 @@ public class UserControl extends HttpServlet {
 			tutto.add(tornei);
 			tutto.add(strutture);
 			torneo=gson.toJson(tutto);
-			System.out.println("ciao mamma, questi sono i miei tornei");
+			System.out.println("Il JSON dei tornei e' stato creato con successo");
 			response.getWriter().print(torneo);
 			response.getWriter().flush();
 			response.setStatus(200);
@@ -81,7 +85,9 @@ public class UserControl extends HttpServlet {
 		}
 		break;
 		
-		
+		/**
+		 * Questa action serve a prendere i nomi e le immagini di tutti i giocatori di una data squadra
+		 */
 		case "getGiocatoriFromSquadra":
 			response.setCharacterEncoding("UTF-8");
 			response.setContentType("application/json");			
@@ -91,12 +97,15 @@ public class UserControl extends HttpServlet {
 				ArrayList<GiocatoreBean> squadre= (ArrayList<GiocatoreBean>) teamModel.doRetrivePlayerFromSquadra(nome);
 				ArrayList<String> names= new ArrayList<String>();
 				ArrayList<String> images= new ArrayList<String>();
+				
 				for(GiocatoreBean b:squadre) {
 					names.add(b.getNickname());
 				}
+				
 				for(GiocatoreBean be:squadre) {
 					images.add(be.getPlayerImage());
 				}
+				
 				ArrayList<ArrayList<?>> cose= new ArrayList<ArrayList<?>>();
 				cose.add(names);
 				cose.add(images);
@@ -106,10 +115,15 @@ public class UserControl extends HttpServlet {
 				System.out.println("il json dei giocatori della squadra "+nome+" e' stato creato con successo");
 				response.setStatus(200);
 			} catch (SQLException e) {
+				response.sendError(404);
 				e.printStackTrace();
 			}
 			break;
 			
+			/**
+			 * Questa action serve a restituire tutti i dati di un giocatore
+			 * identificato univocamente dal proprio nickname
+			 */
 		case "getDatiGiocatore":
 			
 			try {
@@ -132,7 +146,10 @@ public class UserControl extends HttpServlet {
 			
 			
 			break;
-		
+		/**
+		 * Questa action viene utilizzata per prendere tutte le squadre di un
+		 * dato torneo, identificato univocamente dal suo codice
+		 */
 		case "getSquadreFromTorneo":
 			response.setContentType("application/json");
 			response.setCharacterEncoding("UTF-8");
@@ -141,6 +158,7 @@ public class UserControl extends HttpServlet {
 			System.out.println(codTorneo);
 			ArrayList<SquadraBean> squadre=(ArrayList<SquadraBean>) userModel.getSquadreFromTornei(codTorneo);
 			ArrayList<String> dati= new ArrayList<String>();
+			
 			try {
 				TournamentBean bean= tModel.doRetriveByKey(String.valueOf(codTorneo));
 				StrutturaBean struttura=sModel.doRetriveByKey(new KeyStruttura(String.valueOf(bean.getCAPStruttura()), bean.getIndirizzoStruttura()));
@@ -151,9 +169,10 @@ public class UserControl extends HttpServlet {
 				e.printStackTrace();
 			}
 			
-			for(String s:dati) {
+			/*for(String s:dati) {
 				System.out.println(s);
-			}
+			}*/
+			
 			ArrayList<ArrayList<?>> cose= new ArrayList<ArrayList<?>>();
 			cose.add(squadre);
 			cose.add(dati);
@@ -164,14 +183,20 @@ public class UserControl extends HttpServlet {
 			response.setStatus(200);
 			
 			break;
-		
+		/*
+		 * Questa action fittizia serve a chiamare la pagina di visualizzazione delle squadre del torneo
+		 * senza però mostrare nell'url il nome della squadra 
+		 */
 		case "visualizza":
 			
 			session.setAttribute("cod",request.getParameter("codtorneo"));
 			response.sendRedirect(request.getContextPath()+"/torneo.jsp");
 			
 		break;
-	
+		/**
+		 * Questa action fittizia serve a chiamare la pagina di visualizzazione di una squadra
+		 * partecipante ad un torneo senza però mostrare nell'url il nome della squadra 
+		 */
 		case "visualizzaSquadra":
 			session.setAttribute("nome",request.getParameter("nomeSquadra"));
 			System.out.println(request.getParameter("nomeSquadra"));
@@ -218,25 +243,25 @@ public class UserControl extends HttpServlet {
 				if(!userModel.isExistingEmail(valore)) { 					//se la nuova mail non e' gia' presente nel db
 					userModel.cambiaEmail(valore, utente.getEmail());		//la cambio
 				}
-				else {														//altrimenti setto gli errori
+				else {														
 					
-					session.setAttribute("error", "la mail scelta e' gia' stata utilizzato");
+					session.setAttribute("error", "la mail scelta e' gia' stata utilizzato"); //altrimenti setto gli errori
 					session.setAttribute("error-type", "mail");
 				}
 				
 			break;
 			
-			case "username":												//se il nuovo username non e' presente nel db
+			case "username":												
 				if(valore.matches(regUser))
 				{session.setAttribute("error", "lo username inserito non è valido");
 				session.setAttribute("error-type", "mail");}
 				else
-				if(!userModel.isExistingUsername(valore)) {					//lo cambio
-					userModel.cambiaUsername(valore, utente.getEmail());	
+				if(!userModel.isExistingUsername(valore)) {					//se il nuovo username non e' presente nel db
+					userModel.cambiaUsername(valore, utente.getEmail());	//lo cambio
 				}
-				else {														//altrimenti setto gli errori
+				else {														
 					
-					session.setAttribute("error", "l'username scelto e' gia' stato utilizzato");
+					session.setAttribute("error", "l'username scelto e' gia' stato utilizzato");//altrimenti setto gli errori
 					session.setAttribute("error-type", "username");
 					
 				}

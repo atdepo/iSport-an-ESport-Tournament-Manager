@@ -34,6 +34,7 @@
 			width:25%;
 		}
 		i{
+			margin-left:30px;
 		}
 	</style>
 </head>

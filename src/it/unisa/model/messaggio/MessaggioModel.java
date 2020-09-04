@@ -42,13 +42,11 @@ public class MessaggioModel implements ModelInterface<MessaggioBean, Integer> {
 
 	@Override
 	public Collection<MessaggioBean> doRetriveAll(String order) throws SQLException {
-		System.out.println("Bella biond231a3");
 		PreparedStatement statement = null;
 
 		String sql = "SELECT * FROM messaggi";
 		
 		ArrayList<MessaggioBean> collection= new ArrayList<MessaggioBean>();
-		System.out.println("Bella bionda3");
 
 		try (Connection con = DriverManagerConnectionPool.getConnection()) {
 			statement = con.prepareStatement(sql);
@@ -57,7 +55,7 @@ public class MessaggioModel implements ModelInterface<MessaggioBean, Integer> {
 			ResultSet rs = statement.executeQuery();
 
 			while (rs.next()) {
-				System.out.println("Bella bionda");
+				
 				MessaggioBean bean = new MessaggioBean();
 				bean.setCodice(rs.getInt("codice"));
 				bean.setTesto(rs.getString("messaggio"));

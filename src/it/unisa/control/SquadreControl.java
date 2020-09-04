@@ -112,6 +112,8 @@ public class SquadreControl extends HttpServlet {
 			break;
 		case "getGiocatoriFromSquadra":
 			response.setCharacterEncoding("UTF-8");
+			session.setAttribute("nomeSquadra",request.getParameter("nomeSquadra"));
+			
 			
 			try {
 				String nome=(String)request.getParameter("nomeSquadra");

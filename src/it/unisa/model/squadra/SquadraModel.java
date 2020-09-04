@@ -103,6 +103,7 @@ public class SquadraModel implements ModelInterface<SquadraBean, String>{
 		String sql = "SELECT * FROM giocatore where giocatore.nomesquadra=?";
 
 		ArrayList<GiocatoreBean> collection= new ArrayList<GiocatoreBean>();
+		System.out.println("Ciao"+name);
 		
 		try (Connection con = DriverManagerConnectionPool.getConnection()) {
 			statement = con.prepareStatement(sql);
@@ -120,6 +121,7 @@ public class SquadraModel implements ModelInterface<SquadraBean, String>{
 				bean.setRuolo(rs.getString("ruolo"));
 				bean.setPlayerImage(rs.getString("playerImage"));
 				collection.add(bean);
+				System.out.println(rs.getString("nickname"));
 			}
 		}
 		return collection;

@@ -1,9 +1,11 @@
 package it.unisa.control;
 
+import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import javax.imageio.ImageIO;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -11,6 +13,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
+import org.apache.tomcat.jni.File;
 
 import com.google.gson.Gson;
 
@@ -155,16 +159,18 @@ public class UserControl extends HttpServlet {
 			 * Una validazione preventiva viene eseguita nel caso l'utente cerchi di modificare i suoi dati 
 			 * inserendone altri o non correttamente scritti oppure gia' associati a qualche altro utente
 			 */
-		case "change":
+		case "modificaDati":
 			
-			String cosa=request.getParameter("cosa");
 			UtenteBean utente=(UtenteBean)session.getAttribute("user");
-			String valore=request.getParameter("valore");
+			String nome=request.getParameter("nome");
+			String email=request.getParameter("email");
+			String iva=request.getParameter("iva");
+			String img=request.getParameter("img");
 			
 			String regUser="^[A-Za-z0-9_-]{0,30}$";
 			String regEmail="^(([^<>()\\[\\]\\\\.,;:\\s@\"]+(\\.[^<>()\\[\\]\\\\.,;:\\s@\"]+)*)|(\".+\"))@((\\[[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}])|(([a-zA-Z\\-0-9]+\\.)+[a-zA-Z]{2,}))$";
 			String regIva="^[0-9]{11}$";
-
+			
 
 			System.out.println("Sto nel change");
 			
@@ -174,15 +180,13 @@ public class UserControl extends HttpServlet {
 			
 			session.setAttribute("error-type", null); //error-type ci fornisce il campo sul quale abbiamo riscontrato l'errore
 						
-			switch(cosa) {
-			
-			case "email":
-				if(valore.matches(regEmail))
+		
+				if(email.matches(regEmail))
 				{session.setAttribute("error", "la mail scelta non è valida");
 				session.setAttribute("error-type", "mail");}
 				else
-				if(!userModel.isExistingEmail(valore)) { 					//se la nuova mail non e' gia' presente nel db
-					userModel.cambiaEmail(valore, utente.getEmail());		//la cambio
+				if(!userModel.isExistingEmail(email)) { 					//se la nuova mail non e' gia' presente nel db
+					userModel.cambiaEmail(email, utente.getEmail());		//la cambio
 				}
 				else {														//altrimenti setto gli errori
 					
@@ -190,15 +194,15 @@ public class UserControl extends HttpServlet {
 					session.setAttribute("error-type", "mail");
 				}
 				
-			break;
+		
 			
-			case "username":												//se il nuovo username non e' presente nel db
-				if(valore.matches(regUser))
+														//se il nuovo username non e' presente nel db
+				if(nome.matches(regUser))
 				{session.setAttribute("error", "lo username inserito non è valido");
-				session.setAttribute("error-type", "mail");}
+				session.setAttribute("error-type", "username");}
 				else
-				if(!userModel.isExistingUsername(valore)) {					//lo cambio
-					userModel.cambiaUsername(valore, utente.getEmail());	
+				if(!userModel.isExistingUsername(nome)) {					//lo cambio
+					userModel.cambiaUsername(nome, utente.getUsername());	
 				}
 				else {														//altrimenti setto gli errori
 					
@@ -207,28 +211,29 @@ public class UserControl extends HttpServlet {
 					
 				}
 				
-			break;
-			
-			case "pIVA":
-				if(valore.matches(regEmail))
+	
+				if(iva.matches(regIva))
 				{session.setAttribute("error", "la partita IVA inserita non è valida");
-				session.setAttribute("error-type", "mail");}
+				session.setAttribute("error-type", "piva");}
 				else
-				if(!userModel.isExistingPIVA(valore)) {						//se la nuova p.IVA non e' presente nel db
-					userModel.cambiaPIVA(valore, utente.getEmail());		//la cambio
+				if(!userModel.isExistingPIVA(iva)) {						//se la nuova p.IVA non e' presente nel db
+					userModel.cambiaPIVA(iva, utente.getpIVA());		//la cambio
 				}
 				else {														//altrimenti setto gli errori
 					
 					session.setAttribute("error", "la partita iva scelta e' gia' stata utilizzato");
 					session.setAttribute("error-type", "piva");
 				}
-				
-			break;
-			
-			}
+				BufferedImage bimg = ImageIO.read(new java.io.File("C:/Users/Antonio/Desktop/backgroundBlur.jpg"));
+				int width = bimg.getWidth();
+				int height = bimg.getHeight();
+				System.out.println("chiavt a mammt"+width);
+				break;
+		
+			}//chiusura switch(action)
 		
 		}
-	}
+	
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub

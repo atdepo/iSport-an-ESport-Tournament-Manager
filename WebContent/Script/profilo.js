@@ -33,32 +33,60 @@ function getSquadra(codice){
 }
 
  
+ 
+ 
  function confermaMod(){
-	 var uNome=$('#UtenteName').val();
-	 var uEmail=$('#UtenteEmail').val();
-	 var uIVA=$('#UtenteIVA').val();
 	 var Nome=$('#username').val();
      var Email=$('#email').val();
      var IVA=$('#iva').val();
+     var Img=$('#images-0').val();
+     var error=$("#errorImg").text()
+    if(mailCheck()&&userCheck()&&ivaCheck()&&error=="")
+    	alert("bravo");
+     
+     	alert(URL.createObjectURL(Img));
+    	var xhr = new XMLHttpRequest();
+    	xhr.open('POST', '../UserControl?action=modificaDati&nome='+Nome+'&email='+Email+'&iva='+IVA, true);	
+    	
+    	xhr.send();
+
     
      
-     if(uNome!=Nome&&userCheck()){
-    	var xhr = new XMLHttpRequest();
-    	xhr.onreadystatechange = function() {
-    	if (xhr.status == 200 && xhr.readyState == 4) {
-    		let data = JSON.parse(xhr.responseText);
-    		console.log(data);			
-    		}
-    	
-    	}    	
-
-    	xhr.open('GET', '../UserControl?action=change', true);		
-    	xhr.send();
-     }
  }
  
  
  
+	function checkImg() {
+		var file = $(this)[0].files[0];
+		var img=new Image();
+		var imgwidth = 0;
+		var imgheight = 0;
+		var error=$("#images-0").next();
+		if(typeof file!==typeof undefined){
+		img.src = URL.createObjectURL(file);
+		img.onload=function(){
+		
+		imgwidth = this.width;
+		imgheight = this.height;
+		if(imgwidth>parseInt(150)&&imgheight>parseInt(150)){
+			error.text("Inserisci un'immagine di massimo 150x150"); 
+			$(".signup").prop('disabled', true);
+			}
+		else {
+			error.text(""); 
+			$(".signup").prop('disabled', false);
+			}
+		}
+		
+		}else
+			{error.text("");$(".signup").prop('disabled', false);return true;}
+			} 
+	
+	
+	$(function() {
+		 $("#images-0").change(checkImg);
+		
+	})
  
  
  
@@ -143,8 +171,8 @@ function getSquadra(codice){
 		var iva=$("#iva");
 		var ivaReg=/^[0-9]{11}$/;
      let error=iva.next();
-
-		if(iva.val() && !ivaReg.test(iva.val())){	//Iva non corretta
+    
+		if(iva.val()!="           " && !ivaReg.test(iva.val())){	//Iva non corretta
 			$('span').text("");
 			error.text("Iva non corretta");
 			console.log('Iva check not passed');

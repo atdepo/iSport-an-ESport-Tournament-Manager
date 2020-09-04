@@ -18,8 +18,7 @@ function getMessaggi() {
 			container=$(".containerMessaggi");
 			
 			for (var i = 0; i < data.length; i++) {
-				container.append("<div class='mess' onclick=showMessage("+data[i].codice+") id=messaggio"+data[i].codice+">Messaggio"+data[i].codice+"</div> <div id="+data[i].codice+">"+
-						"<a href='MessaggiControl?action=delMessaggio&codice="+data[i].codice+"'><i   class='messChecked check fas fa-check'></i></a></div>")
+				container.append("<div class='mess' onclick=showMessage("+data[i].codice+") id=messaggio"+data[i].codice+">Messaggio"+data[i].codice+"<a href='MessaggiControl?action=delMessaggio&codice="+data[i].codice+"'><i   class='messChecked check fas fa-check'></i></a></div>") 
 						
 			}
 			

@@ -46,7 +46,7 @@
 	
 	<div class="messaggi">
 		<div class="containerMessaggi"></div>
-		<div class="viewerMessaggi"> <p>Uma Jam aaaaaaaaaaa</p></div>
+		<div class="viewerMessaggi"> <p>Clicca un messaggio per visualizzarlo qui</p></div>
 	</div>
 </body>
 </html>

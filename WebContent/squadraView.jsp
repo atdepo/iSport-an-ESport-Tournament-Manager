@@ -29,6 +29,15 @@ if(teamName==null){
 			color:#0082e6;
 			background:url(img/black-gradient.png) repeat;
 		}
+		
+		small{
+		font-size:20px;
+		font-weight:800;
+		color:#0089b6;
+		}
+		
+		span{
+		color:red;}
 	</style>	
 	
 	
@@ -42,7 +51,9 @@ if(teamName==null){
 	<div class="tutto">
 		<div class="nomeSquadra"><h3><%=teamName%></h3></div>
 		<div class="giocatori"></div>
-	
+		<fieldset class="dati">
+		
+		</fieldset>
 	
 	
 	

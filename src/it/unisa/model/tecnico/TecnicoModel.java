@@ -78,14 +78,15 @@ public class TecnicoModel implements ModelInterface<TecnicoBean, String> {
 
 	}
 
-	public int doRetrieveTecniciFisici() throws SQLException {
+	public ArrayList<TecnicoBean> doRetrieveTecnici(String spec) throws SQLException {
 		
-
-		String sql = "SELECT * FROM tecnico WHERE specializzazione='locale'";
+		if(spec!=null && !spec.isEmpty() && (spec.equals("locale") || spec.equals("on-line"))) {
+		String sql = "SELECT * FROM tecnico WHERE specializzazione=?";
 		
 		ArrayList<TecnicoBean> collection= new ArrayList<TecnicoBean>();
 
 		try (Connection con = DriverManagerConnectionPool.getConnection();PreparedStatement statement = con.prepareStatement(sql)) {
+			statement.setString(1, spec);
 			
 			System.out.println("DoRetriveByKey=" + statement.toString());
 			ResultSet rs = statement.executeQuery();
@@ -103,9 +104,12 @@ public class TecnicoModel implements ModelInterface<TecnicoBean, String> {
 				
 				collection.add(bean);
 			}
-			return collection.size();
+			return collection;
 			
 		}
+		}
+		else
+			return null;
 	}
 	
 	

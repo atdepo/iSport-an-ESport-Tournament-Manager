@@ -154,7 +154,7 @@ margin:10px;
 }
 
 .field-btn{
-	margin-top:30px;
+	margin-top:15px;
 	display:flex;
 }
 
@@ -280,6 +280,23 @@ input:hover, input:focus{
     font-size: 13px;
 }
 
+.info{
+	display: block;
+    font-size: 17px;
+    font-weight: 900;
+    margin-top:10px;
+    color: #FF7F1B;
+}
+
+.radiochoice{
+	margin-top:-20px;
+}
+
+.error-struttura{
+	top: -30px;
+    position: relative;
+    color: red;;
+}
 
 ul.ks-cboxtags {
     list-style: none;

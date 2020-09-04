@@ -7,6 +7,10 @@
 
 $(document).ready(function() {
 
+	if($('input[type=radio][name=r-button]:checked').val()=="true"){
+		show();
+	}
+	
 	var xhr = new XMLHttpRequest();
 	xhr.onreadystatechange = function() {
 
@@ -17,11 +21,10 @@ $(document).ready(function() {
 			var game = $('#gioco');
 			var sponsor=$('.ks-cboxtags');
 			var dataGiochi= data['0'];
-			var dataSponsor= data['1'];
-			var totTecnici= data['2'];
-			var maxTecniciFisici= data['3'];
-			$('.max-tecnici-fisici').attr("value",maxTecniciFisici);
-			$('.tot-tecnici').attr("value",totTecnici);			
+			var tecniciOn= data['1'];
+			var tecniciFis= data['2'];
+			$('.max-tecnici-fisici').attr("value",tecniciFis);
+			$('.tot-tecnici').attr("value",tecniciOn);			
 			
 			//Questa funzione riempie la tendina dei giochi 
 			for (var i = 0; i < dataGiochi.length; i++) {
@@ -30,12 +33,6 @@ $(document).ready(function() {
 					
 					game.append('<div class="option"><input name="gioco" value="'+dataGiochi[i].nomeGioco+'" onclick="tendina(\''+nome+'\')" type="radio" class="radio" id="'+nome+'"> <label for="'+nome+'">'+dataGiochi[i].nomeGioco+'</label></div>');
 			}			
-			//Questa funzione riempie la tendina degli sponsor
-			for (var i = 0; i < dataSponsor.length; i++) {
-
-				sponsor.append('<li><input type="checkbox" id="'+dataSponsor[i].nome+'" value="'+dataSponsor[i].nome+'"><label for="'+dataSponsor[i].nome+'">'+dataSponsor[i].nome+'</label></li>')		
-			
-			}
 
 		}
 		
@@ -53,7 +50,7 @@ $(document).ready(function() {
  * Nel caso in cui la data sia stata inserita in modo errato oppure la struttura sia gia' occupata, allora
  * viene mostrato un errore, altrimenti si procede con il submit del form
  */
-$(function(){
+/*$(function(){
 	$(".subBtn").click(function(){
 		var data=$(".data-torneo").val();
 		if(data==""){
@@ -66,14 +63,22 @@ $(function(){
 				if (xhr.status == 200 && xhr.readyState == 4) {
 					let data = JSON.parse(xhr.responseText);
 					console.log(data);
-					var errore=data['0'];
-					if(errore=="null"){
+					var tipo=data['0'];
+					var errore=data['1'];
+					var check=$('input[type=radio][name=r-button]:checked').val();
+					if(check=="true"){
+					if(tipo=="null"){
 						$("#insTorneo").submit();
 					}
-					else{
-						$('.error-data').empty().text(errore);
-					}
+					else
+						if(tipo=="data"){
+							$('.error-data').empty().text(errore);
+						}
+						else if(tipo=="struttura"){
+							$('.error-data').empty().text(errore);
+						}
 				}
+			}
 			}
 			xhr.open('GET', '../TournamentControl?action=validateTorneo&datatorneo='+data, true);
 			xhr.send();
@@ -83,6 +88,61 @@ $(function(){
 	
 })
 
+*/
+
+$(function(){
+	$(".subBtn").click(function(){
+		var data=$(".data-torneo").val();
+		if(data==""){
+			$('.error-data').empty().text("Inserisci una data!");
+			return false;
+		}
+		else{
+			var check=$('input[type=radio][name=r-button]:checked').val();
+			var xhr = new XMLHttpRequest();
+
+			if(check=="true"){
+				
+				var giulio=$('.selected.strutture').text();
+				if(giulio!==" Seleziona una Struttura"){
+					xhr.open('GET', '../TournamentControl?action=validateTorneo&datatorneo='+data+'&struttura='+giulio, true);
+					xhr.send();
+				}
+				else{
+					$('.error-struttura').empty().text("Inserisci una struttura!");
+				}
+			}
+			else if (check=="false"){
+				xhr.open('GET', '../TournamentControl?action=validateTorneo&datatorneo='+data, true);
+				xhr.send();
+			}
+			
+			xhr.onreadystatechange = function() {
+				if (xhr.status == 200 && xhr.readyState == 4) {
+					let data = JSON.parse(xhr.responseText);
+					console.log(data);
+					var tipo=data['0'];
+					var errore=data['1'];
+					if(tipo=="null"){
+						$("#insTorneo").submit();
+					}
+					else{
+						
+						if(tipo=="data"){
+							$('.error-data').empty().text(errore);
+						}
+						else if(tipo=="struttura"){
+							$('.error-data').empty().text(errore);
+						}
+					}
+				}
+			}	
+		}
+		
+		
+		
+	})
+})
 
 
 /**
@@ -121,6 +181,7 @@ function tendina(k){
 
 
 /**
+ * 
  * Questa funzione si occupa di chiamare la servlet e di farsi restituire tutte le strutture 
  * presenti all'interno del database e riempire la tendina corrispondente
  * 
@@ -203,12 +264,13 @@ function show(){
 	if($(".tecniciFisici").empty()&&$(".strutture").empty()){
 		
 		$("label[for='tecnici_fisici']").show();
-		$(".tecniciFisici").append(' <label for="tecnici-fisici">Quanti tecnici desideri avere fisicamente al tuo torneo?</label>'+
+		$(".tecniciFisici").append(' <label for="tecnici-fisici">Quanti tecnici desideri avere fisicamente al tuo torneo?</label><div class="info">I tecnici fisici saranno presenti fisicamente al torneo e potrai chiedere qualsiasi cosa<br>(Costo di ogni tecnico:700€)</div>'+
 				'<div class="number-container tecnici-fisici" title="Premi shift cliccando i selettori per avanzare di +/- 100 e premi CTRL sx per avanzare di +/- 1000">'+
 				'<span class="next tecnici-fisici" onclick="gestioneFisici()"></span> <span class="prev tecnici-fisici" onclick="gestioneFisici()"></span> <div class="box-span">'+
 				'<span class="number-box-tecnici-fisici">0</span></div>');		
 		
-		$(".strutture").append('<label for="strutture">In che struttura vuoi che sia organizzato il tuo torneo?</label> <div class="container"> <div class="select-box">'+
+		$(".strutture").append('<label for="strutture">In che struttura vuoi che sia organizzato il tuo torneo?</label>'+
+				'<div class="container"> <div class="select-box">'+
 				'<div class="options-container" id="strutture">'+
 				'</div><div class="selected strutture" onclick="menu(\'strutture\')">'+
 	             ' Seleziona una Struttura</div></div></div>');
@@ -228,7 +290,6 @@ function show(){
 function gestioneFisici(){
 	if($(event.target).hasClass('next')){
 	var max_value=$('.max-tecnici-fisici').val();
-	var curr_tot_val=parseInt($('.number-box-tecnici').text());
     var curr_val=parseInt($('.number-box-tecnici-fisici').text());
     if(event.shiftKey){
     	if(curr_val+100<=max_value)
@@ -238,7 +299,7 @@ function gestioneFisici(){
     	if(curr_val+1000<=max_value)
             $('.number-box-tecnici-fisici').html(curr_val+1000); 
     }
-    else if(curr_val+1<=max_value && curr_val+1<=curr_tot_val)
+    else if(curr_val+1<=max_value)
         $('.number-box-tecnici-fisici').html(curr_val+1);
 }
 

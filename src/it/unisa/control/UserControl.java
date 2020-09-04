@@ -121,7 +121,6 @@ public class UserControl extends HttpServlet {
 		
 		case "visualizza":
 			
-			System.out.println("entro in visualizza");
 			session.setAttribute("cod",request.getParameter("codtorneo"));
 			response.sendRedirect(request.getContextPath()+"/torneo.jsp");
 			

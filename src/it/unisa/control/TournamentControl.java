@@ -79,20 +79,18 @@ public class TournamentControl extends HttpServlet {
 			try {
 				
 				ArrayList<GiocoBean> giochi = (ArrayList<GiocoBean>) gModel.doRetriveAll(null);
-				ArrayList<String> numeroTecnici = new ArrayList<String>();
-				ArrayList<String> maxTecniciFisici = new ArrayList<String>();
-				ArrayList<SponsorBean> sponsor= (ArrayList<SponsorBean>) spModel.doRetriveAll(null);
-				numeroTecnici.add(String.valueOf(tecModel.doRetriveAll(null).size()));
-				maxTecniciFisici.add(String.valueOf(tecModel.doRetrieveTecniciFisici()));
+				ArrayList<String> numeroTecniciLoc = new ArrayList<String>();
+				ArrayList<String> numeroTecniciFis = new ArrayList<String>();
+				numeroTecniciLoc.add(String.valueOf(tecModel.doRetrieveTecnici("on-line").size()));
+				numeroTecniciFis.add(String.valueOf(tecModel.doRetrieveTecnici("locale").size()));
 				ArrayList<ArrayList<?>> col= new ArrayList<ArrayList<?>>();
 				col.add(giochi);
-				col.add(sponsor);
-				col.add(numeroTecnici);
-				col.add(maxTecniciFisici);
+				col.add(numeroTecniciLoc);
+				col.add(numeroTecniciFis);
 				theJson += gson.toJson(col);
 				response.getWriter().print(theJson);
 				response.getWriter().flush();	
-				System.out.println("il json di inizializzazione del form � stato creato con successo");
+				System.out.println("il json di inizializzazione del form e' stato creato con successo");
 				request.getSession().setAttribute("error", null);
 				request.getSession().setAttribute("error-type", null);
 				response.setStatus(200);
@@ -191,6 +189,7 @@ public class TournamentControl extends HttpServlet {
 				//response.sendRedirect(request.getContextPath()+"/user/FormCreazioneTorneo.jsp");
 				//return;
 				ArrayList<String>err= new ArrayList<String>();
+				err.add("data");
 				err.add(errore);
 				String wr=gson.toJson(err);
 				response.getWriter().print(wr);
@@ -214,6 +213,7 @@ public class TournamentControl extends HttpServlet {
 							if (t.getCAPStruttura() == value && t.getIndirizzoStruttura().equals(address)) {
 								String errore = "In questa data la struttura selezionata e' gia' occupata, selezionarne una diversa";
 								ArrayList<String>err= new ArrayList<String>();
+								err.add("struttura");
 								err.add(errore);
 								String wr=gson.toJson(err);
 								response.getWriter().print(wr);
@@ -247,6 +247,8 @@ public class TournamentControl extends HttpServlet {
 		case "saveTorneo":
 			
 				HttpSession sessione= request.getSession();
+				
+				
 				sessione.setAttribute("nomeTorneo", request.getParameter("nometorneo"));
 				sessione.setAttribute("dataTorneo", request.getParameter("datatorneo"));
 				sessione.setAttribute("nomeGioco", request.getParameter("gioco"));
@@ -254,7 +256,7 @@ public class TournamentControl extends HttpServlet {
 				sessione.setAttribute("modalita", request.getParameter("mode"));
 				sessione.setAttribute("struttura", request.getParameter("strutture"));
 				sessione.setAttribute("budget", request.getParameter("budget"));
-				sessione.setAttribute("totaleTecnici", request.getParameter("tot_tecnici"));
+				sessione.setAttribute("tecniciRemoti", request.getParameter("tot_tecnici"));
 				sessione.setAttribute("tecniciFisici", request.getParameter("tecnici_fisici"));
 				response.sendRedirect(request.getContextPath()+"/user/FormInserimentoSquadre.jsp");			
 				

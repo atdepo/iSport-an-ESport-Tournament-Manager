@@ -58,28 +58,15 @@
 				<label for="nometorneo">Qual'è il nome del torneo da creare?</label>
 				<input type="text" class="feedback-input nome-torneo" name="nometorneo">
 			</div>	
-
 			<div class="field">
-				 <label for="number-container">Qual'è il budget stimato per il torneo?</label>
-				
-				<div class="number-container budget" title="Premi shift cliccando i selettori per avanzare di +/- 100 e premi CTRL sx per avanzare di +/- 1000">
-					<span class="next budget"></span>
-					<span class="prev budget"></span>
-					<div class="box-span">
-						<span class="number-box-budget">0 €</span>
-					</div>
-				
+				<label for="homePage">Vuoi che il torneo sia mostrato in home page?<br><span class="info">(Questa opzione aggiungerà un costo di 250€/settimana per ogni squadra partecipante)</span><br></label>
+				<div class="radiochoice">
+					<input id="toggle-on" class="toggle toggle-left" name="toggle" value="false" type="radio" checked>
+					<label for="toggle-on" class="btn">Si</label>
+					<input id="toggle-off" class="toggle toggle-right" name="toggle" value="true" type="radio">
+					<label for="toggle-off" class="btn">No</label>
 				</div>
 			</div>
-			
-				<label for="homePage">Vuoi che il torneo sia mostrato in home page?<br><small style="color:red">(Questa opzione aggiungerà un costo di 250€ per ogni squadra partecipante)</small><br></label>
-				
-				<input id="toggle-on" class="toggle toggle-left" name="toggle" value="false" type="radio" checked>
-				<label for="toggle-on" class="btn">Si</label>
-				<input id="toggle-off" class="toggle toggle-right" name="toggle" value="true" type="radio">
-				<label for="toggle-off" class="btn">No</label>
-			
-			
 		
 
 			<div class="field-btn">
@@ -147,8 +134,8 @@
 			</div>
 			
 			<div class="field">
-				 <label for="tecnici">Quanti tecnici desideri avere per il tuo torneo?</label>
-				
+				 <label for="tecnici">Quanti tecnici desideri da remoto avere per il tuo torneo?</label>
+				<div class="info">I tecnici che si collegano da remoto riceveranno le eventuali richieste di errore inviate per risolverle<br>(Costo di ogni tecnico:400€)</div>
 				<div class="number-container tecnici" title="Premi shift cliccando i selettori per avanzare di +/- 100 e premi CTRL sx per avanzare di +/- 1000">
 					<span class="next tecnici"></span>
 					<span class="prev tecnici"></span>

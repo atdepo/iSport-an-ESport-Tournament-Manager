@@ -34,13 +34,7 @@
 			font-size:25px;
 			margin-top:15px;
 		}
-		.nomiTeam{
-			display:flex;
-			font-size:21px;
-			margin-top:15px;
-			margin-bottom:15px;
-			flex-wrap:wrap;
-		}
+		
 		.nomiTeam > *{
 			margin-right:5px;
 		}
@@ -64,10 +58,7 @@
 		<div class="nomeT"></div>
 		
 		<div class="nomeS"></div>
-		
-		<div class="nomiTeam">
-			<p>Team Partecipanti :</p>	
-		</div>
+	
 			<h2>Loghi delle squadre partecipanti</h2>
 		<div class="loghi"></div>
 

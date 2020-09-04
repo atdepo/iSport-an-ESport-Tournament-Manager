@@ -12,7 +12,7 @@ $(document).ready(function(){
 				
 				for (var i = 0; i < data[0].length; i++) {
 					var nome=data[0][i].nome;
-					sImage.append('<div><h5>'+data[0][i].nome+'</h5><div class="sImage '+nome+'" > <a href="UserControl?action=visualizzaSquadra&nomeSquadra='+ nome +'"> <img src='+data[0][i].teamImage+'></img></a> </div></div>');
+					sImage.append('<div><h4>'+data[0][i].nome+'</h4><div class="sImage '+nome+'" > <a href="UserControl?action=visualizzaSquadra&nomeSquadra='+ nome +'"> <img src='+data[0][i].teamImage+'></img></a> </div></div>');
 				}
 			}
 		

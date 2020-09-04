@@ -17,7 +17,7 @@
 					//nomeS.append('<div class=nomeS>'+data[i].nome +' </div> ');	
 					//pImage.append('<div class=pImage> <img src='+data[i].teamImage+'></img> </div> ');
 					//datiP.append('<div class=datiP>'+data[i].nome +' </div>');
-					giocatori.append('<div><h5>'+data[i].nickname+'</h5><div class="'+data[i].nome+'"><img src='+data[i].imgPlayer+'></img></div></div> ');
+					giocatori.append('<div><h3>'+data[i].nickname+'</h3><div class="'+data[i].nome+'"><img src='+data[i].imgPlayer+'></img></div></div> ');
 				}
 			}
 		}

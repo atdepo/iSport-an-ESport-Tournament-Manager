@@ -29,6 +29,12 @@ if(teamName==null){
 			color:#0082e6;
 			background:url(img/black-gradient.png) repeat;
 		}
+		.nomeSquadra{
+			text-align:center;
+			margin-top:5px;
+			font-size:22px;	
+			margin-bottom:15px;
+		}
 	</style>	
 	
 	

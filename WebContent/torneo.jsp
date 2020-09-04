@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+<%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
 <%
@@ -7,18 +7,71 @@
 	System.out.println(codice);
 	
 %>
-
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<script src = "https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script src="Script/torneo.js"></script>
-<title>Insert title here</title>
+	<meta charset="UTF-8">
+	<script src = "https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<script src="Script/torneo.js"></script>
+	
+	<style type="text/css">
+		.loghi{
+			display:flex;
+			flex-wrap: wrap;
+			margin-top:24px;
+		}
+		.loghi > *{	
+			margin:5px 10px 10px;
+		}
+		
+		.nomeT{
+			font-size:32px;
+			text-align:-webkit-center;
+			margin-top:5px;
+		}
+		
+		.nomeS{
+			font-size:25px;
+			margin-top:15px;
+		}
+		.nomiTeam{
+			display:flex;
+			font-size:21px;
+			margin-top:15px;
+			margin-bottom:15px;
+			flex-wrap:wrap;
+		}
+		.nomiTeam > *{
+			margin-right:5px;
+		}
+		h2{
+			text-align:center;
+		}
+		h3{
+				
+		}
+		body{
+			color:#0082e6;
+			background:url(img/black-gradient.png) repeat;
+		}
+	</style>	
+	
+	
 </head>
 <body>
+		<%@ include file="header.jsp"%>
+	<div class="tutto">
+		<div class="nomeT">  </div>
+		
+		<div class="nomeS">	 </div>
+		
+		<div class="nomiTeam">
+			<p>Team Partecipanti :</p>	
+		</div>
+			<h2>Loghi delle squadre partecipanti</h2>
+		<div class="loghi">		</div>
 
+	</div>
 </body>
-
-<input type="hidden" value="<%=codice%>" id="torneo">
+	<input type="hidden" value="<%=codice%>" id="torneo">
 </html>

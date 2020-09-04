@@ -50,6 +50,7 @@ h3{
 }
 .torneo{
 	margin-bottom: 5px;
+	cursor: pointer;
 }
 .testlabel{
 	display:block;

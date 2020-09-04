@@ -63,7 +63,7 @@
       <div class="container">
         <div class="row">
           <div class="Copyright">
-            <p class="copyright-text">Copyright &copy; 2020 All Rights Reserved by I-sport
+            <p class="copyright-text">Copyright &copy; 2020 All Rights Reserved by Triggiani SPA
             </p>
           </div>     
         </div>

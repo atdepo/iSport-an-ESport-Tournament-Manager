@@ -19,22 +19,17 @@
 		background:url(../img/black-gradient.png) repeat;
 	}
 	
-	.listaTornei{	position: absolute;
-    left: 50%;
-
+	.listaTornei{	
     /*transform: translate(-50%, -50%);
 	float:left;
-	left: 50%;
-	position: absolute;*/
+	*/
+	position: absolute;
+    left: 50%;
 	width:550px;
 	margin:auto;
-	padding: 50px 35px 10px 35px;
 	text-align: center;	
 	background-color:rgba(47,50,50,0.5);
-	padding-left:35px;
-	padding-right:35px;
-	padding-top:35px;
-	padding-bottom:50px;
+	padding: 35px 35px 50px;
   	margin-top:30px;
 	margin-left: -260px;
 	
@@ -54,11 +49,6 @@
 	<meta charset="UTF-8">
 	
 	<script src = "https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-	<script>
-	
-
-		
-	</script>
 </head>
 	
 <body>

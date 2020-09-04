@@ -3,10 +3,11 @@
 <!DOCTYPE html>
 <html>
 <head>
+<%UtenteBean u=(UtenteBean)session.getAttribute("user"); %>
 	<meta charset="UTF-8">	
 
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-	<script src="Script/messaggi.js"></script>
+	<script src="../Script/messaggi.js"></script>
 	<style>
 		.mess{
 			cursor:pointer;
@@ -40,13 +41,13 @@
 </head>
 <body>
 	<%@ include file="../header.jsp"%>
+	
 
-
-	<div class="nomeTecnico"> Alfredo</div>
+	<div class="nomeTecnico"> <%=u.getUsername() %></div>
 	
 	<div class="messaggi">
 		<div class="containerMessaggi"></div>
-		<div class="viewerMessaggi"> <p>Uma Jam aaaaaaaaaaa</p></div>
+		<div class="viewerMessaggi"> <p>Seleziona un messaggio per visualizzarlo</p></div>
 	</div>
 </body>
 </html>

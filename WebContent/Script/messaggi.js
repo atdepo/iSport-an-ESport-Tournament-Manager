@@ -19,23 +19,18 @@ function getMessaggi() {
 			
 			for (var i = 0; i < data.length; i++) {
 				container.append("<div class='mess' onclick=showMessage("+data[i].codice+") id=messaggio"+data[i].codice+">Messaggio"+data[i].codice+"</div> <div id="+data[i].codice+">"+
-						"<a href='MessaggiControl?action=delMessaggio&codice="+data[i].codice+"'><i   class='messChecked check fas fa-check'></i></a></div>")
+						"<a href='../MessaggiControl?action=delMessaggio&codice="+data[i].codice+"'><i   class='messChecked check fas fa-check'></i></a></div>")
 						
 			}
 			
 			
 			}
 		}	
-	xhr.open('GET', 'MessaggiControl?action=getMessaggi', true);
+	xhr.open('GET', '../MessaggiControl?action=getMessaggi', true);
 		xhr.send();
 		
 	}
 
-function delMessaggi(cod){
-	var xhr = new XMLHttpRequest();
-	xhr.open('GET', 'MessaggiControl?action=delMessaggi&codice='+cod, true);
-	xhr.send();
-	}
 		
 function showMessage(i)  {
 	var xhr = new XMLHttpRequest();
@@ -53,7 +48,7 @@ function showMessage(i)  {
 			}
 		
 		}
-	xhr.open('GET', 'MessaggiControl?action=showMessaggio&codice='+i, true);
+	xhr.open('GET', '../MessaggiControl?action=showMessaggio&codice='+i, true);
 	xhr.send();
 	
 	

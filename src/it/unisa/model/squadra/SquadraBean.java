@@ -5,13 +5,24 @@ import java.io.Serializable;
 public class SquadraBean implements Serializable {
 
 	private static final long serialVersionUID = -991459462790678646L;
-	private String nome,nazionalita,teamImage;
+	private String nome,nazionalita,teamImage,proprietario;
 	
 	public SquadraBean() {
 		nome="";
 		nazionalita="";
 		teamImage="";
+		proprietario="";
 	}
+	
+
+	public String getProprietario() {
+		return proprietario;
+	}
+	
+	public void setProprietario(String prop) {
+		 proprietario=prop;
+	}
+
 	
 	public String getTeamImage() {
 		return teamImage;

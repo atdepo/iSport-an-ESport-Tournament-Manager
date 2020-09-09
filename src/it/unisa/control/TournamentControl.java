@@ -256,16 +256,29 @@ public class TournamentControl extends HttpServlet {
 				while(st.hasNext())
 					System.out.println(st.next());
 				*/
-				sessione.setAttribute("nomeTorneo", request.getParameter("nometorneo"));
-				sessione.setAttribute("dataTorneo", request.getParameter("datatorneo"));
+				sessione.setAttribute("nomeTorneo", request.getParameter("nomeTorneo"));
+				sessione.setAttribute("dataTorneo", request.getParameter("data"));
 				sessione.setAttribute("nomeGioco", request.getParameter("gioco"));
-				sessione.setAttribute("tipoTorneo", request.getParameter("sel"));
+				sessione.setAttribute("tipoTorneo", request.getParameter("organizzato"));
 				sessione.setAttribute("modalita", request.getParameter("mode"));
-				sessione.setAttribute("struttura", request.getParameter("strutture"));
+				sessione.setAttribute("struttura", request.getParameter("struttura"));
 				sessione.setAttribute("budget", request.getParameter("budget"));
-				sessione.setAttribute("tecniciRemoti", request.getParameter("tot_tecnici"));
-				sessione.setAttribute("tecniciFisici", request.getParameter("tecnici_fisici"));
-				response.encodeRedirectURL(request.getContextPath()+"/user/FormInserimentoSquadre.jsp");		
+				sessione.setAttribute("tecniciRemoti", request.getParameter("numTecniciRemoto"));
+				sessione.setAttribute("tecniciFisici", request.getParameter("numTecniciFisici"));
+				response.sendRedirect(request.getContextPath()+"/user/FormInserimentoSquadre.jsp");		
+				/*
+				 * 'nomeTorneo='+$('.nome-torneo').val()+
+								 '&isHome='+$('input[type=radio][name=toggle]:checked').val()+
+								 '&gioco='+$('.selected.gioco').text()+
+								 '&mode='+$('.selected.mode').text()+
+								 '&organizzato='+$('input[type=radio][name=r-button]:checked').val()+
+								 '&data='+$(".data-torneo").val()+
+								 '&struttura='+struttura+
+								 '&numTecniciRemoto='+$('number-box-tecnici').text()+
+								 '&numTecniciFisici='+fisici,
+				 * 
+				 * 
+				 * */
 				
 		
 		break;

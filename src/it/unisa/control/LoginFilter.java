@@ -59,8 +59,11 @@ public class LoginFilter implements Filter{
 			UtenteBean user=(UtenteBean) session.getAttribute("user");
 			if(user!=null && user.getTipo().equals(tipoUtente))
 				chain.doFilter(sRequest, sResponse);
-			else
-				hResponse.sendRedirect(hRequest.getContextPath()+"/FormLoginAndRegister.jsp");
+			else 
+				if(user==null)
+					hResponse.sendRedirect(hRequest.getContextPath()+"/FormLoginAndRegister.jsp");
+				else
+					hResponse.sendRedirect(hRequest.getContextPath()+"/index.jsp");
 		}
 		
 		

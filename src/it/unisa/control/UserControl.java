@@ -188,7 +188,7 @@ public class UserControl extends HttpServlet {
 			break;
 		/*
 		 * Questa action fittizia serve a chiamare la pagina di visualizzazione delle squadre del torneo
-		 * senza per� mostrare nell'url il nome della squadra 
+		 * senza pero' mostrare nell'url il nome della squadra 
 		 */
 		case "visualizza":
 			
@@ -198,7 +198,7 @@ public class UserControl extends HttpServlet {
 		break;
 		/**
 		 * Questa action fittizia serve a chiamare la pagina di visualizzazione di una squadra
-		 * partecipante ad un torneo senza per� mostrare nell'url il nome della squadra 
+		 * partecipante ad un torneo senza pero' mostrare nell'url il nome della squadra 
 		 */
 		case "visualizzaSquadra":
 			session.setAttribute("nome",request.getParameter("nomeSquadra"));
@@ -240,7 +240,7 @@ public class UserControl extends HttpServlet {
 						
 		
 				if(email.matches(regEmail))
-				{session.setAttribute("error", "la mail scelta non � valida");
+				{session.setAttribute("error", "la mail scelta non e' valida");
 				session.setAttribute("error-type", "mail");
 				response.sendRedirect(request.getContextPath()+"/Profilo.jsp");}
 				else
@@ -275,7 +275,7 @@ public class UserControl extends HttpServlet {
 				
 	
 				if(iva.matches(regIva))
-				{session.setAttribute("error", "la partita IVA inserita non � valida");
+				{session.setAttribute("error", "la partita IVA inserita non e' valida");
 				session.setAttribute("error-type", "piva");
 				response.sendRedirect(request.getContextPath()+"/Profilo.jsp");}
 				else
@@ -288,12 +288,6 @@ public class UserControl extends HttpServlet {
 					session.setAttribute("error-type", "piva");
 					response.sendRedirect(request.getContextPath()+"/Profilo.jsp");
 				}
-				/***********TEST PER L'IMG
-				 BufferedImage bimg = ImageIO.read(new java.io.File("C:/Users/Antonio/Desktop/backgroundBlur"));
-				int width = bimg.getWidth();
-				int height = bimg.getHeight();
-				System.out.println("chiavt a mammt"+width);
-				*/
 				break;
 		
 			}//chiusura switch(action)

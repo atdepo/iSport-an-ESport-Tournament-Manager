@@ -84,28 +84,30 @@ $(function(){
 					var tipo=data['0'];
 					var errore=data['1'];
 					if(tipo=="null"){
-						//$('form').submit();
-							alert('faccio la submit')
-							var struttura=$('.selected.strutture').text();
-							var fisici=$('number-box-tecnici-fisici').text();
-							if(struttura=="")
-								struttura="null";
-							if(isNaN(fisici))
-								fisici=0;
+						var struttura=$('.selected.strutture').text();
+						var fisici=$('number-box-tecnici-fisici').text();
+						if(struttura=="")
+							struttura="null";
+						if(isNaN(fisici))
+							fisici=0;
 							
-							$.ajax({
-								url :'TournamentControl?action=saveTorneo',
-								type:'POST',
-								data:'nomeTorneo='+$('.nome-torneo')+
-									 '&isHome='+$('input[type=radio][name=toggle]:checked').val()+
-									 '&gioco='+$('.selected.gioco').text()+
-									 '&mode='+$('.selected.mode').text()+
-									 '&organizzato='+$('input[type=radio][name=r-button]:checked').val()+
-									 '&data='+$(".data-torneo").val()+
-									 '&struttura='+struttura+
-									 '&numTecniciRemoto='+$('number-box-tecnici').text()+
-									 '&numTecniciFisici='+fisici
-							});
+						$.ajax({
+							url :'TournamentControl?action=saveTorneo',
+							async:false,
+							type:'POST',
+							data:'nomeTorneo='+$('.nome-torneo').val()+
+								 '&isHome='+$('input[type=radio][name=toggle]:checked').val()+
+								 '&gioco='+$('.selected.gioco').text()+
+								 '&mode='+$('.selected.mode').text()+
+								 '&organizzato='+$('input[type=radio][name=r-button]:checked').val()+
+								 '&data='+$(".data-torneo").val()+
+								 '&struttura='+struttura+
+								 '&numTecniciRemoto='+$('number-box-tecnici').text()+
+								 '&numTecniciFisici='+fisici,
+							success: function(){
+								window.location.href='FormInserimentoSquadre.jsp';
+							}
+						});
 						
 					}
 					else{

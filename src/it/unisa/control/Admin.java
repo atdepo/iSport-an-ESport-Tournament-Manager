@@ -16,10 +16,6 @@ import it.unisa.model.torneo.TournamentModel;
 import it.unisa.model.utente.UtenteBean;
 import it.unisa.model.utente.UtenteModel;
 
-/**
- * Servlet implementation class Admin
- */
-
 @WebServlet(urlPatterns = {"/admin/Admin","/Admin"})
 public class Admin extends HttpServlet {
 	private static final long serialVersionUID = 1L;

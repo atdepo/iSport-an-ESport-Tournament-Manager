@@ -34,7 +34,7 @@
 
 <body>
 	<%@ include file="../header.jsp"%>
-	
+	<input type="hidden" value="<%=request.getSession().getId()%>" id="session">
 	<div class="total-container">
 		<header>Informazioni di base:</header>
 		<div class="form-div">

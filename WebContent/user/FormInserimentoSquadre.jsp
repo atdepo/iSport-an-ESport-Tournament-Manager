@@ -1,8 +1,20 @@
+<%@page import="java.util.Enumeration"%>
 <%@page import="it.unisa.model.modalita.ModalitaModel"%>
-
+<%@page import="java.util.*"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 	
+	
+<%
+Enumeration<String> en=request.getAttributeNames();
+
+Iterator<String> i=en.asIterator();
+System.out.println("-------inizio attributi");
+
+while(i.hasNext())
+	System.out.println(i.next());
+
+%>
 <!DOCTYPE html>
 <html>
 
@@ -57,7 +69,7 @@
 <body>
 	<%@ include file="../header.jsp"%>
 	<div class="squadra">
-		<h2>Ora aggiungi le squadre per <%=session.getAttribute("nomeTorneo") %></h2><br>
+		<h2>Ora aggiungi le squadre per <%=session.getAttribute("nomeTorneo")%></h2><br>
 		
 		<div class="contenitore">
 		<div class="contieniBottoni">

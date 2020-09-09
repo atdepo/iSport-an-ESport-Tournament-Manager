@@ -24,8 +24,8 @@
 		$(function() {
 			var form=$("#addTecnico");
 			form.submit(function() {
-				if(passCheck()&&CFCheck()&&recapitoCheck()&&indirizzoCheck()&&dataCheck()&&userCheck()&&mailCheck())
-					return true;
+				if(nomeCheck()&&cognomeCheck()&&dataCheck()&&indirizzoCheck()&&recapitoCheck()&&CFCheck()&&mailCheck()&&passCheck())
+				 return true;
 				else return false;	
 				
 			})
@@ -75,9 +75,8 @@
 
 
 	//--------------------------------------------Funzione per il controllo del campo nome e cognome-------------------------------------------
- function userCheck(){
+ function nomeCheck(){
  	var name=$("#nome");
- 	var cognome=$("#cognome");
 
  	var usernameReg=/^[A-Za-z][A-Za-z\'\-]+([\ A-Za-z][A-Za-z\'\-]+)*/;
     let error=name.next();
@@ -104,7 +103,13 @@
 				return true;
 			}
 		}
-	    let error=cognome.next();
+	}
+ 
+ function cognomeCheck() {
+	 var cognome=$("#cognome");
+
+	 	var usernameReg=/^[A-Za-z][A-Za-z\'\-]+([\ A-Za-z][A-Za-z\'\-]+)*/;
+	 error=cognome.next();
 	    if(!cognome.val()){	//Username non inserito
 	    	$('span').text("");
 			error.text("Devi mettere uno cognome prova Marziano");
@@ -127,7 +132,8 @@
 				return true;
 			}
 		}
-	}
+	
+}
 	
 	
 	//--------------------------------------------Funzione per il controllo del campo data-------------------------------------------
@@ -160,14 +166,13 @@ function recapitoCheck() {
 	var reg=/\(?([0-9]{3})\)?([ .-]?)([0-9]{3})\2([0-9]{4})/;
     let error=recapito.next();
 
-	 if(!recapito.val()){	//Username non inserito
+	 if(!recapito.val()){	//Recapito non inserito
 	    	$('span').text("");
 			error.text("Devi mettere uno recapito prova 3936863580");
 			console.log('recapito check not passed');
 			return false;
 		}
 	    else{
-		
 			if(!reg.test(recapito.val())){ 	//Username non corretto
 				$('span').text("");
 				error.text("Magari qualcosa di decente");
@@ -181,7 +186,7 @@ function recapitoCheck() {
 				console.log('recapito check passed');
 				return true;
 			}
-}
+	    }
 	 }
 
 
@@ -215,17 +220,12 @@ function CFCheck() {
 	 }
 	//-----------------------------------------Funzione per il controllo del campo password--------------------------------------------------
  function passCheck(){
-	if($('#login-form').css("display")=="block")
-		var password=$('.password');
-	else
+	
 		var password=$("#password");
 	
 	var passwordReg=/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/;
-   
-	if($('#login-form').css("display")=="block")
-		var error=$('.error-cred');
-	else
-		var error=$('.psw');
+    var error=password.next();
+
 
 	if(!password.val()){	//Password non inserita
 		$('span').text("");

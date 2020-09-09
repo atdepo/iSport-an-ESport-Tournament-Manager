@@ -38,7 +38,8 @@ import it.unisa.model.torneo.TournamentModel;
 import it.unisa.model.utente.UtenteBean;
 import it.unisa.model.utente.UtenteModel;
 
-@WebServlet("/TournamentControl")
+@WebServlet(urlPatterns = { "/user/TournamentControl","/TournamentControl"})
+
 public class TournamentControl extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	TournamentModel tModel = new TournamentModel();
@@ -249,7 +250,7 @@ public class TournamentControl extends HttpServlet {
 		case "saveTorneo":
 			
 				HttpSession sessione= request.getSession();
-				
+				System.out.println("mammt");
 				/*Enumeration<String> s= request.getParameterNames();
 				Iterator<String> st=s.asIterator();
 				while(st.hasNext())
@@ -264,7 +265,7 @@ public class TournamentControl extends HttpServlet {
 				sessione.setAttribute("budget", request.getParameter("budget"));
 				sessione.setAttribute("tecniciRemoti", request.getParameter("tot_tecnici"));
 				sessione.setAttribute("tecniciFisici", request.getParameter("tecnici_fisici"));
-				response.sendRedirect(request.getContextPath()+"/user/FormInserimentoSquadre.jsp");			
+				response.encodeRedirectURL(request.getContextPath()+"/user/FormInserimentoSquadre.jsp");		
 				
 		
 		break;

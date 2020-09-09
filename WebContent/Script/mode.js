@@ -85,7 +85,6 @@ $(function(){
 					var errore=data['1'];
 					if(tipo=="null"){
 						//$('form').submit();
-						$('form').submit(function(event){
 							alert('faccio la submit')
 							var struttura=$('.selected.strutture').text();
 							var fisici=$('number-box-tecnici-fisici').text();
@@ -107,7 +106,7 @@ $(function(){
 									 '&numTecniciRemoto='+$('number-box-tecnici').text()+
 									 '&numTecniciFisici='+fisici
 							});
-						})
+						
 					}
 					else{
 						

@@ -39,14 +39,19 @@ function getSquadra(codice){
 	 var Nome=$('#username').val();
      var Email=$('#email').val();
      var IVA=$('#iva').val();
-     var Img=$('#images-0').val();
+   //  var Img=$('#images-0').val();
      var error=$("#errorImg").text()
+     
+     	var file = $("#images-0")[0].files[0]; //this is the input where I can choose the file
+		
+		alert("ciao  "+file);
+		
     if(mailCheck()&&userCheck()&&ivaCheck()&&error=="")
     	alert("bravo");
      
-     	alert(URL.createObjectURL(Img));
+     	
     	var xhr = new XMLHttpRequest();
-    	xhr.open('POST', '../UserControl?action=modificaDati&nome='+Nome+'&email='+Email+'&iva='+IVA, true);	
+    	xhr.open('POST', '../UserControl?action=modificaDati&nome='+Nome+'&email='+Email+'&iva='+IVA+"img="+file, true);	
     	
     	xhr.send();
 

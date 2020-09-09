@@ -45,7 +45,6 @@ public class UserControl extends HttpServlet {
 	UtenteModel userModel= new UtenteModel();
 	StrutturaModel sModel= new StrutturaModel();
 	SquadraModel teamModel= new SquadraModel();
-	GiocatoreModel pModel= new GiocatoreModel();
 
     public UserControl() {
         super();
@@ -93,18 +92,7 @@ public class UserControl extends HttpServlet {
 			try {
 				String nome=(String)request.getParameter("nomeSquadra");
 				ArrayList<GiocatoreBean> squadre= (ArrayList<GiocatoreBean>) teamModel.doRetrivePlayerFromSquadra(nome);
-				ArrayList<String> names= new ArrayList<String>();
-				ArrayList<String> images= new ArrayList<String>();
-				for(GiocatoreBean b:squadre) {
-					names.add(b.getNickname());
-				}
-				for(GiocatoreBean be:squadre) {
-					images.add(be.getPlayerImage());
-				}
-				ArrayList<ArrayList<?>> cose= new ArrayList<ArrayList<?>>();
-				cose.add(names);
-				cose.add(images);
-				String mode=gson.toJson(cose);
+				String mode=gson.toJson(squadre);
 				response.getWriter().print(mode);
 				response.getWriter().flush();
 				System.out.println("il json dei giocatori della squadra "+nome+" e' stato creato con successo");
@@ -112,28 +100,6 @@ public class UserControl extends HttpServlet {
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
-			break;
-			
-		case "getDatiGiocatore":
-			
-			try {
-
-				String nick=request.getParameter("nick");
-				GiocatoreBean beanp=pModel.doRetriveByKey(nick);
-				ArrayList<GiocatoreBean> beans= new ArrayList<GiocatoreBean>();
-				beans.add(beanp);
-				String datip=gson.toJson(beans);
-				response.getWriter().print(datip);
-				response.getWriter().flush();
-				System.out.println("il json del giocatore "+nick+" e' stato creato con successo");
-				response.setStatus(200);
-			
-			
-			} catch (SQLException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
-			
 			
 			break;
 		
@@ -258,7 +224,7 @@ public class UserControl extends HttpServlet {
 					session.setAttribute("error", "la partita iva scelta e' gia' stata utilizzato");
 					session.setAttribute("error-type", "piva");
 				}
-				BufferedImage bimg = ImageIO.read(new java.io.File("C:/Users/Antonio/Desktop/backgroundBlur.jpg"));
+				BufferedImage bimg = ImageIO.read(new java.io.File("C:/Users/Antonio/Desktop/backgroundBlur"));
 				int width = bimg.getWidth();
 				int height = bimg.getHeight();
 				System.out.println("chiavt a mammt"+width);

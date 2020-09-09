@@ -72,6 +72,37 @@ public class TournamentModel implements ModelInterface<TournamentBean,String>{
 		return collection;
 	}
 
+	public Collection<TournamentBean> doRetriveInHome() throws SQLException{
+		PreparedStatement statement= null;
+		Collection<TournamentBean> collection= new ArrayList<TournamentBean>();
+		
+		String sql="SELECT * FROM torneo where isOnHomePage=1&&datatorneo<dateadd(day, 0, getdate()) ";
+		
+		try (Connection con=DriverManagerConnectionPool.getConnection()){
+			statement = con.prepareStatement(sql);
+			
+			System.out.println("DoRetriveInHome="+statement.toString());
+			ResultSet rs= statement.executeQuery();
+			
+			while(rs.next()) {
+				TournamentBean bean= new TournamentBean();
+
+				bean.setCAPStruttura(rs.getInt("CAPStruttura"));
+				bean.setCodGioco(rs.getString("CodGioco"));
+				bean.setData(rs.getString("DataTorneo"));
+				bean.setIndirizzoStruttura(rs.getString("IndirizzoStruttura"));
+				bean.setNome(rs.getString("Nome"));
+				bean.setCodice(rs.getInt("Codice"));
+				bean.setBudget(rs.getInt("budgetTorneo"));
+				bean.setHomePage(rs.getBoolean("isOnHomePage"));
+				bean.setProprietario(rs.getString("proprietarioTorneo"));
+				System.out.println(bean.getNome());
+				collection.add(bean);
+			}
+		}
+		return collection;
+	}
+	
 	@Override
 	public Collection<TournamentBean> doRetriveAll(String order) throws SQLException {
 		

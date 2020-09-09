@@ -51,7 +51,7 @@
       <div class="avatar-dropdown-menu-items">
         <ul id="test">
           <li>
-            <%if(utente.getTipo()=="user"){ %>
+            <%if(utente.getTipo()=="utente"){ %>
             <a href="<%=request.getContextPath()+"/user/Profilo.jsp"%>"class="dropdown-item">IL MIO PROFILO</a>
              <%}else if(utente.getTipo()=="admin"){ %>
              <a href="<%=request.getContextPath()+"/admin/Admin.jsp"%>"class="dropdown-item">PANNELLO ADMIN</a>

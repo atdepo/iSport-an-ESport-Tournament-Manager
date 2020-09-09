@@ -22,6 +22,8 @@ System.out.println("type "+type);
 
 
 %>
+	<script src = "https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
 <script type="text/javascript" src="../Script/admin.js"></script>
 
 
@@ -65,7 +67,6 @@ System.out.println("type "+type);
 	</style>
 	<meta charset="UTF-8">
 	
-	<script src = "https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 </head>
 	
 <body>
@@ -82,7 +83,7 @@ System.out.println("type "+type);
 		<span class="error"><%if(type.equals("dataN")){ %><%=error%><%}%></span>
 		<input type="text" id="indirizzo" name="indirizzo">
 		<span class="error"><%if(type.equals("indirizzo")){ %><%=error%><%}%></span>
-		<input type="number" id="recapito" name="recapito">
+		<input type="text" id="recapito" name="recapito">
 		<span class="error"><%if(type.equals("recapito")){ %><%=error%><%}%></span>
 		<input type="text" id="CF" name="CF">
 		<span class="error"><%if(type.equals("CF")){ %><%=error%><%}%></span>

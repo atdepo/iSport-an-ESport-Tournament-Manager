@@ -44,16 +44,19 @@
   	  <li><a href="<%=request.getContextPath()+"/FormLoginAndRegister.jsp"%>">ACCEDI O REGISTRATI</a></li>
   	
       <%}else{ %>
-      <%if(utente.getTipo()=="admin"){ %>
-       <li><a href="<%=request.getContextPath()+"/admin/ListaTornei.jsp"%>">LISTA TORNEI</a></li>
       
-      <%} %>
+      	
       <li><div class="avatar-dropdown-menu">
       <div class="avatar-image"><img src="<%=userImg%>" class="source"></div>
       <div class="avatar-dropdown-menu-items">
         <ul id="test">
           <li>
+            <%if(utente.getTipo()=="user"){ %>
             <a href="<%=request.getContextPath()+"/user/Profilo.jsp"%>"class="dropdown-item">IL MIO PROFILO</a>
+             <%}else if(utente.getTipo()=="admin"){ %>
+             <a href="<%=request.getContextPath()+"/admin/Admin.jsp"%>"class="dropdown-item">PANNELLO ADMIN</a>
+             <%}else if(utente.getTipo()=="tecnico"){ %>
+             <a href="<%=request.getContextPath()+"/tecnico/messaggi.jsp"%>"class="dropdown-item">MESSAGGI</a><%} %>
           </li>
           <li>
             <a href="<%=request.getContextPath()+"/Logout"%>" class="dropdown-item">LOG OUT</a>

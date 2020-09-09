@@ -50,46 +50,6 @@ $(document).ready(function() {
  * Nel caso in cui la data sia stata inserita in modo errato oppure la struttura sia gia' occupata, allora
  * viene mostrato un errore, altrimenti si procede con il submit del form
  */
-/*$(function(){
-	$(".subBtn").click(function(){
-		var data=$(".data-torneo").val();
-		if(data==""){
-			$('.error-data').empty().text("Inserisci una data!");
-			return false;
-		}
-		else{
-			var xhr = new XMLHttpRequest();
-			xhr.onreadystatechange = function() {
-				if (xhr.status == 200 && xhr.readyState == 4) {
-					let data = JSON.parse(xhr.responseText);
-					console.log(data);
-					var tipo=data['0'];
-					var errore=data['1'];
-					var check=$('input[type=radio][name=r-button]:checked').val();
-					if(check=="true"){
-					if(tipo=="null"){
-						$("#insTorneo").submit();
-					}
-					else
-						if(tipo=="data"){
-							$('.error-data').empty().text(errore);
-						}
-						else if(tipo=="struttura"){
-							$('.error-data').empty().text(errore);
-						}
-				}
-			}
-			}
-			xhr.open('GET', '../TournamentControl?action=validateTorneo&datatorneo='+data, true);
-			xhr.send();
-			
-		}
-	})
-	
-})
-
-*/
-
 $(function(){
 	$(".subBtn").click(function(){
 		var data=$(".data-torneo").val();
@@ -101,18 +61,18 @@ $(function(){
 			var check=$('input[type=radio][name=r-button]:checked').val();
 			var xhr = new XMLHttpRequest();
 
-			if(check=="true"){
+			if(check=="fisico"){
 				
-				var giulio=$('.selected.strutture').text();
-				if(giulio!==" Seleziona una Struttura"){
-					xhr.open('GET', '../TournamentControl?action=validateTorneo&datatorneo='+data+'&struttura='+giulio, true);
+				var strutt=$('.selected.strutture').text();
+				if(strutt!==" Seleziona una Struttura"){
+					xhr.open('GET', '../TournamentControl?action=validateTorneo&datatorneo='+data+'&struttura='+strutt, true);
 					xhr.send();
 				}
 				else{
 					$('.error-struttura').empty().text("Inserisci una struttura!");
 				}
 			}
-			else if (check=="false"){
+			else if (check=="on-line"){
 				xhr.open('GET', '../TournamentControl?action=validateTorneo&datatorneo='+data, true);
 				xhr.send();
 			}
@@ -124,7 +84,30 @@ $(function(){
 					var tipo=data['0'];
 					var errore=data['1'];
 					if(tipo=="null"){
-						$("#insTorneo").submit();
+						//$('form').submit();
+						$('form').submit(function(event){
+							alert('faccio la submit')
+							var struttura=$('.selected.strutture').text();
+							var fisici=$('number-box-tecnici-fisici').text();
+							if(struttura=="")
+								struttura="null";
+							if(isNaN(fisici))
+								fisici=0;
+							
+							$.ajax({
+								url :'TournamentControl?action=saveTorneo',
+								type:'POST',
+								data:'nomeTorneo='+$('.nome-torneo')+
+									 '&isHome='+$('input[type=radio][name=toggle]:checked').val()+
+									 '&gioco='+$('.selected.gioco').text()+
+									 '&mode='+$('.selected.mode').text()+
+									 '&organizzato='+$('input[type=radio][name=r-button]:checked').val()+
+									 '&data='+$(".data-torneo").val()+
+									 '&struttura='+struttura+
+									 '&numTecniciRemoto='+$('number-box-tecnici').text()+
+									 '&numTecniciFisici='+fisici
+							});
+						})
 					}
 					else{
 						

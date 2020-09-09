@@ -34,7 +34,7 @@ import it.unisa.model.utente.UtenteBean;
 import it.unisa.model.utente.UtenteModel;
 import it.unisa.model.torneo.TournamentBean;
 /**
- * Servlet implementation class UserControl
+ * Questa servlet si occupa della gestione dell'utente e della visualizzazione dei suoi tornei
  */
 
 @WebServlet(urlPatterns = {"/UserControl","/user/UserControl"})
@@ -57,6 +57,10 @@ public class UserControl extends HttpServlet {
 		System.out.println("Sto facendo questa action: "+ action);
 		
 		switch (action) {	
+		/**
+		 * Questa action serve a prendere tutti i tornei di un dato utente
+		 * identificato univocamente dalla sua mail
+		 */
 		case "getMieiTornei":
 			
 		try {
@@ -74,7 +78,7 @@ public class UserControl extends HttpServlet {
 			tutto.add(tornei);
 			tutto.add(strutture);
 			torneo=gson.toJson(tutto);
-			System.out.println("ciao mamma, questi sono i miei tornei");
+			System.out.println("Il JSON dei tornei e' stato creato con successo");
 			response.getWriter().print(torneo);
 			response.getWriter().flush();
 			response.setStatus(200);
@@ -84,7 +88,9 @@ public class UserControl extends HttpServlet {
 		}
 		break;
 		
-		
+		/**
+		 * Questa action serve a prendere i nomi e le immagini di tutti i giocatori di una data squadra
+		 */
 		case "getGiocatoriFromSquadra":
 			response.setCharacterEncoding("UTF-8");
 			response.setContentType("application/json");			
@@ -92,17 +98,61 @@ public class UserControl extends HttpServlet {
 			try {
 				String nome=(String)request.getParameter("nomeSquadra");
 				ArrayList<GiocatoreBean> squadre= (ArrayList<GiocatoreBean>) teamModel.doRetrivePlayerFromSquadra(nome);
-				String mode=gson.toJson(squadre);
+				ArrayList<String> names= new ArrayList<String>();
+				ArrayList<String> images= new ArrayList<String>();
+				
+				for(GiocatoreBean b:squadre) {
+					names.add(b.getNickname());
+				}
+				
+				for(GiocatoreBean be:squadre) {
+					images.add(be.getPlayerImage());
+				}
+				
+				ArrayList<ArrayList<?>> cose= new ArrayList<ArrayList<?>>();
+				cose.add(names);
+				cose.add(images);
+				String mode=gson.toJson(cose);
 				response.getWriter().print(mode);
 				response.getWriter().flush();
 				System.out.println("il json dei giocatori della squadra "+nome+" e' stato creato con successo");
 				response.setStatus(200);
 			} catch (SQLException e) {
+				response.sendError(404);
 				e.printStackTrace();
 			}
+			break;
+			
+			/**
+			 * Questa action serve a restituire tutti i dati di un giocatore
+			 * identificato univocamente dal proprio nickname
+			 */
+		case "getDatiGiocatore":
+			
+			try {
+
+				String nick=request.getParameter("nick");
+				GiocatoreBean beanp=pModel.doRetriveByKey(nick);
+				ArrayList<GiocatoreBean> beans= new ArrayList<GiocatoreBean>();
+				beans.add(beanp);
+				String datip=gson.toJson(beans);
+				response.getWriter().print(datip);
+				response.getWriter().flush();
+				System.out.println("il json del giocatore "+nick+" e' stato creato con successo");
+				response.setStatus(200);
+			
+			
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			
 			
 			break;
-		
+		/**
+		 * Questa action viene utilizzata per prendere tutte le squadre di un
+		 * dato torneo, identificato univocamente dal suo codice
+		 */
 		case "getSquadreFromTorneo":
 			response.setContentType("application/json");
 			response.setCharacterEncoding("UTF-8");
@@ -111,6 +161,7 @@ public class UserControl extends HttpServlet {
 			System.out.println(codTorneo);
 			ArrayList<SquadraBean> squadre=(ArrayList<SquadraBean>) userModel.getSquadreFromTornei(codTorneo);
 			ArrayList<String> dati= new ArrayList<String>();
+			
 			try {
 				TournamentBean bean= tModel.doRetriveByKey(String.valueOf(codTorneo));
 				StrutturaBean struttura=sModel.doRetriveByKey(new KeyStruttura(String.valueOf(bean.getCAPStruttura()), bean.getIndirizzoStruttura()));
@@ -121,9 +172,10 @@ public class UserControl extends HttpServlet {
 				e.printStackTrace();
 			}
 			
-			for(String s:dati) {
+			/*for(String s:dati) {
 				System.out.println(s);
-			}
+			}*/
+			
 			ArrayList<ArrayList<?>> cose= new ArrayList<ArrayList<?>>();
 			cose.add(squadre);
 			cose.add(dati);
@@ -134,14 +186,20 @@ public class UserControl extends HttpServlet {
 			response.setStatus(200);
 			
 			break;
-		
+		/*
+		 * Questa action fittizia serve a chiamare la pagina di visualizzazione delle squadre del torneo
+		 * senza perï¿½ mostrare nell'url il nome della squadra 
+		 */
 		case "visualizza":
 			
 			session.setAttribute("cod",request.getParameter("codtorneo"));
 			response.sendRedirect(request.getContextPath()+"/torneo.jsp");
 			
 		break;
-	
+		/**
+		 * Questa action fittizia serve a chiamare la pagina di visualizzazione di una squadra
+		 * partecipante ad un torneo senza perï¿½ mostrare nell'url il nome della squadra 
+		 */
 		case "visualizzaSquadra":
 			session.setAttribute("nome",request.getParameter("nomeSquadra"));
 			System.out.println(request.getParameter("nomeSquadra"));
@@ -182,38 +240,38 @@ public class UserControl extends HttpServlet {
 						
 		
 				if(email.matches(regEmail))
-				{session.setAttribute("error", "la mail scelta non è valida");
+				{session.setAttribute("error", "la mail scelta non ï¿½ valida");
 				session.setAttribute("error-type", "mail");}
 				else
 				if(!userModel.isExistingEmail(email)) { 					//se la nuova mail non e' gia' presente nel db
 					userModel.cambiaEmail(email, utente.getEmail());		//la cambio
 				}
-				else {														//altrimenti setto gli errori
+				else {														
 					
-					session.setAttribute("error", "la mail scelta e' gia' stata utilizzato");
+					session.setAttribute("error", "la mail scelta e' gia' stata utilizzato"); //altrimenti setto gli errori
 					session.setAttribute("error-type", "mail");
 				}
 				
 		
 			
-														//se il nuovo username non e' presente nel db
-				if(nome.matches(regUser))
-				{session.setAttribute("error", "lo username inserito non è valido");
+			case "username":												
+				if(valore.matches(regUser))
+				{session.setAttribute("error", "lo username inserito non ï¿½ valido");
 				session.setAttribute("error-type", "username");}
 				else
-				if(!userModel.isExistingUsername(nome)) {					//lo cambio
-					userModel.cambiaUsername(nome, utente.getUsername());	
+				if(!userModel.isExistingUsername(valore)) {					//se il nuovo username non e' presente nel db
+					userModel.cambiaUsername(valore, utente.getEmail());	//lo cambio
 				}
-				else {														//altrimenti setto gli errori
+				else {														
 					
-					session.setAttribute("error", "l'username scelto e' gia' stato utilizzato");
+					session.setAttribute("error", "l'username scelto e' gia' stato utilizzato");//altrimenti setto gli errori
 					session.setAttribute("error-type", "username");
 					
 				}
 				
 	
 				if(iva.matches(regIva))
-				{session.setAttribute("error", "la partita IVA inserita non è valida");
+				{session.setAttribute("error", "la partita IVA inserita non ï¿½ valida");
 				session.setAttribute("error-type", "piva");}
 				else
 				if(!userModel.isExistingPIVA(iva)) {						//se la nuova p.IVA non e' presente nel db

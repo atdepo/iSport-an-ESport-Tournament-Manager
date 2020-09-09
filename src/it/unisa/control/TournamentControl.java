@@ -6,6 +6,8 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
+import java.util.Enumeration;
+import java.util.Iterator;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -248,7 +250,11 @@ public class TournamentControl extends HttpServlet {
 			
 				HttpSession sessione= request.getSession();
 				
-				
+				/*Enumeration<String> s= request.getParameterNames();
+				Iterator<String> st=s.asIterator();
+				while(st.hasNext())
+					System.out.println(st.next());
+				*/
 				sessione.setAttribute("nomeTorneo", request.getParameter("nometorneo"));
 				sessione.setAttribute("dataTorneo", request.getParameter("datatorneo"));
 				sessione.setAttribute("nomeGioco", request.getParameter("gioco"));

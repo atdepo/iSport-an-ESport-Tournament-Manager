@@ -33,7 +33,7 @@
 	<label for="check" class="checkbtn">
 	<i class="fa fa-bars" aria-hidden="true"></i>
 	</label>
-	<a href="<%=request.getContextPath()+"/index.jsp"%>" ><label  class="logo">i-Sport</label></a>
+	<a href="<%=request.getContextPath()+"/index.jsp"%>" ><label class="logo">i-Sport</label></a>
 	<ul id="link">
 	<li><a href="<%=request.getContextPath()+"/index.jsp"%>" class="active">HOME</a></li>
 	<li><a href="<%=response.encodeURL(request.getContextPath()+"/user/FormCreazioneTorneo.jsp")%>">CREA TORNEO</a></li>

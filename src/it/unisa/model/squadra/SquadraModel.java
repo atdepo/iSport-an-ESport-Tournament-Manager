@@ -31,6 +31,7 @@ public class SquadraModel implements ModelInterface<SquadraBean, String>{
 				bean.setNome(rs.getString("nome"));
 				bean.setNazionalita(rs.getString("nazionalita"));
 				bean.setTeamImage(rs.getString("imgSquadra"));
+				bean.setProprietario(rs.getString("proprietario"));
 				System.out.println("Ho trovato la squadra"+nome);
 			}
 		}
@@ -64,6 +65,8 @@ public class SquadraModel implements ModelInterface<SquadraBean, String>{
 				bean.setNome(rs.getString("nome"));
 				bean.setNazionalita(rs.getString("nazionalita"));
 				bean.setTeamImage(rs.getString("imgSquadra"));
+				bean.setProprietario(rs.getString("proprietario"));
+
 				collection.add(bean);
 			}
 		} catch (SQLException e) {
@@ -91,6 +94,7 @@ public class SquadraModel implements ModelInterface<SquadraBean, String>{
 				bean.setNome(rs.getString("nome"));
 				bean.setNazionalita(rs.getString("nazionalita"));
 				bean.setTeamImage(rs.getString("imgSquadra"));
+				bean.setProprietario(rs.getString("proprietario"));
 				collection.add(bean);
 			}
 		}
@@ -129,15 +133,16 @@ public class SquadraModel implements ModelInterface<SquadraBean, String>{
 
 	@Override
 	public void doSave(SquadraBean squadra) throws SQLException {
+		System.out.println("-----------SALVO LA SQUADRA-------------------");
 		PreparedStatement statement = null;
-		String sql = "INSERT INTO squadra values (?,?,?)";
-		GiocatoreBean bean= new GiocatoreBean();
+		String sql = "INSERT INTO squadra values (?,?,?,?)";
 		try(Connection con = DriverManagerConnectionPool.getConnection()){
 		
 			statement=con.prepareStatement(sql);
 			statement.setString(1,squadra.getNome());
 			statement.setString(2,squadra.getNazionalita());
-			statement.setString(3,squadra.getTeamImage());
+			statement.setString(3,squadra.getProprietario());
+			statement.setString(4,squadra.getTeamImage());
 			System.out.println("doSave="+statement);
 			statement.executeUpdate();
 			con.commit();//<----- a volte vorrei non essere così tanto forte

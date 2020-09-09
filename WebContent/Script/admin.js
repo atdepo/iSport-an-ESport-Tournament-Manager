@@ -78,7 +78,7 @@
  function nomeCheck(){
  	var name=$("#nome");
 
- 	var usernameReg=/^[A-Za-z][A-Za-z\'\-]+([\ A-Za-z][A-Za-z\'\-]+)*/;
+ 	var usernameReg=/^[a-zA-Z(!_\'\s\-)]{1,30}$/;
     let error=name.next();
      
 	    if(!name.val()){	//Username non inserito
@@ -108,7 +108,7 @@
  function cognomeCheck() {
 	 var cognome=$("#cognome");
 
-	 	var usernameReg=/^[A-Za-z][A-Za-z\'\-]+([\ A-Za-z][A-Za-z\'\-]+)*/;
+	 	var usernameReg=/^[a-zA-Z(!_\'\s\-)]{1,30}$/;
 	 error=cognome.next();
 	    if(!cognome.val()){	//Username non inserito
 	    	$('span').text("");

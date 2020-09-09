@@ -86,7 +86,7 @@ $(document).ready(function(){
 				'</div>'+
 				
 				'<div class="field"><label for="images" class="form-label">Inserisci una immagine massimo 150x150</label>'+
-				'<input type="file" name="images" onchange="checkImg('+j+')" id="images-'+j+'>" required="required">'+
+				'<input type="file" name="images" onchange="checkImg('+j+')" id="images-'+j+'">>'+
 				'<span class="error-img"></span>'+
 				'</div>'+
 				
@@ -133,7 +133,7 @@ $(document).ready(function(){
 			'</div>'+
 			
 			'<div class="field"><label for="images" class="form-label">Inserisci una immagine massimo 150x150</label>'+
-			'<input type="file" name="images" onchange="checkImg('+parseInt(data)+')" id="images-'+parseInt(data)+'>">'+
+			'<input type="file" name="images" onchange="checkImg('+parseInt(data)+')" id="images-'+parseInt(data)+'">'+
 			'<span class="error-img"></span>'+
 			'</div>'+
 			
@@ -291,17 +291,16 @@ $(document).ready(function(){
 				console.log(data);
 				if(data['0']!=="null")
 					$('.nickname-player-'+i).next().text(data['0']);
-				else
-					$('#the-form').submit();
+				}
 			}
 		}
-	}
 	
 	
 	
 
 	function validateCampi(i){
-	var regGeneral="^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$"
+	var regGeneral=/^[a-zA-Z(!_\'\s\-)]{1,30}$/;
+	var nameReg=/^[a-zA-Z(\s')]{1,30}$/;
 	
 	if(i==0){ //Se sto validando i campi dell'inserimento della squadra
 		var nomesquadra=$('.nome-squadra');
@@ -315,6 +314,13 @@ $(document).ready(function(){
 			return false;
 
 		}
+		else if(!regGeneral.test(nomesquadra.val())){
+			var error=nomesquadra.next();
+			$('span').text("");
+			error.text("Il nome della squadra deve essere al massimo di 30 caratteri e puo'contenere solamente i seguenti caratteri speciali:( _ , ! , '-' ,'spazio' ,)");
+			console.log("Nome squadra inserita male");
+			return false;
+		}
 		else if(naz.text()=="Nazioni"){
 
 			var error=naz.next();
@@ -323,7 +329,9 @@ $(document).ready(function(){
 			console.log("Nome squadra non inserito");
 			return false;
 
-		} else{
+		} 
+		else{
+			
 			cambiaPagina();
 		}
 
@@ -347,7 +355,15 @@ $(document).ready(function(){
 			console.log("nickname non inserito");
 			return false;
 
-		} else if(!nome.val()){
+		} else if(!regGeneral.test(nickname.val())){
+			var error=nickname.next();
+			$('span').text("");
+			error.text("Inserisci un nickname di massimo 30 caratteri che puo' contenere solamente i seguenti caratteri speciali:( _ , ! , '-' ,'spazio' ,)");
+			console.log("nickname inserito male");
+			return false;
+		}
+		
+		else if(!nome.val()){
 
 			var error=nome.next();
 			$('span').text("");
@@ -355,7 +371,19 @@ $(document).ready(function(){
 			console.log("nome non inserito");
 			return false;
 
-		} else if(!cognome.val()){
+		} 
+		
+		else if(!nameReg.test(nome.val())){
+
+			var error=nome.next();
+			$('span').text("");
+			error.text("Inserisci un nome di massimo 30 caratteri");
+			console.log("nome inserito male");
+			return false;
+
+		}
+		
+		else if(!cognome.val()){
 
 			var error=cognome.next();
 			$('span').text("");
@@ -363,7 +391,19 @@ $(document).ready(function(){
 			console.log("cognome non inserito");
 			return false;
 
-		} else if(!ruolo.val()){
+		} 
+		
+		else if(!nameReg.test(cognome.val())){
+
+			var error=cognome.next();
+			$('span').text("");
+			error.text("Inserisci un cognome di massimo 30 caratteri");
+			console.log("cognome inserito male");
+			return false;
+
+		}
+		
+		else if(!ruolo.val()){
 
 			var error=ruolo.next();
 			$('span').text("");
@@ -371,7 +411,19 @@ $(document).ready(function(){
 			console.log("ruolo non inserito");
 			return false;
 
-		} else
+		} 
+		
+		else if(!nameReg.test(ruolo.val())){
+
+			var error=ruolo.next();
+			$('span').text("");
+			error.text("Inserisci un ruolo di massimo 30 caratteri");
+			console.log("ruolo inserito male");
+			return false;
+
+		}
+		
+		else
 			if(birth instanceof Date && !isNaN(birth)){
 				if(Math.floor((today-birth)/(31557600000))<18){
 					var error=dataDiNascita.next();
@@ -429,7 +481,7 @@ $(document).ready(function(){
 		}
 	} 
 	
-
+/*
 $(function(){
 	  $('#upload').change(function(){
 		  
@@ -467,4 +519,4 @@ $(function(){
 	    }
 	  });
 
-	});
+	});*/

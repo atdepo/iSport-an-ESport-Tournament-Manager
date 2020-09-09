@@ -45,7 +45,7 @@ public class UserControl extends HttpServlet {
 	UtenteModel userModel= new UtenteModel();
 	StrutturaModel sModel= new StrutturaModel();
 	SquadraModel teamModel= new SquadraModel();
-
+	GiocatoreModel pModel=new GiocatoreModel();
     public UserControl() {
         super();
     }
@@ -241,7 +241,8 @@ public class UserControl extends HttpServlet {
 		
 				if(email.matches(regEmail))
 				{session.setAttribute("error", "la mail scelta non � valida");
-				session.setAttribute("error-type", "mail");}
+				session.setAttribute("error-type", "mail");
+				response.sendRedirect(request.getContextPath()+"/Profilo.jsp");}
 				else
 				if(!userModel.isExistingEmail(email)) { 					//se la nuova mail non e' gia' presente nel db
 					userModel.cambiaEmail(email, utente.getEmail());		//la cambio
@@ -250,29 +251,33 @@ public class UserControl extends HttpServlet {
 					
 					session.setAttribute("error", "la mail scelta e' gia' stata utilizzato"); //altrimenti setto gli errori
 					session.setAttribute("error-type", "mail");
+					response.sendRedirect(request.getContextPath()+"/Profilo.jsp");
 				}
 				
 		
 			
-			case "username":												
-				if(valore.matches(regUser))
+															
+				if(nome.matches(regUser))
 				{session.setAttribute("error", "lo username inserito non � valido");
-				session.setAttribute("error-type", "username");}
+				session.setAttribute("error-type", "username");
+				response.sendRedirect(request.getContextPath()+"/Profilo.jsp");}
 				else
-				if(!userModel.isExistingUsername(valore)) {					//se il nuovo username non e' presente nel db
-					userModel.cambiaUsername(valore, utente.getEmail());	//lo cambio
+				if(!userModel.isExistingUsername(nome)) {					//se il nuovo username non e' presente nel db
+					userModel.cambiaUsername(nome, utente.getEmail());	//lo cambio
 				}
 				else {														
 					
 					session.setAttribute("error", "l'username scelto e' gia' stato utilizzato");//altrimenti setto gli errori
 					session.setAttribute("error-type", "username");
+					response.sendRedirect(request.getContextPath()+"/Profilo.jsp");
 					
 				}
 				
 	
 				if(iva.matches(regIva))
 				{session.setAttribute("error", "la partita IVA inserita non � valida");
-				session.setAttribute("error-type", "piva");}
+				session.setAttribute("error-type", "piva");
+				response.sendRedirect(request.getContextPath()+"/Profilo.jsp");}
 				else
 				if(!userModel.isExistingPIVA(iva)) {						//se la nuova p.IVA non e' presente nel db
 					userModel.cambiaPIVA(iva, utente.getpIVA());		//la cambio
@@ -281,11 +286,14 @@ public class UserControl extends HttpServlet {
 					
 					session.setAttribute("error", "la partita iva scelta e' gia' stata utilizzato");
 					session.setAttribute("error-type", "piva");
+					response.sendRedirect(request.getContextPath()+"/Profilo.jsp");
 				}
-				BufferedImage bimg = ImageIO.read(new java.io.File("C:/Users/Antonio/Desktop/backgroundBlur"));
+				/***********TEST PER L'IMG
+				 BufferedImage bimg = ImageIO.read(new java.io.File("C:/Users/Antonio/Desktop/backgroundBlur"));
 				int width = bimg.getWidth();
 				int height = bimg.getHeight();
 				System.out.println("chiavt a mammt"+width);
+				*/
 				break;
 		
 			}//chiusura switch(action)

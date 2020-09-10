@@ -181,7 +181,7 @@ case "validatePlayer":
 			
 			try {
 				//Se la squadra è gia' presente nel database, oppure uno dei campi è vuoto
-				if(sqModel.doRetriveByKey(squadra)!=null || squadra.isEmpty() || nazionalita.isEmpty()){
+				if(pModel.doRetriveByKey(squadra)!=null || squadra.isEmpty() || nazionalita.isEmpty()){
 					response.sendRedirect(request.getContextPath()+"/oopsPage.jsp");// pagina oops
 				} 
 				
@@ -276,7 +276,9 @@ case "validatePlayer":
 					}
 					
 					//------------FINE INSERIMENTO DEI GIOCATORI---------------
-
+					ArrayList<SquadraBean> sq=(ArrayList<SquadraBean>)request.getSession().getAttribute("squadreTorneo");
+					sq.add(team);
+					request.setAttribute("squadreTorneo", sq);
 					response.sendRedirect(request.getContextPath()+"/user/FormInserimentoSquadre.jsp");
 					
 				}

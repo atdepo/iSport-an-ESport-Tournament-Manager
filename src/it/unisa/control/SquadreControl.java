@@ -47,7 +47,6 @@ public class SquadreControl extends HttpServlet {
 		String action = request.getParameter("action"); // azione da far compiere alla servlet
 		Gson gson = new Gson();
 		HttpSession session=request.getSession();
-		ArrayList<SquadraBean> squadre= request.getAttribute("squadre");
 		switch (action) {
 		
 		case "getGiocatori":
@@ -70,6 +69,13 @@ public class SquadreControl extends HttpServlet {
 		case"getImgSquadra":
 			try {
 				SquadraBean s=(SquadraBean)sqModel.doRetriveByKey(request.getParameter("squadraScelta"));
+				@SuppressWarnings("unchecked")
+				ArrayList<SquadraBean> squadre=(ArrayList<SquadraBean>)session.getAttribute("squadreTorneo");
+				if(squadre==null)
+					squadre= new ArrayList<SquadraBean>();
+				
+				squadre.add(s);
+				session.setAttribute("squadreTorneo", squadre);
 				
 				ArrayList<String> immagine=new ArrayList<String>();
 				immagine.add(s.getTeamImage());
@@ -138,6 +144,10 @@ public class SquadreControl extends HttpServlet {
 				if(bean!=null && !bean.isEmpty()) {
 					squadre.add(bean);
 					session.setAttribute("squadreTorneo", squadre);
+					
+					for(SquadraBean b:squadre) {
+						
+					}
 					response.sendRedirect(request.getContextPath()+"/user/FormInserimentoSquadre.jsp");
 				}
 			} catch (SQLException e) {
@@ -146,6 +156,22 @@ public class SquadreControl extends HttpServlet {
 			}
 			
 		break;
+		
+		case "removeSquadraTorneo":
+			@SuppressWarnings("unchecked")
+			ArrayList<SquadraBean> team=(ArrayList<SquadraBean>)session.getAttribute("squadreTorneo");
+			if(team!=null) {
+				String toDelete=request.getParameter("elimina");
+				SquadraBean be=null;
+				for(SquadraBean b:team) {
+					if(b.getNome().equals(toDelete)) {
+						be=b;
+					}
+				}
+				if(be!=null)
+					team.remove(be);
+			}
+			break;
 			
 		}	
 	}

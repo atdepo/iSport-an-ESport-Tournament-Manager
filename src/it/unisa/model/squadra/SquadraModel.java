@@ -36,7 +36,7 @@ public class SquadraModel implements ModelInterface<SquadraBean, String>{
 			}
 		}
 		if(!bean.isEmpty()) {
-			System.out.println("ho trovato la squadra che cercavi");
+			System.out.println("ho trovato una squadra con questo nome nel db");
 			return bean;
 		}
 			
@@ -86,7 +86,7 @@ public class SquadraModel implements ModelInterface<SquadraBean, String>{
 		try (Connection con = DriverManagerConnectionPool.getConnection()) {
 			statement = con.prepareStatement(sql);
 			statement.setString(1, email);
-			statement.setInt(1, num);
+			statement.setInt(2, num);
 			System.out.println("DoRetriveByUserNum=" + statement.toString());
 			ResultSet rs = statement.executeQuery();
 

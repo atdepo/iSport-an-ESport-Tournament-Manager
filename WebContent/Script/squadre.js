@@ -36,6 +36,9 @@ function add(){
 		}
 }
 	function eliminaSquadra(i){
+		var xhr = new XMLHttpRequest();
+		xhr.open('GET', '../SquadreControl?action=removeSquadraTorneo&elimina='+i, true);
+		xhr.send();
 		var tmp=$("."+i);
 		tmp.remove();	
 	}

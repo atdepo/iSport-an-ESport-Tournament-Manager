@@ -4,6 +4,7 @@
 <html>
 <head>
 	<script src = "https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<script src="Script/index.js"></script>
 	<link rel="stylesheet" href="CSS/index.css" type="text/css">
 	<meta charset="UTF-8">
 </head>

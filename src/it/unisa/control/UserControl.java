@@ -221,10 +221,13 @@ public class UserControl extends HttpServlet {
 			
 			UtenteBean utente=(UtenteBean)session.getAttribute("user");
 			String nome=request.getParameter("nome");
+			System.out.println("MAMMETA:"+nome);
 			String email=request.getParameter("email");
 			String iva=request.getParameter("iva");
 			String img=request.getParameter("img");
-			
+			String oldEmail=request.getParameter("oldEmail");
+			String oldPass=request.getParameter("oldPass");
+			String newPass=request.getParameter("newPass");
 			String regUser="^[A-Za-z0-9_-]{0,30}$";
 			String regEmail="^(([^<>()\\[\\]\\\\.,;:\\s@\"]+(\\.[^<>()\\[\\]\\\\.,;:\\s@\"]+)*)|(\".+\"))@((\\[[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}])|(([a-zA-Z\\-0-9]+\\.)+[a-zA-Z]{2,}))$";
 			String regIva="^[0-9]{11}$";
@@ -239,10 +242,13 @@ public class UserControl extends HttpServlet {
 			session.setAttribute("error-type", null); //error-type ci fornisce il campo sul quale abbiamo riscontrato l'errore
 						
 		
-				if(email.matches(regEmail))
+				if(!email.matches(regEmail))
 				{session.setAttribute("error", "la mail scelta non e' valida");
 				session.setAttribute("error-type", "mail");
-				response.sendRedirect(request.getContextPath()+"/Profilo.jsp");}
+				response.sendRedirect(request.getContextPath()+"/user/Profilo.jsp");
+				return;
+
+				}
 				else
 				if(!userModel.isExistingEmail(email)) { 					//se la nuova mail non e' gia' presente nel db
 					userModel.cambiaEmail(email, utente.getEmail());		//la cambio
@@ -251,16 +257,19 @@ public class UserControl extends HttpServlet {
 					
 					session.setAttribute("error", "la mail scelta e' gia' stata utilizzato"); //altrimenti setto gli errori
 					session.setAttribute("error-type", "mail");
-					response.sendRedirect(request.getContextPath()+"/Profilo.jsp");
+					response.sendRedirect(request.getContextPath()+"/user/Profilo.jsp");
+					return;
 				}
 				
 		
 			
 															
-				if(nome.matches(regUser))
+				if(!nome.matches(regUser))
 				{session.setAttribute("error", "lo username inserito non � valido");
 				session.setAttribute("error-type", "username");
-				response.sendRedirect(request.getContextPath()+"/Profilo.jsp");}
+				response.sendRedirect(request.getContextPath()+"/user/Profilo.jsp");
+				return;
+				}
 				else
 				if(!userModel.isExistingUsername(nome)) {					//se il nuovo username non e' presente nel db
 					userModel.cambiaUsername(nome, utente.getEmail());	//lo cambio
@@ -269,15 +278,18 @@ public class UserControl extends HttpServlet {
 					
 					session.setAttribute("error", "l'username scelto e' gia' stato utilizzato");//altrimenti setto gli errori
 					session.setAttribute("error-type", "username");
-					response.sendRedirect(request.getContextPath()+"/Profilo.jsp");
+					response.sendRedirect(request.getContextPath()+"/user/Profilo.jsp");
 					
 				}
 				
 	
-				if(iva.matches(regIva))
+				if(!iva.matches(regIva))
 				{session.setAttribute("error", "la partita IVA inserita non e' valida");
 				session.setAttribute("error-type", "piva");
-				response.sendRedirect(request.getContextPath()+"/Profilo.jsp");}
+				response.sendRedirect(request.getContextPath()+"/user/Profilo.jsp");
+				return;
+
+				}
 				else
 				if(!userModel.isExistingPIVA(iva)) {						//se la nuova p.IVA non e' presente nel db
 					userModel.cambiaPIVA(iva, utente.getpIVA());		//la cambio
@@ -286,8 +298,25 @@ public class UserControl extends HttpServlet {
 					
 					session.setAttribute("error", "la partita iva scelta e' gia' stata utilizzato");
 					session.setAttribute("error-type", "piva");
-					response.sendRedirect(request.getContextPath()+"/Profilo.jsp");
+					response.sendRedirect(request.getContextPath()+"/user/Profilo.jsp");
+					return;
+
 				}
+				
+				userModel.cambiaPIVA(iva, oldEmail);
+				userModel.cambiaUsername(nome, oldEmail);
+				userModel.cambiaEmail(email, oldEmail);
+				
+				
+				
+				if(newPass!=""&&oldPass!="")
+				try {System.out.println("Provo a cambiare password da:"+oldPass+" a "+newPass);
+					userModel.cambiaPassword(oldEmail, newPass, oldPass);
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}	
+				
 				break;
 		
 			}//chiusura switch(action)

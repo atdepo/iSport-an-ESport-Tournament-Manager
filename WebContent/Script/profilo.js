@@ -39,26 +39,87 @@ function getSquadra(codice){
 	 var Nome=$('#username').val();
      var Email=$('#email').val();
      var IVA=$('#iva').val();
+     
    //  var Img=$('#images-0').val();
      var error=$("#errorImg").text()
      
      	var file = $("#images-0")[0].files[0]; //this is the input where I can choose the file
 		
-		alert("ciao  "+file);
+    
+
+      
 		
-    if(mailCheck()&&userCheck()&&ivaCheck()&&error=="")
-    	alert("bravo");
-     
-     	
-    	var xhr = new XMLHttpRequest();
-    	xhr.open('POST', '../UserControl?action=modificaDati&nome='+Nome+'&email='+Email+'&iva='+IVA+"img="+file, true);	
+    if(mailCheck()&&userCheck()&&ivaCheck()&&oldPassCheck()&&passCheck()&&error==""){
     	
-    	xhr.send();
+    	
+    	
+
+           $.ajax({
+               url: 'UserControl?action=modificaDati',
+               type: 'POST',
+               data: 'nome='+Nome+'&email='+Email+'&iva='+IVA+'&oldEmail='+$('#UtenteEmail').val()+'&oldPass='+$('#vecchia').val()+'&newPass='+$('#nuova').val(),
+             
+           });
+       
+    }
+    	
+    	
 
     
      
  }
+
  
+ function oldPassCheck() {
+		var passwordReg=/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/;
+	 var password=$("#vecchia");
+	 var error=password.next();
+		if(!password.val()){	//Password non inserita
+			$('span').text("");
+			return true;
+		}
+
+		else{
+			if(!passwordReg.test(password.val())){	//Password non corretta
+				$('span').text("");
+				error.text("Deve essere almeno 8 caratteri con almeno:un carattere speciale,un lowercase,un UPPERCASE e un numero ");
+				console.log('password check not passed');
+				return false;
+			}
+			else{	//Controllo passato
+	            error.text("");
+	            console.log('password check passed');
+				return true;
+			}
+		}
+}
+ 
+ function passCheck(){
+		var passwordReg=/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/;
+		var password=$("#nuova");
+		var passwordReg=/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/;
+		var error=password.next();
+
+		if(!password.val()){	//Password non inserita
+			$('span').text("");
+			return true;
+		}
+
+		else{
+			if(!passwordReg.test(password.val())){	//Password non corretta
+				$('span').text("");
+				error.text("Deve essere almeno 8 caratteri con almeno:un carattere speciale,un lowercase,un UPPERCASE e un numero ");
+				console.log('password check not passed');
+				return false;
+			}
+			else{	//Controllo passato
+	            error.text("");
+	            console.log('password check passed');
+				return true;
+			}
+		}
+	
+	}	
  
  
 	function checkImg() {

@@ -41,14 +41,15 @@
 				</div>
 			</div>
 			
-			
+		<form action="UserControl?action=modificaImg" enctype="multipart/form-data" method="post">
 			<div class="field">
 				<div class="form-group file-area">
         			<label for="images" class="testlabel">Cambia immagine <span class="misure"> La tua immagine deve essere 150x150</span></label>
-   			 		<input type="file" name="images" id="images-0" required="required" />
+   			 		<input type="file" name="images" accept="image/*" id="images-0" required="required" />
    			 		<span class="error" id="errorImg"><%if(type.equals("img")){ %><%=error%><%}%></span>	
    				</div>
    			</div>
+   			</form>
    			<div class="bottom">
 				<div class="dati">
 					<div class="field">
@@ -69,20 +70,24 @@
 						<span class="error"><%if(type.equals("piva")){ %><%=error%><%}%></span>
 					</div>
 					
-					<input type="button" class="button-blue" value="Conferma le modifiche" onclick="confermaMod()">	
+					
 
 
 					<div class="passWord">
 						<div class="field">
 							<label for="mail" class="testlabel">Vecchia Password</label>
 							<input type="text" id="vecchia" name="vecchiaPsw">
+							<span class="error"><%if(type.equals("password")){ %><%=error%><%}%></span>
+							
 						</div>
 						
 						<div class="field">
-							<label for="mail" class="testlabel">Password</label>
+							<label for="mail" class="testlabel">Nuova Password</label>
 							<input type="text" id="nuova"  name="nuovaPsw">
-							<input type="button" class="button-blue" value="Conferma le modifiche" onclick="cambiaPassword()">	
+						 	<span class="error"><%if(type.equals("password")){ %><%=error%><%}%></span>
+							
 						</div>
+						<input type="submit" class="button-blue" value="Conferma le modifiche" onclick="confermaMod()">	
 					</div>
 				</div>
 		
@@ -93,6 +98,7 @@
 					</div>
 				</div>
 			</div>
+			
 		</div>
 		
 		

@@ -14,33 +14,47 @@
 	<div class="intro-section" style="background-image: url('img/homeBackground.jpg');">
 		<h1>Il Posto Perfetto per Competere</h1>
 	</div>
-<label class="how">Come funziona?</label>
-<div class="page-content">
-  <div class="card">
-    <div class="content">
-      <h2 class="title">Registrati</h2>
-      <p class="copy">Registrati al sito e inizia a competere subito</p> 
-    </div>
-  </div>
-  <div class="card">
-    <div class="content">
-      <h2 class="title">Crea il Tuo torneo</h2>
-      <p class="copy">Crea il tuo torneo personale, sia online che dal vivo</p>
-    </div>
-  </div>
-  <div class="card">
-    <div class="content">
-      <h2 class="title">Scegli le squadre</h2>
-      <p class="copy">Seleziona le squadre che parteciperanno al tuo torneo</p>
-    </div>
-  </div>
-  <div class="card">
-    <div class="content">
-      <h2 class="title">COMPETI!</h2>
-      <p class="copy">Ora le squadre possono comepetere come professionisti</p>
-    </div>
-  </div>
-</div>
+	<div class=tornei>
+		<label>Dai un occhiata a questi tornei!</label>
+		<div id="slider">
+ 			<ul class="slider"> 
+    			<li>SLIDE 3</li>
+    			<li style="background: #aaa;">SLIDE 4</li>
+  			</ul>  
+		</div>
+		<div class="slider_option">
+			<input type="checkbox" id="checkbox"> <!-- Autoplay -->
+		</div> 
+	</div>
+	
+<!-- Cards  -->
+	<label class="how">Come funziona?</label>
+	<div class="page-content">
+  		<div class="card">
+    		<div class="content">
+      			<h2 class="title">Registrati</h2>
+      				<p class="copy">Registrati al sito e inizia a competere subito</p> 
+    		</div>
+  		</div>
+  		<div class="card">
+    		<div class="content">
+      			<h2 class="title">Crea il Tuo torneo</h2>
+      			<p class="copy">Crea il tuo torneo personale, sia online che dal vivo</p>
+    		</div>
+  		</div>
+  		<div class="card">
+    		<div class="content">
+      			<h2 class="title">Scegli le squadre</h2>
+      			<p class="copy">Seleziona le squadre che parteciperanno al tuo torneo</p>
+    		</div>
+  		</div>
+  		<div class="card">
+    		<div class="content">
+      			<h2 class="title">COMPETI!</h2>
+      			<p class="copy">Ora le squadre possono comepetere come professionisti</p>
+    		</div>
+  		</div>
+	</div>
         
         
 	<%@ include file="Footer.jsp"%>

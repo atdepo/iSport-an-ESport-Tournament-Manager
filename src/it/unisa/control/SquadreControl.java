@@ -85,13 +85,24 @@ public class SquadreControl extends HttpServlet {
 		
 		case "getSquadreNoIva":
 			response.setCharacterEncoding("UTF-8");
-			UtenteBean u=(UtenteBean)session.getAttribute("user");
-			ArrayList<SquadraBean> squadr= (ArrayList<SquadraBean>) sqModel.doRetriveByUser(u.getEmail());
-			String mod=gson.toJson(squadr);
-			response.getWriter().print(mod);
-			response.getWriter().flush();
-			System.out.println("il json delle squadre e' stato creato con successo");
-			response.setStatus(200);
+
+			ModalitaBean modalita;
+			try {
+				modalita = modModel.doRetriveByKey(new ModalitaKey((String)session.getAttribute("nomeGioco"),(String)session.getAttribute("modalita")));
+				Integer num=modalita.getNumPartecipanti()/2;
+				UtenteBean u=(UtenteBean)session.getAttribute("user");
+				ArrayList<SquadraBean> squadr= (ArrayList<SquadraBean>) sqModel.doRetriveByUserNum(u.getEmail(),num);
+				String mod=gson.toJson(squadr);
+				response.getWriter().print(mod);
+				response.getWriter().flush();
+				System.out.println("il json delle squadre e' stato creato con successo");
+				response.setStatus(200);
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			
+			
 			
 			break;
 			
@@ -99,7 +110,9 @@ public class SquadreControl extends HttpServlet {
 			response.setCharacterEncoding("UTF-8");
 			
 			try {
-				ArrayList<SquadraBean> squadre= (ArrayList<SquadraBean>) sqModel.doRetriveAll(null);
+				ModalitaBean modalita1= modModel.doRetriveByKey(new ModalitaKey((String)session.getAttribute("nomeGioco"),(String)session.getAttribute("modalita")));
+				Integer num1=modalita1.getNumPartecipanti()/2;
+				ArrayList<SquadraBean> squadre= (ArrayList<SquadraBean>) sqModel.doRetriveAllNum(num1);
 				String mode=gson.toJson(squadre);
 				response.getWriter().print(mode);
 				response.getWriter().flush();

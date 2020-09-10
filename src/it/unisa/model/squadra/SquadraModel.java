@@ -76,6 +76,62 @@ public class SquadraModel implements ModelInterface<SquadraBean, String>{
 		return collection;
 	}
 	
+	public Collection<SquadraBean> doRetriveByUserNum(String email,int num) {
+		PreparedStatement statement = null;
+
+		String sql = "select * from utente,squadra where squadra.proprietario=?and(select count(*) from giocatore as g where g.nomesquadra=squadra.nome)=?";
+
+		ArrayList<SquadraBean> collection= new ArrayList<SquadraBean>();
+		
+		try (Connection con = DriverManagerConnectionPool.getConnection()) {
+			statement = con.prepareStatement(sql);
+			statement.setString(1, email);
+			statement.setInt(1, num);
+			System.out.println("DoRetriveByUserNum=" + statement.toString());
+			ResultSet rs = statement.executeQuery();
+
+			while (rs.next()) {
+				SquadraBean bean = new SquadraBean();
+				bean.setNome(rs.getString("nome"));
+				bean.setNazionalita(rs.getString("nazionalita"));
+				bean.setTeamImage(rs.getString("imgSquadra"));
+				bean.setProprietario(rs.getString("proprietario"));
+
+				collection.add(bean);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return collection;
+	}
+	
+	
+	public Collection<SquadraBean> doRetriveAllNum(int num) throws SQLException {
+		PreparedStatement statement = null;
+
+		String sql = "SELECT * FROM squadra where (select count(*) from giocatore as g where g.nomesquadra=squadra.nome)=?";
+
+		ArrayList<SquadraBean> collection= new ArrayList<SquadraBean>();
+		
+		try (Connection con = DriverManagerConnectionPool.getConnection()) {
+			statement = con.prepareStatement(sql);
+			System.out.println("DoRetriveAllNum=" + statement.toString());
+			statement.setInt(1, num);
+			ResultSet rs = statement.executeQuery();
+
+			while (rs.next()) {
+				SquadraBean bean = new SquadraBean();
+				bean.setNome(rs.getString("nome"));
+				bean.setNazionalita(rs.getString("nazionalita"));
+				bean.setTeamImage(rs.getString("imgSquadra"));
+				bean.setProprietario(rs.getString("proprietario"));
+				collection.add(bean);
+			}
+		}
+		return collection;
+	}
+	
 	@Override
 	public Collection<SquadraBean> doRetriveAll(String order) throws SQLException {
 		PreparedStatement statement = null;

@@ -58,7 +58,7 @@
             <%if(utente.getTipo()=="utente"){ %>
             <a href="<%=request.getContextPath()+"/user/Profilo.jsp"%>"class="dropdown-item">IL MIO PROFILO</a>
              <%}else if(utente.getTipo()=="admin"){ %>
-             <a href="<%=request.getContextPath()+"/admin/Admin.jsp"%>"class="dropdown-item">PANNELLO ADMIN</a>
+             <a href="<%=request.getContextPath()+"/admin/Admin.jsp"%>"class="dropdown-item" style="font-size:16px">PANNELLO ADMIN</a>
              <%}else if(utente.getTipo()=="tecnico"){ %>
              <a href="<%=request.getContextPath()+"/tecnico/messaggi.jsp"%>"class="dropdown-item">MESSAGGI</a><%} %>
           </li>

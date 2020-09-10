@@ -14,7 +14,7 @@ function tendina(k){
 
 
 function add(){
-
+	//cambiare sto if
 	if($("input[type=radio][name=sel]:checked").attr("id")==="nuova")
 		window.location.replace('FormInserimentoGiocatori.jsp');
 	else{
@@ -27,7 +27,7 @@ function add(){
 			
 			let data = JSON.parse(xhr.responseText);
 			console.log(data);
-			squadre.append('<div class='+check+'><img  onclick="eliminaSquadra(\''+check+'\')" src='+data['0']+'></div>');
+			squadre.append('<div class='+check+'><img onclick="eliminaSquadra(\''+check+'\')" src='+data['0']+'></div>');
 				}
 			}
 			xhr.open('GET', '../SquadreControl?action=getImgSquadra&squadraScelta='+check, true);

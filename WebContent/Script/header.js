@@ -1,8 +1,5 @@
-/**
- * 
- */
 
- function toggle(tipo){
+function toggle(tipo){
 	
 	if($('#user-img').val()!=="null"){
 		var ctx=window.location.pathname.substring(0, window.location.pathname.indexOf("/",2));

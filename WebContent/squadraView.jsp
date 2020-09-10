@@ -52,7 +52,6 @@ if(teamName==null){
 		<div class="nomeSquadra"><h3><%=teamName%></h3></div>
 		<div class="giocatori"></div>
 		<fieldset class="dati">
-		
 		</fieldset>
 	
 	

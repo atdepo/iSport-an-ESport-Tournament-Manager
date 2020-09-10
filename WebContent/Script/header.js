@@ -2,24 +2,38 @@
  * 
  */
 
- function toggle(){
+ function toggle(tipo){
 	
 	if($('#user-img').val()!=="null"){
-		
+		var ctx=window.location.pathname.substring(0, window.location.pathname.indexOf("/",2));
 		if($('#check').prop('checked')){
 			$('ul li').each(function(i){
 				if(i===3){
-					var ctx=window.location.pathname.substring(0, window.location.pathname.indexOf("/",2));
-					$(this).empty().html('<li><a href="'+ctx+'/Logout">LOG OUT</a></li>');
+					if(tipo=="utente"){
+						$(this).empty().html('<li><a href="'+ctx+'/user/Profilo.jsp">IL MIO PROFILO</a></li>');
+					}
+					else if(tipo=="admin"){
+						$(this).empty().html('<li><a href="'+ctx+'/admin/Admin.jsp">IL MIO PANNELLO</a></li>');
+					}
+					else if(tipo=="tecnico"){
+						$(this).empty().html('<li><a href="'+ctx+'/tecnico/messaggi.jsp">I MIEI MESSAGGI</a></li>');
+					}
 				}
+				
+				
 			})
+			
+			
+			$('#link').append('<li class="out"><a href="'+ctx+'/Logout">LOG-OUT</a></li>');
+
 		} else{
 			$('ul li').each(function(i){
 				if(i===3){
 					$(this).empty().html('<div class="div-profile-image"><a href=""><img src="'+$('#user-img').val()+'" class="source"></a></div>');
 				}
-				$('.prof').empty();
-			})
+			})			
+			$('.out').empty();
+
 		}
 	}
 }
@@ -48,9 +62,9 @@ $(function() {
 window.addEventListener("resize", function(){	
 	if(document.body.clientWidth<1180){
 	//	alert('frate troppo piccola');
-		$('#link').append('<li class="prof"><a>TEST</a></li>');
+		//$('#link').append('<li class="prof"><a>TEST</a></li>');
 	}
 	else{
-		$('#link').empty();
+		$('.prof').empty();
 	}
 });

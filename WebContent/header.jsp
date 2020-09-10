@@ -29,7 +29,11 @@
 <input type="hidden" id="user-img" value ="<%=userImg%>">
 	<input type="hidden" id="user-pIVA" value="<%=userpIVA%>">
 	<nav>
-	<input type="checkbox" id="check" onclick="toggle()">
+	<%if(utente==null){%>
+		<input type="checkbox" id="check" onclick="toggle('null')">
+	<%}else{%>
+		<input type="checkbox" id="check" onclick="toggle(<%="'"+utente.getTipo()+"'"%>)">
+	<%}%>
 	<label for="check" class="checkbtn">
 	<i class="fa fa-bars" aria-hidden="true"></i>
 	</label>

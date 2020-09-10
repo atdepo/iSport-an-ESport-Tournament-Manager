@@ -76,7 +76,7 @@ public class TournamentModel implements ModelInterface<TournamentBean,String>{
 		PreparedStatement statement= null;
 		Collection<TournamentBean> collection= new ArrayList<TournamentBean>();
 		
-		String sql="SELECT * FROM torneo where isOnHomePage=1&&datatorneo<dateadd(day, 0, getdate()) ";
+		String sql="SELECT * FROM torneo where isOnHomePage=1 and datatorneo<dateadd(day, 0, getdate()) ";
 		
 		try (Connection con=DriverManagerConnectionPool.getConnection()){
 			statement = con.prepareStatement(sql);

@@ -14,7 +14,7 @@ function tendina(k){
 
 
 function add(){
-	//cambiare sto if
+
 	if($("input[type=radio][name=sel]:checked").attr("id")==="nuova")
 		window.location.replace('FormInserimentoGiocatori.jsp');
 	else{

@@ -47,6 +47,7 @@ public class SquadreControl extends HttpServlet {
 		String action = request.getParameter("action"); // azione da far compiere alla servlet
 		Gson gson = new Gson();
 		HttpSession session=request.getSession();
+		ArrayList<SquadraBean> squadre= request.getAttribute("squadre");
 		switch (action) {
 		
 		case "getGiocatori":
@@ -69,6 +70,7 @@ public class SquadreControl extends HttpServlet {
 		case"getImgSquadra":
 			try {
 				SquadraBean s=(SquadraBean)sqModel.doRetriveByKey(request.getParameter("squadraScelta"));
+				
 				ArrayList<String> immagine=new ArrayList<String>();
 				immagine.add(s.getTeamImage());
 				String img=gson.toJson(immagine);

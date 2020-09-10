@@ -24,17 +24,6 @@
 			margin:5px 10px 10px;
 		}
 		
-		.nomeT{
-			font-size:32px;
-			text-align:-webkit-center;
-			margin-top:5px;
-		}
-		
-		.nomeS{
-			font-size:25px;
-			margin-top:15px;
-		}
-		
 		.nomiTeam > *{
 			margin-right:5px;
 		}
@@ -66,3 +55,12 @@
 </body>
 	<input type="hidden" value="<%=codice%>" id="torneo">
 </html>
+
+
+
+
+
+
+
+
+

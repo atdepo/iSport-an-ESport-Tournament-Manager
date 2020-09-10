@@ -37,25 +37,29 @@ h1{
 }
 
 h2{
-
 	padding-top:1%;
 }
+
 h3{
     display: inline;
 }
+
 .tornei{
 	border-style:solid;
 	padding-bottom:4px;
 	width: 100%;
 }
+
 .torneo{
 	margin-bottom: 5px;
 	cursor: pointer;
 }
+
 .testlabel{
 	display:block;
 	margin-left:10px;
 }
+
 .tuttecose{
 	font-size:20px;
 }
@@ -73,20 +77,24 @@ input[type="text"]{
  	border: 3px solid rgba(0,0,0,0);
   	flex-grow:1;
 }
+
 .immagine{
 	width:150px;
 	height:150px;
 	margin-top:10px;
 	position:relative; 
 }
+
 img{
 	border-style: solid;
 }
+
 .top{
 	display:flex;
 	margin-bottom:10px;
 	margin-left:10px;
 }
+
 .usernameP{
 	width: 100%;
 	font-size:36px;
@@ -94,21 +102,30 @@ img{
 	margin-top:60px;
 	left:2%;
 }
+
 .bottom{
 	display: flex;
 	margin-top:15px;
 }
+
 .dati{
 	width: 50%;
 }
+
 .field{
 	width:100%;
 }
+
 #images-0{
 	margin-left:10px;
 }
+
 .misure{
 	font-size:12px;
+}
+
+.profile-picture{
+	background-color:#0493bd;
 }
 @media (max-width: 600px) {
 	 table {

@@ -125,7 +125,28 @@ public class SquadreControl extends HttpServlet {
 			}
 			
 			break;
-		
+			
+		case "addSquadraTorneo":
+			
+			@SuppressWarnings("unchecked")
+			ArrayList<SquadraBean> squadre=(ArrayList<SquadraBean>)session.getAttribute("squadreTorneo");
+			if(squadre==null)
+				squadre= new ArrayList<SquadraBean>();
+			String squadraDaInserire = request.getParameter("squadra");
+			try {
+				SquadraBean bean= sqModel.doRetriveByKey(squadraDaInserire);
+				if(bean!=null && !bean.isEmpty()) {
+					squadre.add(bean);
+					session.setAttribute("squadreTorneo", squadre);
+					response.sendRedirect(request.getContextPath()+"/user/FormInserimentoSquadre.jsp");
+				}
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+		break;
+			
 		}	
 	}
 

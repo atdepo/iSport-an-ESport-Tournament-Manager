@@ -79,7 +79,8 @@ function cambiaTipo(){
 		}
 			
 	  }	
-		if(iva=="           "){
+	alert("-"+iva+"-");
+		if(iva==undefined){
 		xhr.open('GET', '../SquadreControl?action=getSquadreNoIva', true);
 		xhr.send();
 		}else{

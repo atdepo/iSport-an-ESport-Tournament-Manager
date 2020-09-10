@@ -44,16 +44,17 @@
 <body>
 		<%@ include file="header.jsp"%>
 	<div class="tutto">
-		<div class="nomeT"></div>
-		
-		<div class="nomeS"></div>
-	
-			<h2>Loghi delle squadre partecipanti</h2>
+		<h2>Loghi delle squadre partecipanti</h2>
 		<div class="loghi"></div>
 
 	</div>
 </body>
+
 	<input type="hidden" value="<%=codice%>" id="torneo">
+<<<<<<< Updated upstream
+=======
+	
+>>>>>>> Stashed changes
 </html>
 
 
@@ -64,3 +65,13 @@
 
 
 
+<<<<<<< Updated upstream
+=======
+
+
+
+
+
+
+
+>>>>>>> Stashed changes

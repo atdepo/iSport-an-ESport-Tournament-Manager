@@ -1,11 +1,13 @@
 <%@page import="java.util.Enumeration"%>
 <%@page import="it.unisa.model.modalita.ModalitaModel"%>
+<%@page import="it.unisa.model.squadra.SquadraBean" %>
+
 <%@page import="java.util.*"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 	
 	
-<%
+<%/*
 Enumeration<String> en=request.getAttributeNames();
 
 Iterator<String> i=en.asIterator();
@@ -13,8 +15,19 @@ System.out.println("-------inizio attributi");
 
 while(i.hasNext())
 	System.out.println(i.next());
-
+*/
 %>
+
+<% ArrayList<SquadraBean> team=(ArrayList<SquadraBean>)session.getAttribute("squadreTorneo");
+		System.out.println("*******inizio squadre*******"+team);
+		if(team!=null){
+		for(SquadraBean b:team){
+			System.out.println(b.getNome());
+		}
+		}
+		System.out.println("*******fine squadre*******");
+
+		%>
 <!DOCTYPE html>
 <html>
 
@@ -53,13 +66,47 @@ while(i.hasNext())
 		margine-right:10px;
 		
 	}
-	input[type="button"]{
+	/*input[type="button"]{
 		margin-left:10px;
 		height:25px;
-	}
+	}*/
 	.radioLabel{
 		overflow:hidden;
 	}
+	
+	.button-blue{
+	font-family: 'Montserrat', Arial, Helvetica, sans-serif;
+	width: 250px;
+	height:50px;
+	border: #0088FF solid 4px;
+	border-radius: 11px;
+	cursor:pointer;
+	background-color: #5DEFB9;;
+	color:white;
+	font-size:14px;
+	padding-bottom:13px;
+	padding-top:10px;
+	-webkit-transition: all 0.3s;
+	-moz-transition: all 0.3s;
+	transition: all 0.3s;
+  	margin-right:9px;
+  	font-weight:700;
+}
+
+.button-blue.finish{
+
+float:right;
+}
+/*
+.button-blue.addsq{
+
+width:250px;
+}*/
+
+.button-blue:hover{
+	color: #0493bd;
+}
+	
 }
 
 </style>	
@@ -81,17 +128,24 @@ while(i.hasNext())
 			</div>
 			
 			<div class="squadreEsistenti"></div>
-			<input type="button" value="Aggiungi una nuova squadra" id="aggiungi" onclick="add()">
+			<input type="button" class="button-blue addsq" value="Aggiungi una nuova squadra" id="aggiungi" onclick="add()">
 
 		</div>
 		</div>
-		
-		<div id="listaSquadre"class="flex-container">
 			
 		<input type="hidden" value=<%=u.getpIVA()%> id="iva" >
 		
-		</div>
+		<div id="listaSquadre"class="flex-container">
+			<%if(team!=null){
+				for(SquadraBean b:team){
+			%>
+					
+			<div class='<%=b.getNome()%>'><img onclick="eliminaSquadra('<%=b.getNome()%>')" src="<%=b.getTeamImage()%>"></div>
+			<%}}%>
+			
 		
+		</div>
+		<input type="button" class="button-blue finish" name="next" value="COMPLETA LA CREAZIONE">
 
 
 

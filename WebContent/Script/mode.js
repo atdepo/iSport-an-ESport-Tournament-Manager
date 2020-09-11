@@ -19,7 +19,6 @@ $(document).ready(function() {
 			let data = JSON.parse(xhr.responseText);
 			console.log(data);
 			var game = $('#gioco');
-			var sponsor=$('.ks-cboxtags');
 			var dataGiochi= data['0'];
 			var tecniciOn= data['1'];
 			var tecniciFis= data['2'];

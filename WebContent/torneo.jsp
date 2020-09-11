@@ -1,3 +1,4 @@
+<%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
@@ -45,33 +46,13 @@
 		<%@ include file="header.jsp"%>
 	<div class="tutto">
 		<h2>Loghi delle squadre partecipanti</h2>
-		<div class="loghi"></div>
+		<div class="loghi">
+		
+		</div>
 
 	</div>
 </body>
 
 	<input type="hidden" value="<%=codice%>" id="torneo">
-<<<<<<< Updated upstream
-=======
-	
->>>>>>> Stashed changes
 </html>
 
-
-
-
-
-
-
-
-
-<<<<<<< Updated upstream
-=======
-
-
-
-
-
-
-
->>>>>>> Stashed changes

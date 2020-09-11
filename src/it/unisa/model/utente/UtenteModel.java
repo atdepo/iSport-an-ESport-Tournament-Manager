@@ -202,7 +202,7 @@ public Collection<SquadraBean> getSquadreFromTornei(int codTorneo) {
 	
 	
 	
-	public boolean cambiaPassword(String email,String nuovaPassword,String vecchiaPassword) throws SQLException {
+	public boolean cambiaPassword(String email,String nuovaPassword,String vecchiaPassword,byte[] utentePassw ) throws SQLException {
 		
 		
 		if(email!=null && nuovaPassword!=null) { //Se la password o la mail sono state inserite 	
@@ -214,7 +214,9 @@ public Collection<SquadraBean> getSquadreFromTornei(int codTorneo) {
 					byte vecchia[]=md.digest(vecchiaPassword.getBytes());
 					
 					//Se la vecchia password è la stessa che ho inserito all'interno del database
-					if(Arrays.compare(vecchia, this.getUserPassword("email"))==0) {
+					System.out.println("La vecchia password e':"+vecchia);
+					System.out.println("La password in sessione e':"+utentePassw);
+					if(Arrays.compare(vecchia, utentePassw)==0) {
 						
 						String sql="UPDATE utenti SET passw=? WHERE email=?";
 						try (Connection con = DriverManagerConnectionPool.getConnection();PreparedStatement stat=con.prepareStatement(sql)){
@@ -222,12 +224,15 @@ public Collection<SquadraBean> getSquadreFromTornei(int codTorneo) {
 							stat.setString(2, email);
 							stat.executeUpdate();//cambio la password
 							con.commit(); //e faccio la commit dell'update
+							System.out.println("Ho cambiato la password");
 							return true;
 						}
 					}
-					else
+					else {
+						System.out.println("Problemi col cambio password");
 						return false;//se le due password non combaciano
 				}
+					}
 					 catch (NoSuchAlgorithmException e) {
 						 e.printStackTrace();
 						 return false;//se non è presente l'algoritmo id hashing SHA256

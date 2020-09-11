@@ -139,7 +139,7 @@ $(document).ready(function(){
 			
 			'<div class="field-btn">'+
 			'<input type="button" class="button-blue prevBtn'+parseInt(data)+'" onclick="cambiaPagina()" value="Prev">'+
-			'<input type="submit" class="button-blue submitbtn'+parseInt(data)+'" onclick="submitForm()" value="Submit">'+
+			'<input type="button" class="button-blue submitbtn'+parseInt(data)+'" onclick="submitForm()" value="Submit">'+
 			'</div>'+
 			'</div>');
 			
@@ -289,8 +289,15 @@ $(document).ready(function(){
 			if (xhr.status == 200 && xhr.readyState == 4) {
 				let data = JSON.parse(xhr.responseText);
 				console.log(data);
-				if(data['0']!=="null")
+				if(data['0']!=="null"){
 					$('.nickname-player-'+i).next().text(data['0']);
+					//event.preventDefault();
+					//return false;
+				}
+				else{
+					alert('tutto bene faccio la submit');
+					$('#the-form').submit();
+				}
 				}
 			}
 		}

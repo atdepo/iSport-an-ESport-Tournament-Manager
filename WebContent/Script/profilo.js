@@ -51,7 +51,8 @@ function getSquadra(codice){
 		
     if(mailCheck()&&userCheck()&&ivaCheck()&&oldPassCheck()&&passCheck()&&error==""){
     	
-    	
+    	alert($('#vecchia').val());
+    	alert($('#nuova').val());
     	
 
            $.ajax({

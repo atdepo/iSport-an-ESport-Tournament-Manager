@@ -305,18 +305,21 @@ public class UserControl extends HttpServlet {
 				
 				userModel.cambiaPIVA(iva, oldEmail);
 				userModel.cambiaUsername(nome, oldEmail);
-				userModel.cambiaEmail(email, oldEmail);
 				
 				
 				
 				if(newPass!=""&&oldPass!="")
 				try {System.out.println("Provo a cambiare password da:"+oldPass+" a "+newPass);
-					userModel.cambiaPassword(oldEmail, newPass, oldPass,utente.getPassword());
+				System.out.println("Sto nel try prima del cambio pass:");
+				
+				
+					userModel.cambiaPassword(oldEmail, newPass, oldPass);
 				} catch (SQLException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}	
-				
+				userModel.cambiaEmail(email, oldEmail);
+
 				break;
 		
 			}//chiusura switch(action)

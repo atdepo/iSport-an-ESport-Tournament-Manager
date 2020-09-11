@@ -202,7 +202,7 @@ public Collection<SquadraBean> getSquadreFromTornei(int codTorneo) {
 	
 	
 	
-	public boolean cambiaPassword(String email,String nuovaPassword,String vecchiaPassword,byte[] utentePassw ) throws SQLException {
+	public boolean cambiaPassword(String email,String nuovaPassword,String vecchiaPassword) throws SQLException {
 		
 		
 		if(email!=null && nuovaPassword!=null) { //Se la password o la mail sono state inserite 	
@@ -212,11 +212,16 @@ public Collection<SquadraBean> getSquadreFromTornei(int codTorneo) {
 					md = MessageDigest.getInstance("SHA-256");
 					byte nuova[]=md.digest(nuovaPassword.getBytes());
 					byte vecchia[]=md.digest(vecchiaPassword.getBytes());
-					
+					byte test[]=md.digest("Test1999!".getBytes());
+					/*
 					//Se la vecchia password è la stessa che ho inserito all'interno del database
-					System.out.println("La vecchia password e':"+vecchia);
-					System.out.println("La password in sessione e':"+utentePassw);
-					if(Arrays.compare(vecchia, utentePassw)==0) {
+					System.out.println("La vecchia password e':");
+					for(int i=0;i<test.length;i++)
+						System.out.print(test[i]);
+					System.out.println("\nLa password in sessione e':");
+					for(int i=0;i<vecchia.length;i++)
+						System.out.print(vecchia[i]);*/
+					if(Arrays.compare(vecchia, this.getUserPassword(email))==0) {
 						
 						String sql="UPDATE utenti SET passw=? WHERE email=?";
 						try (Connection con = DriverManagerConnectionPool.getConnection();PreparedStatement stat=con.prepareStatement(sql)){

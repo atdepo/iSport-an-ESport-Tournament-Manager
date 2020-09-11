@@ -4,20 +4,20 @@
 <html>
 <head>
 <style>
-.site-footer {
-  font-size: 15px;
-  line-height: 24px;
-  color: #737373;
-  left: 0;
-  bottom: 0;
-  width: 100%;
+	.site-footer {
+	  font-size: 15px;
+	  line-height: 24px;
+  	color: #737373;
+  	left: 0;
+  	bottom: 0;
+  	width: 100%;
  
-}
+	}
 
-.site-footer hr {
-  border-top-color: #bbb;
-  opacity: 0.5;
-}
+	.site-footer hr {
+	  border-top-color: #bbb;
+  	  opacity: 0.5;
+	}
 
 .site-footer h6 {
   color: #737373;

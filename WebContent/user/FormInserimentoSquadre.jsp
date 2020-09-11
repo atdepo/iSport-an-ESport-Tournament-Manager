@@ -6,18 +6,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 	
-	
-<%/*
-Enumeration<String> en=request.getAttributeNames();
-
-Iterator<String> i=en.asIterator();
-System.out.println("-------inizio attributi");
-
-while(i.hasNext())
-	System.out.println(i.next());
-*/
-%>
-
 <% ArrayList<SquadraBean> team=(ArrayList<SquadraBean>)session.getAttribute("squadreTorneo");
 		System.out.println("*******inizio squadre*******"+team);
 		if(team!=null){
@@ -91,17 +79,13 @@ while(i.hasNext())
 	transition: all 0.3s;
   	margin-right:9px;
   	font-weight:700;
+  	outline:none;
 }
 
 .button-blue.finish{
 
 float:right;
 }
-/*
-.button-blue.addsq{
-
-width:250px;
-}*/
 
 .button-blue:hover{
 	color: #0493bd;
@@ -140,13 +124,12 @@ width:250px;
 				for(SquadraBean b:team){
 			%>
 					
-			<div class='<%=b.getNome()%>'><img onclick="eliminaSquadra('<%=b.getNome()%>')" src="<%=b.getTeamImage()%>"></div>
+			<div class="<%=b.getNome()%> team"><img onclick="eliminaSquadra('<%=b.getNome()%>')" src="<%=b.getTeamImage()%>"></div>
 			<%}}%>
 			
 		
 		</div>
-		<input type="button" class="button-blue finish" name="next" value="COMPLETA LA CREAZIONE">
-
+		<input type="button" class="button-blue finish" name="next" value="COMPLETA LA CREAZIONE" onclick="finishTorneo()">
 
 
 </body>

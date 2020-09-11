@@ -54,6 +54,7 @@ $(function(){
 		var data=$(".data-torneo").val();
 		if(data==""){
 			$('.error-data').empty().text("Inserisci una data!");
+			e.preventDefault();
 			return false;
 		}
 		else{

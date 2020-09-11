@@ -1,3 +1,10 @@
+$(document).ready(function(){
+	
+alert($('.team').length);
+	
+})
+
+
 function menu(k){
 	
 $("#"+k).toggleClass("active");
@@ -8,7 +15,7 @@ $("#"+k).toggleClass("active");
 function tendina(k){
 	var selected=$('.selected.'+event.target.name);
 	var optionsContainer = $("#"+event.target.name);
-	selected.text($("label[for='"+k+"']").html());
+	selected.text($("label[for='"+k+"']").html());	
     optionsContainer.toggleClass("active");
 }
 
@@ -20,6 +27,7 @@ function add(){
 	else{
 		var squadre=$("#listaSquadre");	//div che contiene le img delle squadre
 		var check=$(".squadraSelezionata:checked").val();	//nome della squadra scelta
+		if(check!==undefined){
 		var xhr = new XMLHttpRequest();
 		xhr.onreadystatechange = function() {
 
@@ -27,18 +35,47 @@ function add(){
 			
 			let data = JSON.parse(xhr.responseText);
 			console.log(data);
-			squadre.append('<div class='+check+'><img onclick="eliminaSquadra(\''+check+'\')" src='+data['0']+'></div>');
+			squadre.append('<div class="'+check+' team"><img onclick="eliminaSquadra(\''+check+'\')" src='+data['0']+'></div>');
+			removeSquadraFromTendina(check);
+			
+			
+			
 				}
 			}
 			xhr.open('GET', '../SquadreControl?action=getImgSquadra&squadraScelta='+check, true);
 			xhr.send();
 				
 		}
+		else
+			alert('seleziona prima una squadra!');
+	}
+	
 }
-	function eliminaSquadra(i){
+
+function removeSquadraFromTendina(squadra){
+	alert('rimuovo la squadra'+squadra+' dalla tendina');
+	var squadreTendina=$('.option');
+	alert('ci sono '+squadreTendina.length+' squadre');
+	for(var i=0;i<squadreTendina.length;i++){
+		var sel=squadreTendina[i];
+		if($(sel).children('label').html()==squadra){
+			$(sel).remove();
+			$('.selected.squadreEsistenti').text('Seleziona una squadra');
+			
+		}
+	}
+	
+}
+
+function eliminaSquadra(i){
 		var xhr = new XMLHttpRequest();
 		xhr.open('GET', '../SquadreControl?action=removeSquadraTorneo&elimina='+i, true);
 		xhr.send();
+		$('.options-container').append('<div class="option">'+
+				'<label for="'+i+'">'+i+'</label>'+
+				'<input required="" name="squadreEsistenti" onclick="tendina(\''+i+'\')" type="radio"'+
+				' class="radio squadraSelezionata" id="'+i+'" value="'+i+'"></div>');
+		
 		var tmp=$("."+i);
 		tmp.remove();	
 	}
@@ -82,7 +119,7 @@ function cambiaTipo(){
 		}
 			
 	  }	
-	alert("-"+iva+"-");
+	//alert("-"+iva+"-");
 		if(iva==undefined){
 		xhr.open('GET', '../SquadreControl?action=getSquadreNoIva', true);
 		xhr.send();
@@ -96,6 +133,15 @@ function cambiaTipo(){
 		$('.squadreEsistenti').empty();
 		$('#aggiungi').attr("value","Aggiungi una squadra esistente");
 	}
+}
+
+function finishTorneo(){
+	
+	if($('.team').length<=2)
+		alert("Inserisci almeno due squadre!");
+	else
+		window.location.href="Pagamento.jsp";
+	
 }
 
 

@@ -311,7 +311,7 @@ public class UserControl extends HttpServlet {
 				
 				if(newPass!=""&&oldPass!="")
 				try {System.out.println("Provo a cambiare password da:"+oldPass+" a "+newPass);
-					userModel.cambiaPassword(oldEmail, newPass, oldPass);
+					userModel.cambiaPassword(oldEmail, newPass, oldPass,utente.getPassword());
 				} catch (SQLException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();

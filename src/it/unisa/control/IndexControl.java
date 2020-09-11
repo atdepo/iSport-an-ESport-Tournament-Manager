@@ -29,21 +29,21 @@ public class IndexControl extends HttpServlet {
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String action = request.getParameter("action"); // azione da far compiere alla servlet
-		Gson gson = new Gson();
 		
 		switch (action) {
 			case "TournamentHome":
-				String str="";
 				response.setContentType("application/json");
 				response.setCharacterEncoding("UTF-8");
 				System.out.println("Prendo i tornei da mettere in home");
 			try {
 				ArrayList<TournamentBean> t=(ArrayList<TournamentBean>) tModel.doRetriveInHome();
-				str=gson.toJson(t);
-				response.getWriter().print(str);
-				response.getWriter().flush();
-				System.out.println("il json dei tornei in home e' stato creato con successo");
-				response.setStatus(200);
+				ArrayList<Integer> codici= new ArrayList<Integer>();
+				for (TournamentBean tournamentBean : t) {
+					codici.add(tournamentBean.getCodice());
+					System.out.println("mammt");
+				}
+				request.getSession().setAttribute("commCazzVuoTu", codici);
+				response.sendRedirect(request.getContextPath()+"index.jsp");
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

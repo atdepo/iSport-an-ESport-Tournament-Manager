@@ -5,6 +5,23 @@ $(document).ready(function(){
 		//var nomeT=$('.nomeT');
 		//var nomeS=$('.nomeS');
 		var sImage=$('.loghi');
+		var text=$(".problem");
+		var email=$("#user");
+		var codice=$("#torneo");
+		var bellezza=new XMLHttpRequest();
+		bellezza.onreadystatechange = function() {
+			if (bellezza.status == 200 && bellezza.readyState == 4) {
+				let data = JSON.parse(bellezza.responseText);
+				console.log(data);			
+		
+				if(data)
+					text.append("<textarea id='problem' placeholder='qualcosa'></textarea> <input type='button' value='invia' onclick='testo()'>");
+			}
+		}	
+		bellezza.open('GET', 'UserControl?action=getTorneo&codice='+codice.val(), true);	
+		bellezza.send();
+		
+		
 		xhr.onreadystatechange = function() {
 			if (xhr.status == 200 && xhr.readyState == 4) {
 				let data = JSON.parse(xhr.responseText);
@@ -20,5 +37,20 @@ $(document).ready(function(){
 		}
 		xhr.open('GET', 'UserControl?action=getSquadreFromTorneo&codTorneo='+$('#torneo').val(), true);	
 		xhr.send();
+		
+	
  })
+ 
+ function testo() {
+	var xhr = new XMLHttpRequest();
+	xhr.onreadystatechange = function() {
+		if (xhr.status == 200 && xhr.readyState == 4) {
+				
+			alert($('textarea').val());
+		}
+	}
+			xhr.open('GET', 'MessaggiControl?action=addMessaggio&testo='+$('textarea').val()+'&codice='+$('#torneo').val(), true);	
+			xhr.send();
+			
+}
 

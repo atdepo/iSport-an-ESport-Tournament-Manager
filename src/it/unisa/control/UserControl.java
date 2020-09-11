@@ -61,6 +61,31 @@ public class UserControl extends HttpServlet {
 		 * Questa action serve a prendere tutti i tornei di un dato utente
 		 * identificato univocamente dalla sua mail
 		 */
+		case "getTorneo":
+			
+			try {
+				response.setContentType("application/json");
+				response.setCharacterEncoding("UTF-8");
+				String codice=request.getParameter("codice");
+				UtenteBean bean=(UtenteBean)session.getAttribute("user");
+				String torneo="";
+				TournamentBean tornei = tModel.doRetriveByKey(codice);
+			
+				if(bean!=null) 
+					torneo=gson.toJson(tornei.getProprietario().equals(bean.getEmail()));
+				else
+					torneo=gson.toJson("false");
+				System.out.println("ciao mamma, questo è il torneo selezionato");
+				response.getWriter().print(torneo);
+				response.getWriter().flush();
+				response.setStatus(200);
+				}
+				
+			catch(SQLException e2) {
+				e2.printStackTrace();
+			}
+			break;
+			
 		case "getMieiTornei":
 			
 		try {

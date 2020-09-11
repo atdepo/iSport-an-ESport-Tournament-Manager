@@ -1,5 +1,13 @@
+<%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%ArrayList<Integer> codici=(ArrayList<Integer>)session.getAttribute("commCazzVuoTu");
+	if(codici==null){
+		RequestDispatcher disp=request.getRequestDispatcher("IndexControl?action=TournamentHome");
+		disp.forward(request, response);
+	}
+	
+	%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,7 +18,10 @@
 </head>
 
 <body>
-	<%@ include file="header.jsp"%>
+<%@ include file="header.jsp"%>
+
+	
+	
 	<div class="intro-section" style="background-image: url('img/homeBackground.jpg');">
 		<h1>Il Posto Perfetto per Competere</h1>
 	</div>
@@ -18,8 +29,10 @@
 		<label>Dai un occhiata a questi tornei!</label>
 		<div id="slider">
  			<ul class="slider"> 
-    			<li>SLIDE 3</li>
-    			<li style="background: #aaa;">SLIDE 4</li>
+    		
+    			<%for(Integer i:codici){ %>
+    			<li id="<%=i.intValue()%>"><a href="UserControl?action=visualizza&codtorneo=<%=i.intValue()	%>"><img src="img/arena-<%=(i.intValue()%4)+1%>.jpg"></a> </li>
+    			<%} %>
   			</ul>  
 		</div>
 		<div class="slider_option">

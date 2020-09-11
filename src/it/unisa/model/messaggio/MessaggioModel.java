@@ -69,7 +69,7 @@ public class MessaggioModel implements ModelInterface<MessaggioBean, Integer> {
 	@Override
 	public void doSave(MessaggioBean bean) throws SQLException {
 		PreparedStatement statement = null;
-		String sql = "INSERT INTO messaggi values (?,?)";
+		String sql = "INSERT INTO messaggi(torneoDiRiferimento,messaggio) values (?,?)";
 		
 		try(Connection con = DriverManagerConnectionPool.getConnection()){
 		

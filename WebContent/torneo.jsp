@@ -50,9 +50,13 @@
 		
 		</div>
 
+		<div class="problem">
+					
+		</div>
 	</div>
 </body>
-
 	<input type="hidden" value="<%=codice%>" id="torneo">
+	
+	
 </html>
 

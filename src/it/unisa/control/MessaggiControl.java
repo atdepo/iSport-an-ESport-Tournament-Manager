@@ -74,6 +74,21 @@ public class MessaggiControl extends HttpServlet {
 			}
 		break;
 		
+		case "addMessaggio":
+			cod= Integer.parseInt(request.getParameter("codice"));
+			String testo=request.getParameter("testo");
+			try {System.out.println("Ho aggiunto il messaggio con codice="+cod);
+				MessaggioBean mess=new MessaggioBean();
+				mess.setCodice(cod);
+				mess.setTesto(testo);
+				mModel.doSave(mess);
+				
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		break;
+		
 		case "showMessaggio":
 			str="";
 			response.setContentType("application/json");

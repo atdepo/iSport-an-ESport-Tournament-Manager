@@ -1,9 +1,7 @@
-/**
- * allò cirù mo t facc nu template per il cazzafà dei tornei in home, tu faj o css e accuong nu poc comm sul tu saj fa<3
- */
-
-
-
+/*var xhr = new XMLHttpRequest();
+xhr.open('GET', 'IndexControl?action=TournamentHome', true);	
+xhr.send();
+*/
 $(document).ready(function() {
 
 	
@@ -45,7 +43,7 @@ $(document).ready(function() {
 
 
 
-	var xhr = new XMLHttpRequest();
+	/*
 	var slider=$(".slider");
 	xhr.onreadystatechange = function() {
 		if (xhr.status == 200 && xhr.readyState == 4) {
@@ -60,7 +58,6 @@ $(document).ready(function() {
 	
 
 	}
-	xhr.open('GET', 'IndexControl?action=TournamentHome', true);	
-	xhr.send();
+	*/
 	
 });

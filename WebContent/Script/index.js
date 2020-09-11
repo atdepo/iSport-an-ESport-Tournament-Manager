@@ -53,7 +53,7 @@ $(document).ready(function() {
 			console.log(data);		
 			
 			for (var i = 0; i < data.length; i++) {
-				var num=data[i].codice % 4;
+				var num=(data[i].codice % 4)+1 ;
 				slider.append('<li id="'+data[i].codice+'"><a href="UserControl?action=visualizza&codtorneo='+data[i].codice+'"><img src="img/arena-'+num+'.jpg"></a>  </li>');
 			}
 		}

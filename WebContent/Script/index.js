@@ -3,10 +3,6 @@ xhr.open('GET', 'IndexControl?action=TournamentHome', true);
 xhr.send();
 */
 
-/**
- * allò cirù mo t facc nu template per il cazzafà dei tornei in home, tu faj o css e accuong nu poc comm sul tu saj fa<3
- */
-
 alert('par o frat ro cazz');
 
 $(document).ready(function() {

@@ -3,6 +3,8 @@ package it.unisa.control;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Enumeration;
+import java.util.Iterator;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -47,6 +49,7 @@ public class SquadreControl extends HttpServlet {
 		String action = request.getParameter("action"); // azione da far compiere alla servlet
 		Gson gson = new Gson();
 		HttpSession session=request.getSession();
+		
 		switch (action) {
 		
 		case "getGiocatori":

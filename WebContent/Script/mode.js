@@ -85,10 +85,10 @@ $(function(){
 					var errore=data['1'];
 					if(tipo=="null"){
 						var struttura=$('.selected.strutture').text();
-						var fisici=$('number-box-tecnici-fisici').text();
+						var fisici=$('.number-box-tecnici-fisici').text();
 						if(struttura=="")
 							struttura="null";
-						if(isNaN(fisici))
+						if(fisici=="")
 							fisici=0;
 							
 						$.ajax({
@@ -102,7 +102,7 @@ $(function(){
 								 '&organizzato='+$('input[type=radio][name=r-button]:checked').val()+
 								 '&data='+$(".data-torneo").val()+
 								 '&struttura='+struttura+
-								 '&numTecniciRemoto='+$('number-box-tecnici').text()+
+								 '&numTecniciRemoto='+$('.number-box-tecnici').text()+
 								 '&numTecniciFisici='+fisici,
 							success: function(){
 								window.location.href='FormInserimentoSquadre.jsp';

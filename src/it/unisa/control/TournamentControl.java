@@ -265,44 +265,10 @@ public class TournamentControl extends HttpServlet {
 				sessione.setAttribute("budget", request.getParameter("budget"));
 				sessione.setAttribute("tecniciRemoti", request.getParameter("numTecniciRemoto"));
 				sessione.setAttribute("tecniciFisici", request.getParameter("numTecniciFisici"));
+				sessione.setAttribute("isHome", request.getParameter("isHome"));
 				response.sendRedirect(request.getContextPath()+"/user/FormInserimentoSquadre.jsp");		
-				/*
-				 * 'nomeTorneo='+$('.nome-torneo').val()+
-								 '&isHome='+$('input[type=radio][name=toggle]:checked').val()+
-								 '&gioco='+$('.selected.gioco').text()+
-								 '&mode='+$('.selected.mode').text()+
-								 '&organizzato='+$('input[type=radio][name=r-button]:checked').val()+
-								 '&data='+$(".data-torneo").val()+
-								 '&struttura='+struttura+
-								 '&numTecniciRemoto='+$('number-box-tecnici').text()+
-								 '&numTecniciFisici='+fisici,
-				 * 
-				 * 
-				 * */
-				
 		
 		break;
-			
-		case "deleteTorneo":
-			
-			try {/*
-				TournamentBean t = new TournamentBean();
-				t.setBudget(311);
-				t.setCAPStruttura(80654);
-				t.setCodGioco("Rocket League");
-				t.setData("2032-10-30");
-				t.setHomePage(true);
-				t.setIndirizzoStruttura("Via Francia");
-				t.setNome("TEST");
-				t.setProprietario("test@test.com");
-				tModel.doSave(t);*/
-				tModel.doDelete((String)request.getParameter("cod"));
-				
-				response.sendRedirect(request.getContextPath()+"/admin/ListaTornei.jsp");
-			} catch (Exception e) {
-				// TODO: handle exception
-			}
-			break;
 			
 		case "getTornei":
 			

@@ -35,9 +35,7 @@
     			<%for(Integer i:codici){ %>
     			<li id="<%=i.intValue()%>"><a href="UserControl?action=visualizza&codtorneo=<%=i.intValue()	%>"><img src="img/arena-<%=(i.intValue()%4)+1%>.jpg"></a> </li>
     			<%} %>
-    			<%for(int i=1;i<=3;i++){%>
-    			<li><a title="ue uaglio bello il torneo <%=i%>"><img src="img/arena-<%=i%>.jpg"></a></li>
-    			<%}%>
+    			
   			</ul>  
 		</div>
 		<div class="slider_option">

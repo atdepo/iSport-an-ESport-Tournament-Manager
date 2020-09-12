@@ -53,9 +53,7 @@ function add(){
 }
 
 function removeSquadraFromTendina(squadra){
-	alert('rimuovo la squadra'+squadra+' dalla tendina');
 	var squadreTendina=$('.option');
-	alert('ci sono '+squadreTendina.length+' squadre');
 	for(var i=0;i<squadreTendina.length;i++){
 		var sel=squadreTendina[i];
 		if($(sel).children('label').html()==squadra){
@@ -139,8 +137,11 @@ function finishTorneo(){
 	
 	if($('.team').length<=2)
 		alert("Inserisci almeno due squadre!");
-	else
-		window.location.href="Pagamento.jsp";
+	else{
+		var xhr = new XMLHttpRequest();
+		xhr.open('GET', '../PagamentoControl', true);
+		xhr.send();
+	}
 	
 }
 

@@ -39,10 +39,9 @@ public class IndexControl extends HttpServlet {
 				ArrayList<TournamentBean> t=(ArrayList<TournamentBean>) tModel.doRetriveInHome();
 				ArrayList<Integer> codici= new ArrayList<Integer>();
 				for (TournamentBean tournamentBean : t) {
-					codici.add(tournamentBean.getCodice());
-					System.out.println("mammt");
+					codici.add(Integer.valueOf(tournamentBean.getCodice()));
 				}
-				request.getSession().setAttribute("commCazzVuoTu", codici);
+				request.getSession().setAttribute("torneiDaMostrare", codici);
 				response.sendRedirect(request.getContextPath()+"index.jsp");
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block

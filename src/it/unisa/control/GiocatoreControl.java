@@ -281,7 +281,7 @@ case "validatePlayer":
 						sq=new ArrayList<SquadraBean>();
 					
 					sq.add(team);
-					request.setAttribute("squadreTorneo", sq);
+					request.getSession().setAttribute("squadreTorneo", sq);
 					response.sendRedirect(response.encodeRedirectURL(request.getContextPath()+"/user/FormInserimentoSquadre.jsp"));
 					
 				}

@@ -52,7 +52,7 @@ public class PagamentoControl extends HttpServlet {
 		UtenteBean utente=(UtenteBean)session.getAttribute("user");
 		ArrayList<SquadraBean> team=(ArrayList<SquadraBean>)session.getAttribute("squadreTorneo");
 		String action = request.getParameter("action"); // azione da far compiere alla servlet
-
+		System.out.println("l'azione e'"+action);
 	
 	
 		Iterator<String> it= e.asIterator();
@@ -92,6 +92,7 @@ public class PagamentoControl extends HttpServlet {
 		break;
 		case "visualizza":
 		session.setAttribute("budget", calcolaTotale(session));
+		System.out.println("+++++++++++STO NEL CASE VISUALIZZA");
 		response.sendRedirect(response.encodeRedirectURL(request.getContextPath()+"/user/Pagamento.jsp"));	
 		break;
 		}

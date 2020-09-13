@@ -140,7 +140,7 @@ function finishTorneo(){
 		alert("Inserisci almeno due squadre!");
 	else{
 		var xhr = new XMLHttpRequest();
-		xhr.open('GET', '../PagamentoControl?action="visualizza";jsessionid='+session+'', true);
+		xhr.open('GET', '../PagamentoControl;jsessionid='+session+'?action=visualizza', true);
 		xhr.send();
 	}
 	

@@ -181,8 +181,6 @@ public Collection<SquadraBean> getSquadreFromTornei(int codTorneo) {
 			}
 		}
 		
-	
-	
 
 	@Override
 	public void doUpdate(UtenteBean product) throws SQLException {
@@ -197,11 +195,6 @@ public Collection<SquadraBean> getSquadreFromTornei(int codTorneo) {
 	 * @return <strong>true</strong> se il cambio di password è stato eseguito con successo, <strong>false</strong> altrimenti 
 	 * @throws SQLException
 	 */
-	
-	
-	
-	
-	
 	public boolean cambiaPassword(String email,String nuovaPassword,String vecchiaPassword) throws SQLException {
 		
 		

@@ -123,10 +123,10 @@ System.out.println("type "+type);
 			<input type="password" id="password" name="password">
 			<span class="error"><%if(type.equals("password")){ %><%=error%><%}%></span>
 			<div class="radioChoose">
-				<input id="toggle-on" class="toggle toggle-left" name="toggle" value="online" type="radio" checked>
-				<label for="toggle-on" class="btn">Online</label>
-				<input id="toggle-off" class="toggle toggle-right" name="toggle" value="fisico" type="radio">
-				<label for="toggle-off" class="btn">Fisico</label>
+				<input id="toggle-on" class="toggle toggle-left" name="toggle" value="on-line" type="radio" checked>
+				<label for="toggle-on" class="btn">On-line</label>
+				<input id="toggle-off" class="toggle toggle-right" name="toggle" value="locale" type="radio">
+				<label for="toggle-off" class="btn">Locale</label>
 			</div>
 			<input type="submit">
 		</form>

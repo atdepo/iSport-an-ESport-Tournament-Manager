@@ -139,9 +139,14 @@ function finishTorneo(){
 	if($('.team').length<2)
 		alert("Inserisci almeno due squadre!");
 	else{
-		var xhr = new XMLHttpRequest();
-		xhr.open('GET', '../PagamentoControl;jsessionid='+session+'?action=visualizza', true);
-		xhr.send();
+		
+		$.ajax({
+			url:'../PagamentoControl;jsessionid='+session+'?action=visualizza',
+			success:function(){
+				window.location.href='Pagamento.jsp;jsessionid='+session;
+			}
+			
+		})
 	}
 	
 }

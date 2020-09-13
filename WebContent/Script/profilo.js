@@ -33,6 +33,42 @@ function getSquadra(codice){
 	xhr.send();
 }
 
+ function checkSize(){
+		 alert('called');
+			var file = $(this)[0].files[0];
+			var img=new Image();
+			var imgwidth = 0;
+			var imgheight = 0;
+			var error=$("#images-0").next();
+			if(typeof file!==typeof undefined){
+			img.src = URL.createObjectURL(file);
+			img.onload=function(){
+			
+			imgwidth = this.width;
+			imgheight = this.height;
+			if(imgwidth>parseInt(150)&&imgheight>parseInt(150)){
+				error.text("Inserisci un'immagine di massimo 150x150"); 
+				$("#img-btn").prop('disabled', true);
+				}
+			else {
+				error.text(""); 
+				$("#img-btn").prop('disabled', false);
+				$('#image-form').submit();
+				}
+			}
+			
+			}else{
+				error.text("");
+				$("#img-btn").prop('disabled', false);
+				return true;
+			}
+		
+ }
+ 
+ $(function() {
+	 $("#images-0").change(checkSize);
+	
+})
  
  
  
@@ -44,7 +80,7 @@ function getSquadra(codice){
    //  var Img=$('#images-0').val();
      var error=$("#errorImg").text()
      
-     	var file = $("#images-0")[0].files[0]; //this is the input where I can choose the file
+     	//var file = $("#images-0")[0].files[0]; //this is the input where I can choose the file
 		
     
 

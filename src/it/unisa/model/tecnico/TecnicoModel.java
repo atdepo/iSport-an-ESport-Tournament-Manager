@@ -177,6 +177,26 @@ public ArrayList<TecnicoBean> doRetrieveTecniciLiberi(TournamentBean torneo, int
 
 
 	}
+	
+	
+	public void doAssocia(TecnicoBean tecnico, int cod) throws SQLException {
+		PreparedStatement statement = null;
+		String sql = "INSERT INTO assiste values (?,?)";
+		
+		try(Connection con = DriverManagerConnectionPool.getConnection()){
+		
+			statement=con.prepareStatement(sql);
+			statement.setInt(1, cod);
+			statement.setString(2, tecnico.getCF());
+			
+			
+			System.out.println("doAssocia="+statement);
+			statement.executeUpdate();
+			con.commit();//<----- a volte vorrei non essere così tanto forte
+		}
+
+
+	}
 
 	
 	

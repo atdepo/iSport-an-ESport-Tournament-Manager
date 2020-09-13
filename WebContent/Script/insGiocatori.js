@@ -22,6 +22,14 @@ session=$('#session').val();
 
 })
 
+$(function(){
+	$('#img-btn').click(function(){
+		
+		
+	})
+	
+})
+
 	function menu(k){
 	
 	$("#"+k).toggleClass("active");

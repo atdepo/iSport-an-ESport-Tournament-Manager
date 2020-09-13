@@ -40,6 +40,8 @@ public class Admin extends HttpServlet {
 				bean.setIndirizzo(request.getParameter("indirizzo"));
 				bean.setRecapito(request.getParameter("recapito"));
 				bean.setCF(request.getParameter("CF"));
+				bean.setSpecializzazione(request.getParameter("toggle"));
+				System.out.println(request.getParameter("toggle"));
 				
 				UtenteBean user=new UtenteBean();
 				user.setUsername(request.getParameter("CF"));
@@ -49,6 +51,7 @@ public class Admin extends HttpServlet {
 			try {
 				uModel.doSave(user);
 				tModel.doSave(bean);
+				response.sendRedirect(response.encodeRedirectURL(request.getContextPath()+"/admin/Admin.jsp"));
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}

@@ -65,16 +65,16 @@ public class PagamentoControl extends HttpServlet {
 		System.out.println("*****fine parametri del pagamento******");
 		switch (action) {
 		case "conferma":
-		TournamentBean torneo=new TournamentBean();
-		torneo.setBudget(calcolaTotale(session));
-		StrutturaBean struttura=(StrutturaBean)session.getAttribute("struttura");
-		torneo.setCAPStruttura(Integer.parseInt(struttura.getCAP()));
-		torneo.setCodGioco((String)session.getAttribute("nomeGioco"));
-		torneo.setData((String)session.getAttribute("dataTorneo"));
-		torneo.setHomePage((Boolean)session.getAttribute("isHome"));
-		torneo.setIndirizzoStruttura((String)struttura.getIndirizzo());
-		torneo.setNome((String)session.getAttribute("nomeTorneo"));
-		torneo.setProprietario(utente.getEmail());
+			TournamentBean torneo=new TournamentBean();
+			torneo.setBudget(calcolaTotale(session));
+			StrutturaBean struttura=(StrutturaBean)session.getAttribute("struttura");
+			torneo.setCAPStruttura(Integer.parseInt(struttura.getCAP()));
+			torneo.setCodGioco((String)session.getAttribute("nomeGioco"));
+			torneo.setData((String)session.getAttribute("dataTorneo"));
+			torneo.setHomePage((Boolean)session.getAttribute("isHome"));
+			torneo.setIndirizzoStruttura((String)struttura.getIndirizzo());
+			torneo.setNome((String)session.getAttribute("nomeTorneo"));
+			torneo.setProprietario(utente.getEmail());
 		
 		try {
 			tModel.doSave(torneo);
@@ -89,11 +89,10 @@ public class PagamentoControl extends HttpServlet {
 		 * - associa dei tecnici online (se ci sono) random al torneo+
 		 * - associa dei tecnici fisici non impegnati al torneo
 		 */
+		
 		break;
 		case "visualizza":
-		session.setAttribute("budget", calcolaTotale(session));
-		System.out.println("+++++++++++STO NEL CASE VISUALIZZA");
-		response.sendRedirect(response.encodeRedirectURL(request.getContextPath()+"/user/Pagamento.jsp"));	
+			session.setAttribute("budget", calcolaTotale(session));
 		break;
 		}
 	}

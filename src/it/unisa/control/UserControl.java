@@ -11,6 +11,7 @@ import java.util.Base64;
 import javax.imageio.ImageIO;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -42,6 +43,9 @@ import it.unisa.model.torneo.TournamentBean;
  */
 
 @WebServlet(urlPatterns = {"/UserControl","/user/UserControl"})
+@MultipartConfig(fileSizeThreshold = 1024 * 1024 * 2, // 2MB after which the file will temporarily stored on disk
+maxFileSize = 1024 * 1024 * 10, // 10MB maximum size allowed for uploaded files
+maxRequestSize = 1024 * 1024 * 50) // 50MB overall size of all uploaded files
 public class UserControl extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	TournamentModel tModel = new TournamentModel();
@@ -250,6 +254,13 @@ public class UserControl extends HttpServlet {
 		case "modificaImg":
 			try (ByteArrayOutputStream bos = new ByteArrayOutputStream()){
 			Part part = request.getPart("images"); //Prende la parte dal multipart form che rappresenta l'immagine di profilo dell'utente
+			ArrayList<Part> partii=(ArrayList<Part>) request.getParts();
+			
+			System.out.println("****inizio parti*****");
+			for(Part p:partii) {
+				System.out.println(p.getName());
+			}
+			System.out.println("****fine parti*****");			
 			InputStream fis = null;
 			
 			fis = part.getInputStream();
@@ -262,11 +273,12 @@ public class UserControl extends HttpServlet {
 			}
 			byte[] bytes = bos.toByteArray();
 			
-			String img="";
-			if(bytes.length>0) {
-				img = "data:image/jpeg;base64, " + Base64.getEncoder().encodeToString(bytes);
-				System.out.println("bytes immagine "+bytes.length);
-			}
+			String img="data:image/jpeg;base64, " + Base64.getEncoder().encodeToString(bytes);
+			System.out.println("bytes immagine "+bytes.length);
+			UtenteBean user=(UtenteBean) request.getSession().getAttribute("user");
+			userModel.cambiaImg(img,user.getEmail());
+			user.setImg(img);
+			response.sendRedirect(response.encodeRedirectURL("Profilo.jsp"));
 			}
 			break;
 		

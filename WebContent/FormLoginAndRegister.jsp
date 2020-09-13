@@ -58,7 +58,7 @@ System.out.println("type "+type);
             <label class="showpsw">Show Password</label><br>
             <span class="error-cred"><%if(type.equals("wrongCred")){ %><%=error%><%}%></span>
             <button type="submit" class="btn login">Accedi</button>
-            <p><a href="javascript:void(0)">Password dimenticata</a> </p>
+            
 		          
         </form>
     </div>

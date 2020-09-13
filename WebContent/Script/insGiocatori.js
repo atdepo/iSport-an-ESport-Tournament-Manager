@@ -86,7 +86,7 @@ session=$('#session').val();
 				'</div>'+
 				
 				'<div class="field"><label for="images" class="form-label">Inserisci una immagine massimo 150x150</label>'+
-				'<input type="file" name="images" onchange="checkImg('+j+')" id="images-'+j+'">>'+
+				'<input type="file" name="image-'+j+'" onchange="checkImg('+j+')" id="images-'+j+'">>'+
 				'<span class="error-img"></span>'+
 				'</div>'+
 				

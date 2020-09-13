@@ -97,54 +97,53 @@ public class PagamentoControl extends HttpServlet {
 							return;
 						}else {
 							System.out.println("La struttura sta tropp fort");
-							torneo.setCAPStruttura(Integer.parseInt(struttura.getCAP()));
-							torneo.setCodGioco((String) session.getAttribute("nomeGioco"));
-							torneo.setData((String) session.getAttribute("dataTorneo"));
-							torneo.setHomePage((Boolean) session.getAttribute("isHome"));
-							torneo.setIndirizzoStruttura((String) struttura.getIndirizzo());
-							torneo.setNome((String) session.getAttribute("nomeTorneo"));
-							torneo.setProprietario(utente.getEmail());
-
 							
-							try {
-								tModel.doSave(torneo);
-								tModel.doSaveComposto(torneo, team);
-							} catch (SQLException e1) {
-								// TODO Auto-generated catch block
-								e1.printStackTrace();
-							}
-
-							TecnicoModel teModel=new TecnicoModel();
-							if (Integer.parseInt(request.getParameter("tecniciFisici")) > 0) {
-								try {
-									ArrayList<TecnicoBean> liberi= teModel.doRetrieveTecniciLiberi(torneo, Integer.parseInt(request.getParameter("tecniciFisici")));
-									if(liberi.size()<=Integer.parseInt(request.getParameter("tecniciFisici"))) {
-										int max=tModel.maxTorneo();
-										for (TecnicoBean tecnicoBean : liberi) {
-											teModel.doAssocia(tecnicoBean, max);
-									}
-										}else {
-										System.out.println("non ho abbastanza tecnici fisici");
-									}
-									
-									}
-									
-								 catch (NumberFormatException | SQLException e1) {
-									// TODO Auto-generated catch block
-									e1.printStackTrace();
-								}	
 						}
 
 					}
 				}
 			
 			}
-			}
 			
-			catch (SQLException ex) {
-				ex.printStackTrace();
+			catch (SQLException e) {
+				e.printStackTrace();
 			}
+			torneo.setCAPStruttura(Integer.parseInt(struttura.getCAP()));
+			torneo.setCodGioco((String) session.getAttribute("nomeGioco"));
+			torneo.setData((String) session.getAttribute("dataTorneo"));
+			torneo.setHomePage((Boolean) session.getAttribute("isHome"));
+			torneo.setIndirizzoStruttura((String) struttura.getIndirizzo());
+			torneo.setNome((String) session.getAttribute("nomeTorneo"));
+			torneo.setProprietario(utente.getEmail());
+
 			
+			try {
+				tModel.doSave(torneo);
+				tModel.doSaveComposto(torneo, team);
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+
+			TecnicoModel teModel=new TecnicoModel();
+			if (Integer.parseInt(request.getParameter("tecniciFisici")) > 0) {
+				try {
+					ArrayList<TecnicoBean> liberi= teModel.doRetrieveTecniciLiberi(torneo, Integer.parseInt(request.getParameter("tecniciFisici")));
+					if(liberi.size()<=Integer.parseInt(request.getParameter("tecniciFisici"))) {
+						int max=tModel.maxTorneo();
+						for (TecnicoBean tecnicoBean : liberi) {
+							teModel.doAssocia(tecnicoBean, max);
+					}
+						}else {
+						System.out.println("non ho abbastanza tecnici fisici");
+					}
+					
+					}
+					
+				 catch (NumberFormatException | SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 				
 				
 			}

@@ -67,7 +67,7 @@ public class MessaggiControl extends HttpServlet {
 			cod= Integer.parseInt(request.getParameter("codice"));
 			try {System.out.println("Ho eliminato il messaggio con codice="+cod);
 				mModel.doDelete(cod);
-				response.sendRedirect(request.getContextPath()+"/tecnico/messaggi.jsp");
+				response.sendRedirect(response.encodeRedirectURL(request.getContextPath()+"/tecnico/messaggi.jsp"));
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

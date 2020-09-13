@@ -151,7 +151,7 @@ public class SquadreControl extends HttpServlet {
 					for(SquadraBean b:squadre) {
 						
 					}
-					response.sendRedirect(request.getContextPath()+"/user/FormInserimentoSquadre.jsp");
+					response.sendRedirect(response.encodeRedirectURL(request.getContextPath()+"/user/FormInserimentoSquadre.jsp"));
 				}
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block

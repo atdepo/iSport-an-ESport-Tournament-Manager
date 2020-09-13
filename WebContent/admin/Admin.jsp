@@ -89,13 +89,15 @@ System.out.println("type "+type);
 	
 <body>
 	<%@ include file="../header.jsp"%>
+		<input type="hidden" value="<%=request.getSession().getId()%>" id="session">
+	
 <div class="page">
 	
 	<div class="listaTornei"><label class="lista">Lista Tornei</label></div>
 	
 	<div class="addTecnico">
 		<label> Aggiungi Profilo Tecnico</label>
-		<form action="Admin?action=addTecnico" method="post" id="addTecnico">
+		<form action="Admin;jsessionid=<%=request.getSession().getId()%>?action=addTecnico" method="post" id="addTecnico">
 			<label for="nome">Nome</label>
 			<input type="text" id="nome" name="nome">
 			<span class="error"><%if(type.equals("nome")){ %><%=error%><%}%></span>

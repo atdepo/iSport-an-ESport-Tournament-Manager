@@ -51,6 +51,9 @@ public class PagamentoControl extends HttpServlet {
 			System.out.println(" value: "+request.getSession().getAttribute(par));
 		}
 		System.out.println("*****fine parametri del pagamento******");
+		
+		String action=request.getParameter("action");
+		
 
 		/**
 		 * PER ANTONIO
@@ -62,7 +65,6 @@ public class PagamentoControl extends HttpServlet {
 		
 		
 		calcolaTotale(request.getSession());
-		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
 	/**

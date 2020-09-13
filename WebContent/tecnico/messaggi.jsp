@@ -41,6 +41,7 @@
 </head>
 <body>
 	<%@ include file="../header.jsp"%>
+		<input type="hidden" value="<%=request.getSession().getId()%>" id="session">
 	
 
 	<div class="nomeTecnico"> <%=u.getUsername() %></div>

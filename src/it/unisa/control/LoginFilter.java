@@ -61,9 +61,9 @@ public class LoginFilter implements Filter{
 				chain.doFilter(sRequest, sResponse);
 			else 
 				if(user==null)
-					hResponse.sendRedirect(hRequest.getContextPath()+"/FormLoginAndRegister.jsp");
+					hResponse.sendRedirect(hResponse.encodeRedirectURL(hRequest.getContextPath()+"/FormLoginAndRegister.jsp"));
 				else
-					hResponse.sendRedirect(hRequest.getContextPath()+"/index.jsp");
+					hResponse.sendRedirect(hResponse.encodeRedirectURL(hRequest.getContextPath()+"/index.jsp"));
 		}
 		
 		

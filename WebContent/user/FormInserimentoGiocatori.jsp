@@ -20,6 +20,8 @@
 </head>
 <body>
 	<%@ include file="../header.jsp"%>	
+		<input type="hidden" value="<%=request.getSession().getId()%>" id="session">
+	
 <div class="total-container">
 	<div class="form-div">
 	<header>Creiamo la squadra</header>
@@ -32,7 +34,7 @@
 			</div>
 		</div>
 			
-		<form action="GiocatoreControl?action=totalValidate" method="post" id="the-form" enctype="multipart/form-data">
+		<form action="GiocatoreControl;jsessionid=<%=request.getSession().getId() %>?action=totalValidate" method="post" id="the-form" enctype="multipart/form-data">
 		
 		<!--Pagina per la creazione della squadra, page 0 del multistep -->
 		<div class="page page-0 slidepage">

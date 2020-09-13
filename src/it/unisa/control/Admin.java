@@ -59,7 +59,7 @@ public class Admin extends HttpServlet {
 				if(torModel.doRetriveByKey((String)request.getParameter("cod"))!=null)
 					torModel.doDelete((String)request.getParameter("cod"));
 				
-				response.sendRedirect(request.getContextPath()+"/admin/Admin.jsp");
+				response.sendRedirect(response.encodeRedirectURL(request.getContextPath()+"/admin/Admin.jsp"));
 			} catch (Exception e) {
 				e.printStackTrace();
 			}

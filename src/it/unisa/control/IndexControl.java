@@ -42,7 +42,7 @@ public class IndexControl extends HttpServlet {
 					codici.add(Integer.valueOf(tournamentBean.getCodice()));
 				}
 				request.getSession().setAttribute("torneiDaMostrare", codici);
-				response.sendRedirect(request.getContextPath()+"index.jsp");
+				response.sendRedirect(response.encodeRedirectURL(request.getContextPath()+"/index.jsp"));
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

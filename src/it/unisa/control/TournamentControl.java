@@ -266,7 +266,7 @@ public class TournamentControl extends HttpServlet {
 				sessione.setAttribute("tecniciRemoti", request.getParameter("numTecniciRemoto"));
 				sessione.setAttribute("tecniciFisici", request.getParameter("numTecniciFisici"));
 				sessione.setAttribute("isHome", request.getParameter("isHome"));
-				response.sendRedirect(request.getContextPath()+"/user/FormInserimentoSquadre.jsp");		
+				response.sendRedirect(response.encodeRedirectURL(request.getContextPath()+"/user/FormInserimentoSquadre.jsp"));		
 		
 		break;
 			

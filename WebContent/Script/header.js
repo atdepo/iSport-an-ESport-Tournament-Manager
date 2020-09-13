@@ -1,3 +1,9 @@
+var session;
+$(document).ready(function(){
+	session=$('#session').val();
+	
+	
+})
 
 function toggle(tipo){
 	
@@ -21,7 +27,7 @@ function toggle(tipo){
 			})
 			
 			
-			$('#link').append('<li class="out"><a href="'+ctx+'/Logout">LOG-OUT</a></li>');
+			$('#link').append('<li class="out"><a href="'+ctx+'/Logout;jsessionid='+session+'">LOG-OUT</a></li>');
 
 		} else{
 			$('ul li').each(function(i){

@@ -218,7 +218,7 @@ public class UserControl extends HttpServlet {
 		case "visualizza":
 			
 			session.setAttribute("cod",request.getParameter("codtorneo"));
-			response.sendRedirect(request.getContextPath()+"/torneo.jsp");
+			response.sendRedirect(response.encodeRedirectURL(request.getContextPath()+"/torneo.jsp"));
 			
 		break;
 		/**
@@ -228,7 +228,7 @@ public class UserControl extends HttpServlet {
 		case "visualizzaSquadra":
 			session.setAttribute("nome",request.getParameter("nomeSquadra"));
 			System.out.println(request.getParameter("nomeSquadra"));
-			response.sendRedirect(request.getContextPath()+"/squadraView.jsp");
+			response.sendRedirect(response.encodeRedirectURL(request.getContextPath()+"/squadraView.jsp"));
 		break;
 		
 			/**
@@ -270,7 +270,7 @@ public class UserControl extends HttpServlet {
 				if(!email.matches(regEmail))
 				{session.setAttribute("error", "la mail scelta non e' valida");
 				session.setAttribute("error-type", "mail");
-				response.sendRedirect(request.getContextPath()+"/user/Profilo.jsp");
+				response.sendRedirect(response.encodeRedirectURL(request.getContextPath()+"/user/Profilo.jsp"));
 				return;
 
 				}
@@ -282,7 +282,7 @@ public class UserControl extends HttpServlet {
 					
 					session.setAttribute("error", "la mail scelta e' gia' stata utilizzato"); //altrimenti setto gli errori
 					session.setAttribute("error-type", "mail");
-					response.sendRedirect(request.getContextPath()+"/user/Profilo.jsp");
+					response.sendRedirect(response.encodeRedirectURL(request.getContextPath()+"/user/Profilo.jsp"));
 					return;
 				}
 				
@@ -290,9 +290,9 @@ public class UserControl extends HttpServlet {
 			
 															
 				if(!nome.matches(regUser))
-				{session.setAttribute("error", "lo username inserito non � valido");
+				{session.setAttribute("error", "lo username inserito non e' valido");
 				session.setAttribute("error-type", "username");
-				response.sendRedirect(request.getContextPath()+"/user/Profilo.jsp");
+				response.sendRedirect(response.encodeRedirectURL(request.getContextPath()+"/user/Profilo.jsp"));
 				return;
 				}
 				else
@@ -303,7 +303,7 @@ public class UserControl extends HttpServlet {
 					
 					session.setAttribute("error", "l'username scelto e' gia' stato utilizzato");//altrimenti setto gli errori
 					session.setAttribute("error-type", "username");
-					response.sendRedirect(request.getContextPath()+"/user/Profilo.jsp");
+					response.sendRedirect(response.encodeRedirectURL(request.getContextPath()+"/user/Profilo.jsp"));
 					
 				}
 				
@@ -311,7 +311,7 @@ public class UserControl extends HttpServlet {
 				if(!iva.matches(regIva))
 				{session.setAttribute("error", "la partita IVA inserita non e' valida");
 				session.setAttribute("error-type", "piva");
-				response.sendRedirect(request.getContextPath()+"/user/Profilo.jsp");
+				response.sendRedirect(response.encodeRedirectURL(request.getContextPath()+"/user/Profilo.jsp"));
 				return;
 
 				}
@@ -323,7 +323,7 @@ public class UserControl extends HttpServlet {
 					
 					session.setAttribute("error", "la partita iva scelta e' gia' stata utilizzato");
 					session.setAttribute("error-type", "piva");
-					response.sendRedirect(request.getContextPath()+"/user/Profilo.jsp");
+					response.sendRedirect(response.encodeRedirectURL(request.getContextPath()+"/user/Profilo.jsp"));
 					return;
 
 				}

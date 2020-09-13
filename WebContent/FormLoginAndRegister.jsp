@@ -31,6 +31,7 @@ System.out.println("type "+type);
 </head>
 <body>
 	<%@ include file="header.jsp"%>
+		<input type="hidden" value="<%=request.getSession().getId()%>" id="session">
 	
   <div class="form-modal">
     
@@ -49,7 +50,7 @@ System.out.println("type "+type);
  	   
     <%} %>
     
-        <form action="LoginAndRegisterControl?action=validateLogin" method="post" class="log">
+        <form action="LoginAndRegisterControl;jsessionid=<%=request.getSession().getId() %>?action=validateLogin" method="post" class="log">
             <input type="email" name ="email" class="email" placeholder="Inserisci l'email"/>
             <span class="error-mail"></span>
             <input type="password" name="password" class="password" placeholder="Inserisci la password"/>
@@ -71,7 +72,7 @@ System.out.println("type "+type);
     	<div id="signup-form" style="display: none">
     <%} %>
         
-        <form action="LoginAndRegisterControl?action=register" method="post" class="sub" enctype="multipart/form-data">
+        <form action="LoginAndRegisterControl;jsessionid=<%=request.getSession().getId() %>?action=register" method="post" class="sub" enctype="multipart/form-data">
             <input type="email" name="email" id="email" placeholder="E-mail"/>
             <span class="error"><%if(type.equals("email")){ %><%=error%><%}%></span>
             <input type="text" name="username" class="username" id="username" placeholder="Username"/>

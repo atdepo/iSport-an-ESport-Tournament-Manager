@@ -32,9 +32,11 @@
 		<div id="slider">
  			<ul class="slider"> 
     		
-    			<%for(Integer i:codici){ %>
+    			<%if(codici!=null){
+    				for(Integer i:codici){ %>
+    			
     			<li id="<%=i.intValue()%>"><a href="UserControl?action=visualizza&codtorneo=<%=i.intValue()	%>"><img src="img/arena-<%=(i.intValue()%4)+1%>.jpg"></a> </li>
-    			<%} %>
+    			<%}} %>
     			
   			</ul>  
 		</div>

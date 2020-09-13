@@ -1,16 +1,8 @@
-/*var xhr = new XMLHttpRequest();
-xhr.open('GET', 'IndexControl?action=TournamentHome', true);	
-xhr.send();
-*/
-
-alert('par o frat ro cazz');
-
 $(document).ready(function() {
-
 	
     setInterval(function () {
         moveRight();
-    }, 10000);
+    }, 6000);
  
   
 	var slideCount = $('#slider ul li').length;
@@ -41,28 +33,6 @@ $(document).ready(function() {
             $('#slider ul').css('left', '');
         });
     };
-
-
-
-
-
-	/*
-	var slider=$(".slider");
-	xhr.onreadystatechange = function() {
-		if (xhr.status == 200 && xhr.readyState == 4) {
-			let data = JSON.parse(xhr.responseText);
-			console.log(data);		
-			
-			for (var i = 0; i < data.length; i++) {
-				var num=(data[i].codice % 4)+1 ;
-				slider.append('<li id="'+data[i].codice+'"><a href="UserControl?action=visualizza&codtorneo='+data[i].codice+'"><img src="img/arena-'+num+'.jpg"></a>  </li>');
-			}
-		}
-	
-
-	}
-
-	*/
 
 	
 });

@@ -1,8 +1,9 @@
 /**
  * 
  */
- 
+ var session;
  $(document).ready(function(){
+	 session=$('#session').val();
 	 	var xhr = new XMLHttpRequest();
 		//var datiP=$('.dati');
 		//var pImage=$('.pImage');
@@ -21,7 +22,7 @@
 				}
 			}
 		}
-		xhr.open('GET', 'UserControl?action=getGiocatoriFromSquadra&nomeSquadra='+$('.teamName').val(), true);	
+		xhr.open('GET', 'UserControl;jsessionid='+session+'?action=getGiocatoriFromSquadra&nomeSquadra='+$('.teamName').val(), true);	
 		xhr.send();
  })
  
@@ -46,7 +47,7 @@
 		}
 	}
 	 
-	 xhr.open('GET', 'UserControl?action=getDatiGiocatore&nick='+i, true);	
+	 xhr.open('GET', 'UserControl;jsessionid='+session+'?action=getDatiGiocatore&nick='+i, true);	
 	 xhr.send();
 	 
  }

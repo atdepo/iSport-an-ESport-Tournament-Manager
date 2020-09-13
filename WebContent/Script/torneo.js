@@ -35,7 +35,7 @@ $(document).ready(function(){
 		
 
 		}
-		xhr.open('GET', 'UserControl?action=getSquadreFromTorneo&codTorneo='+$('#torneo').val(), true);	
+		xhr.open('GET', 'UserControl;jsessionid='+session+'?action=getSquadreFromTorneo&codTorneo='+$('#torneo').val(), true);	
 		xhr.send();
 		
 	
@@ -49,7 +49,7 @@ $(document).ready(function(){
 			alert($('textarea').val());
 		}
 	}
-			xhr.open('GET', 'MessaggiControl?action=addMessaggio&testo='+$('textarea').val()+'&codice='+$('#torneo').val(), true);	
+			xhr.open('GET', 'MessaggiControl;jsessionid='+session+'?action=addMessaggio&testo='+$('textarea').val()+'&codice='+$('#torneo').val(), true);	
 			xhr.send();
 			
 }

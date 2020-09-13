@@ -182,7 +182,7 @@ case "validatePlayer":
 			try {
 				//Se la squadra è gia' presente nel database, oppure uno dei campi è vuoto
 				if(pModel.doRetriveByKey(squadra)!=null || squadra.isEmpty() || nazionalita.isEmpty()){
-					response.sendRedirect(request.getContextPath()+"/oopsPage.jsp");// pagina oops
+					response.sendRedirect(response.encodeRedirectURL(request.getContextPath()+"/oopsPage.jsp"));// pagina oops
 				} 
 				
 				//Se i dati della squadra sono buoni
@@ -198,7 +198,7 @@ case "validatePlayer":
 						
 						//se il nick del giocatore i-esimo è presente oppure uno dei campi è vuoto 
 						if(sqModel.doRetriveByKey(nickname)!=null ||nickname.isEmpty() || nome.isEmpty()|| cognome.isEmpty() || ruolo.isEmpty()   || data.isEmpty()) {
-							response.sendRedirect(request.getContextPath()+"/oopsPage.jsp");// pagina oops	
+							response.sendRedirect(response.encodeRedirectURL(request.getContextPath()+"/oopsPage.jsp"));// pagina oops	
 							return;
 						}		
 					}
@@ -282,11 +282,11 @@ case "validatePlayer":
 					
 					sq.add(team);
 					request.setAttribute("squadreTorneo", sq);
-					response.sendRedirect(request.getContextPath()+"/user/FormInserimentoSquadre.jsp");
+					response.sendRedirect(response.encodeRedirectURL(request.getContextPath()+"/user/FormInserimentoSquadre.jsp"));
 					
 				}
 			} catch (SQLException e) {
-				response.sendRedirect(request.getContextPath()+"/oopsPage.jsp");// pagina oops
+				response.sendRedirect(response.encodeRedirectURL(request.getContextPath()+"/oopsPage.jsp"));// pagina oops
 				e.printStackTrace();
 			}
 							

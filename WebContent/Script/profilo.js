@@ -1,9 +1,10 @@
-
+var session;
  $(document).ready(function(){
  	/*
  	if($('#user-pIVA').val()!=="           "){
  		$('.dati').append('<div class="gertrude"><div class="field"><label for="iva" class="testlabel">Partita IVA</label><input type="text" class="iva" disabled placeholder="'+$('#user-pIVA').val()+'" name="pIVA"><i class="fas fa-user-edit iva"></i></div></div>')
  	}*/
+	 session=$('#session').val();
  //TORNEI DELL'UTENTE
  	var xhr = new XMLHttpRequest();
 	xhr.onreadystatechange = function() {
@@ -14,7 +15,7 @@
 			if(data.length==0)
 				div.append("<h3>Non hai tornei, dai ordina il tuo primo torneo dalla sezione Crea Tornei</h3>");
 			for (var i = 0; i < data.length; i++) {
-				div.append('<a href="../UserControl?action=visualizza&codtorneo='+data[0][i].codice+'">  <h3> '+data[0][i].nome+'</h3><h3> '+data[0][i].data+'</h3><h3> '+data[1][i]+'</h3><h3> '+data[0][i].indirizzoStruttura+'</h3><h3> '+data[0][i].codGioco+'</h3><br></a>');	
+				div.append('<a href="../UserControl;jsessionid='+session+'?action=visualizza&codtorneo='+data[0][i].codice+'">  <h3> '+data[0][i].nome+'</h3><h3> '+data[0][i].data+'</h3><h3> '+data[1][i]+'</h3><h3> '+data[0][i].indirizzoStruttura+'</h3><h3> '+data[0][i].codGioco+'</h3><br></a>');	
 	
 			}
 		
@@ -22,13 +23,13 @@
 	
 
 }
-xhr.open('GET', '../UserControl?action=getMieiTornei', true);		
+xhr.open('GET', '../UserControl;jsessionid='+session+'?action=getMieiTornei', true);		
 xhr.send();
  })
  
 function getSquadra(codice){
 	var xhr = new XMLHttpRequest();
-	xhr.open('GET', '../UserControl?action=visualizza&codtorneo='+codice, true);	
+	xhr.open('GET', '../UserControl;jsessionid='+session+'?action=visualizza&codtorneo='+codice, true);	
 	xhr.send();
 }
 

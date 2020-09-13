@@ -1,6 +1,6 @@
-
+var session;
 $(document).ready(function(){
-
+session=$('#session').val();
 	creaSteps();
 	
 	var xhr = new XMLHttpRequest();
@@ -149,7 +149,7 @@ $(document).ready(function(){
 		}
 	}
 	
-		xhr.open('GET', '../SquadreControl?action=getGiocatori', true);
+		xhr.open('GET', '../SquadreControl;jsessionid='+session+'?action=getGiocatori', true);
 		xhr.send();
 }
 
@@ -177,9 +177,9 @@ $(document).ready(function(){
 			
 			var xhr = new XMLHttpRequest();
 			if(called==0)
-				xhr.open('GET', '../GiocatoreControl?action=validateTeam&teamName='+$('.nome-squadra').val(), true);
+				xhr.open('GET', '../GiocatoreControl;jsessionid='+session+'?action=validateTeam&teamName='+$('.nome-squadra').val(), true);
 			else
-				xhr.open('GET', '../GiocatoreControl?action=validatePlayer&nick='+$('.nickname-player-'+called).val()+'&numPlayer='+called, true);
+				xhr.open('GET', '../GiocatoreControl;jsessionid='+session+'?action=validatePlayer&nick='+$('.nickname-player-'+called).val()+'&numPlayer='+called, true);
 
 			xhr.send();
 			
@@ -281,7 +281,7 @@ $(document).ready(function(){
 		
 		$('span').text("");
 
-		xhr.open('GET', '../GiocatoreControl?action=validatePlayer&nick='+$('.nickname-player-'+i).val()+'&numPlayer='+i, true);	
+		xhr.open('GET', '../GiocatoreControl;jsessionid='+session+'?action=validatePlayer&nick='+$('.nickname-player-'+i).val()+'&numPlayer='+i, true);	
 		xhr.send();
 		
 		xhr.onreadystatechange = function() {

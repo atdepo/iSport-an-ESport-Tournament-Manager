@@ -56,7 +56,8 @@ public class LoginAndRegisterControl extends HttpServlet {
 		String action = request.getParameter("action");
 		
 		if(action==null) {
-			response.sendRedirect("index.jsp");
+			response.sendRedirect(response.encodeRedirectURL("index.jsp"));
+			System.out.println("ma c vuo");
 			return;
 		}
 		System.out.println("La servlet di login e registrazione sta svolgendo l'azione di :"+action);
@@ -81,7 +82,7 @@ public class LoginAndRegisterControl extends HttpServlet {
 					session.setAttribute("error-type", "email");
 					session.setAttribute("error", "Questa mail è già stata utilizzata, scegline un'altra");
 					session.setAttribute("error-location", "signup");
-					response.sendRedirect(request.getContextPath()+"/FormLoginAndRegister.jsp");
+					response.sendRedirect(response.encodeRedirectURL(request.getContextPath()+"/FormLoginAndRegister.jsp"));
 					return;
 				}
 				//Di seguito ci sono vari controlli sui campi inseriti in fase di registrazione
@@ -93,7 +94,7 @@ public class LoginAndRegisterControl extends HttpServlet {
 						session.setAttribute("error-type", "username");
 						session.setAttribute("error", "Quest'username è stato utilizzato");
 						session.setAttribute("error-location", "signup");
-						response.sendRedirect(request.getContextPath()+"/FormLoginAndRegister.jsp");
+						response.sendRedirect(response.encodeRedirectURL(request.getContextPath()+"/FormLoginAndRegister.jsp"));
 						return;
 					}
 					//Di seguito ci sono vari controlli sui campi inseriti in fase di registrazione
@@ -104,14 +105,14 @@ public class LoginAndRegisterControl extends HttpServlet {
 						session.setAttribute("error-type", "email");
 						session.setAttribute("error", "La mail non è scritta correttamente");
 						session.setAttribute("error-location", "signup");
-						response.sendRedirect(request.getContextPath()+"/FormLoginAndRegister.jsp");
+						response.sendRedirect(response.encodeRedirectURL(request.getContextPath()+"/FormLoginAndRegister.jsp"));
 				}
 				else if(!request.getParameter("username").matches(regUser)) {
 					System.out.println("mi fermo allo username");
 					session.setAttribute("error-type", "username");
 					session.setAttribute("error", "Utente non scritto correttamente");
 					session.setAttribute("error-location", "signup");
-					response.sendRedirect(request.getContextPath()+"/FormLoginAndRegister.jsp");
+					response.sendRedirect(response.encodeRedirectURL(request.getContextPath()+"/FormLoginAndRegister.jsp"));
 				}
 				
 				else if(!request.getParameter("pIva").isEmpty() && !request.getParameter("pIva").matches(regIva)) {
@@ -119,14 +120,14 @@ public class LoginAndRegisterControl extends HttpServlet {
 					session.setAttribute("error-type", "iva");
 					session.setAttribute("error", "Partita Iva non scritta correttamente");
 					session.setAttribute("error-location", "signup");
-					response.sendRedirect(request.getContextPath()+"/FormLoginAndRegister.jsp");
+					response.sendRedirect(response.encodeRedirectURL(request.getContextPath()+"/FormLoginAndRegister.jsp"));
 				}
 				else if(!request.getParameter("password").matches(regPsw)) {
 					System.out.println("mi fermo alla psw");
 					session.setAttribute("error-type", "password");
 					session.setAttribute("error", "Deve essere almeno 8 caratteri con almeno:un carattere speciale,un lowercase,un UPPERCASE e un numero ");
 					session.setAttribute("error-location", "signup");
-					response.sendRedirect(request.getContextPath()+"/FormLoginAndRegister.jsp");
+					response.sendRedirect(response.encodeRedirectURL(request.getContextPath()+"/FormLoginAndRegister.jsp"));
 				}
 				//Se tutti i controlli sono stati superati si crea il bean e si inserisce nel database
 
@@ -169,7 +170,8 @@ public class LoginAndRegisterControl extends HttpServlet {
 						session.setAttribute("error-type", null); 
 						session.setAttribute("error", null);
 						session.setAttribute("error-location", null);
-						response.sendRedirect("index.jsp");
+						System.out.println("tutto apposto");
+						response.sendRedirect(response.encodeRedirectURL("index.jsp"));
 					
 				}
 				
@@ -202,13 +204,13 @@ public class LoginAndRegisterControl extends HttpServlet {
 					session.setAttribute("error-type", null); 
 					session.setAttribute("error", null);
 					session.setAttribute("error-location", null);
-					response.sendRedirect("index.jsp"); //Reindirizzo l'utente loggato alla pagina iniziale dove potrà svolgere tutte le attività consentite da utente
+					response.sendRedirect(response.encodeRedirectURL("index.jsp")); //Reindirizzo l'utente loggato alla pagina iniziale dove potrà svolgere tutte le attività consentite da utente
 					
 				} else {//Se le due password non coincidono
 					session.setAttribute("error-type", "wrongCred");
 					session.setAttribute("error", "Password o email errate");
 					session.setAttribute("error-location", "login");
-					response.sendRedirect("FormLoginAndRegister.jsp"); //Reindirizzo l'utente nuovamente alla schermata di inserimento delle credenziali
+					response.sendRedirect(response.encodeRedirectURL(request.getContextPath()+"/FormLoginAndRegister.jsp")); //Reindirizzo l'utente nuovamente alla schermata di inserimento delle credenziali
 				}
 
 			} catch (SQLException e) {
@@ -223,7 +225,7 @@ public class LoginAndRegisterControl extends HttpServlet {
 			
 			default:
 				
-			response.sendRedirect("index.jsp");
+			response.sendRedirect(response.encodeRedirectURL("index.jsp"));
 			break;
 			
 		}

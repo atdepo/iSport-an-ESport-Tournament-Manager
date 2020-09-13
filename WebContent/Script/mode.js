@@ -4,8 +4,9 @@
  * 
  * 
  */
-
+var session;
 $(document).ready(function() {
+	session=$('#session').val();
 
 	if($('input[type=radio][name=r-button]:checked').val()=="true"){
 		show();
@@ -37,7 +38,7 @@ $(document).ready(function() {
 		
 	}
 	//La richiesta alla servlet
-	xhr.open('GET', '../TournamentControl?action=initTorneo', true);
+	xhr.open('GET', '../TournamentControl;jsessionid='+session+'?action=initTorneo', true);
 	xhr.send();
 	
 });
@@ -65,7 +66,7 @@ $(function(){
 				
 				var strutt=$('.selected.strutture').text();
 				if(strutt!==" Seleziona una Struttura"){
-					xhr.open('GET', '../TournamentControl?action=validateTorneo&datatorneo='+data+'&struttura='+strutt, true);
+					xhr.open('GET', '../TournamentControl;jsessionid='+session+'?action=validateTorneo&datatorneo='+data+'&struttura='+strutt, true);
 					xhr.send();
 				}
 				else{
@@ -73,7 +74,7 @@ $(function(){
 				}
 			}
 			else if (check=="on-line"){
-				xhr.open('GET', '../TournamentControl?action=validateTorneo&datatorneo='+data, true);
+				xhr.open('GET', '../TournamentControl;jsessionid='+session+'?action=validateTorneo&datatorneo='+data, true);
 				xhr.send();
 			}
 			
@@ -92,7 +93,7 @@ $(function(){
 							fisici=0;
 							
 						$.ajax({
-							url :'TournamentControl?action=saveTorneo',
+							url :'TournamentControl;jsessionid='+session+'?action=saveTorneo',
 							async:false,
 							type:'POST',
 							data:'nomeTorneo='+$('.nome-torneo').val()+
@@ -105,7 +106,7 @@ $(function(){
 								 '&numTecniciRemoto='+$('.number-box-tecnici').text()+
 								 '&numTecniciFisici='+fisici,
 							success: function(){
-								window.location.href='FormInserimentoSquadre.jsp';
+								window.location.href='FormInserimentoSquadre.jsp;jsessionid='+session;
 							}
 						});
 						
@@ -189,7 +190,7 @@ function getStrutture(){
 		}
 	}
 		
-	xhr.open('GET', '../TournamentControl?action=getStrutture', true);
+	xhr.open('GET', '../TournamentControl;jsessionid='+session+'?action=getStrutture', true);
 	xhr.send();
 }
 
@@ -217,7 +218,7 @@ function getMode(k) {
 		}
 	}
 
-	xhr.open('GET', '../TournamentControl?action=getMode&gioco=' + k, true);
+	xhr.open('GET', '../TournamentControl;jsessionid='+session+'?action=getMode&gioco=' + k, true);
 	xhr.send();
 
 }

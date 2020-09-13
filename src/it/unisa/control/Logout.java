@@ -28,10 +28,8 @@ public class Logout extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.getSession().invalidate();
 		System.out.println("Redirect to"+request.getContextPath()+"/index.jsp");
-		response.sendRedirect(request.getContextPath()+"/index.jsp");
+		response.sendRedirect(response.encodeRedirectURL(request.getContextPath()+"/index.jsp"));
 		
-		
-
 	}
 
 }

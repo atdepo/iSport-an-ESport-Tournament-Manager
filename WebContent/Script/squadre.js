@@ -1,7 +1,8 @@
+var session;
 $(document).ready(function(){
 	
-alert($('.team').length);
-	
+alert('ci sono'+$('.team').length+ 'team in sessione');
+session=$('#session').val();
 })
 
 
@@ -23,7 +24,7 @@ function tendina(k){
 function add(){
 
 	if($("input[type=radio][name=sel]:checked").attr("id")==="nuova")
-		window.location.replace('FormInserimentoGiocatori.jsp');
+		window.location.replace('FormInserimentoGiocatori.jsp;jsessionid='+session+'');
 	else{
 		var squadre=$("#listaSquadre");	//div che contiene le img delle squadre
 		var check=$(".squadraSelezionata:checked").val();	//nome della squadra scelta
@@ -42,7 +43,7 @@ function add(){
 			
 				}
 			}
-			xhr.open('GET', '../SquadreControl?action=getImgSquadra&squadraScelta='+check, true);
+			xhr.open('GET', '../SquadreControl;jsessionid='+session+'?action=getImgSquadra&squadraScelta='+check, true);
 			xhr.send();
 				
 		}
@@ -67,7 +68,7 @@ function removeSquadraFromTendina(squadra){
 
 function eliminaSquadra(i){
 		var xhr = new XMLHttpRequest();
-		xhr.open('GET', '../SquadreControl?action=removeSquadraTorneo&elimina='+i, true);
+		xhr.open('GET', '../SquadreControl;jsessionid='+session+'?action=removeSquadraTorneo&elimina='+i, true);
 		xhr.send();
 		$('.options-container').append('<div class="option">'+
 				'<label for="'+i+'">'+i+'</label>'+
@@ -119,10 +120,10 @@ function cambiaTipo(){
 	  }	
 	//alert("-"+iva+"-");
 		if(iva==undefined){
-		xhr.open('GET', '../SquadreControl?action=getSquadreNoIva', true);
+		xhr.open('GET', '../SquadreControl;jsessionid='+session+'?action=getSquadreNoIva', true);
 		xhr.send();
 		}else{
-			xhr.open('GET', '../SquadreControl?action=getSquadre', true);
+			xhr.open('GET', '../SquadreControl;jsessionid='+session+'?action=getSquadre', true);
 			xhr.send();
 			
 		}
@@ -139,7 +140,7 @@ function finishTorneo(){
 		alert("Inserisci almeno due squadre!");
 	else{
 		var xhr = new XMLHttpRequest();
-		xhr.open('GET', '../PagamentoControl', true);
+		xhr.open('GET', '../PagamentoControl;jsessionid='+session+'', true);
 		xhr.send();
 	}
 	

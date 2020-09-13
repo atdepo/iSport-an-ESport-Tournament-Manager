@@ -46,6 +46,8 @@ if(teamName==null){
 </head>
 <body>
 		<%@ include file="header.jsp"%>
+			<input type="hidden" value="<%=request.getSession().getId()%>" id="session">
+		
 		<input type="hidden" value="<%=teamName%>" class="teamName">
 	
 	<div class="tutto">

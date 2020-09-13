@@ -36,6 +36,7 @@
 </head>
 <body>
 	<%@ include file="header.jsp"%>
+	<input type="hidden" value="<%=request.getSession().getId()%>" id="session">
 	
 	<h2>Contattaci Personalmente</h2>
 	<br>

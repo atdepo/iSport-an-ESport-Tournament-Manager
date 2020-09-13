@@ -99,6 +99,8 @@ float:right;
 
 <body>
 	<%@ include file="../header.jsp"%>
+		<input type="hidden" value="<%=request.getSession().getId()%>" id="session">
+	
 	<div class="squadra">
 		<h2>Ora aggiungi le squadre per <%=session.getAttribute("nomeTorneo")%></h2><br>
 		

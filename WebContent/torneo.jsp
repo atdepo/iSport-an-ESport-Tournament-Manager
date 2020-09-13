@@ -44,6 +44,8 @@
 </head>
 <body>
 		<%@ include file="header.jsp"%>
+			<input type="hidden" value="<%=request.getSession().getId()%>" id="session">
+		
 	<div class="tutto">
 		<h2>Loghi delle squadre partecipanti</h2>
 		<div class="loghi">

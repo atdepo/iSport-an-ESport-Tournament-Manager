@@ -26,6 +26,8 @@
 </head>
 
 <body>
+	<input type="hidden" value="<%=request.getSession().getId()%>" id="session">
+
 <input type="hidden" id="user-img" value ="<%=userImg%>">
 	<input type="hidden" id="user-pIVA" value="<%=userpIVA%>">
 	<nav>

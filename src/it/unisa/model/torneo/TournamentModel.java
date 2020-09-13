@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 import it.unisa.model.connessione.DriverManagerConnectionPool;
+import it.unisa.model.squadra.SquadraBean;
 import it.unisa.model.ModelInterface;
 
 public class TournamentModel implements ModelInterface<TournamentBean,String>{
@@ -162,6 +163,28 @@ public class TournamentModel implements ModelInterface<TournamentBean,String>{
 		
 	}
 
+	public void doSaveComposto(TournamentBean torneo,ArrayList<SquadraBean> squadre) throws SQLException {
+		String sql = "INSERT INTO composto "
+				+ " VALUES (?,?)";
+		
+		try(Connection con = DriverManagerConnectionPool.getConnection();PreparedStatement statement= con.prepareStatement(sql)){
+			
+			int i=0;
+			for (SquadraBean squadraBean : squadre) {
+				statement.setString(1, squadraBean.getNome());
+				statement.setInt(2, torneo.getCodice());
+				System.out.println("doSaveComposto squadra N="+(i++)+statement);
+				statement.executeUpdate();
+				con.commit();
+			}
+
+			//<----- a volte vorrei non essere così tanto forte
+		}
+		
+	}
+
+	
+	
 	@Override
 	public void doUpdate(TournamentBean product) throws SQLException {
 		// TODO Auto-generated method stub

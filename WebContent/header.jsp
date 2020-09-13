@@ -41,13 +41,13 @@
 	</label>
 	<a href="<%=request.getContextPath()+"/index.jsp"%>" ><label class="logo">i-Sport</label></a>
 	<ul id="link">
-	<li><a href="<%=request.getContextPath()+"/index.jsp"%>" class="active">HOME</a></li>
-	<li><a href="<%=response.encodeURL(request.getContextPath()+"/user/FormCreazioneTorneo.jsp")%>">CREA TORNEO</a></li>
-	<li><a href="<%=request.getContextPath()+"/contatti.jsp"%>">CONTATTI</a></li>	
+	<li><a href="<%=request.getContextPath()+"/index.jsp;jsessionid="+request.getSession().getId()%>" class="active">HOME</a></li>
+	<li><a href="<%=response.encodeURL(request.getContextPath()+"/user/FormCreazioneTorneo.jsp;jsessionid="+request.getSession().getId())%>">CREA TORNEO</a></li>
+	<li><a href="<%=request.getContextPath()+"/contatti.jsp;jsessionid="+request.getSession().getId()%>">CONTATTI</a></li>	
 	
 		
   	<%if(utente==null){%>
-  	  <li><a href="<%=request.getContextPath()+"/FormLoginAndRegister.jsp"%>">ACCEDI O REGISTRATI</a></li>
+  	  <li><a href="<%=request.getContextPath()+"/FormLoginAndRegister.jsp;jsessionid="+request.getSession().getId()%>">ACCEDI O REGISTRATI</a></li>
   	
       <%}else{ %>
       
@@ -58,14 +58,14 @@
         <ul id="test">
           <li>
             <%if(utente.getTipo()=="utente"){ %>
-            <a href="<%=request.getContextPath()+"/user/Profilo.jsp"%>"class="dropdown-item">IL MIO PROFILO</a>
+            <a href="<%=request.getContextPath()+"/user/Profilo.jsp;jsessionid="+request.getSession().getId()%>"class="dropdown-item">IL MIO PROFILO</a>
              <%}else if(utente.getTipo()=="admin"){ %>
-             <a href="<%=request.getContextPath()+"/admin/Admin.jsp"%>"class="dropdown-item" style="font-size:16px">PANNELLO ADMIN</a>
+             <a href="<%=request.getContextPath()+"/admin/Admin.jsp;jsessionid="+request.getSession().getId()%>"class="dropdown-item" style="font-size:16px">PANNELLO ADMIN</a>
              <%}else if(utente.getTipo()=="tecnico"){ %>
-             <a href="<%=request.getContextPath()+"/tecnico/messaggi.jsp"%>"class="dropdown-item">MESSAGGI</a><%} %>
+             <a href="<%=request.getContextPath()+"/tecnico/messaggi.jsp;jsessionid="+request.getSession().getId()%>"class="dropdown-item">MESSAGGI</a><%} %>
           </li>
           <li>
-            <a href="<%=request.getContextPath()+"/Logout"%>" class="dropdown-item">LOG OUT</a>
+            <a href="<%=request.getContextPath()+"/Logout;jsessionid="+request.getSession().getId()%>" class="dropdown-item">LOG OUT</a>
           </li>
           
         </ul>

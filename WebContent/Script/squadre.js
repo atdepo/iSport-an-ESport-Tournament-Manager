@@ -136,11 +136,11 @@ function cambiaTipo(){
 
 function finishTorneo(){
 	
-	if($('.team').length<=2)
+	if($('.team').length<2)
 		alert("Inserisci almeno due squadre!");
 	else{
 		var xhr = new XMLHttpRequest();
-		xhr.open('GET', '../PagamentoControl;jsessionid='+session+'', true);
+		xhr.open('GET', '../PagamentoControl?action="visualizza";jsessionid='+session+'', true);
 		xhr.send();
 	}
 	

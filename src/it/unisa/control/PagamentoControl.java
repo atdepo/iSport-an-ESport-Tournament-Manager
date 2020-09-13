@@ -1,6 +1,7 @@
 package it.unisa.control;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.Year;
@@ -21,6 +22,10 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import it.unisa.model.squadra.SquadraBean;
+import it.unisa.model.struttura.StrutturaBean;
+import it.unisa.model.torneo.TournamentBean;
+import it.unisa.model.torneo.TournamentModel;
+import it.unisa.model.utente.UtenteBean;
 
 /**
  * Servlet implementation class PagamentoControl
@@ -28,7 +33,7 @@ import it.unisa.model.squadra.SquadraBean;
 @WebServlet({ "/PagamentoControl", "/user/PagamentoControl" })
 public class PagamentoControl extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
+       TournamentModel tModel= new TournamentModel();
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -43,6 +48,13 @@ public class PagamentoControl extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		Enumeration<String> e=request.getSession().getAttributeNames();
+		HttpSession session=request.getSession();
+		UtenteBean utente=(UtenteBean)session.getAttribute("user");
+		ArrayList<SquadraBean> team=(ArrayList<SquadraBean>)session.getAttribute("squadreTorneo");
+		String action = request.getParameter("action"); // azione da far compiere alla servlet
+
+	
+	
 		Iterator<String> it= e.asIterator();
 		System.out.println("*****parametri del pagamento******");
 		while(it.hasNext()) {
@@ -51,18 +63,38 @@ public class PagamentoControl extends HttpServlet {
 			System.out.println(" value: "+request.getSession().getAttribute(par));
 		}
 		System.out.println("*****fine parametri del pagamento******");
+		switch (action) {
+		case "conferma":
+		TournamentBean torneo=new TournamentBean();
+		torneo.setBudget(calcolaTotale(session));
+		StrutturaBean struttura=(StrutturaBean)session.getAttribute("struttura");
+		torneo.setCAPStruttura(Integer.parseInt(struttura.getCAP()));
+		torneo.setCodGioco((String)session.getAttribute("nomeGioco"));
+		torneo.setData((String)session.getAttribute("dataTorneo"));
+		torneo.setHomePage((Boolean)session.getAttribute("isHome"));
+		torneo.setIndirizzoStruttura((String)struttura.getIndirizzo());
+		torneo.setNome((String)session.getAttribute("nomeTorneo"));
+		torneo.setProprietario(utente.getEmail());
 		
-		String action=request.getParameter("action");
-		
+		try {
+			tModel.doSave(torneo);
+			tModel.doSaveComposto(torneo, team);
+		} catch (SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 
 		/**
 		 * PER ANTONIO
 		 * - associa dei tecnici online (se ci sono) random al torneo+
 		 * - associa dei tecnici fisici non impegnati al torneo
 		 */
-		
-		
-		calcolaTotale(request.getSession());
+		break;
+		case "visualizza":
+		session.setAttribute("budget", calcolaTotale(session));
+		response.sendRedirect(response.encodeRedirectURL(request.getContextPath()+"/user/Pagamento.jsp"));	
+		break;
+		}
 	}
 
 	/**

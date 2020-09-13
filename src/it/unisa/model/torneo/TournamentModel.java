@@ -159,6 +159,8 @@ public class TournamentModel implements ModelInterface<TournamentBean,String>{
 			System.out.println("doSave="+statement);
 			statement.executeUpdate();
 			con.commit();//<----- a volte vorrei non essere così tanto forte
+			
+			
 		}
 		
 	}

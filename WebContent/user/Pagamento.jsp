@@ -16,9 +16,9 @@
 		<div class='info'>
 			<h1>Pagamento</h1>
 		</div>
-		<form class='modal'>
+		<form class='modal' action="PagamentoControl?action='conferma'">
 			<header class='header'>
-				<h1 class="totale">Payment of $145.00</h1>
+				<h1 class="totale">Payment of <%= %></h1>
 				<div class='card-type'>
 					<a class='card active' href='#'> <img
 						src='https://s3-us-west-2.amazonaws.com/s.cdpn.io/169963/MC.png'>

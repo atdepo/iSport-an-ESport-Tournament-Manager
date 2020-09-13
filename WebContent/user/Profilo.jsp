@@ -47,7 +47,8 @@
 			<div class="field">
 				<div class="form-group file-area">
         			<label for="images" class="testlabel">Cambia immagine <span class="misure"> La tua immagine deve essere 150x150</span></label>
-   			 		<input type="file" name="images" accept="image/*" id="images-0" required="required" />
+   			 		<input type="file" name="images" accept="image/*" id="images-0"/>
+   			 		<input type="submit" value="Cambia immagine">
    			 		<span class="error" id="errorImg"><%if(type.equals("img")){ %><%=error%><%}%></span>	
    				</div>
    			</div>

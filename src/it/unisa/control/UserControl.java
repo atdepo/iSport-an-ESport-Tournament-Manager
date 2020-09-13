@@ -1,9 +1,12 @@
 package it.unisa.control;
 
 import java.awt.image.BufferedImage;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Base64;
 
 import javax.imageio.ImageIO;
 import javax.servlet.RequestDispatcher;
@@ -13,6 +16,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.servlet.http.Part;
 
 import org.apache.tomcat.jni.File;
 
@@ -46,6 +50,7 @@ public class UserControl extends HttpServlet {
 	StrutturaModel sModel= new StrutturaModel();
 	SquadraModel teamModel= new SquadraModel();
 	GiocatoreModel pModel=new GiocatoreModel();
+	
     public UserControl() {
         super();
     }
@@ -55,7 +60,7 @@ public class UserControl extends HttpServlet {
 		String action = request.getParameter("action"); // azione da far compiere alla servlet
 		Gson gson = new Gson();
 		System.out.println("Sto facendo questa action: "+ action);
-		
+		UtenteBean utente=(UtenteBean)session.getAttribute("user");
 		switch (action) {	
 		/**
 		 * Questa action serve a prendere tutti i tornei di un dato utente
@@ -242,14 +247,36 @@ public class UserControl extends HttpServlet {
 			 * Una validazione preventiva viene eseguita nel caso l'utente cerchi di modificare i suoi dati 
 			 * inserendone altri o non correttamente scritti oppure gia' associati a qualche altro utente
 			 */
+		case "modificaImg":
+			try (ByteArrayOutputStream bos = new ByteArrayOutputStream()){
+			Part part = request.getPart("images"); //Prende la parte dal multipart form che rappresenta l'immagine di profilo dell'utente
+			InputStream fis = null;
+			
+			fis = part.getInputStream();
+			//System.out.println("Immagine trovata");
+			byte[] buf = new byte[4096];
+
+			for (int readNum; (readNum = fis.read(buf)) != -1;) {
+				bos.write(buf, 0, readNum); // no doubt here is 0
+				System.out.println("read " + readNum + " bytes,");
+			}
+			byte[] bytes = bos.toByteArray();
+			
+			String img="";
+			if(bytes.length>0) {
+				img = "data:image/jpeg;base64, " + Base64.getEncoder().encodeToString(bytes);
+				System.out.println("bytes immagine "+bytes.length);
+			}
+			}
+			break;
+		
 		case "modificaDati":
 			
-			UtenteBean utente=(UtenteBean)session.getAttribute("user");
+			
 			String nome=request.getParameter("nome");
 			System.out.println("MAMMETA:"+nome);
 			String email=request.getParameter("email");
 			String iva=request.getParameter("iva");
-			String img=request.getParameter("img");
 			String oldEmail=request.getParameter("oldEmail");
 			String oldPass=request.getParameter("oldPass");
 			String newPass=request.getParameter("newPass");

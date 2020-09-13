@@ -340,6 +340,22 @@ public Collection<SquadraBean> getSquadreFromTornei(int codTorneo) {
 		}
 			
 	}
+	public void cambiaImg(String img,String oldMail) {
+		String sql="UPDATE utenti SET imgProfilo =? WHERE email=?";
+
+		try (Connection con = DriverManagerConnectionPool.getConnection();PreparedStatement stat=con.prepareStatement(sql)){
+			
+			stat.setString(1, img);
+			stat.setString(2, oldMail);
+			stat.executeUpdate();
+			con.commit();
+			
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		}
+			
+	}
 	
 	public void cambiaPIVA(String pIVA,String mail) {
 		String sql="UPDATE utenti SET piva=? WHERE email=?";

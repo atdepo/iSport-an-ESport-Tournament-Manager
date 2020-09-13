@@ -57,8 +57,6 @@ public class PagamentoControl extends HttpServlet {
 
 		/**
 		 * PER ANTONIO
-		 * -dosave del torneo(non ti scordare di inserire il prorpietario del torneo
-		 * -prenditi il codice del torneo una volta inserito e associa a quel torneo le squadre
 		 * - associa dei tecnici online (se ci sono) random al torneo+
 		 * - associa dei tecnici fisici non impegnati al torneo
 		 */

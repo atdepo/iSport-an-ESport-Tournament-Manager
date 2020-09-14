@@ -96,13 +96,14 @@ public class PagamentoControl extends HttpServlet {
 						}
 						else if(errore!=null){
 							alternativa=sModel.doRetriveByKey(new KeyStruttura(String.valueOf(t.getCAPStruttura()), String.valueOf(t.getIndirizzoStruttura())));
-							errore+="in alternativa ti andrebbe bene la struttura "+alternativa.getNome()+"? (NB. premendo annulla il tuo torneo "
+							struttura=alternativa;
+							/*errore+="in alternativa ti andrebbe bene la struttura "+alternativa.getNome()+"? (NB. premendo annulla il tuo torneo "
 								  + "diventera' automaticamente online e di conseguenza perderai tutti i tecnici fisici scelti al momento della registrazione)";
 							session.setAttribute("error-msg", errore);
 							session.setAttribute("error-tipo", tipo);
 							session.setAttribute("error-alternativa", alternativa);
 							response.sendRedirect(response.encodeRedirectURL(request.getContextPath()+"/Pagamento.jsp"));
-							return;
+							return;*/
 						}
 					}
 				}

@@ -119,7 +119,7 @@ public class PagamentoControl extends HttpServlet {
 			
 			try {
 				tModel.doSave(torneo);
-				tModel.doSaveComposto(torneo, team);
+				tModel.doSaveComposto(torneo, team);	
 			} catch (SQLException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
@@ -147,10 +147,7 @@ public class PagamentoControl extends HttpServlet {
 				
 				
 			}
-			/**
-			 * PER ANTONIO - associa dei tecnici online (se ci sono) random al torneo+ -
-			 * associa dei tecnici fisici non impegnati al torneo
-			 */
+			
 
 			break;
 		case "visualizza":

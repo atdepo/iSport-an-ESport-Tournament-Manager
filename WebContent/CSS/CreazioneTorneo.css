@@ -269,17 +269,6 @@ input:hover, input:focus{
 .select-box {
 	 	width:100%;
 	}
-
-
-.contieniSponsor{
-	display: flex;
-    align-items: center;
-    justify-content: center;
-	max-width: 640px;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    font-size: 13px;
-}
-
 .info{
 	display: block;
     font-size: 17px;

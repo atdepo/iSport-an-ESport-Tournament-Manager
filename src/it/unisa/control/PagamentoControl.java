@@ -24,7 +24,9 @@ import javax.servlet.http.HttpSession;
 import com.google.gson.Gson;
 
 import it.unisa.model.squadra.SquadraBean;
+import it.unisa.model.struttura.KeyStruttura;
 import it.unisa.model.struttura.StrutturaBean;
+import it.unisa.model.struttura.StrutturaModel;
 import it.unisa.model.tecnico.TecnicoBean;
 import it.unisa.model.tecnico.TecnicoModel;
 import it.unisa.model.torneo.TournamentBean;
@@ -57,7 +59,6 @@ public class PagamentoControl extends HttpServlet {
 		Enumeration<String> e = request.getSession().getAttributeNames();
 		HttpSession session = request.getSession();
 		UtenteBean utente = (UtenteBean) session.getAttribute("user");
-		ArrayList<SquadraBean> team = (ArrayList<SquadraBean>) session.getAttribute("squadreTorneo");
 		String action = request.getParameter("action"); // azione da far compiere alla servlet
 		System.out.println("l'azione e'" + action);
 
@@ -69,91 +70,84 @@ public class PagamentoControl extends HttpServlet {
 			System.out.println(" value: " + request.getSession().getAttribute(par));
 		}
 		System.out.println("*****fine parametri del pagamento******");
+		
 		switch (action) {
 		case "conferma":
 			TournamentBean torneo = new TournamentBean();
+			StrutturaModel sModel= new StrutturaModel();
 			torneo.setBudget(calcolaTotale(session));
-			Gson gson=new Gson();
 			StrutturaBean struttura = (StrutturaBean) session.getAttribute("struttura");
+			String errore=null;
+			String tipo=null;
+			StrutturaBean alternativa=new StrutturaBean();
 			try {
 				ArrayList<TournamentBean> tornei = (ArrayList<TournamentBean>) tModel.doRetriveAll(null);
 				for (TournamentBean t : tornei) {
 					if (t.getData().equals((String) session.getAttribute("dataTorneo"))) {
-						String s = request.getParameter("struttura");
+						String s = (String) session.getAttribute("struttura");
 						String tmp = s.substring(s.indexOf(',') + 2);
 						int value = Integer.parseInt(tmp.replaceAll("[^0-9]", ""));
 						String address = tmp.substring(0, tmp.indexOf('-') - 1);
+						
 
 						if (t.getCAPStruttura() == value && t.getIndirizzoStruttura().equals(address)) {
-							String errore = "In questa data la struttura selezionata e' gia' occupata, selezionarne una diversa";
-							ArrayList<String>err= new ArrayList<String>();
-							err.add("struttura");
-							err.add(errore);
-							String wr=gson.toJson(err);
-							response.getWriter().print(wr);
-							response.getWriter().flush();
-							System.out.println("struttura non valida");
-							response.setStatus(200);
-							return;
-						}else {
-							System.out.println("La struttura sta tropp fort");
-							
+							errore = "Ci dispiace, in questa data la struttura"+s+"e' gia' stata occupata ";
+							tipo="struttura";
 						}
-
+						else if(errore!=null){
+							alternativa=sModel.doRetriveByKey(new KeyStruttura(String.valueOf(t.getCAPStruttura()), String.valueOf(t.getIndirizzoStruttura())));
+							errore+="in alternativa ti andrebbe bene la struttura "+alternativa.getNome()+"? (NB. premendo annulla il tuo torneo "
+								  + "diventera' automaticamente online e di conseguenza perderai tutti i tecnici fisici scelti al momento della registrazione)";
+							session.setAttribute("error-msg", errore);
+							session.setAttribute("error-tipo", tipo);
+							session.setAttribute("error-alternativa", alternativa);
+							response.sendRedirect(response.encodeRedirectURL(request.getContextPath()+"/Pagamento.jsp"));
+							return;
+						}
 					}
 				}
-			
-			}
-			
-			catch (SQLException e) {
-				e.printStackTrace();
-			}
-			torneo.setCAPStruttura(Integer.parseInt(struttura.getCAP()));
-			torneo.setCodGioco((String) session.getAttribute("nomeGioco"));
-			torneo.setData((String) session.getAttribute("dataTorneo"));
-			torneo.setHomePage((Boolean) session.getAttribute("isHome"));
-			torneo.setIndirizzoStruttura((String) struttura.getIndirizzo());
-			torneo.setNome((String) session.getAttribute("nomeTorneo"));
-			torneo.setProprietario(utente.getEmail());
 
-			
-			try {
+				torneo.setCAPStruttura(Integer.parseInt(struttura.getCAP()));
+				torneo.setCodGioco((String) session.getAttribute("nomeGioco"));
+				torneo.setData((String) session.getAttribute("dataTorneo"));
+				torneo.setIndirizzoStruttura((String) struttura.getIndirizzo());
+				torneo.setHomePage(Boolean.getBoolean((String) session.getAttribute("isHome")));
+				torneo.setNome((String) session.getAttribute("nomeTorneo"));
+				torneo.setProprietario(utente.getEmail());
+
 				tModel.doSave(torneo);
-				tModel.doSaveComposto(torneo, team);	
-			} catch (SQLException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
+				ArrayList<SquadraBean> team = (ArrayList<SquadraBean>) session.getAttribute("squadreTorneoDaInserire");
+				tModel.doSaveComposto(torneo, team);
 
-			TecnicoModel teModel=new TecnicoModel();
-			if (Integer.parseInt(request.getParameter("tecniciFisici")) > 0) {
-				try {
-					ArrayList<TecnicoBean> liberi= teModel.doRetrieveTecniciLiberi(torneo, Integer.parseInt(request.getParameter("tecniciFisici")));
-					if(liberi.size()<=Integer.parseInt(request.getParameter("tecniciFisici"))) {
-						int max=tModel.maxTorneo();
+				TecnicoModel teModel = new TecnicoModel();
+				if (Integer.parseInt((String)session.getAttribute("tecniciFisici")) > 0) {
+					ArrayList<TecnicoBean> liberi = teModel.doRetrieveTecniciLiberi(torneo,
+							Integer.parseInt((String) session.getAttribute("tecniciFisici")));
+					if (liberi.size() <= Integer.parseInt((String) session.getAttribute("tecniciFisici"))) {
+						int max = tModel.maxTorneo();
 						for (TecnicoBean tecnicoBean : liberi) {
 							teModel.doAssocia(tecnicoBean, max);
-					}
-						}else {
+						}
+					} else {
 						System.out.println("non ho abbastanza tecnici fisici");
 					}
-					
-					}
-					
-				 catch (NumberFormatException | SQLException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
+
 				}
-				
-				
+				response.sendRedirect(response.encodeRedirectURL(request.getContextPath()+"/user/Profilo.jsp"));
 			}
-			
+
+			catch (SQLException ex) {
+				ex.printStackTrace();
+			}
 
 			break;
 		case "visualizza":
 			session.setAttribute("budget", calcolaTotale(session));
+			ArrayList<SquadraBean> bean=(ArrayList<SquadraBean>) session.getAttribute("squadreTorneo");
+			session.setAttribute("squadreTorneoDaInserire", bean);
 			break;
 		}
+
 	}
 
 	/**

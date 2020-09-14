@@ -14,7 +14,7 @@ var session;
 			var div=$("#mieiTornei");
 			if(data.length==0)
 				div.append("<h3>Non hai tornei, dai ordina il tuo primo torneo dalla sezione Crea Tornei</h3>");
-			for (var i = 0; i < data.length; i++) {
+			for (var i = 0; i < data['0'].length; i++) {
 				div.append('<a href="../UserControl;jsessionid='+session+'?action=visualizza&codtorneo='+data[0][i].codice+'">  <h3> '+data[0][i].nome+'</h3><h3> '+data[0][i].data+'</h3><h3> '+data[1][i]+'</h3><h3> '+data[0][i].indirizzoStruttura+'</h3><h3> '+data[0][i].codGioco+'</h3><br></a>');	
 	
 			}

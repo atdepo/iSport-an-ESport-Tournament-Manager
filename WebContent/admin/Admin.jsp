@@ -77,7 +77,25 @@ body {
 		position:relative;
 	}
 	.page{
-
+		flex-wrap:wrap;
+		}
+	#addTecnico{
+		width:20%;
+		display:grid;
+		text-align:center;
+		font-size:18px;
+		margin-top:10px;
+		position:relative;
+		left:40%;
+	}
+	.addTecnico{
+		font-size:20px;
+		font-weight: bold;
+		text-align:center;
+		margin-top:15px;
+	}
+	}	
+</style>
 </head>
 
 <body>

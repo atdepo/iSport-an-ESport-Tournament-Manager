@@ -1,5 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	
+<%
+	
+String error_msg=(String)session.getAttribute("error-msg");	
+String error_type=(String)session.getAttribute("error-tipo");	
+String error_alternativa=(String)session.getAttribute("error-alt");
+
+
+%>
+	
 <!DOCTYPE html>
 <html>
 <head>
@@ -16,7 +26,7 @@
 		<div class='info'>
 			<h1>Pagamento</h1>
 		</div>
-		<form class='modal' action="PagamentoControl?action='conferma'">
+		<form class='modal' action="PagamentoControl?action=conferma" method="post">
 			<header class='header'>
 				<h1 class="totale">Payment of <%=session.getAttribute("budget") %></h1>
 				<div class='card-type'>
@@ -51,17 +61,24 @@
 								type='month'>
 						</div>
 						<div class='input-group'>
-							<label for=''>CVV</label> <input maxlenght='4' placeholder=''
+							<label for=''>CVV</label> <input maxlength='3' placeholder=''
 								type='number'>
 						</div>
 					</div>
 				</div>
 			</div>
 			<footer class='footer'>
-				<button class='button'>Completa pagamento</button>
+				<input type="submit" class='button' value="Completa pagamento">
 			</footer>
 		</form>
 	</div>
+
+
+<input type="hidden" id="error-msg" value="<%=error_msg%>">
+<input type="hidden" id="error-type" value="<%=error_type%>">
+<input type="hidden" id="error-msg" value="<%=error_alternativa%>">
+
+
 
 </body>
 </html>

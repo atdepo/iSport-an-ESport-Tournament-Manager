@@ -68,10 +68,10 @@ public class TournamentModel implements ModelInterface<TournamentBean, String> {
 			statement.setString(1, email);
 			System.out.println("DoRetriveByUser=" + statement.toString());
 			ResultSet rs = statement.executeQuery();
-
+			int i=0;
 			while (rs.next()) {
 				TournamentBean bean = new TournamentBean();
-
+				System.out.println(i++);
 				bean.setCAPStruttura(rs.getInt("CAPStruttura"));
 				bean.setCodGioco(rs.getString("CodGioco"));
 				bean.setData(rs.getString("DataTorneo"));
@@ -178,15 +178,16 @@ public class TournamentModel implements ModelInterface<TournamentBean, String> {
 	}
 
 	public void doSaveComposto(TournamentBean torneo, ArrayList<SquadraBean> squadre) throws SQLException {
-		String sql = "INSERT INTO composto " + " VALUES (?,?)";
+		String sql = "INSERT INTO composto VALUES (?,?)";
 
 		try (Connection con = DriverManagerConnectionPool.getConnection();
 				PreparedStatement statement = con.prepareStatement(sql)) {
 
 			int i = 0;
+			int codice=this.maxTorneo();
 			for (SquadraBean squadraBean : squadre) {
 				statement.setString(1, squadraBean.getNome());
-				statement.setInt(2, torneo.getCodice());
+				statement.setInt(2, codice);
 				System.out.println("doSaveComposto squadra N=" + (i++) + statement);
 				statement.executeUpdate();
 				con.commit();

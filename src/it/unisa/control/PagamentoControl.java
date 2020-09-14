@@ -123,18 +123,24 @@ public class PagamentoControl extends HttpServlet {
 				if (Integer.parseInt((String)session.getAttribute("tecniciFisici")) > 0) {
 					ArrayList<TecnicoBean> liberi = teModel.doRetrieveTecniciLiberi(torneo,
 							Integer.parseInt((String) session.getAttribute("tecniciFisici")));
+					int max = tModel.maxTorneo();
 					if (liberi.size() <= Integer.parseInt((String) session.getAttribute("tecniciFisici"))) {
-						int max = tModel.maxTorneo();
+						
 						for (int i=0;i<Integer.parseInt((String)session.getAttribute("tecniciFisici"));i++ ) {
 							teModel.doAssocia(liberi.get(i), max);
 						}
+						} 
+						else {
+							for (int i=0;i<liberi.size();i++ ) {
+								teModel.doAssocia(liberi.get(i), max);
+							}
+						}
+					
 						ArrayList<TecnicoBean> online=teModel.doRetrieveTecnici("on-line");
 						for (int i=0;i<Integer.parseInt((String)session.getAttribute("tecniciRemoti"));i++ ) {
 							teModel.doAssocia(online.get(i), max);
 						}
-					} else {
-						System.out.println("non ho abbastanza tecnici fisici");
-					}
+					
 
 				}
 				response.sendRedirect(response.encodeRedirectURL(request.getContextPath()+"/user/Profilo.jsp"));

@@ -203,7 +203,7 @@ public class TournamentControl extends HttpServlet {
 					ArrayList<TournamentBean> tornei = (ArrayList<TournamentBean>) tModel.doRetriveAll(null);
 					System.out.println("prima del for " + tornei.size());
 					String s = request.getParameter("struttura");
-					if(!s.isEmpty()) {
+					if(s!=null && !s.isEmpty()) {
 					for (TournamentBean t : tornei) {
 						if (t.getData().equals(dataTorneoDaCreare)) {
 							
@@ -262,7 +262,8 @@ public class TournamentControl extends HttpServlet {
 			sessione.setAttribute("modalita", request.getParameter("mode"));
 
 			String s = request.getParameter("struttura");
-			if (!s.isEmpty()) {
+			if (s!=null&&!s.isEmpty()&&!s.equals("null")) {
+				System.out.println(s);
 				String tmp = s.substring(s.indexOf(',') + 2);
 				int value = Integer.parseInt(tmp.replaceAll("[^0-9]", ""));
 				String address = tmp.substring(0, tmp.indexOf('-') - 1);

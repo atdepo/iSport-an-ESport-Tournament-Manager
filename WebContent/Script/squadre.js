@@ -1,7 +1,7 @@
 var session;
 $(document).ready(function(){
 	
-alert('ci sono'+$('.team').length+ 'team in sessione');
+//alert('ci sono'+$('.team').length+ 'team in sessione');
 session=$('#session').val();
 })
 

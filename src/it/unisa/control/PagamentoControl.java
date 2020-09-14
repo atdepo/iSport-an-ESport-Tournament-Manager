@@ -144,9 +144,11 @@ public class PagamentoControl extends HttpServlet {
 					
 
 				}
-				ArrayList<TournamentBean> t=(ArrayList<TournamentBean>) session.getAttribute("torneiDaMostrare");
-				t.add(torneo);
-				session.setAttribute("torneiDaMostrare", t);
+				if(torneo.isHomePage()) {
+					ArrayList<TournamentBean> t=(ArrayList<TournamentBean>) session.getAttribute("torneiDaMostrare");
+					t.add(torneo);
+					session.setAttribute("torneiDaMostrare", t);
+				}
 				response.sendRedirect(response.encodeRedirectURL(request.getContextPath()+"/user/Profilo.jsp"));
 			}
 

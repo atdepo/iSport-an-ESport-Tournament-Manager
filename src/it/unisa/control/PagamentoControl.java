@@ -125,8 +125,12 @@ public class PagamentoControl extends HttpServlet {
 							Integer.parseInt((String) session.getAttribute("tecniciFisici")));
 					if (liberi.size() <= Integer.parseInt((String) session.getAttribute("tecniciFisici"))) {
 						int max = tModel.maxTorneo();
-						for (TecnicoBean tecnicoBean : liberi) {
-							teModel.doAssocia(tecnicoBean, max);
+						for (int i=0;i<Integer.parseInt((String)session.getAttribute("tecniciFisici"));i++ ) {
+							teModel.doAssocia(liberi.get(i), max);
+						}
+						ArrayList<TecnicoBean> online=teModel.doRetrieveTecnici("on-line");
+						for (int i=0;i<Integer.parseInt((String)session.getAttribute("tecniciRemoti"));i++ ) {
+							teModel.doAssocia(online.get(i), max);
 						}
 					} else {
 						System.out.println("non ho abbastanza tecnici fisici");

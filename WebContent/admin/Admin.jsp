@@ -63,6 +63,13 @@ System.out.println("type "+type);
 		padding: 10px;
 		font-weight: bolder;
 	}
+	input[type="submit"]{
+		cursor:pointer;
+		width: 50%;
+		border-radius: 11px;
+		left:23%;
+		position:relative;
+	}
 	.page{
 
 		flex-wrap:wrap;

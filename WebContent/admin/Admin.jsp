@@ -54,49 +54,29 @@ body {
 	text-align: center;
 	background-color: rgba(47, 50, 50, 0.5);
 	padding: 35px 35px 50px;
-	margin-top: 30px;
-}
-
-.lista {
-	font-size: 24px;
-	font-weight: bold;
-}
-
-.fa-dumpster-fire {
-	color: red
-}
-
-i:hover {
-	background-color: transparent;
-}
-
-p {
-	padding: 10px;
-	font-weight: bolder;
-}
-
-.page {
-	flex-wrap: wrap;
-}
-
-#addTecnico {
-	width: 20%;
-	display: grid;
-	text-align: center;
-	font-size: 18px;
-	margin-top: 10px;
-	position: relative;
-	left: 40%;
-}
-
-.addTecnico {
-	font-size: 20px;
-	font-weight: bold;
-	text-align: center;
-	margin-top: 15px;
-}
-</style>
-<meta charset="UTF-8">
+  	margin-top:30px;
+  	}
+  	.lista{
+  		font-size:24px;
+  		font-weight: bold;
+  	}
+  	
+	.fa-dumpster-fire{
+		color: red
+	}
+	i:hover{background-color: transparent;}
+	p{
+		padding: 10px;
+		font-weight: bolder;
+	}
+	input[type="submit"]{
+		cursor:pointer;
+		width: 50%;
+		border-radius: 11px;
+		left:23%;
+		position:relative;
+	}
+	.page{
 
 </head>
 

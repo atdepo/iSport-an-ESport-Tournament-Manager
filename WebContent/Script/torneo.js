@@ -14,8 +14,10 @@ $(document).ready(function(){
 				let data = JSON.parse(bellezza.responseText);
 				console.log(data);			
 		
-				if(data)
+				if(data==true){
 					text.append("<textarea id='problem' placeholder='qualcosa'></textarea> <input type='button' value='invia' onclick='testo()'>");
+				}
+				
 			}
 		}	
 		bellezza.open('GET', 'UserControl?action=getTorneo&codice='+codice.val(), true);	
@@ -46,7 +48,7 @@ $(document).ready(function(){
 	xhr.onreadystatechange = function() {
 		if (xhr.status == 200 && xhr.readyState == 4) {
 				
-			alert($('textarea').val());
+			//alert($('textarea').val());
 		}
 	}
 			xhr.open('GET', 'MessaggiControl;jsessionid='+session+'?action=addMessaggio&testo='+$('textarea').val()+'&codice='+$('#torneo').val(), true);	

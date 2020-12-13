@@ -1,15 +1,16 @@
 # iSport
 
-#### iSport è una web application che si occupa di gestire di tornei di e-sport, sviluppata per il corso di Tecnologie Software per il Web della laurea triennale in Informatica dell'Università degli studi di Salerno.
-##### Le tecnologie utilizzate per il front-end della web-app sono:
-* HTML5
-* CSS3
+#### iSport is a web application whose purpose is manage E-sport Tornaments, developed for Tecnologie Software per il Web for the degree in computer science at Università degli studi di Salerno.
+#### 
+##### The technologies used for front-end of web-app are:
+* HTML 5
+* CSS 3
 * JavaScript ES6
 * Jquery 3.2.1
 * Java Server Pages 
 
-##### Le tecnologie utilizzate per il back-end della web-app sono:
+##### The technologies used for back-end of web-app are:
 * JDK 14
 * Java Servlet
-* Apache Tomcat come container della web-app
+* Apache Tomcat as container of the web-app
 
